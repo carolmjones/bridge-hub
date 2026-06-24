@@ -88,6 +88,7 @@ Women aged 28–45, global English audience. Overwhelmed, carrying unidentified 
 | [roadmap.md](roadmap.md) | Implementation phases 0–8 (repo init through launch) |
 | [architecture.md](architecture.md) | Frontend/backend split, API routes, data model summary |
 | [design-system.md](design-system.md) | Visual tokens, charts, assets — summary with pointers |
+| [ORGANIZATION.md](ORGANIZATION.md) | Pipeline vs Bridge Hub — separate repos and Cursor windows |
 
 ---
 
