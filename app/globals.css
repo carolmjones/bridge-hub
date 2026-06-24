@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+
+  body {
+    @apply bg-warm-paper font-sans text-ink;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply flex h-[54px] w-full items-center justify-center rounded-button bg-btn-primary px-6 font-sans text-body-lg font-medium text-btn-text transition-colors hover:bg-btn-primary-hover;
+  }
+
+  .disclaimer {
+    @apply text-center font-sans text-label text-soft-ink/70;
+  }
+
+  .wordmark {
+    @apply font-sans text-label font-medium uppercase tracking-[0.28em] text-wordmark;
+  }
+}

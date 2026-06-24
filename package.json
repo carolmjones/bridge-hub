@@ -1,0 +1,34 @@
+{
+  "name": "bridge-hub",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "DOTENV_CONFIG_PATH=.env.bridgehub node -r dotenv/config node_modules/.bin/next dev",
+    "build": "next build",
+    "start": "DOTENV_CONFIG_PATH=.env.bridgehub node -r dotenv/config node_modules/.bin/next start",
+    "lint": "next lint",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "db:verify": "node scripts/db-verify.mjs",
+    "smoke:test": "node scripts/smoke-test.mjs"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.12.0",
+    "@supabase/supabase-js": "^2.108.2",
+    "next": "14.2.35",
+    "pg": "^8.22.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "resend": "^6.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.57",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "dotenv": "^16.5.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.35",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3"
+  }
+}
