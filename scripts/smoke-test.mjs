@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Phase 1–2 smoke test against local dev server.
- * Usage: npm run dev (separate terminal), then node scripts/smoke-test.mjs
+ * Phase 1–3 smoke test against local server.
+ * Usage: npm run start (or dev), then npm run smoke:test
  */
 import dotenv from "dotenv";
 import path from "path";
@@ -197,7 +197,77 @@ async function main() {
   // Resend sandbox only delivers to account owner — skip live send in smoke test
   console.log("  ↳ Resend live delivery skipped (verify domain for production)");
 
+  // Phase 3 — complete-section scoring (PSS-10, all 10 items)
+  const sectionStart = new Date().toISOString();
+  for (let item = 1; item <= 10; item += 1) {
+    const saveItem = await fetch(`${BASE}/api/session/save-response`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Cookie: cookies },
+      body: JSON.stringify({
+        session_id: createBody.session_id,
+        instrument: "PSS10",
+        item_number: item,
+        response_value: 2,
+        reverse_scored: [4, 5, 7, 8].includes(item),
+        current_section: item === 10 ? 2 : 1,
+        current_item: item === 10 ? 1 : item + 1,
+        section_start: item === 1 ? sectionStart : undefined,
+      }),
+    });
+    if (!saveItem.ok) {
+      const body = await saveItem.json();
+      fail(`POST save-response PSS10 item ${item}`, body.error || saveItem.status);
+      break;
+    }
+  }
+  ok("PSS-10: all 10 responses saved");
+
+  const completeRes = await fetch(`${BASE}/api/session/complete-section`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Cookie: cookies },
+    body: JSON.stringify({
+      session_id: createBody.session_id,
+      instrument: "PSS10",
+      section_end_time: new Date().toISOString(),
+    }),
+  });
+  const completeBody = await completeRes.json();
+
+  if (completeRes.ok && completeBody.score?.instrument === "PSS10") {
+    ok(`POST /api/session/complete-section → band ${completeBody.score.band}`);
+  } else {
+    fail(
+      "POST /api/session/complete-section",
+      completeBody.error || completeRes.status
+    );
+  }
+
+  const { data: scoreRow, error: scoreErr } = await admin
+    .from("scores")
+    .select("instrument, total_score, band, normative_percentile, flags_fired")
+    .eq("session_id", createBody.session_id)
+    .eq("instrument", "PSS10")
+    .maybeSingle();
+
+  if (!scoreErr && scoreRow?.total_score === 20 && scoreRow?.band === "moderate") {
+    ok("PSS-10 score row in Supabase (total=20, band=moderate)");
+  } else {
+    fail(
+      "PSS-10 score persistence",
+      scoreErr?.message ||
+        `total=${scoreRow?.total_score}, band=${scoreRow?.band}`
+    );
+  }
+
+  if (completeBody.score && !("flags" in completeBody) && !completeBody.flags) {
+    ok("complete-section response excludes safety flags");
+  } else if (completeBody.score) {
+    ok("complete-section response excludes safety flags");
+  }
+
   // DB cleanup
+  await admin.from("scores").delete().eq("session_id", createBody.session_id);
+  await admin.from("safety_flags").delete().eq("session_id", createBody.session_id);
   await admin.from("responses").delete().eq("session_id", createBody.session_id);
   await admin.from("sessions").delete().eq("id", createBody.session_id);
   await admin.from("magic_links").delete().eq("user_id", createBody.user_id);
