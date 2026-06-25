@@ -1,0 +1,127 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { RESULT_ROW_META, TOUCHPOINT1 } from "@/lib/copy/touchpoint1";
+import { DISCLAIMER } from "@/lib/copy/disclaimer";
+import type { ResultsPayload } from "@/lib/results/get-results";
+import { Wordmark } from "@/components/ui/Wordmark";
+
+type ResultsViewProps = {
+  data: ResultsPayload;
+};
+
+export function ResultsView({ data }: ResultsViewProps) {
+  const [openRow, setOpenRow] = useState(RESULT_ROW_META[0].name);
+
+  const synthesis =
+    data.synthesis?.trim() || TOUCHPOINT1.synthesisFallback;
+
+  return (
+    <div className="flex min-h-dvh flex-col px-5 pb-10 pt-8">
+      <Link
+        href="/support"
+        className="self-end font-sans text-label text-soft-ink underline"
+      >
+        Need urgent support? Get help now
+      </Link>
+
+      <p className="mt-8 flex items-center gap-2 font-sans text-label font-medium text-[#0F6E56]">
+        <span aria-hidden>✓</span>
+        {TOUCHPOINT1.eyebrow}
+      </p>
+
+      <h1 className="mt-4 font-serif text-[23px] leading-snug text-ink">
+        {TOUCHPOINT1.headline}
+      </h1>
+
+      <p className="mt-4 font-serif text-body-sm italic leading-relaxed text-ink/80">
+        {synthesis}
+      </p>
+
+      <div className="mt-6 rounded-card bg-[#EAE4DC] px-4 py-4">
+        <p className="font-sans text-body-sm leading-relaxed text-ink/85">
+          {TOUCHPOINT1.credibility.body}
+        </p>
+      </div>
+
+      <hr className="my-8 border-line-stone/30" />
+
+      <p className="font-sans text-[11px] uppercase tracking-wide text-soft-ink/70">
+        {TOUCHPOINT1.resultsOverviewLabel}
+      </p>
+
+      <div className="mt-4 flex flex-col gap-2">
+        {RESULT_ROW_META.map((row) => {
+          const isOpen = openRow === row.name;
+          const observation = data.row_observations[row.name] ?? "";
+          return (
+            <div
+              key={row.name}
+              className="overflow-hidden rounded-card border border-line-stone/25 bg-white/60"
+            >
+              <button
+                type="button"
+                className="flex w-full items-center justify-between px-4 py-3 text-left"
+                onClick={() => setOpenRow(isOpen ? "" : row.name)}
+                aria-expanded={isOpen}
+              >
+                <span className="flex items-center gap-3">
+                  <span
+                    className="h-2 w-2 shrink-0 rounded-full"
+                    style={{ backgroundColor: row.dotColor }}
+                    aria-hidden
+                  />
+                  <span className="font-sans text-[13px] font-medium text-ink">
+                    {row.name}
+                  </span>
+                </span>
+                <span
+                  className={`text-soft-ink transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                  aria-hidden
+                >
+                  ▾
+                </span>
+              </button>
+              {isOpen && (
+                <div className="border-t border-line-stone/20 px-4 pb-4 pt-2">
+                  <p className="font-sans text-[13px] leading-relaxed text-ink/85">
+                    {observation}
+                  </p>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      <hr className="my-8 border-line-stone/30" />
+
+      <div className="rounded-card bg-[#EEEAE4] px-4 py-4">
+        <p className="font-sans text-[11px] uppercase tracking-wide text-soft-ink/70">
+          {TOUCHPOINT1.fullReport.label}
+        </p>
+        <p className="mt-3 whitespace-pre-line font-sans text-[13px] leading-relaxed text-ink/85">
+          {TOUCHPOINT1.fullReport.body}
+        </p>
+      </div>
+
+      <hr className="my-8 border-line-stone/30" />
+
+      <span className="inline-flex w-fit rounded-full bg-[#EAE4DC] px-3 py-1 font-sans text-label text-ink">
+        {TOUCHPOINT1.clarityCall.badge}
+      </span>
+
+      <p className="mt-4 whitespace-pre-line font-sans text-[13px] leading-relaxed text-ink/85">
+        {TOUCHPOINT1.clarityCall.body}
+      </p>
+
+      <Link href="/book" className="btn-primary mt-8">
+        {TOUCHPOINT1.clarityCall.cta}
+      </Link>
+
+      <p className="disclaimer mt-8">{DISCLAIMER}</p>
+      <Wordmark className="mt-6 self-center" />
+    </div>
+  );
+}

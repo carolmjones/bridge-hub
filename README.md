@@ -19,6 +19,15 @@ npm run dev
 
 Environment variables load from `.env.bridgehub` automatically. Add the same names in **Vercel → Environment Variables** for production.
 
+**Production URL:** Find yours in Vercel → Deployments → Production → Visit. Do **not** use `bridge-hub.vercel.app` — that subdomain belongs to another project. Set `NEXT_PUBLIC_APP_URL` to your actual `*.vercel.app` URL (or custom domain).
+
+```bash
+# After first successful Vercel deploy (optional — needs tokens in .env.bridgehub)
+PRODUCTION_APP_URL=https://your-project.vercel.app npm run sync:production
+```
+
+See `.env.example` for `VERCEL_TOKEN`, `VERCEL_PROJECT_ID`, and `SUPABASE_ACCESS_TOKEN` (optional, for automated sync).
+
 ## Phase 1 API routes
 
 | Route | Purpose |

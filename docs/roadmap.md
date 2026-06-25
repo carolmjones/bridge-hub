@@ -32,7 +32,7 @@ flowchart LR
   P0 --> P1 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7 --> P8
 ```
 
-**Current position:** Phase 3 in progress — scoring engine implemented; results screen (Phase 4) next.
+**Current position:** Phase 4 in progress — S6 results screen and results API built; OpenRouter AI content next.
 
 ---
 
@@ -232,7 +232,7 @@ Resolve these per phase; do not merge silently.
 |------|------|----------|
 | ⚑ | Disclaimer map | Final list of which routes show disclaimer (S1, S2, S3, S6, S8 vs R1, R2, S7, S4, S5) |
 | ⚑ | Screen copy | Wireframe boards vs COPY_REFERENCE — extract final copy per slot |
-| ⚑ | Section row labels | S6 preview uses "Life lately" for section 2; locked name is "The Fog" — align before Phase 4 |
+| ⚑ | Section row labels | **Resolved Phase 4:** S6 uses locked names (The Load, The Fog…) |
 
 **Exit criteria:** User can complete all 115 questions; answers persist across page refresh and magic link resume. **Met** — verified via smoke test (June 2026).
 
@@ -253,7 +253,8 @@ Resolve these per phase; do not merge silently.
 - [x] Store results in `scores` table
 - [x] Safety flags → `safety_flags` table via service role only
 - [x] Section timing captured (`section_start`, `section_end`)
-- [ ] End-to-end scoring smoke test with full 115-question completion
+- [x] End-to-end scoring smoke test — PSS-10 section via `npm run smoke:test` (19/19)
+- [ ] Full 115-question manual scoring verification
 
 ### Infrastructure checklist
 
@@ -271,7 +272,7 @@ Resolve these per phase; do not merge silently.
 | ⚑ | Safety flags in API | **Resolved Phase 3:** client response excludes flags; `safety_flags` table via service role |
 | ⚑ | Completion quality | <15 min flag — defer to therapist briefing (Phase 6) |
 
-**Exit criteria:** Completing all 5 sections produces score records with bands, percentiles, subscales, and pattern flags. Safety flags never appear in client API responses.
+**Exit criteria:** Completing all 5 sections produces score records with bands, percentiles, subscales, and pattern flags. Safety flags never appear in client API responses. **Met** for engine + section smoke test (June 2026).
 
 ---
 
@@ -281,14 +282,14 @@ Resolve these per phase; do not merge silently.
 
 **Reference:** [specs/chat-05/chat-05-phase3-copy-v3.md](../specs/chat-05/chat-05-phase3-copy-v3.md)
 
-- [ ] Route `/results` (S6)
-- [ ] Static copy slots 1–4 (headline, credibility, full report block, Clarity Call paragraph)
-- [ ] `GET /api/results/[session_id]` — scores, patterns, top items (no flags)
+- [x] Route `/results` (S6) — static copy, accordion rows, fallback observations
+- [x] Static copy slots 1–4 (headline, credibility, full report block, Clarity Call paragraph)
+- [x] `GET /api/results/[session_id]` — scores, patterns, top items (no flags)
+- [x] Collapsible section rows with chevron (one open at a time)
+- [x] CTA: "Book your free Clarity Call" → `/book` (placeholder until Phase 5)
 - [ ] `POST /api/results/generate-ai-content` — OpenRouter for:
   - Synthesis paragraph (Slot 5a)
   - Five collapsible row observations (Slot 5b)
-- [ ] Collapsible section rows with chevron animation
-- [ ] CTA: "Book your free Clarity Call" → `/book`
 
 ### Screen inventory — S6 `/results`
 
@@ -297,7 +298,7 @@ Resolve these per phase; do not merge silently.
 - ✓ Block 3: full report note (Slot 3)
 - ✓ Block 4: Clarity Call badge, paragraph (Slot 4), CTA → `/book`
 - ✓ Block 5: disclaimer, urgent help link, wordmark
-- ⚑ REVIEW: Row header labels — use locked section names (The Load, The Fog…) or wireframe shorthand (Stress load, Life lately…)?
+- ⚑ REVIEW: Row header labels — **Resolved Phase 4:** locked section names (The Load, The Fog…)
 - ⚑ REVIEW: AI content caching — generate once and store, or regenerate on refresh?
 - ⚑ REVIEW: Loading state while AI generates — skeleton, spinner, or static-first then hydrate?
 - ⚑ REVIEW: Urgent help link destination — same as S1 support page
@@ -307,8 +308,8 @@ Resolve these per phase; do not merge silently.
 
 | Flag | Area | Question |
 |------|------|----------|
-| ⚑ | Scoring dependency | Confirm Phase 3 cross-instrument scoring complete before S6 renders |
-| ⚑ | PDF timing | Confirm no PDF generation or download on S6 (booking only) |
+| ⚑ | Scoring dependency | **Resolved:** S6 requires `session.status = completed` and score rows |
+| ⚑ | PDF timing | **Resolved:** no PDF on S6; booking CTA only |
 
 **Exit criteria:** Completed user sees personalised Touchpoint 1 with AI-generated synthesis and row observations.
 
