@@ -49,6 +49,7 @@ The copy below is the final locked version for each slot.
 | S6 Touchpoint 1 | Synthesis paragraph | AI-generated | See Slot 5a below |
 | S6 Touchpoint 1 | Credibility block | Static | See Slot 2 below |
 | S6 Touchpoint 1 | Row observations ×5 | AI-generated | See Slot 5b below |
+| S6 Touchpoint 1 | Compiled overview heading | Static | "What your answers are showing" |
 | S6 Touchpoint 1 | Results overview paragraph | AI-generated | See Slot 5c below — appears after rows, before full report |
 | S6 Touchpoint 1 | Full report block | Static | See Slot 3 below |
 | S6 Touchpoint 1 | Clarity Call paragraph | Static | See Slot 4 below |
@@ -137,7 +138,10 @@ chat-05-phase3-copy-v3.md → Slot 5b
 ### Slot 5c — Results overview paragraph (AI-GENERATED)
 Full JSON payload and system prompt:
 chat-05-phase3-copy-v3.md → Slot 5c
-Appears below accordion rows, above full report block.
+Static heading above Slot 5c output: **What your answers are showing** (`TOUCHPOINT1.compiledOverviewHeading`).
+
+### Clinical language rule (all S6 AI slots — 5a, 5b, 5c)
+Injected at runtime in `lib/ai/touchpoint-ai.ts`. Forbidden words/phrases include: trauma, distressing, memories, flashbacks, triggered, symptoms, clinical, disorder, diagnosis, dysregulation, and direct psychological symptom labels. Translate into lived-experience language (e.g. "something that still echoes" not "distressing memories").
 
 ---
 

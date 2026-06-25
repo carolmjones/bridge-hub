@@ -19,10 +19,18 @@ import { getOpenRouterApiKey } from "@/lib/env";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { Response } from "@/lib/types/database";
 
-export const TOUCHPOINT_PROMPT_VERSION = 3;
+export const TOUCHPOINT_PROMPT_VERSION = 4;
 
 /** Results-screen AI only — Flash avoids Pro reasoning token budget exhaustion. */
 export const TOUCHPOINT_OPENROUTER_MODEL = "google/gemini-2.5-flash";
+
+const CLINICAL_LANGUAGE_RULE = `- Do not use these words or phrases: trauma, distressing, memories, flashbacks, triggered, symptoms, clinical, disorder, diagnosis, dysregulation, or any word that describes a psychological symptom directly. Describe the lived experience instead. Instead of distressing memories say something that still echoes or something that has not fully settled. Instead of emotional dysregulation say feelings that arrive fast or hard to predict. Translate clinical concepts into plain human language every time.`;
+
+function withClinicalLanguageRule(prompt: string): string {
+  const marker = "WHAT YOU MUST NEVER DO:\n";
+  if (!prompt.includes(marker)) return prompt;
+  return prompt.replace(marker, `${marker}${CLINICAL_LANGUAGE_RULE}\n`);
+}
 
 export type TouchpointAiCache = {
   synthesis: string | null;
@@ -92,7 +100,7 @@ async function generateSynthesis(
     );
   }
   const raw = await callOpenRouter(
-    SYNTHESIS_SYSTEM_PROMPT,
+    withClinicalLanguageRule(SYNTHESIS_SYSTEM_PROMPT),
     payload,
     400,
     TOUCHPOINT_OPENROUTER_MODEL
@@ -113,7 +121,7 @@ async function generateOverview(
     );
   }
   const raw = await callOpenRouter(
-    RESULTS_OVERVIEW_SYSTEM_PROMPT,
+    withClinicalLanguageRule(RESULTS_OVERVIEW_SYSTEM_PROMPT),
     payload,
     350,
     TOUCHPOINT_OPENROUTER_MODEL
@@ -136,7 +144,9 @@ async function generateRowObservation(
     responses
   );
   const sectionInstruction = SECTION_INSTRUCTIONS[sectionName];
-  const systemPrompt = `${ROW_OBSERVATION_SYSTEM_PROMPT}\n\nSECTION-SPECIFIC INSTRUCTION:\n${sectionInstruction}`;
+  const systemPrompt = withClinicalLanguageRule(
+    `${ROW_OBSERVATION_SYSTEM_PROMPT}\n\nSECTION-SPECIFIC INSTRUCTION:\n${sectionInstruction}`
+  );
 
   const raw = await callOpenRouter(
     systemPrompt,

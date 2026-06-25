@@ -387,7 +387,10 @@ Kit sequences: Chat 08 scope — not built here
 
 ## OpenRouter AI calls
 
-Model: `google/gemini-2.5-pro` (override via `OPENROUTER_MODEL` env var)
+**S6 Touchpoint 1 (results screen):** `google/gemini-2.5-flash` via `TOUCHPOINT_OPENROUTER_MODEL` in `lib/ai/touchpoint-ai.ts`. Gemini 2.5 Pro exhausts the token budget on internal reasoning, producing truncated fragments at current max_tokens.
+
+**Report / PDF / therapist AI (future):** `OPENROUTER_MODEL` env var (default `google/gemini-2.5-pro`).
+
 All calls server-side only. Never expose API key client-side.
 
 ```ts
@@ -411,6 +414,8 @@ const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
 AI generation targets and their prompts:
 - Synthesis paragraph (Slot 5a): chat-05-phase3-copy-v3.md
 - Collapsible rows ×5 (Slot 5b): chat-05-phase3-copy-v3.md
+- Results overview paragraph (Slot 5c): chat-05-phase3-copy-v3.md
+- Clinical language rule: injected in `lib/ai/touchpoint-ai.ts` on all S6 prompts (`prompt_version: 4`)
 - Layer 1 per instrument: chat-05-report-pseudocode-v4.md
 - Call Preparation Brief: chat-05-therapist-briefing-v1.md
 

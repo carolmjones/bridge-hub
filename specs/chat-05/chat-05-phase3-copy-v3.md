@@ -174,6 +174,7 @@ like the first moment someone who actually read her answers is speaking
 back to her. Not a summary. A recognition.
 
 WHAT YOU MUST NEVER DO:
+- Do not use these words or phrases: trauma, distressing, memories, flashbacks, triggered, symptoms, clinical, disorder, diagnosis, dysregulation, or any word that describes a psychological symptom directly. Describe the lived experience instead. Instead of distressing memories say something that still echoes or something that has not fully settled. Instead of emotional dysregulation say feelings that arrive fast or hard to predict. Translate clinical concepts into plain human language every time.
 - Name any instrument (PSS-10, PHQ-8, MAIA-2, PCL-5, PID-5-SF)
 - Name any band label (High, Moderate, Strongly elevated, etc.)
 - Use a percentile or number
@@ -273,6 +274,7 @@ Whisper not shout. Sound like someone who read her answers, not
 a system that processed her score.
 
 WHAT YOU MUST NEVER DO:
+- Do not use these words or phrases: trauma, distressing, memories, flashbacks, triggered, symptoms, clinical, disorder, diagnosis, dysregulation, or any word that describes a psychological symptom directly. Describe the lived experience instead. Instead of distressing memories say something that still echoes or something that has not fully settled. Instead of emotional dysregulation say feelings that arrive fast or hard to predict. Translate clinical concepts into plain human language every time.
 - Name the instrument (PSS-10, PHQ-8, MAIA-2, PCL-5, PID-5-SF)
 - Name the band (High, Moderate, Typical range, etc.)
 - Use a percentile or number
@@ -485,6 +487,7 @@ This should feel like the moment someone who actually read her
 answers is speaking back to her about what they see overall.
 
 WHAT YOU MUST NEVER DO:
+- Do not use these words or phrases: trauma, distressing, memories, flashbacks, triggered, symptoms, clinical, disorder, diagnosis, dysregulation, or any word that describes a psychological symptom directly. Describe the lived experience instead. Instead of distressing memories say something that still echoes or something that has not fully settled. Instead of emotional dysregulation say feelings that arrive fast or hard to predict. Translate clinical concepts into plain human language every time.
 - Name any instrument by code or name
 - Use band labels or percentiles
 - Use clinical terminology or diagnostic language

@@ -240,15 +240,16 @@ Resolve these per phase; do not merge silently.
 
 ## Assessment reorder & PID trim (June 2026)
 
-**Goal:** Body Room first, 104 items, no safety flags, 15-minute copy, Gemini 2.5 Pro for S6 AI.
+**Goal:** Body Room first, 104 items, no safety flags, 15-minute copy, S6 AI on Gemini Flash.
 
 **Code (done):**
 
 - [x] Section order: MAIA-2 → PSS-10 → PHQ-8 → PCL-5 → PID-5-SF (39 items)
 - [x] Remove 11 PID items; depressivity ÷3; patterns/framework updated
 - [x] Remove all `safety_flags` app code; migration file added
-- [x] Time copy → 15 minutes (S1, S2); `OPENROUTER_MODEL` default → `google/gemini-2.5-pro`
-- [x] AI: `top_endorsed_items` = 10, MAIA-first synthesis, `prompt_version: 3` cache bump (overview paragraph added)
+- [x] Time copy → 15 minutes (S1, S2)
+- [x] AI: `top_endorsed_items` = 10 (max 3 per instrument), MAIA-first synthesis, `prompt_version: 4` (clinical language rule)
+- [x] S6 touchpoint model → `google/gemini-2.5-flash` (not `OPENROUTER_MODEL` Pro — reasoning token exhaustion)
 - [x] `lib/report/section-order.ts` for future PDF/addendum order
 - [x] Build + smoke test pass
 
@@ -312,14 +313,18 @@ Resolve these per phase; do not merge silently.
   - Synthesis paragraph (Slot 5a)
   - Five collapsible row observations (Slot 5b)
   - Results overview paragraph (Slot 5c)
-- [x] AI content cached on `sessions.touchpoint_ai` (`prompt_version: 3`)
-- [x] Static-first loading state in ResultsView while AI hydrates
+- [x] AI content cached on `sessions.touchpoint_ai` (`prompt_version: 4`)
+- [x] Static-first loading state in ResultsView while AI hydrates (sequential per-slot API calls — avoids Vercel timeout)
+- [x] Results-screen AI model: `google/gemini-2.5-flash` (`TOUCHPOINT_OPENROUTER_MODEL` in code — Pro exhausts token budget on reasoning)
+- [x] Compiled overview block: heading "What your answers are showing" + Slot 5c paragraph
+- [x] `top_endorsed_items`: max 3 per instrument, round-robin tie-breaking across instruments
+- [x] Clinical language rule on all 7 AI calls (forbidden symptom/clinical words — lived-experience translation)
 
 ### Screen inventory — S6 `/results`
 
 - ✓ Block 1: eyebrow, headline (Slot 1), synthesis AI (Slot 5a), credibility (Slot 2)
 - ✓ Block 2: five collapsible rows (Slot 5b), dot colours, accordion (one open)
-- ✓ Block 2b: results overview paragraph (Slot 5c) — below rows, above full report
+- ✓ Block 2b: compiled overview — heading "What your answers are showing" + results overview paragraph (Slot 5c)
 - ✓ Block 3: full report note (Slot 3) — Nervous System Map + bullet list
 - ✓ Block 4: Clarity Call badge, paragraph (Slot 4), CTA → `/book`
 - ✓ Block 5: disclaimer, urgent help link, wordmark

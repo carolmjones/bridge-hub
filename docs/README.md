@@ -43,7 +43,7 @@ Women aged 28–45, global English audience. Overwhelmed, carrying unidentified 
 | Booking | Cal.com | Free plan at launch. Embedded on `/book`. |
 | PDF generation | React PDF (`@react-pdf/renderer`) | Generated on booking confirmation only |
 | Hosting | Vercel | Auto-deploy from GitHub |
-| AI generation | OpenRouter | Default model: `google/gemini-2.5-pro` (`OPENROUTER_MODEL`) |
+| AI generation | OpenRouter | S6 touchpoint: `google/gemini-2.5-flash` (in code). Report/PDF AI: `OPENROUTER_MODEL` (default `google/gemini-2.5-pro`) |
 | Repository | GitHub private repo | This repo |
 
 > **Note:** The master brief still references Mailchimp and older design tokens. Locked decisions in `specs/cursor-guide/` supersede the master brief where they conflict. Kit replaces Mailchimp. DESIGN_SYSTEM.md replaces master brief colour tokens.

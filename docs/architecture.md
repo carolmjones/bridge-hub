@@ -158,8 +158,9 @@ Last question in section answered
 ```
 User lands on /results
   → GET /api/results/[session_id]
-  → POST /api/results/generate-ai-content (synthesis + 5 rows)
-  → OpenRouter: claude-sonnet-4-6
+  → POST /api/results/generate-ai-content ×7 (synthesis, 5 rows, overview — sequential from client)
+  → OpenRouter: google/gemini-2.5-flash (TOUCHPOINT_OPENROUTER_MODEL)
+  → Cache on sessions.touchpoint_ai (prompt_version: 4)
   → Display Touchpoint 1
 ```
 
