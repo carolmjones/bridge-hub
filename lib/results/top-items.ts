@@ -9,6 +9,8 @@ export type TopItem = {
   response_label: string;
 };
 
+const MAX_ITEMS_PER_INSTRUMENT = 3;
+
 function labelFor(instrument: Instrument, itemNumber: number, value: number): string {
   const question = QUESTIONS.find(
     (q) => q.instrument === instrument && q.instrumentItemNumber === itemNumber
@@ -16,33 +18,92 @@ function labelFor(instrument: Instrument, itemNumber: number, value: number): st
   return question?.scale.find((o) => o.value === value)?.label ?? String(value);
 }
 
+function toTopItem(response: Response): TopItem | null {
+  const question = QUESTIONS.find(
+    (q) =>
+      q.instrument === response.instrument &&
+      q.instrumentItemNumber === response.item_number
+  );
+  if (!question) return null;
+
+  return {
+    instrument: response.instrument,
+    item_number: response.item_number,
+    item_text: question.text,
+    response_value: response.response_value,
+    response_label: labelFor(
+      response.instrument,
+      response.item_number,
+      response.response_value
+    ),
+  };
+}
+
+/**
+ * Select top-endorsed items by score, capping at MAX_ITEMS_PER_INSTRUMENT per
+ * instrument. Within equal scores, round-robin across instruments so one
+ * instrument cannot fill the list when values tie.
+ */
+function selectDiverseTopItems(items: TopItem[], limit: number): TopItem[] {
+  const byScore = new Map<number, TopItem[]>();
+  for (const item of items) {
+    const tier = byScore.get(item.response_value) ?? [];
+    tier.push(item);
+    byScore.set(item.response_value, tier);
+  }
+
+  const scores = [...byScore.keys()].sort((a, b) => b - a);
+  const selected: TopItem[] = [];
+  const counts = new Map<Instrument, number>();
+
+  for (const score of scores) {
+    if (selected.length >= limit) break;
+
+    const tier = byScore.get(score)!;
+    const byInstrument = new Map<Instrument, TopItem[]>();
+    for (const item of tier) {
+      const list = byInstrument.get(item.instrument) ?? [];
+      list.push(item);
+      byInstrument.set(item.instrument, list);
+    }
+
+    for (const list of byInstrument.values()) {
+      list.sort((a, b) => a.item_number - b.item_number);
+    }
+
+    const instruments = [...byInstrument.keys()].sort();
+    let addedInRound = true;
+
+    while (addedInRound && selected.length < limit) {
+      addedInRound = false;
+      for (const instrument of instruments) {
+        if (selected.length >= limit) break;
+        if ((counts.get(instrument) ?? 0) >= MAX_ITEMS_PER_INSTRUMENT) continue;
+
+        const queue = byInstrument.get(instrument);
+        if (!queue?.length) continue;
+
+        selected.push(queue.shift()!);
+        counts.set(instrument, (counts.get(instrument) ?? 0) + 1);
+        addedInRound = true;
+      }
+    }
+  }
+
+  return selected;
+}
+
 export function buildTopItems(
   responses: Response[],
   limit = 10
 ): TopItem[] {
-  const scored = responses.filter((r) =>
-    QUESTIONS.some(
-      (item) =>
-        item.instrument === r.instrument &&
-        item.instrumentItemNumber === r.item_number
-    )
-  );
+  const items: TopItem[] = [];
+  for (const response of responses) {
+    const item = toTopItem(response);
+    if (item) items.push(item);
+  }
 
-  return scored
-    .map((r) => ({
-      instrument: r.instrument,
-      item_number: r.item_number,
-      item_text:
-        QUESTIONS.find(
-          (q) =>
-            q.instrument === r.instrument &&
-            q.instrumentItemNumber === r.item_number
-        )?.text ?? "",
-      response_value: r.response_value,
-      response_label: labelFor(r.instrument, r.item_number, r.response_value),
-    }))
-    .sort((a, b) => b.response_value - a.response_value)
-    .slice(0, limit);
+  return selectDiverseTopItems(items, limit);
 }
 
 export function topItemsForInstrument(
