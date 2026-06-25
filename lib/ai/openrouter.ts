@@ -5,13 +5,15 @@ const OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions";
 export async function callOpenRouter(
   systemPrompt: string,
   userPayload: unknown,
-  maxTokens = 500
+  maxTokens = 500,
+  modelOverride?: string
 ): Promise<string> {
   const apiKey = getOpenRouterApiKey();
   if (!apiKey) {
     throw new Error("OPENROUTER_API_KEY is not configured.");
   }
 
+  const model = modelOverride ?? getOpenRouterModel();
   const response = await fetch(OPENROUTER_URL, {
     method: "POST",
     headers: {
@@ -19,7 +21,7 @@ export async function callOpenRouter(
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: getOpenRouterModel(),
+      model,
       max_tokens: maxTokens,
       messages: [
         { role: "system", content: systemPrompt },
@@ -34,10 +36,11 @@ export async function callOpenRouter(
   }
 
   const data = (await response.json()) as {
-    choices?: Array<{ message?: { content?: string } }>;
+    choices?: Array<{ finish_reason?: string; message?: { content?: string } }>;
   };
 
-  const content = data.choices?.[0]?.message?.content?.trim();
+  const choice = data.choices?.[0];
+  const content = choice?.message?.content?.trim();
   if (!content) {
     throw new Error("OpenRouter returned empty content.");
   }

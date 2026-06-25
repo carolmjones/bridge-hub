@@ -21,6 +21,9 @@ import type { Response } from "@/lib/types/database";
 
 export const TOUCHPOINT_PROMPT_VERSION = 3;
 
+/** Results-screen AI only — Flash avoids Pro reasoning token budget exhaustion. */
+export const TOUCHPOINT_OPENROUTER_MODEL = "google/gemini-2.5-flash";
+
 export type TouchpointAiCache = {
   synthesis: string | null;
   overview_paragraph: string | null;
@@ -88,7 +91,12 @@ async function generateSynthesis(
       `[touchpoint-ai] top_endorsed_items empty for session ${sessionId} despite ${responses.length} responses`
     );
   }
-  const raw = await callOpenRouter(SYNTHESIS_SYSTEM_PROMPT, payload, 400);
+  const raw = await callOpenRouter(
+    SYNTHESIS_SYSTEM_PROMPT,
+    payload,
+    400,
+    TOUCHPOINT_OPENROUTER_MODEL
+  );
   return stripInternalNotes(raw);
 }
 
@@ -104,7 +112,12 @@ async function generateOverview(
       `[touchpoint-ai] overview top_endorsed_items empty for session ${sessionId}`
     );
   }
-  const raw = await callOpenRouter(RESULTS_OVERVIEW_SYSTEM_PROMPT, payload, 350);
+  const raw = await callOpenRouter(
+    RESULTS_OVERVIEW_SYSTEM_PROMPT,
+    payload,
+    350,
+    TOUCHPOINT_OPENROUTER_MODEL
+  );
   return stripInternalNotes(raw);
 }
 
@@ -125,7 +138,12 @@ async function generateRowObservation(
   const sectionInstruction = SECTION_INSTRUCTIONS[sectionName];
   const systemPrompt = `${ROW_OBSERVATION_SYSTEM_PROMPT}\n\nSECTION-SPECIFIC INSTRUCTION:\n${sectionInstruction}`;
 
-  const raw = await callOpenRouter(systemPrompt, payload, 250);
+  const raw = await callOpenRouter(
+    systemPrompt,
+    payload,
+    250,
+    TOUCHPOINT_OPENROUTER_MODEL
+  );
   return stripInternalNotes(raw);
 }
 

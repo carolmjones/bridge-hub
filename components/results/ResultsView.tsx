@@ -184,15 +184,18 @@ export function ResultsView({ data }: ResultsViewProps) {
         })}
       </div>
 
+      <hr className="my-8 border-line-stone/30" />
+
+      <h2 className="font-serif text-lg leading-snug text-ink">
+        {TOUCHPOINT1.compiledOverviewHeading}
+      </h2>
       <p
-        className={`mt-8 font-serif text-body-sm italic leading-relaxed text-ink/80 ${aiLoading ? "animate-pulse" : ""}`}
+        className={`mt-4 font-serif text-body-sm italic leading-relaxed text-ink/80 ${aiLoading ? "animate-pulse" : ""}`}
       >
         {overview}
       </p>
 
-      <hr className="my-8 border-line-stone/30" />
-
-      <div className="rounded-card bg-[#EEEAE4] px-4 py-4">
+      <div className="mt-8 rounded-card bg-[#EEEAE4] px-4 py-4">
         <h2 className="font-serif text-lg leading-snug text-ink">
           {TOUCHPOINT1.fullReport.heading}
         </h2>

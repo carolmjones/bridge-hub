@@ -33,6 +33,7 @@ Up to 45 minutes. Free. No obligation.`,
     cta: "Book your free Clarity Call",
   },
   resultsOverviewLabel: "YOUR RESULTS OVERVIEW",
+  compiledOverviewHeading: "What your answers are showing",
   synthesisFallback:
     "Across all five areas, your answers pointed toward a system that has been carrying a significant load for some time.",
   overviewFallback:
