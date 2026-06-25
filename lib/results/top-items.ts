@@ -52,7 +52,7 @@ function selectDiverseTopItems(items: TopItem[], limit: number): TopItem[] {
     byScore.set(item.response_value, tier);
   }
 
-  const scores = [...byScore.keys()].sort((a, b) => b - a);
+  const scores = Array.from(byScore.keys()).sort((a, b) => b - a);
   const selected: TopItem[] = [];
   const counts = new Map<Instrument, number>();
 
@@ -67,11 +67,11 @@ function selectDiverseTopItems(items: TopItem[], limit: number): TopItem[] {
       byInstrument.set(item.instrument, list);
     }
 
-    for (const list of byInstrument.values()) {
+    for (const list of Array.from(byInstrument.values())) {
       list.sort((a, b) => a.item_number - b.item_number);
     }
 
-    const instruments = [...byInstrument.keys()].sort();
+    const instruments = Array.from(byInstrument.keys()).sort();
     let addedInRound = true;
 
     while (addedInRound && selected.length < limit) {
