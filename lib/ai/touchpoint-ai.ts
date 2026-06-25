@@ -130,13 +130,14 @@ async function generateRowObservation(
 }
 
 function cacheHasTarget(cache: TouchpointAiCache, target: GenerationTarget): boolean {
-  if ((cache.prompt_version ?? 0) < TOUCHPOINT_PROMPT_VERSION) return false;
-
   if (target === "synthesis_paragraph") {
     return Boolean(cache.synthesis?.trim());
   }
   if (target === "results_overview_paragraph") {
-    return Boolean(cache.overview_paragraph?.trim());
+    return (
+      Boolean(cache.overview_paragraph?.trim()) &&
+      (cache.prompt_version ?? 0) >= TOUCHPOINT_PROMPT_VERSION
+    );
   }
   const section = rowIndexToSection(target);
   if (!section) return false;
@@ -214,6 +215,7 @@ export async function generateTouchpointContent(
     overview_paragraph: existing.overview_paragraph ?? null,
     row_observations: { ...existing.row_observations },
     generated_at: existing.generated_at,
+    prompt_version: existing.prompt_version,
   };
 
   const firstName = profile?.first_name ?? "";

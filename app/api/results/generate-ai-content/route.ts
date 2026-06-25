@@ -7,6 +7,7 @@ import type { GenerationTarget } from "@/lib/ai/build-touchpoint-payload";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const VALID_TARGETS = new Set<GenerationTarget>([
   "synthesis_paragraph",

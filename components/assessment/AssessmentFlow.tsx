@@ -161,6 +161,7 @@ export function AssessmentFlow({
   const advanceAfterTransition = useCallback(
     (nextSectionIndex: number) => {
       if (nextSectionIndex === 4 && !writeInDone) {
+        setSectionIndex(nextSectionIndex);
         setView({ kind: "write_in" });
         return;
       }
@@ -297,7 +298,7 @@ export function AssessmentFlow({
               }}
               className="btn-primary"
             >
-              Begin section 4
+              Continue
             </button>
             <button
               type="button"

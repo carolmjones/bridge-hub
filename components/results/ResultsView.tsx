@@ -11,6 +11,16 @@ type ResultsViewProps = {
   data: ResultsPayload;
 };
 
+const AI_GENERATION_TARGETS = [
+  "synthesis_paragraph",
+  "row_1",
+  "row_2",
+  "row_3",
+  "row_4",
+  "row_5",
+  "results_overview_paragraph",
+] as const;
+
 export function ResultsView({ data }: ResultsViewProps) {
   const [openRow, setOpenRow] = useState<
     (typeof RESULT_ROW_META)[number]["name"] | null
@@ -31,44 +41,48 @@ export function ResultsView({ data }: ResultsViewProps) {
 
     async function loadAiContent() {
       try {
-        const res = await fetch("/api/results/generate-ai-content", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            session_id: data.session_id,
-            generation_target: "all",
-          }),
-        });
+        for (const generation_target of AI_GENERATION_TARGETS) {
+          if (cancelled) return;
 
-        if (!res.ok) {
-          return;
-        }
-
-        const body = (await res.json()) as {
-          synthesis?: string | null;
-          overview_paragraph?: string | null;
-          row_observations?: Record<string, string>;
-        };
-
-        if (cancelled) return;
-
-        if (body.synthesis?.trim()) {
-          setSynthesis(body.synthesis.trim());
-        }
-
-        if (body.overview_paragraph?.trim()) {
-          setOverview(body.overview_paragraph.trim());
-        }
-
-        if (body.row_observations) {
-          setRowObservations((prev) => {
-            const next = { ...prev };
-            for (const row of RESULT_ROW_META) {
-              const text = body.row_observations?.[row.name]?.trim();
-              if (text) next[row.name] = text;
-            }
-            return next;
+          const res = await fetch("/api/results/generate-ai-content", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              session_id: data.session_id,
+              generation_target,
+            }),
           });
+
+          if (!res.ok) {
+            continue;
+          }
+
+          const body = (await res.json()) as {
+            synthesis?: string | null;
+            overview_paragraph?: string | null;
+            row_observations?: Record<string, string>;
+          };
+
+          if (cancelled) return;
+
+          if (body.synthesis?.trim()) {
+            setSynthesis(body.synthesis.trim());
+          }
+
+          if (body.overview_paragraph?.trim()) {
+            setOverview(body.overview_paragraph.trim());
+          }
+
+          if (body.row_observations) {
+            setRowObservations((prev) => {
+              const next = { ...prev };
+              for (const row of RESULT_ROW_META) {
+                const text = body.row_observations?.[row.name]?.trim();
+                if (text) next[row.name] = text;
+              }
+              return next;
+            });
+          }
         }
       } finally {
         if (!cancelled) setAiLoading(false);
