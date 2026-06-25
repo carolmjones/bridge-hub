@@ -32,7 +32,7 @@ flowchart LR
   P0 --> P1 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7 --> P8
 ```
 
-**Current position:** Phases 0–2 complete. Supabase migration applied (`npm run db:verify` passes). Smoke test passed (`npm run smoke:test`, 15/15). **Next: Phase 3 — scoring engine.**
+**Current position:** Phase 3 in progress — scoring engine implemented; results screen (Phase 4) next.
 
 ---
 
@@ -244,15 +244,16 @@ Resolve these per phase; do not merge silently.
 
 **Reference:** [specs/chat-03/chat-03-scoring-engine-pseudocode-v2.md](../specs/chat-03/chat-03-scoring-engine-pseudocode-v2.md)
 
-- [ ] Implement `lib/scoring/`:
+- [x] Implement `lib/scoring/`:
   - `pss10.ts`, `phq8.ts`, `maia2.ts`, `pcl5.ts`, `pid5sf.ts`
   - `normative.ts` (continuous normal CDF, not lookup tables)
   - `flags.ts`, `framework.ts`, `patterns.ts`
-- [ ] `POST /api/session/complete-section` triggers scoring per instrument
-- [ ] Run `framework.ts` + `patterns.ts` after all 5 instruments scored (not per-section)
-- [ ] Store results in `scores` table
-- [ ] Safety flags → `safety_flags` table via service role only
-- [ ] Section timing captured (`section_start`, `section_end`)
+- [x] `POST /api/session/complete-section` triggers scoring per instrument
+- [x] Run `framework.ts` + `patterns.ts` after all 5 instruments scored (on final `complete-section`)
+- [x] Store results in `scores` table
+- [x] Safety flags → `safety_flags` table via service role only
+- [x] Section timing captured (`section_start`, `section_end`)
+- [ ] End-to-end scoring smoke test with full 115-question completion
 
 ### Infrastructure checklist
 
@@ -264,11 +265,11 @@ Resolve these per phase; do not merge silently.
 
 | Flag | Area | Question |
 |------|------|----------|
-| ⚑ | Cross-instrument timing | Run Q1–Q8 + named patterns once all 5 instruments scored — on last `complete-section` or on first `/results` load? |
-| ⚑ | Chat 03 3.3–3.4 | Reconcile [current-status.md](current-status.md) vs scoring roadmap closeout before building `patterns.ts` |
-| ⚑ | `POST /api/score/calculate` | Separate public route or internal-only helper called from `complete-section`? |
-| ⚑ | Safety flags in API | Ensure no client route returns flag data (ARCHITECTURE `complete-section` response) |
-| ⚑ | Completion quality | <15 min flag — surface where? (therapist only per scoring roadmap) |
+| ⚑ | Cross-instrument timing | **Resolved Phase 3:** framework + patterns run on final `complete-section` (PID5SF / `complete_assessment`) |
+| ⚑ | Chat 03 3.3–3.4 | Edge cases / AI pattern library structure still pending in specs — core PF-01–08 implemented |
+| ⚑ | `POST /api/score/calculate` | **Resolved Phase 3:** internal helpers only; `complete-section` is the sole entry point |
+| ⚑ | Safety flags in API | **Resolved Phase 3:** client response excludes flags; `safety_flags` table via service role |
+| ⚑ | Completion quality | <15 min flag — defer to therapist briefing (Phase 6) |
 
 **Exit criteria:** Completing all 5 sections produces score records with bands, percentiles, subscales, and pattern flags. Safety flags never appear in client API responses.
 

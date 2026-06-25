@@ -50,6 +50,7 @@ export function AssessmentFlow({
   const [dimmed, setDimmed] = useState(false);
   const [breathingOpen, setBreathingOpen] = useState(false);
   const [writeInDone, setWriteInDone] = useState(false);
+  const [writeInText, setWriteInText] = useState("");
   const [view, setView] = useState<View>(() => {
     if (showInitialTransition) {
       return { kind: "transition", sectionIndex: 1 };
@@ -73,6 +74,26 @@ export function AssessmentFlow({
   }, [view, sectionIndex, itemIndex]);
 
   const section = getSection(sectionIndex);
+
+  const completeSection = useCallback(
+    async (
+      instrument: Question["instrument"],
+      options?: { writeIn?: string; final?: boolean }
+    ) => {
+      await fetch("/api/session/complete-section", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          session_id: sessionId,
+          instrument,
+          section_end_time: new Date().toISOString(),
+          write_in_text: options?.writeIn,
+          complete_assessment: options?.final,
+        }),
+      });
+    },
+    [sessionId]
+  );
 
   useEffect(() => {
     const local = loadLocalAssessment();
@@ -125,6 +146,10 @@ export function AssessmentFlow({
           reverse_scored: question.reverseScored,
           current_section: nextSection,
           current_item: nextItem,
+          section_start:
+            question.sectionItemIndex === 1
+              ? new Date().toISOString()
+              : undefined,
         }),
       });
     },
@@ -174,12 +199,22 @@ export function AssessmentFlow({
     if (isLastInSection) {
       if (isLastOverall) {
         await persistAnswer(currentQuestion, value, sectionIndex, itemIndex);
+        await completeSection(currentQuestion.instrument, {
+          writeIn: writeInText.trim() || undefined,
+          final: true,
+        });
         router.push("/results");
         return;
       }
       nextSection = sectionIndex + 1;
       nextItem = 1;
       await persistAnswer(currentQuestion, value, nextSection, nextItem);
+      await completeSection(currentQuestion.instrument, {
+        writeIn:
+          currentQuestion.instrument === "PCL5"
+            ? writeInText.trim() || undefined
+            : undefined,
+      });
       window.setTimeout(() => {
         setSelectedValue(null);
         setDimmed(false);
@@ -240,6 +275,8 @@ export function AssessmentFlow({
           <textarea
             className="mt-6 min-h-[120px] w-full rounded-card border border-line-stone/40 bg-white p-4 font-sans text-body text-ink"
             placeholder="Optional — only if you want to"
+            value={writeInText}
+            onChange={(event) => setWriteInText(event.target.value)}
           />
           <div className="mt-6 flex flex-col gap-3">
             <button
