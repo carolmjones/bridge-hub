@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { RESULT_ROW_META, TOUCHPOINT1 } from "@/lib/copy/touchpoint1";
 import { DISCLAIMER } from "@/lib/copy/disclaimer";
@@ -13,9 +13,64 @@ type ResultsViewProps = {
 
 export function ResultsView({ data }: ResultsViewProps) {
   const [openRow, setOpenRow] = useState(RESULT_ROW_META[0].name);
+  const [synthesis, setSynthesis] = useState(
+    data.synthesis?.trim() || TOUCHPOINT1.synthesisFallback
+  );
+  const [rowObservations, setRowObservations] = useState(data.row_observations);
+  const [aiLoading, setAiLoading] = useState(!data.ai_cached);
 
-  const synthesis =
-    data.synthesis?.trim() || TOUCHPOINT1.synthesisFallback;
+  useEffect(() => {
+    if (data.ai_cached) return;
+
+    let cancelled = false;
+
+    async function loadAiContent() {
+      try {
+        const res = await fetch("/api/results/generate-ai-content", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            session_id: data.session_id,
+            generation_target: "all",
+          }),
+        });
+
+        if (!res.ok) {
+          return;
+        }
+
+        const body = (await res.json()) as {
+          synthesis?: string | null;
+          row_observations?: Record<string, string>;
+        };
+
+        if (cancelled) return;
+
+        if (body.synthesis?.trim()) {
+          setSynthesis(body.synthesis.trim());
+        }
+
+        if (body.row_observations) {
+          setRowObservations((prev) => {
+            const next = { ...prev };
+            for (const row of RESULT_ROW_META) {
+              const text = body.row_observations?.[row.name]?.trim();
+              if (text) next[row.name] = text;
+            }
+            return next;
+          });
+        }
+      } finally {
+        if (!cancelled) setAiLoading(false);
+      }
+    }
+
+    loadAiContent();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [data.session_id, data.ai_cached]);
 
   return (
     <div className="flex min-h-dvh flex-col px-5 pb-10 pt-8">
@@ -35,9 +90,17 @@ export function ResultsView({ data }: ResultsViewProps) {
         {TOUCHPOINT1.headline}
       </h1>
 
-      <p className="mt-4 font-serif text-body-sm italic leading-relaxed text-ink/80">
+      <p
+        className={`mt-4 font-serif text-body-sm italic leading-relaxed text-ink/80 ${aiLoading ? "animate-pulse" : ""}`}
+      >
         {synthesis}
       </p>
+
+      {aiLoading && (
+        <p className="mt-2 font-sans text-label text-soft-ink/70">
+          Personalising your results…
+        </p>
+      )}
 
       <div className="mt-6 rounded-card bg-[#EAE4DC] px-4 py-4">
         <p className="font-sans text-body-sm leading-relaxed text-ink/85">
@@ -54,7 +117,7 @@ export function ResultsView({ data }: ResultsViewProps) {
       <div className="mt-4 flex flex-col gap-2">
         {RESULT_ROW_META.map((row) => {
           const isOpen = openRow === row.name;
-          const observation = data.row_observations[row.name] ?? "";
+          const observation = rowObservations[row.name] ?? "";
           return (
             <div
               key={row.name}
@@ -85,7 +148,9 @@ export function ResultsView({ data }: ResultsViewProps) {
               </button>
               {isOpen && (
                 <div className="border-t border-line-stone/20 px-4 pb-4 pt-2">
-                  <p className="font-sans text-[13px] leading-relaxed text-ink/85">
+                  <p
+                    className={`font-sans text-[13px] leading-relaxed text-ink/85 ${aiLoading ? "animate-pulse" : ""}`}
+                  >
                     {observation}
                   </p>
                 </div>

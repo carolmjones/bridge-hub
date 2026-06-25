@@ -12,7 +12,7 @@
 
 **Implementation is in progress.** Phases 0–3 are complete in code; Phase 4 (Touchpoint 1 results screen) is partially built locally. Supabase schema is migrated; local smoke test passes 19/19 checks.
 
-**Production (Vercel):** GitHub `main` is at commit `7038046` (Phase 3). The Vercel project appears linked but **production deploy returns 404** at `bridge-hub-git-main-carolmjones.vercel.app` — likely missing env vars or failed build. **Do not use `bridge-hub.vercel.app`** — that subdomain is another unrelated app.
+**Production (Vercel):** Live at https://bridge-hub-indol.vercel.app (Phase 4 AI requires `OPENROUTER_API_KEY` on Vercel).
 
 ---
 
@@ -24,7 +24,7 @@
 | 1 — Data layer | **Complete** | Supabase EU, RLS, magic link auth, migration applied |
 | 2 — Assessment UI | **Complete** | S1–S3, S5 (115 questions), R1/R2, auto-save |
 | 3 — Scoring engine | **Complete** | `lib/scoring/`, `complete-section` API, smoke test |
-| 4 — Results (S6) | **In progress** | ResultsView + GET `/api/results` built locally; OpenRouter AI pending |
+| 4 — Results (S6) | **Complete** | Touchpoint 1 UI, results API, OpenRouter AI + cache |
 | 5–8 | Not started | Booking, PDF, therapist dashboard, email, launch |
 
 **Authoritative checklist:** [roadmap.md](roadmap.md)
@@ -105,6 +105,4 @@ Trust file content, git history, and [roadmap.md](roadmap.md) over older checkbo
 
 ## Next step
 
-Continue **Phase 4** per [roadmap.md](roadmap.md): OpenRouter AI content for synthesis + row observations, then commit/push so S6 matches local on Vercel.
-
-Fix Vercel 404: confirm green production deploy + env vars + correct production URL.
+Continue **Phase 5** per [roadmap.md](roadmap.md): `/book` + Cal.com embed, booking webhook, Nervous System Map PDF.

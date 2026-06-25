@@ -32,7 +32,7 @@ flowchart LR
   P0 --> P1 --> P2 --> P3 --> P4 --> P5 --> P6 --> P7 --> P8
 ```
 
-**Current position:** Phase 4 in progress — S6 results screen and results API built; OpenRouter AI content next.
+**Current position:** Phase 5 in progress — S7 booking screen + webhook stub; PDF generation next.
 
 ---
 
@@ -287,9 +287,11 @@ Resolve these per phase; do not merge silently.
 - [x] `GET /api/results/[session_id]` — scores, patterns, top items (no flags)
 - [x] Collapsible section rows with chevron (one open at a time)
 - [x] CTA: "Book your free Clarity Call" → `/book` (placeholder until Phase 5)
-- [ ] `POST /api/results/generate-ai-content` — OpenRouter for:
+- [x] `POST /api/results/generate-ai-content` — OpenRouter for:
   - Synthesis paragraph (Slot 5a)
   - Five collapsible row observations (Slot 5b)
+- [x] AI content cached on `sessions.touchpoint_ai` (generate once)
+- [x] Static-first loading state in ResultsView while AI hydrates
 
 ### Screen inventory — S6 `/results`
 
@@ -299,8 +301,8 @@ Resolve these per phase; do not merge silently.
 - ✓ Block 4: Clarity Call badge, paragraph (Slot 4), CTA → `/book`
 - ✓ Block 5: disclaimer, urgent help link, wordmark
 - ⚑ REVIEW: Row header labels — **Resolved Phase 4:** locked section names (The Load, The Fog…)
-- ⚑ REVIEW: AI content caching — generate once and store, or regenerate on refresh?
-- ⚑ REVIEW: Loading state while AI generates — skeleton, spinner, or static-first then hydrate?
+- ⚑ REVIEW: AI content caching — **Resolved Phase 4:** generate once, store on `sessions.touchpoint_ai`
+- ⚑ REVIEW: Loading state while AI generates — **Resolved Phase 4:** static fallbacks + pulse, then hydrate
 - ⚑ REVIEW: Urgent help link destination — same as S1 support page
 - ⚑ REVIEW: Breathing button on S6? (not in wireframe)
 
@@ -311,7 +313,7 @@ Resolve these per phase; do not merge silently.
 | ⚑ | Scoring dependency | **Resolved:** S6 requires `session.status = completed` and score rows |
 | ⚑ | PDF timing | **Resolved:** no PDF on S6; booking CTA only |
 
-**Exit criteria:** Completed user sees personalised Touchpoint 1 with AI-generated synthesis and row observations.
+**Exit criteria:** Completed user sees personalised Touchpoint 1 with AI-generated synthesis and row observations. **Met** when `OPENROUTER_API_KEY` is set (June 2026).
 
 ---
 
@@ -321,9 +323,10 @@ Resolve these per phase; do not merge silently.
 
 **Reference:** [specs/chat-05/chat-05-report-pseudocode-v4.md](../specs/chat-05/chat-05-report-pseudocode-v4.md), [specs/chat-05/chat-05-sample-client-report-v5.html](../specs/chat-05/chat-05-sample-client-report-v5.html)
 
-- [ ] Route `/book` (S7): phone capture + Cal.com inline embed
-- [ ] `POST /api/booking/save-phone`
-- [ ] `POST /api/booking/cal-webhook` on `BOOKING_CREATED`
+- [x] Route `/book` (S7): phone capture + Cal.com inline embed
+- [x] `POST /api/booking/save-phone`
+- [x] `POST /api/booking/cal-webhook` on `BOOKING_CREATED` (booking record; PDF/email stubbed)
+- [x] Route `/confirmed` (S8) — confirmation screen shell
 - [ ] React PDF components in `components/pdf/`:
   - Cover page with base64 embedded background
   - Five instrument sections with charts
@@ -332,7 +335,6 @@ Resolve these per phase; do not merge silently.
   - Addendum with full response tables
 - [ ] `POST /api/pdf/generate` (server-only, webhook-triggered)
 - [ ] Store PDF in Supabase Storage; update `bookings.pdf_url`
-- [ ] Route `/confirmed` (S8)
 - [ ] Confirmation email via Resend (copy from phase3-copy v3)
 - [ ] Kit nurture opt-in if `opted_in = true`
 

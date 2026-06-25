@@ -25,6 +25,13 @@ export type Session = {
   current_section: number;
   current_item: number;
   time_started: string | null;
+  touchpoint_ai?: TouchpointAiContent | null;
+};
+
+export type TouchpointAiContent = {
+  synthesis: string | null;
+  row_observations: Record<string, string>;
+  generated_at?: string;
 };
 
 export type Response = {

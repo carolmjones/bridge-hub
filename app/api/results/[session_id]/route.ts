@@ -35,7 +35,9 @@ export async function GET(
       top_items: results.top_items,
       write_in: results.write_in,
       row_observations: results.row_observations,
+      synthesis: results.synthesis,
       first_name: results.first_name,
+      session_id: results.session_id,
     });
   } catch (error) {
     console.error("results GET:", error);

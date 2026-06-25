@@ -1,4 +1,5 @@
 import { RESULT_ROW_META } from "@/lib/copy/touchpoint1";
+import type { TouchpointAiCache } from "@/lib/ai/touchpoint-ai";
 import { buildTopItems, topItemsForInstrument } from "@/lib/results/top-items";
 import type { Instrument } from "@/lib/types/database";
 import { createClient } from "@/lib/supabase/server";
@@ -21,6 +22,7 @@ export type ResultsPayload = {
   write_in: string | null;
   row_observations: Record<string, string>;
   synthesis: string | null;
+  ai_cached: boolean;
 };
 
 function bandForInstrument(
@@ -74,7 +76,7 @@ export async function getResultsForSession(
 
   const { data: session } = await supabase
     .from("sessions")
-    .select("id, user_id, status")
+    .select("id, user_id, status, touchpoint_ai")
     .eq("id", sessionId)
     .single();
 
@@ -113,6 +115,8 @@ export async function getResultsForSession(
   }));
 
   const row_observations: Record<string, string> = {};
+  const cachedAi = session.touchpoint_ai as TouchpointAiCache | null;
+
   for (const meta of RESULT_ROW_META) {
     const scoreRow = scoreRows.find((s) => s.instrument === meta.instrument);
     const band = scoreRow
@@ -122,11 +126,9 @@ export async function getResultsForSession(
         })
       : "unknown";
     const items = topItemsForInstrument(responses ?? [], meta.instrument);
-    row_observations[meta.name] = fallbackRowObservation(
-      meta.name,
-      band,
-      items.length > 0
-    );
+    row_observations[meta.name] =
+      cachedAi?.row_observations?.[meta.name]?.trim() ||
+      fallbackRowObservation(meta.name, band, items.length > 0);
   }
 
   return {
@@ -143,6 +145,12 @@ export async function getResultsForSession(
     top_items: buildTopItems(responses ?? []),
     write_in: (pclRow?.write_in_text as string | null) ?? null,
     row_observations,
-    synthesis: null,
+    synthesis: cachedAi?.synthesis?.trim() || null,
+    ai_cached: Boolean(
+      cachedAi?.synthesis?.trim() &&
+        RESULT_ROW_META.every((row) =>
+          Boolean(cachedAi.row_observations?.[row.name]?.trim())
+        )
+    ),
   };
 }

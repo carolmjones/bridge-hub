@@ -32,3 +32,20 @@ export function getResendFromEmail(): string {
     "The Bridge Hub <onboarding@resend.dev>"
   );
 }
+
+export function getOpenRouterApiKey(): string | null {
+  return process.env.OPENROUTER_API_KEY?.trim() || null;
+}
+
+/** Default launch model — override via OPENROUTER_MODEL in env. */
+export function getOpenRouterModel(): string {
+  return process.env.OPENROUTER_MODEL?.trim() || "openrouter/owl-alpha";
+}
+
+export function getCalEmbedUrl(): string | null {
+  return process.env.NEXT_PUBLIC_CAL_EMBED_URL?.trim() || null;
+}
+
+export function getCalWebhookSecret(): string | null {
+  return process.env.CAL_WEBHOOK_SECRET?.trim() || null;
+}

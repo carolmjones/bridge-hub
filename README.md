@@ -36,6 +36,7 @@ See `.env.example` for `VERCEL_TOKEN`, `VERCEL_PROJECT_ID`, and `SUPABASE_ACCESS
 | `POST /api/auth/request-magic-link` | R1/R2 — send resume link |
 | `GET /api/auth/verify?token=` | Magic link verify → redirect |
 | `GET /api/session/resume` | Load active session + responses (auth required) |
+| `POST /api/results/generate-ai-content` | S6 — OpenRouter synthesis + row observations (cached) |
 
 Open [http://localhost:3000](http://localhost:3000).
 
