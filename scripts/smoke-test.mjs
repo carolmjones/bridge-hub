@@ -100,13 +100,13 @@ async function main() {
     fail("GET /api/session/resume", resumeBody.error || resumeRes.status);
   }
 
-  // Save response
+  // Save response (section 1 = MAIA-2)
   const saveRes = await fetch(`${BASE}/api/session/save-response`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Cookie: cookies },
     body: JSON.stringify({
       session_id: createBody.session_id,
-      instrument: "PSS10",
+      instrument: "MAIA2",
       item_number: 1,
       response_value: 2,
       reverse_scored: false,
@@ -128,13 +128,13 @@ async function main() {
   });
   const resume2Body = await resume2.json();
   const saved = resume2Body.responses?.find(
-    (r) => r.instrument === "PSS10" && r.item_number === 1
+    (r) => r.instrument === "MAIA2" && r.item_number === 1
   );
 
   if (saved?.response_value === 2) {
     ok("Response persisted in Supabase");
   } else {
-    fail("Response persistence", "PSS10 item 1 not found or wrong value");
+    fail("Response persistence", "MAIA2 item 1 not found or wrong value");
   }
 
   if (resume2Body.current_item === 2) {
@@ -197,7 +197,7 @@ async function main() {
   // Resend sandbox only delivers to account owner — skip live send in smoke test
   console.log("  ↳ Resend live delivery skipped (verify domain for production)");
 
-  // Phase 3 — complete-section scoring (PSS-10, all 10 items)
+  // Phase 3 — complete-section scoring (PSS-10 section 2, all 10 items)
   const sectionStart = new Date().toISOString();
   for (let item = 1; item <= 10; item += 1) {
     const saveItem = await fetch(`${BASE}/api/session/save-response`, {
@@ -209,7 +209,7 @@ async function main() {
         item_number: item,
         response_value: 2,
         reverse_scored: [4, 5, 7, 8].includes(item),
-        current_section: item === 10 ? 2 : 1,
+        current_section: 2,
         current_item: item === 10 ? 1 : item + 1,
         section_start: item === 1 ? sectionStart : undefined,
       }),
@@ -267,7 +267,6 @@ async function main() {
 
   // DB cleanup
   await admin.from("scores").delete().eq("session_id", createBody.session_id);
-  await admin.from("safety_flags").delete().eq("session_id", createBody.session_id);
   await admin.from("responses").delete().eq("session_id", createBody.session_id);
   await admin.from("sessions").delete().eq("id", createBody.session_id);
   await admin.from("magic_links").delete().eq("user_id", createBody.user_id);

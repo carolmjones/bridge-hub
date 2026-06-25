@@ -77,12 +77,15 @@ export function buildDimensionalFramework(
   }
 
   let Q3 = "Insufficient data.";
-  if (scores.PID5SF && scores.MAIA2) {
-    const pd = scores.PID5SF.facets.perceptual_dysregulation;
+  if (scores.MAIA2 && scores.PCL5) {
     const notDist = scores.MAIA2.subscales.not_distracting;
-    if (pd.band === "significant" || (pd.band === "elevated" && notDist.band === "limited")) {
-      Q3 = "Dissociation may be a factor — perceptual dysregulation and/or body distraction patterns suggest organised disconnection from experience.";
-    } else if (pd.band === "lower" && notDist.band !== "limited") {
+    const notWorry = scores.MAIA2.subscales.not_worrying;
+    const arousal = scores.PCL5.clusters.e_arousal;
+    const limitedBodyPresence =
+      notDist.band === "limited" && notWorry.band === "limited";
+    if (limitedBodyPresence && arousal >= 15) {
+      Q3 = "Dissociation may be a factor — limited body presence alongside hyperarousal suggests organised disconnection from experience.";
+    } else if (notDist.band !== "limited" && notWorry.band !== "limited") {
       Q3 = "Dissociation does not appear central based on current scores.";
     } else {
       Q3 = "Some dissociation-related signals present but not at the most severe level.";
@@ -164,8 +167,8 @@ export function buildDimensionalFramework(
       (scores.PCL5.clusters.c_avoidance >= 4 ? 1 : 0) +
       (scores.MAIA2.subscales.not_worrying.band === "limited" ? 1 : 0);
     const freezeScore =
-      (scores.PID5SF.facets.perceptual_dysregulation.band !== "lower" ? 2 : 0) +
-      (scores.MAIA2.subscales.not_distracting.band === "limited" ? 1 : 0) +
+      (scores.MAIA2.subscales.not_distracting.band === "limited" ? 2 : 0) +
+      (scores.MAIA2.subscales.not_worrying.band === "limited" ? 1 : 0) +
       (scores.PCL5.clusters.d_negative >= 14 ? 1 : 0);
     const fawnScore =
       (scores.PID5SF.facets.separation_insecurity.band !== "lower" ? 2 : 0) +

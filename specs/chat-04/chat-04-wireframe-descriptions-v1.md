@@ -351,26 +351,22 @@ LAYOUT (top to bottom):
     Breathing button: top right
     Progress: diamonds 1-3 complete, diamond 4 active
 
-  [label — 11px, uppercase, secondary]
-    "BEFORE YOU BEGIN THIS SECTION"
+  [label — serif, 17px]
+    "Before you begin this section"
 
-  [intro text — serif, 17px]
-    "These questions ask about difficult or stressful experiences."
-    COPY SLOT → Chat 05
-
-  [subtext — 13px, secondary]
-    "If it helps to have something specific in mind as you answer,
-     you can name it here. This is completely optional and won't
-     affect your results."
-    COPY SLOT → Chat 05
+  [intro text — 13px, secondary]
+    "The questions in this section ask about the impact of difficult
+     experiences. Before you begin, take a moment to bring one experience
+     to mind that feels most present for you right now."
 
   [field label — 12px]
-    "Name an experience" + "optional" tag (lighter weight)
+    "The experience I have in mind"
 
   [text area]
-    Placeholder: "e.g. a difficult period, a loss, a relationship..."
+    Placeholder: "A few words is enough. Or leave it blank, it is your choice."
+    Minimum 3 rows tall
     No character limit
-    Auto-grows vertically, max visible 120px then scroll
+    Auto-grows vertically if needed
     Background: rgba(255,255,255,0.6)
     Border: 0.5px solid rgba(26,37,48,0.2)
 
@@ -455,15 +451,21 @@ LAYOUT (top to bottom):
 
     [divider — 0.5px]
 
+  BLOCK 2b — Results overview paragraph
+    [synthesis-style paragraph — serif, 14px, italic, #444441]
+      AI-generated. Pulls five sections into one unified picture.
+      Appears below accordion rows, above full report block.
+      COPY SLOT → Chat 05 Slot 5c
+
+    [divider — 0.5px]
+
   BLOCK 3 — Full report note
     [warm tinted background block (#EEEAE4)]
-      [label — 11px, uppercase, muted]
-        "YOUR FULL REPORT"
+      [heading — serif, ~18px]
+        "Your full Nervous System Map is waiting."
       [text — 13px, #444441]
-        What the full report contains, how it goes deeper,
-        scored using published psychometric methods,
-        sent to email as soon as they book their Clarity Call.
-        COPY SLOT → Chat 05
+        Intro + delivery copy + five checkmark bullets.
+        COPY SLOT → Chat 05 Slot 3
 
     [divider — 0.5px]
 

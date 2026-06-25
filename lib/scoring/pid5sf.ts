@@ -3,7 +3,7 @@ import {
   pid5BandFromAverage,
   pid5Percentile,
 } from "@/lib/scoring/normative";
-import type { Pid5SfResult, Pid5SafetyFlag, ScoringTiming } from "@/lib/scoring/types";
+import type { Pid5SfResult, ScoringTiming } from "@/lib/scoring/types";
 import {
   getItem,
   mean,
@@ -21,9 +21,7 @@ const FACET_ITEMS: Record<string, number[]> = {
   impulsivity: [2, 5, 6, 8],
   irresponsibility: [47, 64, 68, 76],
   distractibility: [39, 49, 55, 91],
-  depressivity: [26, 60, 70, 74],
-  unusual_beliefs: [34, 54, 59, 96],
-  perceptual_dysregulation: [15, 63, 88, 98],
+  depressivity: [60, 70, 74],
 };
 
 const DOMAIN_FACETS: Record<string, string[]> = {
@@ -37,32 +35,6 @@ const DOMAIN_FACETS: Record<string, string[]> = {
 };
 
 const SCORED_ITEMS = Object.values(FACET_ITEMS).flat();
-
-const SAFETY_ITEMS: Array<{
-  item: number;
-  code: string;
-  text: string;
-}> = [
-  {
-    item: 26,
-    code: "PID5_ITEM_26",
-    text: "The world would be better off if I were dead",
-  },
-  {
-    item: 119,
-    code: "PID5_SUPP_119",
-    text: "I talk about suicide a lot.",
-  },
-  {
-    item: 178,
-    code: "PID5_SUPP_178",
-    text: "I know I'll commit suicide sooner or later.",
-  },
-];
-
-function scaleLabel(value: number): string {
-  return PID5SF_SCALE.find((option) => option.value === value)?.label ?? String(value);
-}
 
 function scoreFacet(key: string, responses: ResponseMap) {
   const items = FACET_ITEMS[key];
@@ -81,7 +53,7 @@ export function scorePid5Sf(
   timing: ScoringTiming
 ): Pid5SfResult {
   const raw: Record<number, number> = {};
-  for (const item of [...SCORED_ITEMS, 119, 178]) {
+  for (const item of SCORED_ITEMS) {
     raw[item] = getItem(responses, item);
   }
 
@@ -100,24 +72,10 @@ export function scorePid5Sf(
     };
   }
 
-  const safetyFlags: Pid5SafetyFlag[] = [];
-  for (const safety of SAFETY_ITEMS) {
-    const value = getItem(responses, safety.item);
-    if (value >= 1) {
-      safetyFlags.push({
-        itemCode: safety.code,
-        itemText: safety.text,
-        responseValue: value,
-        responseLabel: scaleLabel(value),
-      });
-    }
-  }
-
   return {
     instrument: "PID5SF",
     domains,
     facets,
-    safetyFlags,
     timeTakenSeconds: sectionDurationSeconds(
       timing.sectionStart,
       timing.sectionEnd

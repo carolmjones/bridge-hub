@@ -22,6 +22,7 @@ export type ResultsPayload = {
   write_in: string | null;
   row_observations: Record<string, string>;
   synthesis: string | null;
+  overview_paragraph: string | null;
   ai_cached: boolean;
 };
 
@@ -146,8 +147,10 @@ export async function getResultsForSession(
     write_in: (pclRow?.write_in_text as string | null) ?? null,
     row_observations,
     synthesis: cachedAi?.synthesis?.trim() || null,
+    overview_paragraph: cachedAi?.overview_paragraph?.trim() || null,
     ai_cached: Boolean(
       cachedAi?.synthesis?.trim() &&
+        cachedAi?.overview_paragraph?.trim() &&
         RESULT_ROW_META.every((row) =>
           Boolean(cachedAi.row_observations?.[row.name]?.trim())
         )

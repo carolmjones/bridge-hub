@@ -231,11 +231,6 @@ chat-05-layer2-user-facing-v1.md → client report ONLY
 chat-03-layer2-content-library-v2.md → therapist briefing ONLY
 Never mix them. Never use the clinical version for the client.
 
-**Rule 2 — Safety flags are architecturally isolated:**
-The safety_flags Supabase table has no connection to any
-client-facing pipeline. Access via server-side admin only.
-Enforced at schema level with RLS. See ARCHITECTURE.md.
-
 ---
 
 *If anything conflicts between files, the master brief wins.*

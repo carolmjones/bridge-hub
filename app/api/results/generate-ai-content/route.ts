@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 
 const VALID_TARGETS = new Set<GenerationTarget>([
   "synthesis_paragraph",
+  "results_overview_paragraph",
   "row_1",
   "row_2",
   "row_3",
@@ -75,6 +76,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       content: result.synthesis,
       synthesis: result.synthesis,
+      overview_paragraph: result.overview_paragraph,
       row_observations: result.row_observations,
       generated: result.generated,
       cached: result.cached,

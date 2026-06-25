@@ -145,34 +145,6 @@ export async function persistScoreResult(
   });
 
   if (error) throw error;
-
-  if (result.instrument === "PID5SF") {
-    await persistSafetyFlags(sessionId, userId, result);
-  }
-}
-
-async function persistSafetyFlags(
-  sessionId: string,
-  userId: string,
-  result: InstrumentResult
-) {
-  if (result.instrument !== "PID5SF") return;
-
-  const admin = createAdminClient();
-  await admin.from("safety_flags").delete().eq("session_id", sessionId);
-
-  for (const flag of result.safetyFlags) {
-    const { error } = await admin.from("safety_flags").insert({
-      session_id: sessionId,
-      user_id: userId,
-      item_code: flag.itemCode,
-      item_text: flag.itemText,
-      response_value: flag.responseValue,
-      response_label: flag.responseLabel,
-      instrument: "PID5SF",
-    });
-    if (error) throw error;
-  }
 }
 
 export async function markSessionCompleted(sessionId: string) {

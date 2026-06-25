@@ -12,9 +12,14 @@ type ResultsViewProps = {
 };
 
 export function ResultsView({ data }: ResultsViewProps) {
-  const [openRow, setOpenRow] = useState(RESULT_ROW_META[0].name);
+  const [openRow, setOpenRow] = useState<
+    (typeof RESULT_ROW_META)[number]["name"] | null
+  >(RESULT_ROW_META[0].name);
   const [synthesis, setSynthesis] = useState(
     data.synthesis?.trim() || TOUCHPOINT1.synthesisFallback
+  );
+  const [overview, setOverview] = useState(
+    data.overview_paragraph?.trim() || TOUCHPOINT1.overviewFallback
   );
   const [rowObservations, setRowObservations] = useState(data.row_observations);
   const [aiLoading, setAiLoading] = useState(!data.ai_cached);
@@ -41,6 +46,7 @@ export function ResultsView({ data }: ResultsViewProps) {
 
         const body = (await res.json()) as {
           synthesis?: string | null;
+          overview_paragraph?: string | null;
           row_observations?: Record<string, string>;
         };
 
@@ -48,6 +54,10 @@ export function ResultsView({ data }: ResultsViewProps) {
 
         if (body.synthesis?.trim()) {
           setSynthesis(body.synthesis.trim());
+        }
+
+        if (body.overview_paragraph?.trim()) {
+          setOverview(body.overview_paragraph.trim());
         }
 
         if (body.row_observations) {
@@ -126,7 +136,7 @@ export function ResultsView({ data }: ResultsViewProps) {
               <button
                 type="button"
                 className="flex w-full items-center justify-between px-4 py-3 text-left"
-                onClick={() => setOpenRow(isOpen ? "" : row.name)}
+                onClick={() => setOpenRow(isOpen ? null : row.name)}
                 aria-expanded={isOpen}
               >
                 <span className="flex items-center gap-3">
@@ -160,15 +170,37 @@ export function ResultsView({ data }: ResultsViewProps) {
         })}
       </div>
 
+      <p
+        className={`mt-8 font-serif text-body-sm italic leading-relaxed text-ink/80 ${aiLoading ? "animate-pulse" : ""}`}
+      >
+        {overview}
+      </p>
+
       <hr className="my-8 border-line-stone/30" />
 
       <div className="rounded-card bg-[#EEEAE4] px-4 py-4">
-        <p className="font-sans text-[11px] uppercase tracking-wide text-soft-ink/70">
-          {TOUCHPOINT1.fullReport.label}
+        <h2 className="font-serif text-lg leading-snug text-ink">
+          {TOUCHPOINT1.fullReport.heading}
+        </h2>
+        <p className="mt-3 font-sans text-[13px] leading-relaxed text-ink/85">
+          {TOUCHPOINT1.fullReport.intro}
         </p>
-        <p className="mt-3 whitespace-pre-line font-sans text-[13px] leading-relaxed text-ink/85">
-          {TOUCHPOINT1.fullReport.body}
+        <p className="mt-3 font-sans text-[13px] leading-relaxed text-ink/85">
+          {TOUCHPOINT1.fullReport.delivery}
         </p>
+        <ul className="mt-4 flex flex-col gap-2">
+          {TOUCHPOINT1.fullReport.bullets.map((bullet) => (
+            <li
+              key={bullet}
+              className="flex gap-2 font-sans text-[13px] leading-relaxed text-ink/85"
+            >
+              <span aria-hidden className="shrink-0 text-[#0F6E56]">
+                ✓
+              </span>
+              {bullet}
+            </li>
+          ))}
+        </ul>
       </div>
 
       <hr className="my-8 border-line-stone/30" />

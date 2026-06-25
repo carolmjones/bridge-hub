@@ -3,8 +3,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
-  PCL5_WORST_EVENT_HINT,
-  PCL5_WORST_EVENT_PROMPT,
+  PCL5_WRITE_IN_BODY,
+  PCL5_WRITE_IN_HEADING,
+  PCL5_WRITE_IN_LABEL,
+  PCL5_WRITE_IN_PLACEHOLDER,
   QUESTIONS,
   TOTAL_QUESTIONS,
   type Question,
@@ -268,13 +270,21 @@ export function AssessmentFlow({
           sectionProgress={0}
         />
         <div className="flex flex-1 flex-col justify-center">
-          <h2 className="font-serif text-xl text-ink">{PCL5_WORST_EVENT_PROMPT}</h2>
-          <p className="mt-3 font-sans text-body-sm text-soft-ink">
-            {PCL5_WORST_EVENT_HINT}
+          <h2 className="font-serif text-xl text-ink">{PCL5_WRITE_IN_HEADING}</h2>
+          <p className="mt-3 font-sans text-body-sm leading-relaxed text-soft-ink">
+            {PCL5_WRITE_IN_BODY}
           </p>
+          <label
+            htmlFor="pcl-write-in"
+            className="mt-6 font-sans text-body-sm font-medium text-ink"
+          >
+            {PCL5_WRITE_IN_LABEL}
+          </label>
           <textarea
-            className="mt-6 min-h-[120px] w-full rounded-card border border-line-stone/40 bg-white p-4 font-sans text-body text-ink"
-            placeholder="Optional — only if you want to"
+            id="pcl-write-in"
+            rows={3}
+            className="mt-2 w-full rounded-card border border-line-stone/40 bg-white p-4 font-sans text-body text-ink"
+            placeholder={PCL5_WRITE_IN_PLACEHOLDER}
             value={writeInText}
             onChange={(event) => setWriteInText(event.target.value)}
           />

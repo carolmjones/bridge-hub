@@ -9,14 +9,14 @@
 
 | # | Instrument | Report section | Items | Response scale | Time reference |
 |---|---|---|---|---|---|
-| 1 | PSS-10 | The Load | 10 | 0–4 (5 options) | Past month |
-| 2 | PHQ-8 | The Fog | 8 | 0–3 (4 options) | Past 2 weeks |
-| 3 | MAIA-2 | The Body Room | 27 | 0–5 (6 options) | Generally in daily life |
+| 1 | MAIA-2 | The Body Room | 27 | 0–5 (6 options) | Generally in daily life |
+| 2 | PSS-10 | The Load | 10 | 0–4 (5 options) | Past month |
+| 3 | PHQ-8 | The Fog | 8 | 0–3 (4 options) | Past 2 weeks |
 | 4 | PCL-5 | The Weight You Carry | 20 | 0–4 (5 options) | Past month |
-| 5 | PID-5-SF | The Weather Inside | 50 | 0–3 (4 options) | How you generally describe yourself |
+| 5 | PID-5-SF | The Weather Inside | 39 | 0–3 (4 options) | How you generally describe yourself |
 
-**Total items: 115** (48 PID-5-SF facet items + 2 supplementary safety items = 50 shown to user)
-**Estimated time: 35–45 minutes**
+**Total items: 104** (39 PID-5-SF facet items)
+**Estimated time: 15 minutes**
 
 ---
 
@@ -33,14 +33,11 @@ Reverse scoring is handled entirely at the **data layer** — never shown to the
 | PCL-5 | None |
 | PID-5-SF | None within the selected facets |
 
-### Safety flag (PID-5-SF item 26)
-PID-5-SF item 26 ("The world would be better off if I were dead") counts toward the Depressivity facet score AND triggers a private safety flag to Caroline. Two supplementary items (items 119 and 178 from the full PID-5) are also administered at the end and flag-only — they are NOT counted in any score. All three flag items are stored in a strictly separated database table with no access from any user-facing pipeline.
-
 ### PCL-5 worst event field
 PCL-5 requires a free-text field at the top of the section: "Briefly describe your worst or most stressful experience." This field is optional. If left blank, responses are still valid. The text is surfaced to Caroline only — never used in scoring.
 
 ### Section-level progress indicator
-Show "Question X of Y" within each section only, not globally across the full 115-item assessment.
+Show "Question X of Y" within each section only, not globally across the full 104-item assessment.
 
 ### Disclaimer
 Must appear on the entry screen and results screen: "This is a screening tool, not a clinical diagnosis."
@@ -110,7 +107,7 @@ Score range: 0–40
 **Reference:** Kroenke, K., Strine, T. W., Spitzer, R. L., Williams, J. B. W., Berry, J. T., & Mokdad, A. H. (2009).
 **What it measures:** Frequency of depressive symptoms over the past 2 weeks. Total score only — no subscales.
 **Score range:** 0–24. Higher = greater depressive symptom burden.
-**Note:** PHQ-8 is PHQ-9 with item 9 removed (the suicidal ideation item). Item 9 equivalent is covered by PID-5-SF item 26.
+**Note:** PHQ-8 is PHQ-9 with item 9 removed (the suicidal ideation item).
 
 ### Instructions shown to user
 
@@ -279,10 +276,17 @@ self_regulation_avg    = sum(items 28–31) / 4     // range 0.00–5.00
 
 ### Free-text field (shown before questions)
 
-> **Your worst or most stressful experience:**
-> *(Optional — you can describe it briefly, or simply hold it in mind as you answer)*
+**Heading:** Before you begin this section
 
-Store as `worst_event_text`. Show to Caroline only. Never surfaced to user in report.
+**Body:** The questions in this section ask about the impact of difficult experiences. Before you begin, take a moment to bring one experience to mind that feels most present for you right now.
+
+**Field label:** The experience I have in mind
+
+**Placeholder:** A few words is enough. Or leave it blank, it is your choice.
+
+Input: textarea, minimum 3 rows. Optional — user may skip.
+
+Store as `write_in_text`. Show to Caroline only. Never surfaced to user in report.
 
 ### Instructions shown to user
 
@@ -378,7 +382,7 @@ probable_ptsd_algorithm = (
 **Reference:** Maples, J. L., Carter, N. T., Few, L. R., Crego, C., Gore, W. L., Samuel, D. B., Williamson, R. L., Lynam, D. R., Widiger, T. A., Markon, K. E., Krueger, R. F., & Miller, J. D. (2015). Psychological Assessment, 27(4), 1195–1210.
 **Normative source:** Miller et al. (2022) US representative adult sample.
 **What it measures:** Maladaptive personality trait patterns across 12 selected facets within 3 domains. No overall total score.
-**Items shown to user: 50** (48 facet items + 2 supplementary safety items)
+**Items shown to user: 39** (10 facets × 4 items each, except Depressivity with 3 items)
 
 **Excluded from this tool:** Antagonism domain (entire domain). Eccentricity facet (so no Psychoticism domain average). Two facets (Unusual Beliefs and Experiences; Perceptual Dysregulation) are scored and routed to therapist briefing only — not shown in client report.
 
@@ -511,49 +515,14 @@ All item numbers below refer to PID-5-SF item numbers (as numbered in the Maples
 
 #### Standalone Facets (scored, routed to therapist briefing only — NOT in client report)
 
-##### Facet 10 — Depressivity (4 items)
+##### Facet 10 — Depressivity (3 items)
 *Feelings of being down, miserable, and having no hope for the future*
-**Item 26 also triggers safety flag. Store separately.**
-
-| SF item # | Question text | Safety flag? |
-|---|---|---|
-| 26 | The world would be better off if I were dead. | **YES — triggers flag** |
-| 60 | Life looks pretty bleak to me. | No |
-| 70 | Everything seems pointless to me. | No |
-| 74 | I have no worth as a person. | No |
-
-##### Facet 11 — Unusual Beliefs and Experiences (4 items)
-*Therapist briefing only*
 
 | SF item # | Question text |
 |---|---|
-| 34 | I often have unusual experiences, such as sensing the presence of someone who isn't actually there. |
-| 54 | I have seen things that weren't really there. |
-| 59 | Sometimes I can influence other people just by sending my thoughts to them. |
-| 96 | I've had some really weird experiences that are very difficult to explain. |
-
-##### Facet 12 — Perceptual Dysregulation (4 items)
-*Therapist briefing only*
-
-| SF item # | Question text |
-|---|---|
-| 15 | It's weird, but sometimes ordinary objects seem to be a different shape than usual. |
-| 63 | Sometimes I feel "controlled" by thoughts that belong to someone else. |
-| 88 | Sometimes I think someone else is removing thoughts from my head. |
-| 98 | Things around me often feel unreal, or more real than usual. |
-
----
-
-#### Supplementary safety items (2 items — shown to user, flag only, NOT counted in any score)
-
-These two items are from the full PID-5 (not part of the SF). They are shown after the main 48 items. Responses are stored in the safety flag table only.
-
-| Full PID-5 item # | Question text | Flag purpose |
-|---|---|---|
-| 119 | I talk about suicide a lot. | Suicidal ideation |
-| 178 | I know I'll commit suicide sooner or later. | Suicidal intent |
-
-> **Dev note:** Store supplementary item responses in the `safety_flag` table only. Never reference, imply, or surface them in any user-facing layer. No score is calculated. The user continues to full results regardless of responses.
+| 60 | Life looks pretty bleak to me. |
+| 70 | Everything seems pointless to me. |
+| 74 | I have no worth as a person. |
 
 ### Scoring
 
@@ -580,19 +549,13 @@ irresponsibility_avg      = (item_47 + item_64 + item_68 + item_76) / 4
 distractibility_avg       = (item_39 + item_49 + item_55 + item_91) / 4
 disinhibition_domain      = (impulsivity_avg + irresponsibility_avg + distractibility_avg) / 3
 
-// Standalone facets:
-depressivity_avg          = (item_26 + item_60 + item_70 + item_74) / 4
-unusual_beliefs_avg       = (item_34 + item_54 + item_59 + item_96) / 4
-perceptual_dysreg_avg     = (item_15 + item_63 + item_88 + item_98) / 4
-
-// No Psychoticism domain average (Eccentricity excluded)
-// No Antagonism domain (entire domain excluded)
-// Supplementary items: store raw response in safety_flag table only
+// Standalone facet:
+depressivity_avg          = (item_60 + item_70 + item_74) / 3
 ```
 
 ### Band thresholds (SD-based, from Miller et al. 2022)
 
-Applies to all 12 facets and 3 domain averages.
+Applies to all 10 facets and 3 domain averages.
 
 | Band | Percentile | Statistical meaning |
 |---|---|---|
@@ -608,11 +571,11 @@ Applies to all 12 facets and 3 domain averages.
 
 | Section | Items shown | Total |
 |---|---|---|
+| MAIA-2 — The Body Room | MAIA items 5–31 (27 selected items, displayed in original numbering order) | 27 |
 | PSS-10 — The Load | PSS items 1–10 | 10 |
 | PHQ-8 — The Fog | PHQ items 1–8 | 8 |
-| MAIA-2 — The Body Room | MAIA items 5–31 (27 selected items, displayed in original numbering order) | 27 |
 | PCL-5 — The Weight You Carry | PCL items 1–20 (preceded by worst event text field) | 20 |
-| PID-5-SF — The Weather Inside | SF items: 41, 53, 71, 81, 24, 36, 48, 78, 17, 45, 58, 79, 27, 52, 57, 84, 9, 11, 43, 65, 29, 40, 56, 93, 2, 5, 6, 8, 47, 64, 68, 76, 39, 49, 55, 91, 26, 60, 70, 74, 34, 54, 59, 96, 15, 63, 88, 98 + supplementary 119, 178 | 50 |
-| **Total** | | **115** |
+| PID-5-SF — The Weather Inside | SF items: 41, 53, 71, 81, 24, 36, 48, 78, 17, 45, 58, 79, 27, 52, 57, 84, 9, 11, 43, 65, 29, 40, 56, 93, 2, 5, 6, 8, 47, 64, 68, 76, 39, 49, 55, 91, 60, 70, 74 | 39 |
+| **Total** | | **104** |
 
-> **Dev note on PID-5-SF presentation order:** Items above are listed by facet for clarity. For UX, consider presenting facets in the order listed (Emotional Lability, Anxiousness, Separation Insecurity, Withdrawal, Anhedonia, Intimacy Avoidance, Impulsivity, Follow-through under stress, Distractibility, Depressivity, Unusual Beliefs, Perceptual Dysregulation, then supplementary items). Confirm with Chat 04 UX spec.
+> **Dev note on PID-5-SF presentation order:** Items above are listed by facet for clarity. For UX, consider presenting facets in the order listed (Emotional Lability, Anxiousness, Separation Insecurity, Withdrawal, Anhedonia, Intimacy Avoidance, Impulsivity, Follow-through under stress, Distractibility, Depressivity). Confirm with Chat 04 UX spec.

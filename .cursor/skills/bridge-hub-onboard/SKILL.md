@@ -13,7 +13,7 @@ Get up to speed on The Bridge Hub before doing any work. Run this at the start o
 
 ## What this project is (30-second version)
 
-Trauma-informed online psychological screening tool for women aged 28–45. Five validated instruments, 115 questions, ~35–45 minutes. Produces a **Nervous System Map** report and converts completions into booked **Clarity Calls**. Next.js 14 monolith on Vercel, Supabase (EU), React PDF, OpenRouter.
+Trauma-informed online psychological screening tool for women aged 28–45. Five validated instruments, 104 questions, ~15 minutes. Produces a **Nervous System Map** report and converts completions into booked **Clarity Calls**. Next.js 14 monolith on Vercel, Supabase (EU), React PDF, OpenRouter (default: `google/gemini-2.5-pro`).
 
 **This is not** the Caroline Pipeline repo (`~/pipeline`).
 

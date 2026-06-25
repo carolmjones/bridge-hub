@@ -12,7 +12,9 @@
 
 **Implementation is in progress.** Phases 0–3 are complete in code; Phase 4 (Touchpoint 1 results screen) is partially built locally. Supabase schema is migrated; local smoke test passes 19/19 checks.
 
-**Production (Vercel):** Live at https://bridge-hub-indol.vercel.app (Phase 4 AI requires `OPENROUTER_API_KEY` on Vercel).
+**Production (Vercel):** Live at https://bridge-hub-indol.vercel.app — set `OPENROUTER_API_KEY` and `OPENROUTER_MODEL=google/gemini-2.5-pro` on Vercel for S6 AI.
+
+**After June 2026 reorder:** Use a new session via `/save` when testing; don't resume pre-change in-progress sessions.
 
 ---
 
@@ -22,9 +24,9 @@
 |-------|--------|-------|
 | 0 — Repo & env | **Complete** | Next.js 14, Tailwind, `.env.bridgehub`, Vercel linked |
 | 1 — Data layer | **Complete** | Supabase EU, RLS, magic link auth, migration applied |
-| 2 — Assessment UI | **Complete** | S1–S3, S5 (115 questions), R1/R2, auto-save |
+| 2 — Assessment UI | **Complete** | S1–S3, S5 (104 questions), R1/R2, auto-save |
 | 3 — Scoring engine | **Complete** | `lib/scoring/`, `complete-section` API, smoke test |
-| 4 — Results (S6) | **Complete** | Touchpoint 1 UI, results API, OpenRouter AI + cache |
+| 4 — Results (S6) | **Complete** | Touchpoint 1 UI, synthesis + rows + overview AI (7 calls), updated full-report copy |
 | 5–8 | Not started | Booking, PDF, therapist dashboard, email, launch |
 
 **Authoritative checklist:** [roadmap.md](roadmap.md)
@@ -56,7 +58,7 @@ npm run db:verify                # Supabase tables + storage bucket
 | Workstream | Status | Key deliverables |
 |------------|--------|------------------|
 | Chat 01 — Product naming | **Complete** | The Bridge Hub name locked |
-| Chat 02 — Assessment architecture | **Complete** | 5 instruments, 115 items, PID-5-SF |
+| Chat 02 — Assessment architecture | **Complete** | 5 instruments, 104 items, PID-5-SF (39) |
 | Chat 03 — Scoring | **Mostly complete** | Pseudocode v2, normative data, patterns PF-01–08, framework Q1–Q8. **Pending:** edge cases (3.3), AI pattern library (3.4) |
 | Chat 04 — UX | **Mostly complete** | Wireframes S1–S8, R1–R2, journey map. **Pending:** formal interaction spec doc |
 | Chat 05 — Copy | **Mostly complete** | Layer 2, Touchpoint 1 copy, report pseudocode |

@@ -1,4 +1,5 @@
 /** S6 Touchpoint 1 — static copy slots (chat-05-phase3-copy-v3.md) */
+import { REPORT_SECTION_ORDER } from "@/lib/report/section-order";
 
 export const TOUCHPOINT1 = {
   eyebrow: "Screening complete",
@@ -8,10 +9,17 @@ export const TOUCHPOINT1 = {
     body: `The questions you answered are the same validated tools used by clinicians and researchers worldwide. Not a general quiz. Your results are measured, not estimated.`,
   },
   fullReport: {
-    label: "YOUR FULL REPORT",
-    body: `Your full report goes deeper into each of the five areas. It includes a personalised reflection drawn from your specific answers, a research-grounded interpretation of what your results may be showing, and every question you answered in full.
-
-It is scored using published psychometric methods and sent to your email as soon as you book your Clarity Call.`,
+    heading: "Your full Nervous System Map is waiting.",
+    intro:
+      "It goes deeper into each of the five areas, with personalised reflections drawn from your specific answers and research-grounded interpretations of what your results are showing.",
+    delivery: "It is sent to you as soon as you book your Clarity Call.",
+    bullets: [
+      "Built from your responses, not a template",
+      "Scored against published population norms",
+      "Designed by a qualified nurse and therapist",
+      "A screening tool, not a diagnosis",
+      "Your results belong to you",
+    ],
   },
   clarityCall: {
     badge: "Free Clarity Call",
@@ -27,38 +35,23 @@ Up to 45 minutes. Free. No obligation.`,
   resultsOverviewLabel: "YOUR RESULTS OVERVIEW",
   synthesisFallback:
     "Across all five areas, your answers pointed toward a system that has been carrying a significant load for some time.",
+  overviewFallback:
+    "Across all five areas, your answers pointed toward a system that has been carrying a significant load, in ways that are worth understanding more fully.",
 } as const;
 
 /** Row dot colours — wireframe S6, locked section names in labels */
-export const RESULT_ROW_META = [
-  {
-    sectionIndex: 1,
-    name: "The Load",
-    instrument: "PSS10" as const,
-    dotColor: "#C4873A",
-  },
-  {
-    sectionIndex: 2,
-    name: "The Fog",
-    instrument: "PHQ8" as const,
-    dotColor: "#C4A03A",
-  },
-  {
-    sectionIndex: 3,
-    name: "The Body Room",
-    instrument: "MAIA2" as const,
-    dotColor: "#3A8C7E",
-  },
-  {
-    sectionIndex: 4,
-    name: "The Weight You Carry",
-    instrument: "PCL5" as const,
-    dotColor: "#4A6E8C",
-  },
-  {
-    sectionIndex: 5,
-    name: "The Weather Inside",
-    instrument: "PID5SF" as const,
-    dotColor: "#7E5A6E",
-  },
-];
+export const RESULT_ROW_META = REPORT_SECTION_ORDER.map((row) => ({
+  sectionIndex: row.sectionIndex,
+  name: row.name,
+  instrument: row.instrument,
+  dotColor:
+    row.instrument === "MAIA2"
+      ? "#3A8C7E"
+      : row.instrument === "PSS10"
+        ? "#C4873A"
+        : row.instrument === "PHQ8"
+          ? "#C4A03A"
+          : row.instrument === "PCL5"
+            ? "#4A6E8C"
+            : "#7E5A6E",
+}));

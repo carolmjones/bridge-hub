@@ -12,9 +12,9 @@
 
 A trauma-informed online psychological screening tool for women aged
 28-45 who are overwhelmed and carrying unidentified patterns. The tool
-administers five validated psychological instruments across 115 questions,
-generates a personalised report called the Nervous System Map, and
-converts completions into booked Clarity Calls with a therapist.
+administers five validated psychological instruments across 104 questions
+(~15 minutes), generates a personalised report called the Nervous System Map,
+and converts completions into booked Clarity Calls with a therapist.
 
 This is not a quiz. It is a clinical screening tool with a warm,
 editorial, field-guide aesthetic. It must feel safe at every step.
@@ -41,7 +41,7 @@ Prefer clear, readable code over clever abstractions.
 | Booking | Cal.com | Free plan at launch. Embedded on /book route. |
 | PDF generation | React PDF (@react-pdf/renderer) | Generated on booking confirmation only |
 | Hosting | Vercel | Auto-deploy from GitHub |
-| AI generation | OpenRouter | claude-sonnet-4-6 for all AI calls |
+| AI generation | OpenRouter | Default model: `google/gemini-2.5-pro` (`OPENROUTER_MODEL`) |
 | Repository | GitHub private repo | |
 
 ---
@@ -53,7 +53,7 @@ Prefer clear, readable code over clever abstractions.
 | / | S1 Landing | No session. Cookie consent on first visit. |
 | /begin | S2 What to expect | No session. Breathing overlay introduced. |
 | /save | S3 Email + name capture | Session created on submit to Supabase. |
-| /assessment | S5 Question shell | All 115 questions. Auto-save per answer. |
+| /assessment | S5 Question shell | All 104 questions. Auto-save per answer. |
 | /results | S6 Touchpoint 1 | AI-generated rows. Clarity Call CTA. |
 | /book | S7 Booking | Phone capture + Cal.com embed. |
 | /confirmed | S8 Confirmation | PDF triggered. Kit nurture if opted in. |
@@ -66,13 +66,13 @@ Prefer clear, readable code over clever abstractions.
 
 | # | Internal name | User-facing name | Instrument | Items |
 |---|---|---|---|---|
-| 1 | stress | The Load | PSS-10 | 10 |
-| 2 | mood | The Fog | PHQ-8 | 8 |
-| 3 | body | The Body Room | MAIA-2 | 27 |
+| 1 | body | The Body Room | MAIA-2 | 27 |
+| 2 | stress | The Load | PSS-10 | 10 |
+| 3 | mood | The Fog | PHQ-8 | 8 |
 | 4 | carrying | The Weight You Carry | PCL-5 | 20 |
-| 5 | emotional | The Weather Inside | PID-5-SF | 50 |
+| 5 | emotional | The Weather Inside | PID-5-SF | 39 |
 
-Total: 115 items across 5 sections.
+Total: 104 items across 5 sections. Section 1 is always The Body Room (MAIA-2).
 
 ---
 
@@ -87,6 +87,8 @@ Total: 115 items across 5 sections.
 - Forward-only navigation. No back button. No browser back during
   assessment.
 - On resume: land at exact question, no transition replay
+- After section-order changes (June 2026): do not resume pre-change
+  in-progress sessions — start a fresh session via /save for testing
 
 ---
 
@@ -95,17 +97,6 @@ Total: 115 items across 5 sections.
 PDF generates on booking confirmation (S8) ONLY.
 Never before. Nothing generated or stored until booking confirmed.
 This is a deliberate GDPR position. Do not change it.
-
----
-
-## Safety flag — locked behaviour
-
-Safety flag NEVER stops the assessment.
-Safety flag NEVER withholds results from the client.
-Safety flag routes to a SEPARATE private Supabase table.
-Flag is visible in therapist briefing ONLY.
-No user-facing pipeline has access to the safety flag table.
-Enforce this at the architectural level, not just the application layer.
 
 ---
 
@@ -121,8 +112,8 @@ Enforce this at the architectural level, not just the application layer.
 - Kit replaces Mailchimp throughout
 - Phone number collected at S7, NOT inside Cal.com
 - Cal.com free plan at launch
-- Two PID-5-SF facets never shown to client: Unusual beliefs and
-  experiences, Perceptual dysregulation — therapist briefing only
+- PID-5-SF: 39 items (10 facets; Depressivity uses 3 items). Safety,
+  Unusual Beliefs, and Perceptual Dysregulation items removed June 2026.
 
 ---
 
@@ -161,6 +152,7 @@ Read these files for the workstream they cover. Do not mix them up.
 | File | Contains |
 |---|---|
 | ARCHITECTURE.md | Supabase schema, API routes, scoring engine integration, PDF generation flow, email triggers |
+| bridge-hub-questionnaire-reference.md | All 104 items, scales, section order — single source for question data |
 
 ---
 
@@ -189,12 +181,11 @@ Read these files for the workstream they cover. Do not mix them up.
 2. Disclaimer on every screen: "This is a screening tool, not a
    clinical diagnosis."
 3. No clinical labels in client-facing text. See COPY_REFERENCE.md.
-4. Safety flag data never reaches any client-facing pipeline.
-5. PDF only on booking confirmation.
-6. Forward-only assessment. No back.
-7. Auto-save after every answer.
-8. Supabase EU region only. No data outside EU.
-9. No health data stored before S3 consent.
+4. PDF only on booking confirmation.
+5. Forward-only assessment. No back.
+6. Auto-save after every answer.
+7. Supabase EU region only. No data outside EU.
+8. No health data stored before S3 consent.
 
 ---
 

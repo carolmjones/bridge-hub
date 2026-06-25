@@ -11,8 +11,8 @@ export function BeginScreen() {
   const [breathingOpen, setBreathingOpen] = useState(false);
 
   const trustItems = [
-    "About 30–40 minutes. Pauses are welcome.",
-    "Five sections: load, mood, body, carrying, emotional weather.",
+    "About 15 minutes. Pauses are welcome.",
+    "Five sections: body, load, fog, carrying, emotional weather.",
     "Confidential. Your answers are saved as you go.",
     "This gives you language for patterns — not a label.",
   ];

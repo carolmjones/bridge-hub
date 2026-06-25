@@ -18,7 +18,6 @@ This workspace is **The Bridge Hub** (`~/bridge-hub`), not the Caroline Pipeline
 - Next.js 14 App Router monolith on Vercel. No separate backend repo.
 - Supabase EU region. Magic link auth. No passwords.
 - Scoring, AI (OpenRouter), and PDF generation run **server-side only**.
-- `safety_flags` table: service role access only. Never exposed to client APIs, PDF, or email.
 - PDF generates on **booking confirmation (S8) only** — never before.
 - Assessment is **forward-only** — no back button. Auto-save every answer.
 

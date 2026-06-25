@@ -4,7 +4,6 @@ import type {
   PatternMatch,
   Pcl5Result,
   Phq8Result,
-  Pid5SfResult,
   Pss10Result,
   SessionScores,
 } from "@/lib/scoring/types";
@@ -25,7 +24,7 @@ function isPclLow(pcl?: Pcl5Result): boolean {
   return pcl?.userBand === "low";
 }
 
-/** Named priority patterns PF-01–PF-08. PF-09 (safety) is routed separately. */
+/** Named priority patterns PF-01–PF-08. */
 export function matchPatterns(scores: SessionScores): PatternMatch[] {
   const matches: PatternMatch[] = [];
   const pss = scores.PSS10;
@@ -36,35 +35,38 @@ export function matchPatterns(scores: SessionScores): PatternMatch[] {
 
   if (!maia || !pid) return matches;
 
-  const perceptual = pid.facets.perceptual_dysregulation;
   const notDistracting = maia.subscales.not_distracting;
+  const notWorrying = maia.subscales.not_worrying;
 
   if (
     pcl &&
     isHighUserBand(pcl.userBand) &&
-    isPidElevated(perceptual.band) &&
-    isMaiaLimited(notDistracting.band)
+    isMaiaLimited(notDistracting.band) &&
+    isMaiaLimited(notWorrying.band)
   ) {
     matches.push({
       id: "PF-01",
       name: "Dissociative presentation",
       description:
-        "High trauma symptoms alongside perceptual dysregulation and limited capacity to stay present with body discomfort.",
-      triggeredBy: `PCL-5 ${pcl.userBand}, Perceptual Dysregulation ${perceptual.band}, MAIA Not-Distracting ${notDistracting.band}`,
+        "High trauma symptoms alongside limited capacity to stay present with body discomfort and worry.",
+      triggeredBy: `PCL-5 ${pcl.userBand}, MAIA Not-Distracting ${notDistracting.band}, MAIA Not-Worrying ${notWorrying.band}`,
     });
   }
 
+  const limitedMaiaCount = Object.values(maia.subscales).filter((s) =>
+    isMaiaLimited(s.band)
+  ).length;
   if (
-    perceptual.band === "significant" &&
+    limitedMaiaCount >= 3 &&
     pcl &&
     isPclLow(pcl)
   ) {
     matches.push({
       id: "PF-02",
-      name: "Dissociation without high PTSD",
+      name: "Somatic disconnection without high PTSD",
       description:
-        "Significant perceptual dysregulation without correspondingly high trauma checklist scores.",
-      triggeredBy: `Perceptual Dysregulation significant, PCL-5 ${pcl.userBand}`,
+        "Multiple limited body-awareness subscales without correspondingly high trauma checklist scores.",
+      triggeredBy: `${limitedMaiaCount} MAIA subscales limited, PCL-5 ${pcl.userBand}`,
     });
   }
 
@@ -195,13 +197,6 @@ export function detectInstrumentFlags(result: InstrumentResult): string[] {
       r.subscales.emotional_awareness.band === "limited"
     ) {
       flags.push("MAIA-04");
-    }
-  }
-
-  if (result.instrument === "PID5SF") {
-    const r = result as Pid5SfResult;
-    if (r.facets.unusual_beliefs.band !== "lower") {
-      flags.push("PID-08");
     }
   }
 

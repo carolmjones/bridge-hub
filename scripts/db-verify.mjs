@@ -14,7 +14,6 @@ const tables = [
   "scores",
   "bookings",
   "magic_links",
-  "safety_flags",
 ];
 
 async function main() {

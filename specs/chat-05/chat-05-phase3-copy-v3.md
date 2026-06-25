@@ -48,19 +48,25 @@ Background: warm tinted (#EAE4DC)
 
 ### Slot 3 — Full report block (STATIC — not AI-generated)
 
+Appears below the results overview paragraph (Slot 5c) and above the Clarity Call block.
+
 ```
-YOUR FULL REPORT
+Your full Nervous System Map is waiting.
 
-Your full report goes deeper into each of the five areas. It includes
-a personalised reflection drawn from your specific answers, a
-research-grounded interpretation of what your results may be showing,
-and every question you answered in full.
+It goes deeper into each of the five areas, with personalised
+reflections drawn from your specific answers and research-grounded
+interpretations of what your results are showing.
 
-It is scored using published psychometric methods and sent to your
-email as soon as you book your Clarity Call.
+It is sent to you as soon as you book your Clarity Call.
+
+✓ Built from your responses, not a template
+✓ Scored against published population norms
+✓ Designed by a qualified nurse and therapist
+✓ A screening tool, not a diagnosis
+✓ Your results belong to you
 ```
 
-Label: "YOUR FULL REPORT" — 11px, uppercase, muted
+Heading: serif, ~18px
 Background: warm tinted (#EEEAE4)
 
 ---
@@ -420,6 +426,88 @@ than you would like.
 
 ---
 
+### Slot 5c — Results overview paragraph (AI-GENERATED)
+
+Appears below the five collapsible rows (Slot 5b) and above the full report block (Slot 3).
+Pulls the five sections into one unified picture. Plain language. No scores. No band labels.
+
+#### JSON payload
+
+```json
+{
+  "generation_target": "results_overview_paragraph",
+  "client": {
+    "first_name": "string"
+  },
+  "scores": {
+    "MAIA2": { "overall_pattern": "string", "self_regulation_band": "string" },
+    "PSS10": { "band": "string", "percentile": "number" },
+    "PHQ8":  { "band": "string", "percentile": "number" },
+    "PCL5":  { "band": "string", "percentile": "number", "write_in_text": "string | null" },
+    "PID5SF": { "dominant_domain": "string", "dominant_domain_band": "string" }
+  },
+  "top_endorsed_items": [
+    {
+      "instrument": "string",
+      "item_text": "string",
+      "response_label": "string"
+    }
+  ],
+  "flags_fired": ["string"]
+}
+```
+
+#### System prompt
+
+```
+You are writing a short overview paragraph for a results screen.
+The person has just completed a psychological screening across five
+areas. This paragraph appears above the full report CTA and below
+the five section rows.
+
+PURPOSE:
+Pull the five sections into one unified picture. Make her feel that
+someone read everything she answered and can see the whole of it,
+not just five separate scores.
+
+LENGTH: 3 sentences maximum.
+
+WHAT TO DO:
+Identify the one thread that connects the strongest patterns across
+her five sections. Name it as a coherent whole, not as a list.
+Draw from top_endorsed_items to anchor the language in her specific
+experience. End with a sentence that makes the full report feel like
+the natural next step without selling it.
+
+TONE:
+Warm, direct, specific. Written as "your" and "you."
+This should feel like the moment someone who actually read her
+answers is speaking back to her about what they see overall.
+
+WHAT YOU MUST NEVER DO:
+- Name any instrument by code or name
+- Use band labels or percentiles
+- Use clinical terminology or diagnostic language
+- Make causal claims
+- Quote item text directly
+- Use em dashes
+- Sound like it could apply to anyone
+- Mention the report, the call, or next steps explicitly
+
+FALLBACK:
+If no single thread clearly connects the sections use:
+"Across all five areas, your answers pointed toward a system
+that has been carrying a significant load, in ways that are
+worth understanding more fully."
+
+END with internal note stripped before display:
+[PATTERNS USED: list the two or three patterns that most
+informed this paragraph]
+Strip the internal note before displaying. Log it internally. Display the paragraph text only.
+```
+
+---
+
 ### Footer copy (STATIC — locked from master brief)
 
 ```
@@ -573,6 +661,7 @@ Manual at launch per Chat 08 spec. Twilio upgrade path later.
 | Slot 5b — Row 3: The Body Room | AI | Yes | Full payload above |
 | Slot 5b — Row 4: The Weight You Carry | AI | Yes | Full payload above |
 | Slot 5b — Row 5: The Weather Inside | AI | Yes | Full payload above |
+| Slot 5c — Results overview paragraph | AI | Yes | Full payload above |
 | Confirmation email | Static | No | JSON template above |
 | SMS confirmation | Static | No | JSON template above |
 
@@ -584,6 +673,7 @@ Manual at launch per Chat 08 spec. Twilio upgrade path later.
 |---|---|
 | v1 | Initial Phase 3 copy. All Touchpoint 1 copy slots filled. Basic AI guardrails for collapsible rows. Booking confirmation email written. |
 | v2 | Collapsible row pseudocode fully rewritten. Slot 4 rewritten. SMS confirmation added. Caller anonymised. |
+| v4 | Slot 3 full report copy updated (Nervous System Map + bullet list). Slot 5c results overview paragraph added (below rows, above full report). PCL-5 write-in copy updated in questionnaire reference. |
 | v3 | All AI-generated outputs reformatted with full JSON payload and system prompt specs. Static copy clearly labelled. Synthesis paragraph added as Slot 5a with its own JSON payload. Email and SMS reformatted as JSON templates. AI generation summary table added. |
 
 ---

@@ -94,7 +94,7 @@ export function buildSynthesisPayload(
   const cognitive = phqSub?.cognitive_affective ?? 0;
   const somatic = phqSub?.somatic_vegetative ?? 0;
 
-  const topFive = buildTopItems(responses, 5).map((item) => ({
+  const topEndorsed = buildTopItems(responses, 10).map((item) => ({
     instrument: item.instrument,
     item_text: item.item_text,
     response_label: item.response_label,
@@ -103,7 +103,10 @@ export function buildSynthesisPayload(
   return {
     generation_target: "synthesis_paragraph",
     client: { first_name: firstName },
+    section_order_note:
+      "MAIA-2 (The Body Room) was completed first. Weight body relationship as the opening lens for cross-instrument synthesis.",
     scores: {
+      MAIA2: maia2Summary(maia),
       PSS10: {
         band: pss?.band ?? "unknown",
         percentile: pss?.normative_percentile ?? null,
@@ -118,7 +121,6 @@ export function buildSynthesisPayload(
         somatic_high: somatic >= cognitive,
         cognitive_high: cognitive > somatic,
       },
-      MAIA2: maia2Summary(maia),
       PCL5: {
         band: pcl?.band ?? "unknown",
         percentile: pcl?.normative_percentile ?? null,
@@ -130,7 +132,52 @@ export function buildSynthesisPayload(
       PID5SF: pid5Dominant(pid),
     },
     flags_fired: flagsFor(scoreRows),
-    top_endorsed_items: topFive,
+    top_endorsed_items: topEndorsed,
+  };
+}
+
+export function buildResultsOverviewPayload(
+  firstName: string,
+  scoreRows: ScoreRow[],
+  responses: Parameters<typeof buildTopItems>[0]
+) {
+  const pss = rowFor(scoreRows, "PSS10");
+  const phq = rowFor(scoreRows, "PHQ8");
+  const maia = rowFor(scoreRows, "MAIA2");
+  const pcl = rowFor(scoreRows, "PCL5");
+  const pid = rowFor(scoreRows, "PID5SF");
+
+  const topEndorsed = buildTopItems(responses, 10).map((item) => ({
+    instrument: item.instrument,
+    item_text: item.item_text,
+    response_label: item.response_label,
+  }));
+
+  return {
+    generation_target: "results_overview_paragraph",
+    client: { first_name: firstName },
+    scores: {
+      MAIA2: {
+        overall_pattern: maia2Summary(maia).overall_pattern,
+        self_regulation_band: maia2Summary(maia).self_regulation_band,
+      },
+      PSS10: {
+        band: pss?.band ?? "unknown",
+        percentile: pss?.normative_percentile ?? null,
+      },
+      PHQ8: {
+        band: phq?.band ?? "unknown",
+        percentile: phq?.normative_percentile ?? null,
+      },
+      PCL5: {
+        band: pcl?.band ?? "unknown",
+        percentile: pcl?.normative_percentile ?? null,
+        write_in_text: pcl?.write_in_text ?? null,
+      },
+      PID5SF: pid5Dominant(pid),
+    },
+    top_endorsed_items: topEndorsed,
+    flags_fired: flagsFor(scoreRows),
   };
 }
 
@@ -197,6 +244,7 @@ export function rowIndexToSection(rowTarget: string): (typeof RESULT_ROW_META)[n
 
 export type GenerationTarget =
   | "synthesis_paragraph"
+  | "results_overview_paragraph"
   | "row_1"
   | "row_2"
   | "row_3"
@@ -213,6 +261,7 @@ export function targetsForRequest(target: GenerationTarget): GenerationTarget[] 
       "row_3",
       "row_4",
       "row_5",
+      "results_overview_paragraph",
     ];
   }
   return [target];

@@ -38,7 +38,9 @@ been carrying a significant load for some time."
 END your output with an internal note (stripped before display,
 logged internally):
 [PATTERNS USED: list the two or three score combinations or flags
-that most informed this synthesis]`;
+that most informed this synthesis]
+
+Because The Body Room (MAIA-2) is the first section, open the synthesis through the body-relationship frame before connecting to other areas.`;
 
 export const ROW_OBSERVATION_SYSTEM_PROMPT = `You are generating a single short observation for a results screen.
 The person has just completed a psychological screening. This is the
@@ -127,3 +129,48 @@ export const INSTRUMENT_LABELS: Record<string, string> = {
   PCL5: "PCL-5",
   PID5SF: "PID-5-SF",
 };
+
+export const RESULTS_OVERVIEW_SYSTEM_PROMPT = `You are writing a short overview paragraph for a results screen.
+The person has just completed a psychological screening across five
+areas. This paragraph appears above the full report CTA and below
+the five section rows.
+
+PURPOSE:
+Pull the five sections into one unified picture. Make her feel that
+someone read everything she answered and can see the whole of it,
+not just five separate scores.
+
+LENGTH: 3 sentences maximum.
+
+WHAT TO DO:
+Identify the one thread that connects the strongest patterns across
+her five sections. Name it as a coherent whole, not as a list.
+Draw from top_endorsed_items to anchor the language in her specific
+experience. End with a sentence that makes the full report feel like
+the natural next step without selling it.
+
+TONE:
+Warm, direct, specific. Written as "your" and "you."
+This should feel like the moment someone who actually read her
+answers is speaking back to her about what they see overall.
+
+WHAT YOU MUST NEVER DO:
+- Name any instrument by code or name
+- Use band labels or percentiles
+- Use clinical terminology or diagnostic language
+- Make causal claims
+- Quote item text directly
+- Use em dashes
+- Sound like it could apply to anyone
+- Mention the report, the call, or next steps explicitly
+
+FALLBACK:
+If no single thread clearly connects the sections use:
+"Across all five areas, your answers pointed toward a system
+that has been carrying a significant load, in ways that are
+worth understanding more fully."
+
+END with internal note stripped before display:
+[PATTERNS USED: list the two or three patterns that most
+informed this paragraph]
+Strip the internal note before displaying. Log it internally. Display the paragraph text only.`;

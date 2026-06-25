@@ -1,5 +1,5 @@
 /**
- * All 115 assessment items.
+ * All 104 assessment items.
  * Source of truth: specs/questionnaire/bridge-hub-questionnaire-reference.md
  */
 import type { Instrument } from "@/lib/types/database";
@@ -21,10 +21,6 @@ export type Question = {
   text: string;
   reverseScored: boolean;
   scale: ScaleOption[];
-  /** Item 26 — counts toward score and triggers safety flag */
-  triggersSafetyFlag?: boolean;
-  /** Items 119, 178 — flag only, not scored */
-  safetyFlagOnly?: boolean;
 };
 
 type ItemDef = Omit<
@@ -163,20 +159,9 @@ const PID5SF_ITEMS: ItemDef[] = [
   { instrument: "PID5SF", instrumentItemNumber: 49, text: "I am easily distracted.", reverseScored: false, scale: PID5SF_SCALE },
   { instrument: "PID5SF", instrumentItemNumber: 55, text: "I can't focus on things for very long.", reverseScored: false, scale: PID5SF_SCALE },
   { instrument: "PID5SF", instrumentItemNumber: 91, text: "I get pulled off-task by even minor distractions.", reverseScored: false, scale: PID5SF_SCALE },
-  { instrument: "PID5SF", instrumentItemNumber: 26, text: "The world would be better off if I were dead.", reverseScored: false, scale: PID5SF_SCALE, triggersSafetyFlag: true },
   { instrument: "PID5SF", instrumentItemNumber: 60, text: "Life looks pretty bleak to me.", reverseScored: false, scale: PID5SF_SCALE },
   { instrument: "PID5SF", instrumentItemNumber: 70, text: "Everything seems pointless to me.", reverseScored: false, scale: PID5SF_SCALE },
   { instrument: "PID5SF", instrumentItemNumber: 74, text: "I have no worth as a person.", reverseScored: false, scale: PID5SF_SCALE },
-  { instrument: "PID5SF", instrumentItemNumber: 34, text: "I often have unusual experiences, such as sensing the presence of someone who isn't actually there.", reverseScored: false, scale: PID5SF_SCALE },
-  { instrument: "PID5SF", instrumentItemNumber: 54, text: "I have seen things that weren't really there.", reverseScored: false, scale: PID5SF_SCALE },
-  { instrument: "PID5SF", instrumentItemNumber: 59, text: "Sometimes I can influence other people just by sending my thoughts to them.", reverseScored: false, scale: PID5SF_SCALE },
-  { instrument: "PID5SF", instrumentItemNumber: 96, text: "I've had some really weird experiences that are very difficult to explain.", reverseScored: false, scale: PID5SF_SCALE },
-  { instrument: "PID5SF", instrumentItemNumber: 15, text: "It's weird, but sometimes ordinary objects seem to be a different shape than usual.", reverseScored: false, scale: PID5SF_SCALE },
-  { instrument: "PID5SF", instrumentItemNumber: 63, text: 'Sometimes I feel "controlled" by thoughts that belong to someone else.', reverseScored: false, scale: PID5SF_SCALE },
-  { instrument: "PID5SF", instrumentItemNumber: 88, text: "Sometimes I think someone else is removing thoughts from my head.", reverseScored: false, scale: PID5SF_SCALE },
-  { instrument: "PID5SF", instrumentItemNumber: 98, text: "Things around me often feel unreal, or more real than usual.", reverseScored: false, scale: PID5SF_SCALE },
-  { instrument: "PID5SF", instrumentItemNumber: 119, text: "I talk about suicide a lot.", reverseScored: false, scale: PID5SF_SCALE, safetyFlagOnly: true },
-  { instrument: "PID5SF", instrumentItemNumber: 178, text: "I know I'll commit suicide sooner or later.", reverseScored: false, scale: PID5SF_SCALE, safetyFlagOnly: true },
 ];
 
 function buildSection(
@@ -190,19 +175,21 @@ function buildSection(
 }
 
 export const QUESTIONS: Question[] = [
-  ...buildSection(1, PSS10_ITEMS, 1),
-  ...buildSection(2, PHQ8_ITEMS, 11),
-  ...buildSection(3, MAIA2_ITEMS, 19),
+  ...buildSection(1, MAIA2_ITEMS, 1),
+  ...buildSection(2, PSS10_ITEMS, 28),
+  ...buildSection(3, PHQ8_ITEMS, 38),
   ...buildSection(4, PCL5_ITEMS, 46),
   ...buildSection(5, PID5SF_ITEMS, 66),
 ];
 
 export const TOTAL_QUESTIONS = QUESTIONS.length;
 
-export const PCL5_WORST_EVENT_PROMPT =
-  "Your worst or most stressful experience:";
-export const PCL5_WORST_EVENT_HINT =
-  "Optional — you can describe it briefly, or simply hold it in mind as you answer";
+export const PCL5_WRITE_IN_HEADING = "Before you begin this section";
+export const PCL5_WRITE_IN_BODY =
+  "The questions in this section ask about the impact of difficult experiences. Before you begin, take a moment to bring one experience to mind that feels most present for you right now.";
+export const PCL5_WRITE_IN_LABEL = "The experience I have in mind";
+export const PCL5_WRITE_IN_PLACEHOLDER =
+  "A few words is enough. Or leave it blank, it is your choice.";
 
 export function getQuestion(globalIndex: number): Question | undefined {
   return QUESTIONS.find((question) => question.globalIndex === globalIndex);

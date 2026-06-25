@@ -93,18 +93,10 @@ export type Pcl5Result = {
   itemResponses: Record<number, number>;
 };
 
-export type Pid5SafetyFlag = {
-  itemCode: string;
-  itemText: string;
-  responseValue: number;
-  responseLabel: string;
-};
-
 export type Pid5SfResult = {
   instrument: "PID5SF";
   domains: Record<string, { average: number; band: string; percentile: number }>;
   facets: Record<string, { average: number; band: string; percentile: number }>;
-  safetyFlags: Pid5SafetyFlag[];
   timeTakenSeconds: number | null;
   itemResponses: Record<number, number>;
 };
@@ -144,9 +136,9 @@ export type SessionScores = {
 };
 
 export const INSTRUMENTS_BY_SECTION: Instrument[] = [
+  "MAIA2",
   "PSS10",
   "PHQ8",
-  "MAIA2",
   "PCL5",
   "PID5SF",
 ];

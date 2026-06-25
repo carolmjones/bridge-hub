@@ -34,6 +34,8 @@ flowchart LR
 
 **Current position:** Phase 5 in progress — S7 booking screen + webhook stub; PDF generation next.
 
+**Recent (June 2026):** Assessment reorder, PID trim (104 items), safety flags removed from app and database. See [Assessment reorder](#assessment-reorder--pid-trim-june-2026).
+
 ---
 
 ## How to use review flags
@@ -113,9 +115,9 @@ Resolve these per phase; do not merge silently.
 - [x] Implement Supabase schema (SQL in [supabase/migrations/001_initial_schema.sql](../supabase/migrations/001_initial_schema.sql))
   - Applied via `npm run db:migrate` (or Supabase SQL Editor)
   - `users`, `sessions`, `responses`, `scores`, `bookings`, `magic_links`
-  - `safety_flags` (no user-facing RLS policies)
 - [x] Migration scripts: `npm run db:migrate`, `npm run db:verify`
-- [x] Enable RLS on all tables except `safety_flags` (in migration)
+- [x] Migration `002_session_touchpoint_ai.sql` (adds `sessions.touchpoint_ai`)
+- [x] **Apply** [003_remove_safety_flags.sql](../supabase/migrations/003_remove_safety_flags.sql) in Supabase SQL Editor (drops legacy `safety_flags` table — applied June 2026)
 - [x] Create `lib/supabase/client.ts`, `server.ts`, `admin.ts`, `route.ts`
 - [x] Magic link auth:
   - `POST /api/auth/request-magic-link`
@@ -141,19 +143,17 @@ Resolve these per phase; do not merge silently.
 
 **Exit criteria:** User can submit email at S3, receive magic link, authenticate, and have a session record.
 
-**Critical constraint:** `safety_flags` accessible only via service role. Enforce at schema level, not application layer alone.
-
 ---
 
 ## Phase 2 — Assessment flow
 
-**Goal:** Full screening experience from landing through question 115.
+**Goal:** Full screening experience from landing through question 104.
 
 **Reference:** [specs/chat-04/chat-04-wireframe-descriptions-v1.md](../specs/chat-04/chat-04-wireframe-descriptions-v1.md)
 
 - [x] Routes S1–S5: `/`, `/begin`, `/save`, `/assessment`
 - [x] Routes R1–R2: `/resume`, `/expired`
-- [x] Question data: 115 items in `lib/data/questions.ts` from [specs/questionnaire/bridge-hub-questionnaire-reference.md](../specs/questionnaire/bridge-hub-questionnaire-reference.md)
+- [x] Question data: 104 items in `lib/data/questions.ts` from [specs/questionnaire/bridge-hub-questionnaire-reference.md](../specs/questionnaire/bridge-hub-questionnaire-reference.md)
 - [x] Section transition screens (S4) with section tones
 - [x] Auto-save per answer: `POST /api/session/save-response` + localStorage cache
 - [x] Progress indicator: five diamonds, connecting line fill
@@ -232,15 +232,38 @@ Resolve these per phase; do not merge silently.
 |------|------|----------|
 | ⚑ | Disclaimer map | Final list of which routes show disclaimer (S1, S2, S3, S6, S8 vs R1, R2, S7, S4, S5) |
 | ⚑ | Screen copy | Wireframe boards vs COPY_REFERENCE — extract final copy per slot |
-| ⚑ | Section row labels | **Resolved Phase 4:** S6 uses locked names (The Load, The Fog…) |
+| ⚑ | Section row labels | **Resolved Phase 4:** S6 uses locked names; Body Room first (June 2026 reorder) |
 
-**Exit criteria:** User can complete all 115 questions; answers persist across page refresh and magic link resume. **Met** — verified via smoke test (June 2026).
+**Exit criteria:** User can complete all 104 questions; answers persist across page refresh and magic link resume. **Met** — verified via smoke test (June 2026).
+
+---
+
+## Assessment reorder & PID trim (June 2026)
+
+**Goal:** Body Room first, 104 items, no safety flags, 15-minute copy, Gemini 2.5 Pro for S6 AI.
+
+**Code (done):**
+
+- [x] Section order: MAIA-2 → PSS-10 → PHQ-8 → PCL-5 → PID-5-SF (39 items)
+- [x] Remove 11 PID items; depressivity ÷3; patterns/framework updated
+- [x] Remove all `safety_flags` app code; migration file added
+- [x] Time copy → 15 minutes (S1, S2); `OPENROUTER_MODEL` default → `google/gemini-2.5-pro`
+- [x] AI: `top_endorsed_items` = 10, MAIA-first synthesis, `prompt_version: 3` cache bump (overview paragraph added)
+- [x] `lib/report/section-order.ts` for future PDF/addendum order
+- [x] Build + smoke test pass
+
+**Ops (your checklist):**
+
+- [x] Run [003_remove_safety_flags.sql](../supabase/migrations/003_remove_safety_flags.sql) in Supabase (applied June 2026)
+- [x] Set `OPENROUTER_MODEL=google/gemini-2.5-pro` in `.env.bridgehub`
+- [ ] Set `OPENROUTER_MODEL` and `OPENROUTER_API_KEY` in Vercel → Project Settings → Environment Variables (Production, Preview, Development) — CLI token not available in this environment; add manually then redeploy
+- [x] **Testing:** Start fresh sessions via `/save` after June 2026 reorder — do not resume old in-progress sessions (section index may not match instrument order)
 
 ---
 
 ## Phase 3 — Scoring engine
 
-**Goal:** Per-instrument scoring on section completion with safety flag routing.
+**Goal:** Per-instrument scoring on section completion.
 
 **Reference:** [specs/chat-03/chat-03-scoring-engine-pseudocode-v2.md](../specs/chat-03/chat-03-scoring-engine-pseudocode-v2.md)
 
@@ -251,16 +274,14 @@ Resolve these per phase; do not merge silently.
 - [x] `POST /api/session/complete-section` triggers scoring per instrument
 - [x] Run `framework.ts` + `patterns.ts` after all 5 instruments scored (on final `complete-section`)
 - [x] Store results in `scores` table
-- [x] Safety flags → `safety_flags` table via service role only
 - [x] Section timing captured (`section_start`, `section_end`)
-- [x] End-to-end scoring smoke test — PSS-10 section via `npm run smoke:test` (19/19)
-- [ ] Full 115-question manual scoring verification
+- [x] End-to-end scoring smoke test — PSS-10 section via `npm run smoke:test`
+- [ ] Full 104-question manual scoring verification
 
 ### Infrastructure checklist
 
 - Per-instrument scoring on section completion
 - Cross-instrument framework (Q1–Q8) and named patterns after section 5
-- Safety flag routing isolated from client APIs
 
 ### ⚑ Review before exit
 
@@ -269,10 +290,8 @@ Resolve these per phase; do not merge silently.
 | ⚑ | Cross-instrument timing | **Resolved Phase 3:** framework + patterns run on final `complete-section` (PID5SF / `complete_assessment`) |
 | ⚑ | Chat 03 3.3–3.4 | Edge cases / AI pattern library structure still pending in specs — core PF-01–08 implemented |
 | ⚑ | `POST /api/score/calculate` | **Resolved Phase 3:** internal helpers only; `complete-section` is the sole entry point |
-| ⚑ | Safety flags in API | **Resolved Phase 3:** client response excludes flags; `safety_flags` table via service role |
-| ⚑ | Completion quality | <15 min flag — defer to therapist briefing (Phase 6) |
 
-**Exit criteria:** Completing all 5 sections produces score records with bands, percentiles, subscales, and pattern flags. Safety flags never appear in client API responses. **Met** for engine + section smoke test (June 2026).
+**Exit criteria:** Completing all 5 sections produces score records with bands, percentiles, subscales, and pattern flags. **Met** for engine + section smoke test (June 2026).
 
 ---
 
@@ -282,22 +301,26 @@ Resolve these per phase; do not merge silently.
 
 **Reference:** [specs/chat-05/chat-05-phase3-copy-v3.md](../specs/chat-05/chat-05-phase3-copy-v3.md)
 
+- [x] PCL-5 write-in copy (5d): locked heading, body, label, placeholder — [`lib/data/questions.ts`](../lib/data/questions.ts)
 - [x] Route `/results` (S6) — static copy, accordion rows, fallback observations
 - [x] Static copy slots 1–4 (headline, credibility, full report block, Clarity Call paragraph)
+- [x] Full report block copy updated (Nervous System Map + bullet list)
 - [x] `GET /api/results/[session_id]` — scores, patterns, top items (no flags)
 - [x] Collapsible section rows with chevron (one open at a time)
 - [x] CTA: "Book your free Clarity Call" → `/book` (placeholder until Phase 5)
 - [x] `POST /api/results/generate-ai-content` — OpenRouter for:
   - Synthesis paragraph (Slot 5a)
   - Five collapsible row observations (Slot 5b)
-- [x] AI content cached on `sessions.touchpoint_ai` (generate once)
+  - Results overview paragraph (Slot 5c)
+- [x] AI content cached on `sessions.touchpoint_ai` (`prompt_version: 3`)
 - [x] Static-first loading state in ResultsView while AI hydrates
 
 ### Screen inventory — S6 `/results`
 
 - ✓ Block 1: eyebrow, headline (Slot 1), synthesis AI (Slot 5a), credibility (Slot 2)
 - ✓ Block 2: five collapsible rows (Slot 5b), dot colours, accordion (one open)
-- ✓ Block 3: full report note (Slot 3)
+- ✓ Block 2b: results overview paragraph (Slot 5c) — below rows, above full report
+- ✓ Block 3: full report note (Slot 3) — Nervous System Map + bullet list
 - ✓ Block 4: Clarity Call badge, paragraph (Slot 4), CTA → `/book`
 - ✓ Block 5: disclaimer, urgent help link, wordmark
 - ⚑ REVIEW: Row header labels — **Resolved Phase 4:** locked section names (The Load, The Fog…)
@@ -313,7 +336,7 @@ Resolve these per phase; do not merge silently.
 | ⚑ | Scoring dependency | **Resolved:** S6 requires `session.status = completed` and score rows |
 | ⚑ | PDF timing | **Resolved:** no PDF on S6; booking CTA only |
 
-**Exit criteria:** Completed user sees personalised Touchpoint 1 with AI-generated synthesis and row observations. **Met** when `OPENROUTER_API_KEY` is set (June 2026).
+**Exit criteria:** Completed user sees personalised Touchpoint 1 with AI-generated synthesis, row observations, and results overview paragraph. **Met** when `OPENROUTER_API_KEY` is set (June 2026).
 
 ---
 
@@ -379,29 +402,25 @@ Resolve these per phase; do not merge silently.
 
 ## Phase 6 — Therapist dashboard (private)
 
-**Goal:** Caroline-only view of clinical briefing and safety flags.
+**Goal:** Caroline-only view of clinical briefing.
 
 **Reference:** [specs/chat-05/chat-05-therapist-briefing-v1.md](../specs/chat-05/chat-05-therapist-briefing-v1.md)
 
 - [ ] Admin routes with service role authentication
 - [ ] `GET /api/admin/briefing/[session_id]`
-- [ ] Safety alert block (conditional, top of briefing)
 - [ ] Call Preparation Brief (OpenRouter, 4 sections)
 - [ ] Clinical Layer 2 blocks from `lib/content/layer2-therapist.ts`
 - [ ] Dimensional framework output (Q1–Q8)
 - [ ] Named pattern observations
-- [ ] Safety flag review UI
 
 ### ⚑ Review before exit
 
 | Flag | Area | Question |
 |------|------|----------|
 | ⚑ | Admin auth | How Caroline logs in — env password, Supabase admin user, or Vercel protection? |
-| ⚑ | Safety flag UI | Mark reviewed workflow — needed at launch or post-launch? |
 | ⚑ | Layer 2 source | Therapist blocks from `chat-03-layer2-content-library-v2.md` only — never client blocks |
-| ⚑ | PID-5 facets | Unusual beliefs + Perceptual dysregulation — therapist only (START_HERE) |
 
-**Exit criteria:** Caroline can view full clinical picture including safety flags. No client-facing route exposes this data.
+**Exit criteria:** Caroline can view full clinical picture. No client-facing route exposes this data.
 
 ---
 
@@ -496,11 +515,10 @@ Phases 6 and 7 can partially overlap after Phase 5 webhook is working.
 
 ## Success metrics at launch
 
-1. User completes 115-question screening without data loss
+1. User completes 104-question screening without data loss
 2. Touchpoint 1 displays within seconds of completion
 3. Booking triggers PDF delivery to email
-4. Safety flags visible to therapist only
-5. Magic link resume works across devices (30-day expiry)
+4. Magic link resume works across devices (30-day expiry)
 
 ---
 

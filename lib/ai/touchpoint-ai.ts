@@ -1,5 +1,6 @@
 import { callOpenRouter } from "@/lib/ai/openrouter";
 import {
+  buildResultsOverviewPayload,
   buildRowPayload,
   buildSynthesisPayload,
   rowIndexToSection,
@@ -7,6 +8,7 @@ import {
   targetsForRequest,
 } from "@/lib/ai/build-touchpoint-payload";
 import {
+  RESULTS_OVERVIEW_SYSTEM_PROMPT,
   ROW_OBSERVATION_SYSTEM_PROMPT,
   SECTION_INSTRUCTIONS,
   SYNTHESIS_SYSTEM_PROMPT,
@@ -17,10 +19,14 @@ import { getOpenRouterApiKey } from "@/lib/env";
 import { createAdminClient } from "@/lib/supabase/admin";
 import type { Response } from "@/lib/types/database";
 
+export const TOUCHPOINT_PROMPT_VERSION = 3;
+
 export type TouchpointAiCache = {
   synthesis: string | null;
+  overview_paragraph: string | null;
   row_observations: Record<string, string>;
   generated_at?: string;
+  prompt_version?: number;
 };
 
 type ScoreRow = {
@@ -73,10 +79,32 @@ async function saveTouchpointAiCache(
 async function generateSynthesis(
   firstName: string,
   scoreRows: ScoreRow[],
-  responses: Response[]
+  responses: Response[],
+  sessionId: string
 ): Promise<string> {
   const payload = buildSynthesisPayload(firstName, scoreRows, responses);
+  if (responses.length > 0 && payload.top_endorsed_items.length === 0) {
+    console.warn(
+      `[touchpoint-ai] top_endorsed_items empty for session ${sessionId} despite ${responses.length} responses`
+    );
+  }
   const raw = await callOpenRouter(SYNTHESIS_SYSTEM_PROMPT, payload, 400);
+  return stripInternalNotes(raw);
+}
+
+async function generateOverview(
+  firstName: string,
+  scoreRows: ScoreRow[],
+  responses: Response[],
+  sessionId: string
+): Promise<string> {
+  const payload = buildResultsOverviewPayload(firstName, scoreRows, responses);
+  if (responses.length > 0 && payload.top_endorsed_items.length === 0) {
+    console.warn(
+      `[touchpoint-ai] overview top_endorsed_items empty for session ${sessionId}`
+    );
+  }
+  const raw = await callOpenRouter(RESULTS_OVERVIEW_SYSTEM_PROMPT, payload, 350);
   return stripInternalNotes(raw);
 }
 
@@ -102,8 +130,13 @@ async function generateRowObservation(
 }
 
 function cacheHasTarget(cache: TouchpointAiCache, target: GenerationTarget): boolean {
+  if ((cache.prompt_version ?? 0) < TOUCHPOINT_PROMPT_VERSION) return false;
+
   if (target === "synthesis_paragraph") {
     return Boolean(cache.synthesis?.trim());
+  }
+  if (target === "results_overview_paragraph") {
+    return Boolean(cache.overview_paragraph?.trim());
   }
   const section = rowIndexToSection(target);
   if (!section) return false;
@@ -112,6 +145,7 @@ function cacheHasTarget(cache: TouchpointAiCache, target: GenerationTarget): boo
 
 export type GenerateTouchpointResult = {
   synthesis: string | null;
+  overview_paragraph: string | null;
   row_observations: Record<string, string>;
   generated: GenerationTarget[];
   cached: boolean;
@@ -169,6 +203,7 @@ export async function generateTouchpointContent(
 
   const existing: TouchpointAiCache = (session.touchpoint_ai as TouchpointAiCache) ?? {
     synthesis: null,
+    overview_paragraph: null,
     row_observations: {},
   };
 
@@ -176,18 +211,35 @@ export async function generateTouchpointContent(
   const generated: GenerationTarget[] = [];
   let cache: TouchpointAiCache = {
     synthesis: existing.synthesis,
+    overview_paragraph: existing.overview_paragraph ?? null,
     row_observations: { ...existing.row_observations },
     generated_at: existing.generated_at,
   };
+
+  const firstName = profile?.first_name ?? "";
+  const typedScores = scoreRows as ScoreRow[];
+  const typedResponses = (responses ?? []) as Response[];
 
   for (const target of targets) {
     if (cacheHasTarget(cache, target)) continue;
 
     if (target === "synthesis_paragraph") {
       cache.synthesis = await generateSynthesis(
-        profile?.first_name ?? "",
-        scoreRows as ScoreRow[],
-        (responses ?? []) as Response[]
+        firstName,
+        typedScores,
+        typedResponses,
+        sessionId
+      );
+      generated.push(target);
+      continue;
+    }
+
+    if (target === "results_overview_paragraph") {
+      cache.overview_paragraph = await generateOverview(
+        firstName,
+        typedScores,
+        typedResponses,
+        sessionId
       );
       generated.push(target);
       continue;
@@ -198,18 +250,20 @@ export async function generateTouchpointContent(
 
     cache.row_observations[section.name] = await generateRowObservation(
       section.name,
-      scoreRows as ScoreRow[],
-      (responses ?? []) as Response[]
+      typedScores,
+      typedResponses
     );
     generated.push(target);
   }
 
   if (generated.length > 0) {
+    cache.prompt_version = TOUCHPOINT_PROMPT_VERSION;
     await saveTouchpointAiCache(sessionId, cache);
   }
 
   return {
     synthesis: cache.synthesis,
+    overview_paragraph: cache.overview_paragraph,
     row_observations: cache.row_observations,
     generated,
     cached: generated.length === 0,

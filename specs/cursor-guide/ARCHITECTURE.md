@@ -72,24 +72,6 @@ time_taken_seconds      int
 created_at              timestamptz default now()
 ```
 
-### safety_flags
-```sql
-id              uuid primary key default gen_random_uuid()
-session_id      uuid references sessions(id)
-user_id         uuid references users(id)
-item_code       text not null
-item_text       text not null
-response_value  int not null
-response_label  text not null
-instrument      text not null
-created_at      timestamptz default now()
-reviewed        boolean default false
-```
-
-CRITICAL: safety_flags table has NO foreign key from any
-user-facing table. It is accessed ONLY via a separate server-side
-admin route. Never expose in any client-facing API call.
-
 ### bookings
 ```sql
 id              uuid primary key default gen_random_uuid()
@@ -122,7 +104,7 @@ created_at      timestamptz default now()
 
 ## Row Level Security (RLS) — critical
 
-Enable RLS on all tables except safety_flags.
+Enable RLS on all tables.
 
 ```sql
 -- users: own row only
@@ -149,9 +131,6 @@ create policy "scores_own" on scores
 alter table bookings enable row level security;
 create policy "bookings_own" on bookings
   for all using (auth.uid() = user_id);
-
--- safety_flags: NO user-facing access at all
--- Access via server-side admin only, using service role key
 ```
 
 ---
@@ -205,8 +184,7 @@ POST /api/session/complete-section
   Body: { session_id, instrument, section_end_time }
   - Triggers scoring for that instrument
   - Stores score record
-  - Checks and routes safety flags
-  Returns: { scores, flags }
+  Returns: { score } or { scores } on final section
 
 GET /api/session/resume
   Auth: required
@@ -223,9 +201,8 @@ POST /api/score/calculate
   Body: { session_id, instrument, responses[] }
   - Runs scoring engine for instrument
   - Calculates total, subscales, bands, percentiles
-  - Checks for flags
+  - Checks for instrument flags (not safety items)
   - Stores to scores table
-  - If safety flag triggered: writes to safety_flags table only
   Returns: { score_record }
 
 Implementation: import scoring functions from
@@ -243,7 +220,6 @@ GET /api/results/[session_id]
   - Returns pattern match flags
   - Returns top_endorsed_items (10 highest across all instruments)
   - Returns write_in_text if present
-  NEVER returns safety_flags data
   Returns: { scores, framework, patterns, top_items, write_in }
 
 POST /api/results/generate-ai-content
@@ -411,7 +387,7 @@ Kit sequences: Chat 08 scope — not built here
 
 ## OpenRouter AI calls
 
-Model: claude-sonnet-4-6
+Model: `google/gemini-2.5-pro` (override via `OPENROUTER_MODEL` env var)
 All calls server-side only. Never expose API key client-side.
 
 ```ts
@@ -422,7 +398,7 @@ const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    model: 'anthropic/claude-sonnet-4-6',
+    model: process.env.OPENROUTER_MODEL ?? 'google/gemini-2.5-pro',
     max_tokens: 500,
     messages: [
       { role: 'system', content: systemPrompt },
@@ -477,6 +453,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=
 SUPABASE_SERVICE_ROLE_KEY=     # server-side only, never expose
 RESEND_API_KEY=
 OPENROUTER_API_KEY=
+OPENROUTER_MODEL=google/gemini-2.5-pro
 CAL_WEBHOOK_SECRET=
 KIT_API_KEY=
 NEXT_PUBLIC_APP_URL=
@@ -488,12 +465,11 @@ NEXT_PUBLIC_APP_URL=
 
 1. Supabase EU region only. Set in project creation, not changeable.
 2. Service role key never in client-side code or .env.local commits.
-3. safety_flags table: zero user-facing access paths. Enforced by RLS.
-4. PDF triggered server-side from webhook only.
-5. All AI calls server-side only.
-6. No health data stored before S3 consent moment.
-7. Auto-save on every response — network failure must not lose answers.
-8. LocalStorage as instant restore only — Supabase is source of truth.
+3. PDF triggered server-side from webhook only.
+4. All AI calls server-side only.
+5. No health data stored before S3 consent moment.
+6. Auto-save on every response — network failure must not lose answers.
+7. LocalStorage as instant restore only — Supabase is source of truth.
 
 ---
 

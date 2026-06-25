@@ -48,8 +48,9 @@ The copy below is the final locked version for each slot.
 | S6 Touchpoint 1 | Headline | Static | See Slot 1 below |
 | S6 Touchpoint 1 | Synthesis paragraph | AI-generated | See Slot 5a below |
 | S6 Touchpoint 1 | Credibility block | Static | See Slot 2 below |
-| S6 Touchpoint 1 | Full report block | Static | See Slot 3 below |
 | S6 Touchpoint 1 | Row observations ×5 | AI-generated | See Slot 5b below |
+| S6 Touchpoint 1 | Results overview paragraph | AI-generated | See Slot 5c below — appears after rows, before full report |
+| S6 Touchpoint 1 | Full report block | Static | See Slot 3 below |
 | S6 Touchpoint 1 | Clarity Call paragraph | Static | See Slot 4 below |
 | S6 Touchpoint 1 | CTA | Static | "Book your free Clarity Call" |
 | S6 Touchpoint 1 | Disclaimer | Static | "This is a screening tool, not a clinical diagnosis." |
@@ -68,9 +69,9 @@ collapsible row headers. Exact casing below.
 
 | # | Internal code | User-facing name |
 |---|---|---|
-| 1 | stress | The Load |
-| 2 | mood | The Fog |
-| 3 | body | The Body Room |
+| 1 | body | The Body Room |
+| 2 | stress | The Load |
+| 3 | mood | The Fog |
 | 4 | carrying | The Weight You Carry |
 | 5 | emotional | The Weather Inside |
 
@@ -92,15 +93,19 @@ Your results are measured, not estimated.
 
 ### Slot 3 — Full report block (STATIC)
 ```
-YOUR FULL REPORT
+Your full Nervous System Map is waiting.
 
-Your full report goes deeper into each of the five areas. It includes
-a personalised reflection drawn from your specific answers, a
-research-grounded interpretation of what your results may be showing,
-and every question you answered in full.
+It goes deeper into each of the five areas, with personalised
+reflections drawn from your specific answers and research-grounded
+interpretations of what your results are showing.
 
-It is scored using published psychometric methods and sent to your
-email as soon as you book your Clarity Call.
+It is sent to you as soon as you book your Clarity Call.
+
+✓ Built from your responses, not a template
+✓ Scored against published population norms
+✓ Designed by a qualified nurse and therapist
+✓ A screening tool, not a diagnosis
+✓ Your results belong to you
 ```
 
 ### Slot 4 — Clarity Call paragraph (STATIC)
@@ -128,6 +133,11 @@ chat-05-phase3-copy-v3.md → Slot 5a
 ### Slot 5b — Collapsible row observations ×5 (AI-GENERATED)
 Full JSON payload and system prompt per section:
 chat-05-phase3-copy-v3.md → Slot 5b
+
+### Slot 5c — Results overview paragraph (AI-GENERATED)
+Full JSON payload and system prompt:
+chat-05-phase3-copy-v3.md → Slot 5c
+Appears below accordion rows, above full report block.
 
 ---
 
@@ -303,6 +313,7 @@ email. See you then."
 | S6 row observation — The Body Room | chat-05-phase3-copy-v3.md | 1-2 sentences |
 | S6 row observation — The Weight You Carry | chat-05-phase3-copy-v3.md | 1-2 sentences |
 | S6 row observation — The Weather Inside | chat-05-phase3-copy-v3.md | 1-2 sentences |
+| S6 results overview paragraph | chat-05-phase3-copy-v3.md | 3 sentences max |
 | Report Layer 1 — per instrument ×5 | chat-05-report-pseudocode-v4.md | 3-4 sentences |
 | Report cross-instrument synthesis | chat-05-report-pseudocode-v4.md | 4-5 sentences |
 | Therapist Call Preparation Brief | chat-05-therapist-briefing-v1.md | 4 sections, 3-4 sentences each |

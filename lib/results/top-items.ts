@@ -20,14 +20,13 @@ export function buildTopItems(
   responses: Response[],
   limit = 10
 ): TopItem[] {
-  const scored = responses.filter((r) => {
-    const q = QUESTIONS.find(
+  const scored = responses.filter((r) =>
+    QUESTIONS.some(
       (item) =>
         item.instrument === r.instrument &&
         item.instrumentItemNumber === r.item_number
-    );
-    return q && !q.safetyFlagOnly;
-  });
+    )
+  );
 
   return scored
     .map((r) => ({

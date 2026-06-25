@@ -7,7 +7,7 @@
 
 ## What this is
 
-The Bridge Hub is a trauma-informed online psychological screening tool for women aged 28–45 who are overwhelmed and carrying patterns they cannot name. It administers five validated clinical instruments across 115 questions (~35–45 minutes), generates a personalised **Nervous System Map** report, and converts completions into booked **Clarity Calls** with a therapist.
+The Bridge Hub is a trauma-informed online psychological screening tool for women aged 28–45 who are overwhelmed and carrying patterns they cannot name. It administers five validated clinical instruments across 104 questions (~15 minutes), generates a personalised **Nervous System Map** report, and converts completions into booked **Clarity Calls** with a therapist.
 
 This is not a quiz. It is a clinical screening tool with a warm, editorial, field-guide aesthetic. It must feel safe at every step.
 
@@ -43,7 +43,7 @@ Women aged 28–45, global English audience. Overwhelmed, carrying unidentified 
 | Booking | Cal.com | Free plan at launch. Embedded on `/book`. |
 | PDF generation | React PDF (`@react-pdf/renderer`) | Generated on booking confirmation only |
 | Hosting | Vercel | Auto-deploy from GitHub |
-| AI generation | OpenRouter | Default model: `openrouter/owl-alpha` (`OPENROUTER_MODEL`) |
+| AI generation | OpenRouter | Default model: `google/gemini-2.5-pro` (`OPENROUTER_MODEL`) |
 | Repository | GitHub private repo | This repo |
 
 > **Note:** The master brief still references Mailchimp and older design tokens. Locked decisions in `specs/cursor-guide/` supersede the master brief where they conflict. Kit replaces Mailchimp. DESIGN_SYSTEM.md replaces master brief colour tokens.
@@ -57,7 +57,7 @@ Women aged 28–45, global English audience. Overwhelmed, carrying unidentified 
 | `/` | S1 Landing | No session. Cookie consent on first visit. |
 | `/begin` | S2 What to expect | No session. Breathing overlay introduced. |
 | `/save` | S3 Email + name capture | Session created on submit to Supabase. |
-| `/assessment` | S5 Question shell | All 115 questions. Auto-save per answer. |
+| `/assessment` | S5 Question shell | All 104 questions. Auto-save per answer. |
 | `/results` | S6 Touchpoint 1 | AI-generated rows. Clarity Call CTA. |
 | `/book` | S7 Booking | Phone capture + Cal.com embed. |
 | `/confirmed` | S8 Confirmation | PDF triggered. Kit nurture if opted in. |
@@ -70,13 +70,13 @@ Women aged 28–45, global English audience. Overwhelmed, carrying unidentified 
 
 | # | Internal name | User-facing name | Instrument | Items |
 |---|---|---|---|---|
-| 1 | stress | The Load | PSS-10 | 10 |
-| 2 | mood | The Fog | PHQ-8 | 8 |
-| 3 | body | The Body Room | MAIA-2 | 27 |
+| 1 | body | The Body Room | MAIA-2 | 27 |
+| 2 | stress | The Load | PSS-10 | 10 |
+| 3 | mood | The Fog | PHQ-8 | 8 |
 | 4 | carrying | The Weight You Carry | PCL-5 | 20 |
-| 5 | emotional | The Weather Inside | PID-5-SF | 50 |
+| 5 | emotional | The Weather Inside | PID-5-SF | 39 |
 
-**Total:** 115 items across 5 sections.
+**Total:** 104 items across 5 sections.
 
 ---
 
@@ -189,11 +189,6 @@ Women aged 28–45, global English audience. Overwhelmed, carrying unidentified 
 - `chat-05-layer2-user-facing-v1.md` → client report ONLY
 - `chat-03-layer2-content-library-v2.md` → therapist briefing ONLY
 - Never mix them.
-
-**Rule 2 — Safety flags are architecturally isolated:**
-- Separate `safety_flags` Supabase table
-- Service role access only
-- No connection to PDF, email, or user-facing results pipelines
 
 ---
 

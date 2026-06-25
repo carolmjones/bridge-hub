@@ -24,7 +24,7 @@ export default function LandingPage() {
 
         <p className="mt-4 text-center font-sans text-body text-soft-ink">
           A gentle screening that maps how your nervous system has been
-          responding. About 30–40 minutes. You can pause any time.
+          responding. About 15 minutes. You can pause any time.
         </p>
 
         <div className="flex-1" />

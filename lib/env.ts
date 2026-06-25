@@ -39,7 +39,7 @@ export function getOpenRouterApiKey(): string | null {
 
 /** Default launch model — override via OPENROUTER_MODEL in env. */
 export function getOpenRouterModel(): string {
-  return process.env.OPENROUTER_MODEL?.trim() || "openrouter/owl-alpha";
+  return process.env.OPENROUTER_MODEL?.trim() || "google/gemini-2.5-pro";
 }
 
 export function getCalEmbedUrl(): string | null {

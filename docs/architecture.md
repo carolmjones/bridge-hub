@@ -41,7 +41,7 @@ flowchart TB
 | `app/page.tsx` | S1 Landing |
 | `app/begin/page.tsx` | S2 What to expect |
 | `app/save/page.tsx` | S3 Email + name capture |
-| `app/assessment/page.tsx` | S5 Question shell (115 items) |
+| `app/assessment/page.tsx` | S5 Question shell (104 items) |
 | `app/results/page.tsx` | S6 Touchpoint 1 |
 | `app/book/page.tsx` | S7 Phone + Cal.com |
 | `app/confirmed/page.tsx` | S8 Confirmation |
@@ -80,7 +80,6 @@ app/api/
   booking/cal-webhook/        POST  ← triggers PDF + email
   pdf/generate/                 POST  ← server-only
   admin/briefing/[session_id]/ GET
-  admin/safety-flags/         GET
 ```
 
 ```
@@ -88,10 +87,11 @@ lib/
   supabase/     client.ts (browser), server.ts (cookies), admin.ts (service role)
   scoring/      pss10, phq8, maia2, pcl5, pid5sf, normative, flags, framework, patterns
   content/      layer2-client.ts, layer2-therapist.ts
-  ai/           openrouter.ts, prompts.ts
+  ai/           openrouter.ts, prompts/
   email/        resend templates
   pdf/          generate orchestrator
-  data/         questions.ts (115 items)
+  data/         questions.ts (104 items)
+  report/       section-order.ts
 ```
 
 ---
@@ -103,36 +103,32 @@ lib/
 | UI, animations, localStorage | Client | Instant restore; Supabase wins on conflict |
 | Auto-save answer | Client → API → Supabase | RLS-scoped |
 | Scoring | Server (`lib/scoring/`) | Never in browser |
-| Safety flag write | Server (service role) | Isolated table |
 | OpenRouter calls | Server only | API key protected |
 | PDF generation | Server (webhook only) | GDPR: after booking only |
-| Results API | Server | Strips safety_flags |
+| Results API | Server | Score summaries only |
 | Therapist briefing | Server admin + service role | Caroline-only |
 
 ### Two Supabase clients
 
 1. **Browser** — `NEXT_PUBLIC_SUPABASE_ANON_KEY` + RLS. User sees only own data.
-2. **Server service role** — `SUPABASE_SERVICE_ROLE_KEY`. Used for `safety_flags`, PDF storage, webhooks, therapist dashboard. **Never imported in client components.**
+2. **Server service role** — `SUPABASE_SERVICE_ROLE_KEY`. Used for PDF storage, webhooks, therapist dashboard. **Never imported in client components.**
 
 ---
 
 ## Data model
 
-Seven tables. Full SQL in [ARCHITECTURE.md](../specs/cursor-guide/ARCHITECTURE.md).
+Six tables. Full SQL in [ARCHITECTURE.md](../specs/cursor-guide/ARCHITECTURE.md).
 
 | Table | Purpose |
 |-------|---------|
 | `users` | email, first_name, opted_in |
-| `sessions` | status, current_section, current_item, timestamps |
+| `sessions` | status, current_section, current_item, timestamps, touchpoint_ai cache |
 | `responses` | item-level answers with reverse_scored flag |
 | `scores` | computed totals, bands, percentiles, subscales, flags, dimensional framework |
-| `safety_flags` | **Isolated.** Service role only. No user-facing access. |
 | `bookings` | phone, cal_booking_id, pdf_generated, pdf_url |
 | `magic_links` | token, expires_at (30-day), used |
 
-**RLS:** Enabled on all tables except `safety_flags`. Users access only their own rows.
-
-**Critical:** `safety_flags` has no foreign key from any user-facing table. No client-facing API returns flag data.
+**RLS:** Enabled on all tables. Users access only their own rows.
 
 ---
 
@@ -154,8 +150,7 @@ Last question in section answered
   → Client: POST /api/session/complete-section
   → Server: lib/scoring/[instrument].ts
   → Supabase: write scores
-  → If safety item triggered: write safety_flags (service role)
-  → Client: receive band summaries (no flags)
+  → Client: receive band summaries
 ```
 
 ### Results + AI
@@ -258,12 +253,11 @@ NEXT_PUBLIC_APP_URL=
 
 1. Supabase **EU region only**
 2. Service role key never in client code or committed `.env`
-3. `safety_flags`: zero user-facing access paths
-4. PDF triggered server-side from webhook only
-5. All AI calls server-side only
-6. No health data stored before S3 consent
-7. Auto-save on every response — network failure must not lose answers
-8. localStorage is instant restore only — Supabase is source of truth
+3. PDF triggered server-side from webhook only
+4. All AI calls server-side only
+5. No health data stored before S3 consent
+6. Auto-save on every response — network failure must not lose answers
+7. localStorage is instant restore only — Supabase is source of truth
 
 ---
 
