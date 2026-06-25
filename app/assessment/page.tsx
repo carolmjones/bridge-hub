@@ -1,9 +1,7 @@
 import { redirect } from "next/navigation";
 import { AppShell } from "@/components/AppShell";
-import {
-  AssessmentFlow,
-  hydrateAnswersFromResponses,
-} from "@/components/assessment/AssessmentFlow";
+import { AssessmentFlow } from "@/components/assessment/AssessmentFlow";
+import { hydrateAnswersFromResponses } from "@/lib/assessment/hydrate";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function AssessmentPage({
