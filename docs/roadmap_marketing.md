@@ -27,7 +27,7 @@ Marketing and screening share **one git repo** — **two Vercel projects**. No s
 | `NEXT_PUBLIC_MARKETING_URL` | This deploy's URL (`http://localhost:3000` locally) |
 | `NEXT_PUBLIC_SCREENING_URL` | Screening app URL (`http://localhost:3001` locally) — used for CTAs |
 
-Optional later: `NEXT_PUBLIC_CAL_EMBED_URL`, `KIT_API_KEY` for `/free-class`. Screening also needs Supabase keys unless you add server features later.
+Optional later: `NEXT_PUBLIC_CAL_EMBED_URL`, `KIT_API_KEY` for `/free-class`. Supabase and API keys live on the **screening** Vercel project only — see [roadmap_screening.md](roadmap_screening.md) Phase 0.
 
 See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
