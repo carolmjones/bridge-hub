@@ -1,0 +1,37 @@
+---
+description: Marketing website workstream — design system, Framer Motion, no screening imports
+globs: apps/marketing/**
+alwaysApply: false
+---
+
+# Marketing workstream
+
+You are building **marketing pages** only (`apps/marketing/`). Do not edit screening logic.
+
+## Before building
+
+1. Run **bridge-hub-marketing-onboard** skill (unless full context already).
+2. Read [docs/marketing/README.md](docs/marketing/README.md).
+3. Read [docs/integration-boundaries.md](docs/integration-boundaries.md).
+
+## Local dev
+
+`npm run dev:marketing` → **http://localhost:3000** (screening is `:3001`).
+
+## Must
+
+- Full-width Nav + Footer layout — not `AppShell`
+- Screening CTAs via `SCREENING_START` from `apps/marketing/lib/marketing/routes.ts` (absolute URL to screening deploy)
+- Framer Motion only in `apps/marketing/components/marketing/`
+- Pull copy from `apps/marketing/content/` — locked after Caroline approval
+- Honor `prefers-reduced-motion`; calm, slow animations only
+
+## Must not
+
+- Import `lib/scoring/*`, `lib/supabase/*`, `lib/ai/*`, `lib/pdf/*` from repo root
+- Add or edit routes under root `app/api/`
+- Edit screening page components or `specs/chat-*`
+
+## Copy tone
+
+Trauma-informed, warm, plain language. No clinical labels on marketing pages.

@@ -11,7 +11,7 @@ import { createClient } from "@supabase/supabase-js";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, "..", ".env.bridgehub") });
 
-const BASE = process.env.SMOKE_TEST_URL || "http://localhost:3000";
+const BASE = process.env.SMOKE_TEST_URL || "http://localhost:3001";
 const TEST_EMAIL = `smoke-${Date.now()}@bridgehub-test.local`;
 
 let passed = 0;
@@ -43,9 +43,8 @@ function parseSetCookie(headers) {
 }
 
 async function main() {
-  console.log(`\nBridge Hub smoke test → ${BASE}\n`);
+  console.log(`\nBridge Hub screening smoke test → ${BASE}\n`);
 
-  await checkPage("/");
   await checkPage("/begin");
   await checkPage("/save");
   await checkPage("/resume");

@@ -19,6 +19,7 @@ const config: Config = {
         "warm-paper": "#F6F0E6",
         cream: "#FAF7EF",
         "dark-room": "#1F2925",
+        "deep-card": "#16201C",
         "glow-sage": "#BEC2A9",
         "line-stone": "#CFC4B5",
         // UI-specific (DESIGN_SYSTEM buttons, logo)

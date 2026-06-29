@@ -1,0 +1,31 @@
+---
+description: Bridge Hub monolith router — marketing vs screening workstreams, integration limits
+alwaysApply: true
+---
+
+# Bridge Hub — core rules
+
+This repo is **The Bridge Hub** (`~/bridge-hub`) — one git repo, **two deploys**:
+
+| Workstream | App | Local dev | Onboard skill |
+|------------|-----|-----------|---------------|
+| **Marketing** | `apps/marketing/` | `npm run dev:marketing` → `:3000` | **bridge-hub-marketing-onboard** |
+| **Screening** | repo root | `npm run dev:screening` → `:3001` | **bridge-hub-onboard** |
+
+**Stay in your lane.** Read [docs/integration-boundaries.md](docs/integration-boundaries.md) before crossing workstreams.
+
+## Two Cursor windows (recommended)
+
+- **Bridge Hub — Marketing:** first message *"Onboard to Bridge Hub marketing"*
+- **Bridge Hub — Screening:** first message *"Onboard to Bridge Hub"*
+
+## Universal rules
+
+- Disclaimer on every client-facing screen: *This is a screening tool, not a clinical diagnosis.*
+- No clinical labels or diagnostic language in client-facing copy.
+- Solo builder — clear, readable code over clever abstractions.
+- This is not the Caroline Pipeline (`~/pipeline`).
+
+## Marketing → screening CTAs
+
+Use `SCREENING_START` from `apps/marketing/lib/marketing/routes.ts` — points at `NEXT_PUBLIC_SCREENING_URL/begin`, not relative `/begin`.

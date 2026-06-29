@@ -52,17 +52,20 @@ Women aged 28–45, global English audience. Overwhelmed, carrying unidentified 
 
 ## Route map — locked
 
-| Route | Screen | Key behaviour |
+| Route | Screen | Workstream |
 |---|---|---|
-| `/` | S1 Landing | No session. Cookie consent on first visit. |
-| `/begin` | S2 What to expect | No session. Breathing overlay introduced. |
-| `/save` | S3 Email + name capture | Session created on submit to Supabase. |
-| `/assessment` | S5 Question shell | All 104 questions. Auto-save per answer. |
-| `/results` | S6 Touchpoint 1 | AI-generated rows. Clarity Call CTA. |
-| `/book` | S7 Booking | Phone capture + Cal.com embed. |
-| `/confirmed` | S8 Confirmation | PDF triggered. Kit nurture if opted in. |
-| `/resume` | R1 Re-entry | Email input for magic link. |
-| `/expired` | R2 Expired link | New link request. |
+| `/` | Marketing landing | Marketing deploy (`roadmap_marketing.md`) |
+| `/bridge-map` | Bridge Map intro | Marketing deploy |
+| `/begin` | S2 What to expect | Screening deploy (`roadmap_screening.md`) |
+| `/save` | S3 Email + name capture | Screening |
+| `/assessment` | S5 Question shell | Screening |
+| `/results` | S6 Touchpoint 1 | Screening |
+| `/book` | S7 Booking | Screening |
+| `/confirmed` | S8 Confirmation | Screening |
+| `/resume` | R1 Re-entry | Screening |
+| `/expired` | R2 Expired link | Screening |
+
+Full screening build plan: [roadmap_screening.md](roadmap_screening.md). Marketing pages: [roadmap_marketing.md](roadmap_marketing.md).
 
 ---
 
@@ -84,11 +87,13 @@ Women aged 28–45, global English audience. Overwhelmed, carrying unidentified 
 
 | Doc | Purpose |
 |---|---|
-| [current-status.md](current-status.md) | What is done vs pending across all workstreams |
-| [roadmap.md](roadmap.md) | Implementation phases 0–8 (repo init through launch) |
+| [current-status.md](current-status.md) | What is done vs pending across both workstreams |
+| [roadmap_screening.md](roadmap_screening.md) | **Screening** — assessment, scoring, results, booking (phases 0–8) |
+| [roadmap_marketing.md](roadmap_marketing.md) | **Marketing** — landing, Bridge Map, site pages |
 | [architecture.md](architecture.md) | Frontend/backend split, API routes, data model summary |
-| [design-system.md](design-system.md) | Visual tokens, charts, assets — summary with pointers |
-| [ORGANIZATION.md](ORGANIZATION.md) | Pipeline vs Bridge Hub — separate repos and Cursor windows |
+| [design-system.md](design-system.md) | Screening visual tokens — summary with pointers |
+| [marketing/design-system.md](marketing/design-system.md) | Marketing visual tokens (separate aesthetic) |
+| [ORGANIZATION.md](ORGANIZATION.md) | Pipeline vs Bridge Hub — repos and Cursor windows |
 
 ---
 
@@ -152,7 +157,7 @@ Women aged 28–45, global English audience. Overwhelmed, carrying unidentified 
 2. [design-system.md](design-system.md) then [specs/cursor-guide/DESIGN_SYSTEM.md](../specs/cursor-guide/DESIGN_SYSTEM.md)
 3. [architecture.md](architecture.md) then [specs/cursor-guide/ARCHITECTURE.md](../specs/cursor-guide/ARCHITECTURE.md)
 4. [specs/chat-03/chat-03-scoring-engine-pseudocode-v2.md](../specs/chat-03/chat-03-scoring-engine-pseudocode-v2.md)
-5. [roadmap.md](roadmap.md) — follow build phases in order
+5. [roadmap_screening.md](roadmap_screening.md) — follow screening build phases in order
 
 ---
 

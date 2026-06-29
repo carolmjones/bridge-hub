@@ -1,0 +1,32 @@
+---
+description: Screening app workstream — questionnaire, scoring, API, Supabase, PDF
+globs: app/api/**,app/assessment/**,app/begin/**,app/save/**,app/results/**,app/book/**,app/confirmed/**,app/resume/**,app/expired/**,lib/scoring/**,lib/supabase/**,lib/ai/**,lib/pdf/**,specs/**,docs/screening/**,docs/roadmap_screening.md
+alwaysApply: false
+---
+
+# Screening workstream
+
+You are building the **screening app** — questionnaire, scoring, results, booking, PDF.
+
+## Before building
+
+1. Run **bridge-hub-onboard** skill (unless full context already).
+2. Use [docs/roadmap_screening.md](docs/roadmap_screening.md) for build phase checklist.
+3. Use [specs/cursor-guide/FILE_OVERVIEW.md](specs/cursor-guide/FILE_OVERVIEW.md) for authoritative specs.
+4. Locked decisions in `specs/cursor-guide/` are final.
+
+- Scoring, AI (OpenRouter), and PDF generation **server-side only**
+- PDF on booking confirmation only — never before
+- Assessment forward-only — auto-save every answer
+- Supabase EU. Service role never in client components
+
+## Must not
+
+- Edit `app/(marketing)/` or `components/marketing/` unless explicitly coordinating
+- Import marketing Framer Motion components into screening flows
+
+## Copy
+
+- Disclaimer on every screen
+- Client Layer 2: `specs/chat-05/chat-05-layer2-user-facing-v1.md` only
+- Therapist Layer 2: `specs/chat-03/chat-03-layer2-content-library-v2.md` only

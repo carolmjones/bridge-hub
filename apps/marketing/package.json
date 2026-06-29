@@ -1,0 +1,11 @@
+{
+  "name": "@bridge-hub/marketing",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "DOTENV_CONFIG_PATH=../../.env.bridgehub node -r dotenv/config ../../node_modules/.bin/next dev -p 3000",
+    "build": "next build",
+    "start": "DOTENV_CONFIG_PATH=../../.env.bridgehub node -r dotenv/config ../../node_modules/.bin/next start -p 3000",
+    "lint": "next lint"
+  }
+}

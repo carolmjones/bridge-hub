@@ -1,68 +1,55 @@
 # Where Bridge Hub files live
 
-How this project relates to **pipeline** and where to work on each.
+Marketing and screening share **one repo** (`~/bridge-hub`). Pipeline is separate.
 
 ---
 
-## Two separate projects, two Cursor windows
+## Projects
 
 | Project | Purpose | Folder | GitHub |
 |---------|---------|--------|--------|
-| **Bridge Hub** | Trauma-informed online screening tool | `~/bridge-hub` | `carolmjones/bridge-hub` (private) |
-| **Pipeline** | Instagram content production (agents, reels, carousels) | `~/pipeline` | `carolmjones/pipeline` |
-
-Open **separate Cursor windows** for each — do not mix in one workspace.
-
-| Task | Open in Cursor |
-|------|----------------|
-| Bridge Hub app, Supabase, scoring, PDF | **File → Open Folder → `~/bridge-hub`** |
-| Reels, Pulse, Vera, Ada, LobsterBoard | **File → Open Folder → `~/pipeline`** |
+| **Bridge Hub** | Marketing site + screening app + API | `~/bridge-hub` | `carolmjones/bridge-hub` |
+| **Pipeline** | Instagram content production | `~/pipeline` | `carolmjones/pipeline` |
+| **caroline-jones-website** | Retired — redirect only | `~/caroline-jones-website` | — |
 
 ---
 
-## Bridge Hub repo layout
+## Two Cursor windows on bridge-hub
+
+| Window | Work on | Onboard skill |
+|--------|---------|---------------|
+| **Bridge Hub — Marketing** | Landing, Bridge Map, About, `/free-class` | `bridge-hub-marketing-onboard` |
+| **Bridge Hub — Screening** | Questionnaire, scoring, results, PDF, `app/api/` | `bridge-hub-onboard` |
+
+Open **File → Open Folder → `~/bridge-hub`** in each window.
+
+---
+
+## Repo layout
 
 ```
 bridge-hub/
-├── .cursor/
-│   ├── rules/bridge-hub.mdc           ← always-on AI context
-│   └── skills/bridge-hub-onboard/       ← run at session start
-├── docs/                                ← synthesized docs (start here)
-├── specs/
-│   ├── cursor-guide/                    ← START_HERE, ARCHITECTURE, etc.
-│   ├── chat-03/                         ← scoring (v2 only)
-│   ├── chat-04/                         ← UX and wireframes
-│   ├── chat-05/                         ← copy and sample report
-│   ├── master-brief/
-│   └── assets/                          ← logos, backgrounds
-├── app/                                 ← (future) Next.js
-├── lib/                                 ← (future) scoring, content
-└── components/                          ← (future) UI and PDF
+├── apps/marketing/       ← marketing site (Vercel deploy #2, :3000)
+├── app/                  ← screening routes + API (:3001)
+├── components/           ← screening UI
+├── docs/
+│   roadmap_marketing.md
+│   roadmap_screening.md
+│   marketing/            ← design system, brand
+│   screening/
+├── specs/                ← screening specs only
+└── lib/                  ← scoring, supabase (screening only)
 ```
 
-**Single source of truth:** this repo. Commit and push from here.
+See [integration-boundaries.md](integration-boundaries.md).
 
 ---
 
-## Archive copies (do not edit for build work)
+## Funnel
 
-| Location | Notes |
-|----------|-------|
-| `~/Documents/Online Assessment/` | Original planning folder. Duplicates of specs now in `specs/`. |
-| `~/Desktop/Application Design/` | Early PDFs and docx. Unique files may be copied to `specs/reference/` later. |
-
-Edits for the build belong in `~/bridge-hub`, then git commit + push.
-
----
-
-## AI onboarding in Cursor
-
-When you open `~/bridge-hub` in Cursor:
-
-- **Rule:** `.cursor/rules/bridge-hub.mdc` applies automatically.
-- **Skill:** Ask the agent to run **bridge-hub-onboard** at the start of a new session, or say: "Onboard to Bridge Hub."
-
-See also [AGENTS.md](../AGENTS.md) at repo root.
+```
+Instagram (Pipeline) → Marketing pages (/) → /begin → Screening → Results → Clarity Call
+```
 
 ---
 

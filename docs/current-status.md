@@ -1,7 +1,7 @@
 # The Bridge Hub — Current Status
 
 > Honest snapshot of planning and implementation progress.
-> Reconciled against git history and [roadmap.md](roadmap.md).
+> Reconciled against git history and [roadmap_screening.md](roadmap_screening.md).
 > Last updated: June 2026
 
 ---
@@ -11,6 +11,8 @@
 **Planning is substantially complete** across workstreams Chat 02–06. Specifications, copy, scoring logic, UX wireframes, and design tokens are build-ready.
 
 **Implementation:** Phases 0–4 are complete in code. Supabase schema is migrated; local smoke test passes 19/19 checks.
+
+**Marketing (June 2026):** Phase 1 scaffold shipped — `app/(marketing)/` serves `/` and `/bridge-map` (placeholders). Screening unchanged at `/begin`, `/assessment`, `/api/*`. See [roadmap_marketing.md](roadmap_marketing.md).
 
 **Production (Vercel):** Live at https://bridge-hub-indol.vercel.app — set `OPENROUTER_API_KEY` on Vercel for S6 AI. Results-screen AI uses **`google/gemini-2.5-flash`** (hardcoded in `lib/ai/touchpoint-ai.ts`); `OPENROUTER_MODEL` applies to future report/PDF AI only.
 
@@ -29,7 +31,7 @@
 | 4 — Results (S6) | **Complete** | Touchpoint 1 UI, Flash AI (7 calls), compiled overview, clinical language rule |
 | 5–8 | Not started | Booking, PDF, therapist dashboard, email, launch |
 
-**Authoritative checklist:** [roadmap.md](roadmap.md)
+**Authoritative checklists:** [roadmap_screening.md](roadmap_screening.md) (assessment funnel) · [roadmap_marketing.md](roadmap_marketing.md) (website pages)
 
 ---
 
@@ -43,7 +45,8 @@ npm run db:verify                # Supabase tables + storage bucket
 
 | Route | Screen | Status |
 |-------|--------|--------|
-| `/` | S1 Landing | Working |
+| `/` | Marketing landing | Placeholder (marketing workstream) |
+| `/bridge-map` | Bridge Map | Placeholder (marketing workstream) |
 | `/begin` | S2 What to expect | Working |
 | `/save` | S3 Email capture | Working |
 | `/assessment` | S5 Questions | Working (auth required) |
@@ -94,7 +97,7 @@ See [README.md](../README.md) and [scripts/sync-production.mjs](../scripts/sync-
 
 ## Stale documentation warnings
 
-Trust file content, git history, and [roadmap.md](roadmap.md) over older checkboxes.
+Trust file content, git history, and [roadmap_screening.md](roadmap_screening.md) over older checkboxes.
 
 | Stale doc says | Actual state |
 |----------------|--------------|
@@ -107,4 +110,5 @@ Trust file content, git history, and [roadmap.md](roadmap.md) over older checkbo
 
 ## Next step
 
-Continue **Phase 5** per [roadmap.md](roadmap.md): `/book` + Cal.com embed, booking webhook, Nervous System Map PDF.
+- **Screening:** Continue **Phase 5** per [roadmap_screening.md](roadmap_screening.md): `/book` + Cal.com embed, booking webhook, Nervous System Map PDF.
+- **Marketing:** Continue **Phase 2** per [roadmap_marketing.md](roadmap_marketing.md): design port landing + Bridge Map.

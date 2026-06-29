@@ -1,37 +1,14 @@
 ---
 description: Core context for The Bridge Hub screening app — locked decisions and non-negotiable rules
-alwaysApply: true
+alwaysApply: false
 ---
 
-# The Bridge Hub — project rules
+# Deprecated — use path-scoped rules
 
-This workspace is **The Bridge Hub** (`~/bridge-hub`), not the Caroline Pipeline (`~/pipeline`).
+This file is superseded by:
 
-## Before building anything
+- [bridge-hub-core.mdc](bridge-hub-core.mdc) — always-on router
+- [marketing.mdc](marketing.mdc) — marketing paths
+- [screening.mdc](screening.mdc) — screening paths
 
-1. Read [docs/README.md](docs/README.md) for orientation.
-2. Use [specs/cursor-guide/FILE_OVERVIEW.md](specs/cursor-guide/FILE_OVERVIEW.md) to find the authoritative spec for your task.
-3. Locked decisions in `specs/cursor-guide/` are final — do not second-guess without explicit approval from Caroline.
-
-## Non-negotiable architecture
-
-- Next.js 14 App Router monolith on Vercel. No separate backend repo.
-- Supabase EU region. Magic link auth. No passwords.
-- Scoring, AI (OpenRouter), and PDF generation run **server-side only**.
-- PDF generates on **booking confirmation (S8) only** — never before.
-- Assessment is **forward-only** — no back button. Auto-save every answer.
-
-## Non-negotiable copy
-
-- Disclaimer on every screen: "This is a screening tool, not a clinical diagnosis."
-- No clinical labels or diagnostic language in client-facing text.
-- Client report Layer 2: `specs/chat-05/chat-05-layer2-user-facing-v1.md` only.
-- Therapist Layer 2: `specs/chat-03/chat-03-layer2-content-library-v2.md` only. Never mix.
-
-## Code style
-
-Solo builder project. Prefer clear, readable code over clever abstractions. Match existing conventions when code exists; follow specs when starting new modules.
-
-## New session
-
-Run the **bridge-hub-onboard** skill unless you already have full context from the current conversation.
+Run **bridge-hub-onboard** for screening work or **bridge-hub-marketing-onboard** for marketing work.

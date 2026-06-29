@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  .disclaimer {
+    @apply text-center font-sans text-label text-soft-ink/70;
+  }
+}

@@ -1,20 +1,32 @@
 # Agent onboarding — The Bridge Hub
 
-Run the **bridge-hub-onboard** skill at the start of every new session unless you already have full context from the current conversation.
+Two workstreams, one repo. Pick the right skill for your Cursor window.
 
-Skill location: [.cursor/skills/bridge-hub-onboard/SKILL.md](.cursor/skills/bridge-hub-onboard/SKILL.md)
+## Which skill?
 
-## Quick read order
+| Cursor window | First message | Skill |
+|---------------|---------------|-------|
+| **Bridge Hub — Marketing** | *Onboard to Bridge Hub marketing* | [bridge-hub-marketing-onboard](.cursor/skills/bridge-hub-marketing-onboard/SKILL.md) |
+| **Bridge Hub — Screening** | *Onboard to Bridge Hub* | [bridge-hub-onboard](.cursor/skills/bridge-hub-onboard/SKILL.md) |
 
-1. [docs/README.md](docs/README.md) — project orientation
-2. [docs/current-status.md](docs/current-status.md) — what is done vs pending
-3. [docs/ORGANIZATION.md](docs/ORGANIZATION.md) — pipeline vs bridge-hub (separate repos)
-4. [specs/cursor-guide/START_HERE.md](specs/cursor-guide/START_HERE.md) — locked decisions
-5. [specs/cursor-guide/FILE_OVERVIEW.md](specs/cursor-guide/FILE_OVERVIEW.md) — which spec file to use per task
+## Marketing quick read
 
-For UI work, also read [specs/cursor-guide/DESIGN_SYSTEM.md](specs/cursor-guide/DESIGN_SYSTEM.md).
-For copy work, also read [specs/cursor-guide/COPY_REFERENCE.md](specs/cursor-guide/COPY_REFERENCE.md).
+1. [docs/marketing/README.md](docs/marketing/README.md) — start here
+2. [docs/integration-boundaries.md](docs/integration-boundaries.md)
 
-All locked decisions in the specs are final. Do not second-guess them without explicit approval.
+## Screening quick read
+
+1. [docs/screening/README.md](docs/screening/README.md) — start here
+2. [docs/current-status.md](docs/current-status.md)
+3. [specs/cursor-guide/START_HERE.md](specs/cursor-guide/START_HERE.md)
+4. [specs/cursor-guide/FILE_OVERVIEW.md](specs/cursor-guide/FILE_OVERVIEW.md)
+
+## Rules
+
+- [bridge-hub-core.mdc](.cursor/rules/bridge-hub-core.mdc) — always on
+- [marketing.mdc](.cursor/rules/marketing.mdc) — when editing marketing paths
+- [screening.mdc](.cursor/rules/screening.mdc) — when editing screening paths
 
 This repo is **not** the Caroline Pipeline (`~/pipeline`).
+
+All marketing work — docs, copy, design prototypes — lives in **`~/bridge-hub`**.

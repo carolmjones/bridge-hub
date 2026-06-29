@@ -20,7 +20,7 @@ Trauma-informed online psychological screening tool for women aged 28–45. Five
 ## Onboarding checklist
 
 ```
-- [ ] Read docs/README.md
+- [ ] Read docs/screening/README.md (index — then roadmap)
 - [ ] Read docs/current-status.md          ← what's done vs pending
 - [ ] Read specs/cursor-guide/START_HERE.md ← locked decisions
 - [ ] Read specs/cursor-guide/FILE_OVERVIEW.md ← which spec to use
@@ -48,7 +48,7 @@ Trauma-informed online psychological screening tool for women aged 28–45. Five
 | Scoring engine | [specs/chat-03/chat-03-scoring-engine-pseudocode-v2.md](../../specs/chat-03/chat-03-scoring-engine-pseudocode-v2.md) + [specs/chat-03/chat-03-phase2-normative-data-v2.md](../../specs/chat-03/chat-03-phase2-normative-data-v2.md) |
 | Copy / client report | [specs/cursor-guide/COPY_REFERENCE.md](../../specs/cursor-guide/COPY_REFERENCE.md) + relevant file from `specs/chat-05/` |
 | Therapist briefing | [specs/chat-05/chat-05-therapist-briefing-v1.md](../../specs/chat-05/chat-05-therapist-briefing-v1.md) + [specs/chat-03/chat-03-layer2-content-library-v2.md](../../specs/chat-03/chat-03-layer2-content-library-v2.md) |
-| What to build next | [docs/roadmap.md](../../docs/roadmap.md) |
+| What to build next | [docs/roadmap_screening.md](../../docs/roadmap_screening.md) |
 | Pipeline vs Bridge Hub confusion | [docs/ORGANIZATION.md](../../docs/ORGANIZATION.md) |
 
 ### 3. Live verification (always)
@@ -67,7 +67,8 @@ If git shows changes not reflected in `docs/current-status.md`, mention the gap 
 | Doc | Purpose |
 |-----|---------|
 | `docs/current-status.md` | What planning is done vs pending |
-| `docs/roadmap.md` | Implementation phases 0–8 |
+| `docs/roadmap_screening.md` | Screening build phases 0–8 (assessment → launch) |
+| `docs/roadmap_marketing.md` | Marketing pages — separate workstream |
 | `docs/README.md`, `docs/architecture.md` | Synthesized reference — points to full specs |
 | `specs/cursor-guide/` | Authoritative locked decisions for build |
 | `specs/chat-03/` through `specs/chat-05/` | Workstream specs — use highest version only |

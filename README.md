@@ -2,7 +2,7 @@
 
 Trauma-informed online psychological screening tool for women aged 28–45.
 
-**Docs:** [docs/README.md](docs/README.md) · **Build plan:** [docs/roadmap.md](docs/roadmap.md)
+**Docs:** [docs/README.md](docs/README.md) · **Screening:** [docs/roadmap_screening.md](docs/roadmap_screening.md) · **Marketing:** [docs/roadmap_marketing.md](docs/roadmap_marketing.md)
 
 ## Stack
 
@@ -10,16 +10,18 @@ Next.js 14 (App Router) · Tailwind CSS · Supabase (EU) · Vercel
 
 ## Local development
 
+Two apps, one repo:
+
 ```bash
 npm install
-# Edit .env.bridgehub with Supabase + Resend keys
-# Run supabase/migrations/001_initial_schema.sql in Supabase SQL Editor (once)
-npm run dev
+# Edit .env.bridgehub — see .env.example (MARKETING_URL :3000, SCREENING_URL :3001)
+npm run dev:marketing   # http://localhost:3000 — landing, Bridge Map
+npm run dev:screening   # http://localhost:3001 — assessment, results, API
 ```
 
-Environment variables load from `.env.bridgehub` automatically. Add the same names in **Vercel → Environment Variables** for production.
+Environment variables load from `.env.bridgehub`. Set the same names on **both** Vercel projects — see [docs/infra-decision.md](docs/infra-decision.md).
 
-**Production URL:** Find yours in Vercel → Deployments → Production → Visit. Do **not** use `bridge-hub.vercel.app` — that subdomain belongs to another project. Set `NEXT_PUBLIC_APP_URL` to your actual `*.vercel.app` URL (or custom domain).
+**Production:** Two Vercel deploys — screening (repo root) and marketing (`apps/marketing`). Set `NEXT_PUBLIC_APP_URL` to the screening URL; set `NEXT_PUBLIC_MARKETING_URL` and `NEXT_PUBLIC_SCREENING_URL` on both.
 
 ```bash
 # After first successful Vercel deploy (optional — needs tokens in .env.bridgehub)
@@ -38,12 +40,13 @@ See `.env.example` for `VERCEL_TOKEN`, `VERCEL_PROJECT_ID`, and `SUPABASE_ACCESS
 | `GET /api/session/resume` | Load active session + responses (auth required) |
 | `POST /api/results/generate-ai-content` | S6 — OpenRouter synthesis + row observations (cached) |
 
-Open [http://localhost:3000](http://localhost:3000).
+Open **http://localhost:3001** for screening (`/begin`, `/assessment`, …). Marketing site: **http://localhost:3000**.
 
 ## Project layout
 
 ```
-app/           Next.js routes
+apps/marketing/  Marketing site (separate Vercel deploy)
+app/             Screening routes + API
 components/    UI and PDF components
 lib/           Scoring, content, Supabase clients, API helpers
 specs/         Authoritative build specifications
