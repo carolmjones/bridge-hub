@@ -27,7 +27,9 @@ Marketing and screening share **one git repo** — **two Vercel projects**. No s
 | `NEXT_PUBLIC_MARKETING_URL` | This deploy's URL (`http://localhost:3000` locally) |
 | `NEXT_PUBLIC_SCREENING_URL` | Screening app URL (`http://localhost:3001` locally) — used for CTAs |
 
-Optional later: `NEXT_PUBLIC_CAL_EMBED_URL`, `KIT_API_KEY` for `/free-class`. Screening secrets (Supabase, etc.) live on the screening Vercel project only — see [roadmap_screening.md](roadmap_screening.md) Phase 0.
+Optional later: `NEXT_PUBLIC_CAL_EMBED_URL`, `KIT_API_KEY` for `/free-class`. Screening also needs Supabase keys unless you add server features later.
+
+See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 ---
 
@@ -93,9 +95,10 @@ Optional later: `NEXT_PUBLIC_CAL_EMBED_URL`, `KIT_API_KEY` for `/free-class`. Sc
 
 ### Phase 2 — Design port + shared components (current)
 
-- [ ] Framer Motion utilities (`lib/marketing/motion.ts`)
+- [x] Framer Motion utilities (`apps/marketing/lib/marketing/motion.ts`)
 - [ ] Reusable section components (spotlight card, FAQ, carousel, synapse hero)
-- [ ] Landing from [apps/marketing/design/handoff/design_files/](../apps/marketing/design/handoff/design_files/)
+- [x] Landing hero + announcement + transformation vision (in progress)
+- [ ] Landing remaining sections from handoff
 - [ ] Bridge Map from [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md)
 
 ### Phase 3 — Core funnel pages
