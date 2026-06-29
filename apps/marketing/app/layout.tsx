@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { MarketingFooter } from "@/components/marketing/Footer";
-import { MarketingNav } from "@/components/marketing/Nav";
+import { MarketingHeader } from "@/components/marketing/MarketingHeader";
 import "./globals.css";
 
 const cormorant = Cormorant_Garamond({
@@ -40,7 +40,7 @@ export default function RootLayout({
     <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
       <body>
         <div className="flex min-h-dvh flex-col bg-warm-paper font-sans text-soft-ink">
-          <MarketingNav />
+          <MarketingHeader />
           <main className="flex-1">{children}</main>
           <MarketingFooter />
         </div>

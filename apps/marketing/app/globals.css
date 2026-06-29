@@ -6,6 +6,10 @@
   html {
     @apply antialiased;
   }
+
+  body {
+    @apply bg-warm-paper text-soft-ink;
+  }
 }
 
 @layer components {

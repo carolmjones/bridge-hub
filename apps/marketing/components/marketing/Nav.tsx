@@ -20,8 +20,8 @@ export function MarketingNav() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 flex h-16 items-center justify-between border-b border-line-stone bg-cream px-6">
-        <Link href={MARKETING_ROUTES.home} className="flex items-center">
+      <header className="sticky top-0 z-50 grid h-16 grid-cols-[1fr_auto_1fr] items-center border-b border-line-stone bg-cream px-6">
+        <Link href={MARKETING_ROUTES.home} className="flex items-center justify-self-start">
           <Image
             src="/images/logo.png"
             alt="The Bridge Hub"
@@ -32,7 +32,10 @@ export function MarketingNav() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
+        <nav
+          className="hidden items-center justify-center gap-8 md:flex"
+          aria-label="Main"
+        >
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
@@ -46,7 +49,7 @@ export function MarketingNav() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-self-end gap-3">
           {!hideNavCta && (
             <Link
               href={MARKETING_ROUTES.freeClass}

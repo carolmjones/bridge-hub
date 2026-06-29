@@ -2,12 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 import { buttonHover, fadeUp, staggerContainer } from "@/lib/marketing/motion";
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    setReady(true);
+  }, []);
+
+  const animate = ready && !reduceMotion;
 
   return (
     <section className="relative overflow-hidden bg-cream">
@@ -37,13 +45,13 @@ export function Hero() {
         <motion.div
           className="flex flex-1 flex-col items-start justify-center px-6 py-[clamp(60px,7vw,96px)] md:px-16"
           style={{ flexBasis: "440px" }}
-          variants={reduceMotion ? undefined : staggerContainer}
-          initial={reduceMotion ? false : "hidden"}
-          animate={reduceMotion ? undefined : "visible"}
+          variants={animate ? staggerContainer : undefined}
+          initial={false}
+          animate={animate ? "visible" : false}
         >
           <motion.span
             variants={fadeUp}
-            className="mb-7 inline-flex items-center gap-2 rounded-full border border-line-stone bg-white/50 px-4 py-1.5 font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-[#6B7060]"
+            className="mb-7 inline-flex items-center gap-[9px] rounded-full border border-line-stone bg-white/50 py-[7px] pl-[11px] pr-[15px] font-sans text-[11px] font-medium uppercase tracking-[0.12em] text-[#6B7060]"
           >
             <span
               className="block h-[9px] w-[18px] rounded-b-[60%] border-b-[1.5px] border-[#8E9A7C]"
@@ -73,7 +81,7 @@ export function Hero() {
             variants={fadeUp}
             className="flex flex-col items-start gap-4"
           >
-            <motion.div whileHover={reduceMotion ? undefined : buttonHover}>
+            <motion.div whileHover={animate ? buttonHover : undefined}>
               <Link
                 href={MARKETING_ROUTES.freeClass}
                 className="inline-flex h-14 items-center justify-center gap-2.5 rounded-[14px] bg-btn-primary px-8 font-sans text-[15px] font-medium text-btn-text shadow-[0_16px_30px_-14px_rgba(53,66,56,0.7)] transition-shadow hover:shadow-[0_22px_40px_-14px_rgba(53,66,56,0.8)]"
@@ -109,10 +117,10 @@ export function Hero() {
             aria-label="A calm warm horizon at first light"
           >
             <Image
-              src="/images/desktop_landing-page-background-mqx21jt6.png"
+              src="/images/landing-hero-desktop.png"
               alt=""
               fill
-              className="object-cover"
+              className="object-cover object-center"
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
             />
