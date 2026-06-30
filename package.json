@@ -9,6 +9,7 @@
     "dev": "npm run dev:screening",
     "dev:screening": "DOTENV_CONFIG_PATH=.env.bridgehub node -r dotenv/config node_modules/.bin/next dev -p 3001",
     "dev:marketing": "npm run dev -w @bridge-hub/marketing",
+    "dev:marketing:clean": "npm run dev:clean -w @bridge-hub/marketing",
     "build": "npm run build:screening",
     "build:screening": "next build",
     "build:marketing": "npm run build -w @bridge-hub/marketing",

@@ -25,3 +25,30 @@ export const buttonHover = {
   y: -2,
   transition: { duration: 0.2, ease: easeOut },
 };
+
+export const fadeInRight: Variants = {
+  hidden: { opacity: 0, x: 28 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.9, ease: easeOut, delay: 0.15 },
+  },
+};
+
+export const glassCardIn: Variants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: (delay: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.85, ease: easeOut, delay },
+  }),
+};
+
+export const subtleFloat = {
+  y: [0, -7, 0],
+  transition: {
+    duration: 7,
+    ease: easeOut,
+    repeat: Infinity,
+  },
+};

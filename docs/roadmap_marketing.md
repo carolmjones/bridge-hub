@@ -50,7 +50,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 | # | Page | Route | Copy | Dev |
 |---|------|-------|------|-----|
-| 1 | Landing | `/` | Nearly done | In progress — hero, announcement, transformation vision, Daily Reality ported |
+| 1 | Landing | `/` | Nearly done | Design port complete — polish + copy sign-off |
 | 2 | Bridge Map | `/bridge-map` | Draft for review | Scaffold done — design port next |
 | 3 | Free class | `/free-class` | Not started | Not started |
 | 4 | Results | `/results` | Built | [Screening workstream](roadmap_screening.md) |
@@ -99,8 +99,15 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - [ ] Reusable section components (spotlight card, FAQ, carousel, synapse hero)
 - [x] Landing hero + announcement bar + transformation vision
 - [x] Landing Daily Reality section
+- [x] Landing Bridge Map CTA spotlight + Reassurance sections
+- [x] Landing Programme intro (timeline + quote callout)
+- [x] Landing Testimonials carousel
+- [x] Landing Founder section
+- [x] Landing Outcome pillars section
+- [x] Landing Missing piece + Phase breakdown sections
+- [x] Landing Outcomes, FAQ, Final CTA, and Still not sure sections
 - [x] Marketing header (announcement + nav), on-brand 404, dev watcher fixes (EMFILE)
-- [ ] Landing remaining sections from handoff (Bridge Map CTA next)
+- [x] Landing page sections from handoff (18 sections)
 - [ ] Bridge Map from [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md)
 
 ### Phase 3 — Core funnel pages
@@ -119,10 +126,8 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 ## Next actions
 
 1. Caroline reviews [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md)
-2. Port Bridge Map CTA spotlight section (dark aurora + glass steps panel)
-3. Port remaining landing sections from design prototype (Reassurance, Programme intro, testimonials, FAQ, final CTA)
-4. Port Bridge Map page from prototype + locked copy
-5. Build shared marketing components (spotlight card, FAQ, carousel)
+2. Port Bridge Map page from prototype + locked copy
+3. Build shared marketing components (spotlight card refactor, FAQ extract)
 
 *Copy in `apps/marketing/content/` is source of truth. No changes without Caroline's approval.*
 

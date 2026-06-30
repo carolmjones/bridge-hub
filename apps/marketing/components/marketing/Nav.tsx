@@ -20,7 +20,7 @@ export function MarketingNav() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 grid h-16 grid-cols-[1fr_auto_1fr] items-center border-b border-line-stone bg-cream px-6">
+      <header className="sticky top-0 z-50 flex h-16 items-center border-b border-line-stone bg-cream px-6 md:grid md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
         <Link href={MARKETING_ROUTES.home} className="flex items-center justify-self-start">
           <Image
             src="/images/logo.png"
@@ -49,7 +49,7 @@ export function MarketingNav() {
           ))}
         </nav>
 
-        <div className="flex items-center justify-self-end gap-3">
+        <div className="ml-auto flex items-center justify-end gap-3 md:ml-0 md:w-full md:justify-self-stretch">
           {!hideNavCta && (
             <Link
               href={MARKETING_ROUTES.freeClass}

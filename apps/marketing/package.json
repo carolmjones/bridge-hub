@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "WATCHPACK_POLLING=true DOTENV_CONFIG_PATH=../../.env.bridgehub node -r dotenv/config ../../node_modules/.bin/next dev -p 3000",
+    "dev:clean": "rm -rf .next && npm run dev",
     "build": "next build",
     "start": "DOTENV_CONFIG_PATH=../../.env.bridgehub node -r dotenv/config ../../node_modules/.bin/next start -p 3000",
     "lint": "next lint"
