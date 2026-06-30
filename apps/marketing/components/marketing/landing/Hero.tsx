@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 import {
@@ -29,53 +29,47 @@ function doorProximityGlow(mx: number, my: number): number {
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLElement>(null);
   const [ready, setReady] = useState(false);
   const [doorGlow, setDoorGlow] = useState(0);
+  const [pointer, setPointer] = useState(DOOR_HOTSPOT);
 
   useEffect(() => {
     setReady(true);
   }, []);
 
-  useEffect(() => {
-    if (reduceMotion) return;
+  const handleHeroPointerMove = useCallback(
+    (event: React.PointerEvent<HTMLElement>) => {
+      if (reduceMotion === true || window.innerWidth < 768) return;
 
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const onPointerMove = (event: PointerEvent) => {
-      if (window.innerWidth < 768) return;
-
-      const rect = section.getBoundingClientRect();
+      const rect = event.currentTarget.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width;
       const y = (event.clientY - rect.top) / rect.height;
+      const strength = doorProximityGlow(x, y);
 
-      setDoorGlow(doorProximityGlow(x, y));
-    };
+      setPointer({ x, y });
+      setDoorGlow(strength);
+    },
+    [reduceMotion],
+  );
 
-    const onPointerLeave = () => {
-      setDoorGlow(0);
-    };
+  const handleHeroPointerLeave = useCallback(() => {
+    setDoorGlow(0);
+    setPointer(DOOR_HOTSPOT);
+  }, []);
 
-    section.addEventListener("pointermove", onPointerMove);
-    section.addEventListener("pointerleave", onPointerLeave);
+  const animate = ready && reduceMotion !== true;
 
-    return () => {
-      section.removeEventListener("pointermove", onPointerMove);
-      section.removeEventListener("pointerleave", onPointerLeave);
-    };
-  }, [reduceMotion]);
-
-  const animate = ready && !reduceMotion;
-
-  const doorOpacity = doorGlow;
-  const coreOpacity = doorGlow * 0.9;
-  const scrimOpacity = doorGlow * 0.75;
+  const glowX = DOOR_HOTSPOT.x + (pointer.x - DOOR_HOTSPOT.x) * doorGlow * 0.35;
+  const glowY = DOOR_HOTSPOT.y + (pointer.y - DOOR_HOTSPOT.y) * doorGlow * 0.35;
+  const doorOpacity = 0.06 + doorGlow * 0.94;
+  const coreOpacity = doorGlow * 0.95;
+  const scrimOpacity = doorGlow * 0.8;
 
   return (
     <section
-      ref={sectionRef}
       className="relative isolate overflow-hidden bg-deep-card"
+      onPointerMove={handleHeroPointerMove}
+      onPointerLeave={handleHeroPointerLeave}
     >
       <div className="absolute inset-0" aria-hidden>
         <div className="absolute inset-0 md:hidden">
@@ -104,32 +98,34 @@ export function Hero() {
 
           {/* Desktop — door light on the arch image (before scrims) */}
           <div className="pointer-events-none absolute inset-0 mix-blend-screen">
-            <div
-              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition-opacity duration-500 ease-out"
+            <motion.div
+              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{
                 left: `${DOOR_HOTSPOT.x * 100}%`,
                 top: `${DOOR_HOTSPOT.y * 100}%`,
                 width: 380,
                 height: 460,
-                opacity: doorOpacity,
                 background:
                   "radial-gradient(ellipse, rgba(255,225,165,1) 0%, rgba(240,195,125,0.55) 32%, rgba(210,165,95,0.15) 55%, transparent 74%)",
                 filter: "blur(16px)",
               }}
+              animate={{ opacity: doorOpacity }}
+              transition={{ duration: 0.65, ease: easeOut }}
               aria-hidden
             />
-            <div
-              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition-opacity duration-400 ease-out"
+            <motion.div
+              className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
               style={{
-                left: `${DOOR_HOTSPOT.x * 100}%`,
-                top: `${DOOR_HOTSPOT.y * 100}%`,
-                width: 120 + doorGlow * 80,
-                height: 160 + doorGlow * 60,
-                opacity: coreOpacity,
+                left: `${glowX * 100}%`,
+                top: `${glowY * 100}%`,
+                width: 120 + doorGlow * 100,
+                height: 160 + doorGlow * 70,
                 background:
                   "radial-gradient(ellipse, rgba(255,245,215,1) 0%, rgba(255,220,160,0.7) 38%, transparent 65%)",
                 filter: "blur(8px)",
               }}
+              animate={{ opacity: coreOpacity }}
+              transition={{ duration: 0.75, ease: easeOut }}
               aria-hidden
             />
           </div>
@@ -142,18 +138,19 @@ export function Hero() {
 
         {/* Desktop — extra punch through scrims at the arch */}
         <div className="pointer-events-none absolute inset-0 hidden md:block">
-          <div
-            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full mix-blend-soft-light transition-opacity duration-500 ease-out"
+          <motion.div
+            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full mix-blend-soft-light"
             style={{
-              left: `${DOOR_HOTSPOT.x * 100}%`,
-              top: `${DOOR_HOTSPOT.y * 100}%`,
-              width: 340,
-              height: 420,
-              opacity: scrimOpacity,
+              left: `${glowX * 100}%`,
+              top: `${glowY * 100}%`,
+              width: 340 + doorGlow * 40,
+              height: 420 + doorGlow * 30,
               background:
                 "radial-gradient(ellipse, rgba(255,235,190,0.85) 0%, rgba(225,185,125,0.35) 48%, transparent 72%)",
               filter: "blur(20px)",
             }}
+            animate={{ opacity: scrimOpacity }}
+            transition={{ duration: 0.7, ease: easeOut }}
             aria-hidden
           />
         </div>

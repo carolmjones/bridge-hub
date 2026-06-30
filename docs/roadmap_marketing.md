@@ -50,7 +50,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 | # | Page | Route | Copy | Dev |
 |---|------|-------|------|-----|
-| 1 | Landing | `/` | Nearly done | Design port complete — polish + copy sign-off |
+| 1 | Landing | `/` | Nearly done | Design port complete — polish + copy sign-off (hero door-glow + section backgrounds in place) |
 | 2 | Bridge Map | `/bridge-map` | Draft for review | Scaffold done — design port next |
 | 3 | Free class | `/free-class` | Not started | Not started |
 | 4 | Results | `/results` | Built | [Screening workstream](roadmap_screening.md) |
@@ -97,16 +97,16 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 - [x] Framer Motion utilities (`apps/marketing/lib/marketing/motion.ts`)
 - [ ] Reusable section components (spotlight card, FAQ, carousel, synapse hero)
-- [x] Landing hero + announcement bar + transformation vision
+- [x] Landing hero + announcement bar + transformation vision (desktop door-glow on archway)
 - [x] Landing Daily Reality section
 - [x] Landing Bridge Map CTA spotlight + Reassurance sections
-- [x] Landing Programme intro (timeline + quote callout)
-- [x] Landing Testimonials carousel
+- [x] Landing Programme intro (timeline + quote callout) — glassy quote card
+- [x] Landing Testimonials carousel — scenic background behind cards
 - [x] Landing Founder section
 - [x] Landing Outcome pillars section
 - [x] Landing Missing piece + Phase breakdown sections
-- [x] Landing Outcomes, FAQ, Final CTA, and Still not sure sections
-- [x] Marketing header (announcement + nav), on-brand 404, dev watcher fixes (EMFILE)
+- [x] Landing Outcomes, FAQ, Final CTA, and Still not sure sections (Final CTA has photo background)
+- [x] Marketing header (announcement + nav), on-brand 404, dev watcher fixes (EMFILE) — mobile menu button pinned right
 - [x] Landing page sections from handoff (18 sections)
 - [ ] Bridge Map from [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md)
 
