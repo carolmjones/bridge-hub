@@ -1,9 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 
 export function AnnouncementBar() {
+  const pathname = usePathname();
+  if (pathname === MARKETING_ROUTES.urgentSupport) return null;
+
   return (
     <div className="flex flex-wrap items-center justify-center gap-x-3.5 gap-y-1 bg-ink px-6 py-2.5 text-center">
       <p className="font-sans text-[12px] leading-relaxed text-cream/80">

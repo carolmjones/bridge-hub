@@ -17,11 +17,12 @@ export const MARKETING_ROUTES = {
   home: "/",
   bridgeMap: "/bridge-map",
   freeClass: "/free-class",
+  urgentSupport: "/urgent-support",
   about: "/about",
   workWithMe: "/work-with-me",
   discoveryCall: "/discovery-call",
   clarityCall: "/clarity-call",
   privacy: screeningUrl("/privacy"),
   terms: "/terms",
-  support: screeningUrl("/support"),
+  support: "/urgent-support",
 } as const;

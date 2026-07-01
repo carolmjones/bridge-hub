@@ -37,13 +37,13 @@ export function MarketingFooter() {
               href={MARKETING_ROUTES.support}
               className="font-sans text-[12px] text-glow-sage hover:text-cream"
             >
-              Get help now ↗
+              In Crisis?
             </Link>
           </div>
         </div>
         <p className="text-center font-sans text-[11px] leading-relaxed text-cream/25">
-          This is a screening tool, not a clinical diagnosis. © 2026 The Bridge
-          Hub. All rights reserved.
+          This is a screening tool, not a clinical diagnosis. © 2026
+          carolinejones.co. All rights reserved.
         </p>
       </div>
     </footer>
