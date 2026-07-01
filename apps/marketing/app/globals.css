@@ -8,7 +8,14 @@
   }
 
   body {
-    @apply bg-warm-paper text-soft-ink;
+    @apply bg-warm-paper font-sans text-soft-ink;
+  }
+
+  input,
+  button,
+  select,
+  textarea {
+    font: inherit;
   }
 }
 

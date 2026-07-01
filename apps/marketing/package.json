@@ -8,5 +8,8 @@
     "build": "next build",
     "start": "DOTENV_CONFIG_PATH=../../.env.bridgehub node -r dotenv/config ../../node_modules/.bin/next start -p 3000",
     "lint": "next lint"
+  },
+  "dependencies": {
+    "@mux/mux-player-react": "^3.13.0"
   }
 }

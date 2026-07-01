@@ -1,6 +1,6 @@
 # Marketing roadmap — website pages
 
-*Last updated: June 2026. Lives in `bridge-hub` repo — see [infra-decision.md](../infra-decision.md).*
+*Last updated: July 2026. Lives in `bridge-hub` repo — see [infra-decision.md](../infra-decision.md).*
 
 **Start at [marketing/README.md](marketing/README.md).** Visual spec: [marketing/design-system.md](marketing/design-system.md). Screening roadmap: [roadmap_screening.md](roadmap_screening.md).
 
@@ -26,8 +26,11 @@ Marketing and screening share **one git repo** — **two Vercel projects**. No s
 |----------|---------|
 | `NEXT_PUBLIC_MARKETING_URL` | This deploy's URL (`http://localhost:3000` locally) |
 | `NEXT_PUBLIC_SCREENING_URL` | Screening app URL (`http://localhost:3001` locally) — used for CTAs |
+| `NEXT_PUBLIC_MUX_PLAYBACK_ID` | Mux public playback ID for `/free-class` watch view (marketing deploy) |
+| `KIT_API_KEY` | Kit v4 API key — free class signup (`/api/free-class/subscribe`) |
+| `KIT_FREE_CLASS_FORM_ID` | Kit form ID for free class list |
 
-Optional later: `NEXT_PUBLIC_CAL_EMBED_URL`, `KIT_API_KEY` for `/free-class`. Supabase and API keys live on the **screening** Vercel project only — see [roadmap_screening.md](roadmap_screening.md) Phase 0.
+Supabase and other screening API keys live on the **screening** Vercel project only — see [roadmap_screening.md](roadmap_screening.md) Phase 0.
 
 See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
@@ -52,7 +55,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 |---|------|-------|------|-----|
 | 1 | Landing | `/` | Nearly done | Design port complete — polish + copy sign-off (hero door-glow + section backgrounds in place) |
 | 2 | Bridge Map | `/bridge-map` | Draft for review | Design port complete — hero + synapse canvas + founder, “This is for you”, dark “What happens next”, final CTA background |
-| 3 | Free class | `/free-class` | Not started | Not started |
+| 3 | Free class | `/free-class` | Draft from mockup | Landing + unlocked watch (Mux player, Kit signup, localStorage unlock); dev reset via `?reset=1` |
 | 4 | Results | `/results` | Built | [Screening workstream](roadmap_screening.md) |
 | 5 | Clarity Call | `/clarity-call` | Not started | Not started |
 | 6 | Booking confirmed | `/booking-confirmed` | Not started | Not started |
@@ -112,7 +115,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 ### Phase 3 — Core funnel pages
 
-- [ ] Free class (`/free-class`)
+- [x] Free class (`/free-class`)
 - [ ] Clarity Call + Discovery Call embeds
 - [ ] About, Work with Me
 
@@ -125,9 +128,11 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 ## Next actions
 
-1. Caroline reviews [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (sign-off + any final tweaks)
-2. Stabilise marketing dev cache issue (`dev:marketing:clean` when chunks go missing)
-3. Build shared marketing components (spotlight card refactor, FAQ extract)
+1. Upload free class video to Mux; set `NEXT_PUBLIC_MUX_PLAYBACK_ID` on marketing Vercel
+2. Set `KIT_API_KEY` + `KIT_FREE_CLASS_FORM_ID` on marketing Vercel (wired locally)
+3. Caroline reviews [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (sign-off + any final tweaks)
+4. Stabilise marketing dev cache issue (`npm run dev:marketing:clean` when chunks go missing)
+5. Build shared marketing components (spotlight card refactor, FAQ extract)
 
 *Copy in `apps/marketing/content/` is source of truth. No changes without Caroline's approval.*
 

@@ -16,7 +16,9 @@ const NAV_LINKS = [
 export function MarketingNav() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const hideNavCta = pathname === MARKETING_ROUTES.bridgeMap;
+  const hideNavCta =
+    pathname === MARKETING_ROUTES.bridgeMap ||
+    pathname === MARKETING_ROUTES.freeClass;
 
   return (
     <>
