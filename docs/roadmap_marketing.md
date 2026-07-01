@@ -51,7 +51,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 | # | Page | Route | Copy | Dev |
 |---|------|-------|------|-----|
 | 1 | Landing | `/` | Nearly done | Design port complete — polish + copy sign-off (hero door-glow + section backgrounds in place) |
-| 2 | Bridge Map | `/bridge-map` | Draft for review | Scaffold done — design port next |
+| 2 | Bridge Map | `/bridge-map` | Draft for review | Design port complete — hero + synapse canvas + founder, “This is for you”, dark “What happens next”, final CTA background |
 | 3 | Free class | `/free-class` | Not started | Not started |
 | 4 | Results | `/results` | Built | [Screening workstream](roadmap_screening.md) |
 | 5 | Clarity Call | `/clarity-call` | Not started | Not started |
@@ -108,7 +108,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - [x] Landing Outcomes, FAQ, Final CTA, and Still not sure sections (Final CTA has photo background)
 - [x] Marketing header (announcement + nav), on-brand 404, dev watcher fixes (EMFILE) — mobile menu button pinned right
 - [x] Landing page sections from handoff (18 sections)
-- [ ] Bridge Map from [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md)
+- [x] Bridge Map from [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (design port complete; copy still pending sign-off)
 
 ### Phase 3 — Core funnel pages
 
@@ -125,8 +125,8 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 ## Next actions
 
-1. Caroline reviews [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md)
-2. Port Bridge Map page from prototype + locked copy
+1. Caroline reviews [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (sign-off + any final tweaks)
+2. Stabilise marketing dev cache issue (`dev:marketing:clean` when chunks go missing)
 3. Build shared marketing components (spotlight card refactor, FAQ extract)
 
 *Copy in `apps/marketing/content/` is source of truth. No changes without Caroline's approval.*

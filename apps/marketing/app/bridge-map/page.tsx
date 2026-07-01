@@ -236,48 +236,96 @@ export default function BridgeMapPage() {
       </section>
 
       {/* THIS IS FOR YOU IF */}
-      <section className="border-t border-line-stone bg-cream px-6 py-[clamp(72px,9vw,104px)]">
-        <div className="mx-auto max-w-[960px]">
-          <div className="mx-auto max-w-[680px] text-center">
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-line-stone bg-white/55 px-4 py-1.5 font-sans text-[10px] font-medium uppercase tracking-[0.14em] text-[#6B7060]">
-              <span
-                className="h-[5px] w-[5px] rounded-full bg-glow-sage"
-                aria-hidden
-              />
-              This is for you
-            </span>
-            <h2 className="font-serif text-[clamp(32px,7vw,44px)] leading-[1.1] text-ink">
-              The Bridge Map may be useful if you...
-            </h2>
+      <section className="relative overflow-hidden border-t border-line-stone bg-cream px-6 py-[clamp(72px,9vw,104px)]">
+        <div
+          className="pointer-events-none absolute -left-[14%] top-[18%] h-[520px] w-[520px] rounded-full opacity-70"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(190,194,169,0.26), rgba(190,194,169,0) 68%)",
+            filter: "blur(46px)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -right-[16%] bottom-[6%] h-[560px] w-[560px] rounded-full opacity-70"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(218,206,191,0.18), rgba(218,206,191,0) 68%)",
+            filter: "blur(52px)",
+          }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 opacity-70"
+          style={{
+            backgroundImage:
+              "radial-gradient(rgba(35,40,36,0.05) 1px, transparent 1px)",
+            backgroundSize: "26px 26px",
+            maskImage: "linear-gradient(180deg, #000 0%, transparent 76%)",
+            WebkitMaskImage: "linear-gradient(180deg, #000 0%, transparent 76%)",
+          }}
+          aria-hidden
+        />
+
+        <div className="relative mx-auto max-w-[1040px]">
+          <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[minmax(0,420px)_minmax(0,1fr)] md:gap-10">
+            <div className="text-left">
+              <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-line-stone bg-white/55 px-4 py-1.5 font-sans text-[10px] font-medium uppercase tracking-[0.14em] text-[#6B7060]">
+                <span
+                  className="h-[5px] w-[5px] rounded-full bg-glow-sage"
+                  aria-hidden
+                />
+                This is for you
+              </span>
+              <h2 className="font-serif text-[clamp(32px,7vw,44px)] leading-[1.1] text-ink">
+                The Bridge Map may be useful if you...
+              </h2>
+            </div>
+
+            <p className="max-w-[720px] font-sans text-body-lg leading-[1.7] text-soft-ink md:pt-[42px]">
+              If any of this sounds familiar, understanding your own nervous
+              system pattern is likely to be a more useful starting point than
+              trying harder with approaches that were never matched to how your
+              body actually works.
+            </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-3 md:grid-cols-2">
+          <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
             {THIS_IS_FOR_YOU.map((item) => (
               <div
                 key={item}
-                className="flex items-start gap-3 rounded-2xl border border-line-stone bg-warm-paper px-5 py-4"
+                className="group relative overflow-hidden rounded-[22px] border border-line-stone bg-white/55 px-6 py-5 shadow-[0_18px_44px_-40px_rgba(35,40,36,0.35)] transition-transform duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_26px_56px_-40px_rgba(35,40,36,0.45)]"
+                style={{
+                  background:
+                    "linear-gradient(180deg, rgba(250,247,239,0.82), rgba(250,247,239,0.62))",
+                }}
               >
-                <span
-                  className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-glow-sage/15 text-[12px] text-[#6B7060]"
+                <div
+                  className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(circle, rgba(190,194,169,0.35), rgba(190,194,169,0) 70%)",
+                    filter: "blur(18px)",
+                  }}
                   aria-hidden
-                >
-                  ✓
-                </span>
-                <p className="font-sans text-sm leading-[1.65] text-soft-ink">
-                  {item}
-                </p>
+                />
+
+                <div className="relative flex items-start gap-4">
+                  <span
+                    className="mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-glow-sage/35 bg-gradient-to-br from-[#E7EAD7] to-glow-sage text-[14px] text-deep-card shadow-[0_10px_22px_-14px_rgba(142,154,124,0.9)]"
+                    aria-hidden
+                  >
+                    ✓
+                  </span>
+                  <p className="font-sans text-[15px] leading-[1.7] text-soft-ink">
+                    {item}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
 
-          <p className="mx-auto mt-10 max-w-[820px] font-sans text-body-lg text-soft-ink">
-            If any of this sounds familiar, understanding your own nervous
-            system pattern is likely to be a more useful starting point than
-            trying harder with approaches that were never matched to how your
-            body actually works.
-          </p>
-
-          <div className="mt-10 flex flex-col items-center gap-4">
+          <div className="mt-12 flex flex-col items-center gap-4">
             <MarketingPrimaryCta>Discover my profile — free</MarketingPrimaryCta>
           </div>
         </div>

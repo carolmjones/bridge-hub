@@ -1,13 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 /** Add your portrait at `public/images/bridge-map-founder.jpg` (4:5, ~800×1000px). */
 const PORTRAIT_SRC = "/images/bridge-map-founder.jpg";
 
 export function BridgeMapFounderPortrait() {
-  const [showImage, setShowImage] = useState(true);
+  const [showImage, setShowImage] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function checkPortrait() {
+      try {
+        const res = await fetch(PORTRAIT_SRC, { method: "HEAD" });
+        if (!cancelled) setShowImage(res.ok);
+      } catch {
+        if (!cancelled) setShowImage(false);
+      }
+    }
+
+    checkPortrait();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   return (
     <div className="relative">
@@ -29,6 +48,8 @@ export function BridgeMapFounderPortrait() {
             fill
             className="object-cover object-center"
             sizes="(max-width: 768px) 90vw, 380px"
+            quality={95}
+            unoptimized
             onError={() => setShowImage(false)}
           />
         ) : null}
