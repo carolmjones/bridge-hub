@@ -1,7 +1,9 @@
-import { config } from "dotenv";
 import { resolve } from "path";
 
-config({ path: resolve(process.cwd(), "../../.env.bridgehub") });
+if (!process.env.VERCEL) {
+  const { config } = await import("dotenv");
+  config({ path: resolve(process.cwd(), "../../.env.bridgehub") });
+}
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

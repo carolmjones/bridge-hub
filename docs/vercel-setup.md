@@ -22,25 +22,28 @@ SUPABASE_SERVICE_ROLE_KEY=...
 RESEND_API_KEY=...
 ```
 
-## 2. Marketing (new project)
-
-Vercel dashboard → **Add New Project** → import `carolmjones/bridge-hub`:
+## 2. Marketing (`bridge-hub-marketing`)
 
 | Setting | Value |
 |---------|-------|
 | Root Directory | `apps/marketing` |
 | Framework | Next.js |
-| Build Command | `npm run build` (default in that folder) |
-| Install Command | `cd ../.. && npm install` |
+| Build Command | `npm run build` |
+| Install Command | `npm install` |
+
+**Production URL:** `https://bridge-hub-marketing.vercel.app`
 
 **Environment variables**:
 
 ```
-NEXT_PUBLIC_MARKETING_URL=https://your-marketing-domain.vercel.app
-NEXT_PUBLIC_SCREENING_URL=https://your-screening-domain.vercel.app
+NEXT_PUBLIC_MARKETING_URL=https://thebridgehub.com
+NEXT_PUBLIC_SCREENING_URL=https://bridge-hub-indol.vercel.app
+NEXT_PUBLIC_MUX_PLAYBACK_ID=...
+MUX_TOKEN_ID=...
+MUX_TOKEN_SECRET=...
+KIT_API_KEY=...
+KIT_FREE_CLASS_FORM_ID=...
 ```
-
-Marketing does not need Supabase keys unless you add server features later.
 
 ## 3. Redeploy both
 

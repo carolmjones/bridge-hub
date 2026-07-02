@@ -26,7 +26,9 @@ Marketing and screening share **one git repo** — **two Vercel projects**. No s
 |----------|---------|
 | `NEXT_PUBLIC_MARKETING_URL` | This deploy's URL (`http://localhost:3000` locally) |
 | `NEXT_PUBLIC_SCREENING_URL` | Screening app URL (`http://localhost:3001` locally) — used for CTAs |
-| `NEXT_PUBLIC_MUX_PLAYBACK_ID` | Mux public playback ID for `/free-class` watch view (marketing deploy) |
+| `MUX_TOKEN_ID` | Mux API access token ID (Settings → Access Tokens) — marketing deploy |
+| `MUX_TOKEN_SECRET` | Mux API access token secret — server-side only; not used by player yet |
+| `NEXT_PUBLIC_MUX_PLAYBACK_ID` | Public playback ID for `/free-class` Mux player (from video asset after upload) |
 | `KIT_API_KEY` | Kit v4 API key — free class signup (`/api/free-class/subscribe`) |
 | `KIT_FREE_CLASS_FORM_ID` | Kit form ID for free class list |
 
@@ -55,7 +57,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 |---|------|-------|------|-----|
 | 1 | Landing | `/` | Nearly done | Design port complete — polish + copy sign-off (hero door-glow + section backgrounds in place) |
 | 2 | Bridge Map | `/bridge-map` | Draft for review | Design port complete — hero + synapse canvas + founder, “This is for you”, dark “What happens next”, final CTA background |
-| 3 | Free class | `/free-class` | Draft from mockup | Landing + unlocked watch (Mux player, Kit signup, localStorage unlock); dev reset via `?reset=1` |
+| 3 | Free class | `/free-class` | Draft from mockup | **Live** on [bridge-hub-marketing.vercel.app](https://bridge-hub-marketing.vercel.app) — landing + unlocked watch, Mux player, Kit signup; dev reset via `?reset=1` |
 | 4 | Results | `/results` | Built | [Screening workstream](roadmap_screening.md) |
 | 5 | Clarity Call | `/clarity-call` | Not started | Not started |
 | 6 | Booking confirmed | `/booking-confirmed` | Not started | Not started |
@@ -87,6 +89,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - [x] `framer-motion` + `lucide-react` installed
 - [x] `deep-card` token in `tailwind.config.ts`
 - [x] Shared env: `.env.bridgehub` + `.env.example` (same as screening)
+- [x] Marketing Vercel project (`bridge-hub-marketing`) — live at `bridge-hub-marketing.vercel.app`
 
 ### Phase 1 — Scaffold — Done
 
@@ -121,18 +124,19 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 ### Phase 4 — Polish + launch
 
-- [ ] Copy sign-off, a11y, analytics, domain DNS
+- [x] Marketing production deploy (`bridge-hub-marketing`) — Mux + Kit env on Vercel
+- [ ] Custom domain (`thebridgehub.com`) → marketing Vercel project
+- [ ] Copy sign-off, a11y, analytics
 - [ ] Cookie consent on marketing layout (optional)
 
 ---
 
 ## Next actions
 
-1. Upload free class video to Mux; set `NEXT_PUBLIC_MUX_PLAYBACK_ID` on marketing Vercel
-2. Set `KIT_API_KEY` + `KIT_FREE_CLASS_FORM_ID` on marketing Vercel (wired locally)
-3. Caroline reviews [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (sign-off + any final tweaks)
-4. Stabilise marketing dev cache issue (`npm run dev:marketing:clean` when chunks go missing)
-5. Build shared marketing components (spotlight card refactor, FAQ extract)
+1. **Domain:** Link `thebridgehub.com` → `bridge-hub-marketing` Vercel project; `app.thebridgehub.com` → screening
+2. Caroline reviews [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (sign-off + any final tweaks)
+3. Stabilise marketing dev cache issue (`npm run dev:marketing:clean` when chunks go missing)
+4. Build shared marketing components (spotlight card refactor, FAQ extract)
 
 *Copy in `apps/marketing/content/` is source of truth. No changes without Caroline's approval.*
 
