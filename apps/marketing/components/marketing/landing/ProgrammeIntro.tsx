@@ -81,28 +81,11 @@ export function ProgrammeIntro() {
         </div>
 
         <div
-          className="relative mt-9 overflow-hidden rounded-2xl border border-glow-sage/20 px-7 py-[30px] shadow-[0_22px_50px_-30px_rgba(0,0,0,0.55)] backdrop-blur-xl"
+          className="relative mt-9 overflow-hidden rounded-2xl border border-line-stone px-7 py-[30px]"
           style={{
-            background:
-              "linear-gradient(180deg, rgba(250,247,239,0.10), rgba(250,247,239,0.04))",
+            background: "linear-gradient(150deg, #F6F0E6, #EFE7D8)",
           }}
         >
-          <div
-            className="pointer-events-none absolute inset-0"
-            style={{
-              background:
-                "radial-gradient(circle at 18% 18%, rgba(190,194,169,0.32), transparent 55%), radial-gradient(circle at 92% 110%, rgba(232,196,140,0.22), transparent 60%)",
-            }}
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-0 opacity-60"
-            style={{
-              background:
-                "linear-gradient(115deg, transparent 0%, rgba(255,255,255,0.38) 34%, transparent 62%)",
-            }}
-            aria-hidden
-          />
           <span
             className="pointer-events-none absolute -top-[18px] right-3.5 font-serif text-[90px] leading-none text-glow-sage/35"
             aria-hidden

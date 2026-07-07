@@ -43,7 +43,9 @@ export function MarketingNav() {
               key={href}
               href={href}
               className={`font-sans text-[13px] text-soft-ink transition-colors hover:text-ink ${
-                pathname === href ? "font-medium text-ink" : ""
+                pathname === href
+                  ? "font-medium text-ink underline decoration-line-stone underline-offset-[6px]"
+                  : ""
               }`}
             >
               {label}

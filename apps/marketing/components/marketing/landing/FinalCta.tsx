@@ -13,12 +13,16 @@ export function FinalCta() {
     <section className="relative overflow-hidden bg-stone py-[clamp(72px,9vw,104px)] text-center">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Image
-          src="/images/final-cta-bg.png"
+          src="/images/final-cta-bg.jpg"
           alt=""
           fill
-          className="object-cover object-center"
+          quality={90}
           sizes="100vw"
+          className="object-cover object-[center_42%]"
         />
+        <div className="absolute inset-0 bg-stone/45" />
+        <div className="absolute inset-0 bg-gradient-to-b from-stone/65 via-stone/30 to-stone/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(250,247,239,0.22),transparent_60%)]" />
       </div>
 
       <div
