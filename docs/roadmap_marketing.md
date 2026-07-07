@@ -66,7 +66,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 | # | Page | Route | Copy | Dev |
 |---|------|-------|------|-----|
-| 7 | About | `/about` | Not started | Not started |
+| 7 | About | `/about` | Locked in [about.md](../apps/marketing/content/about.md) | **Built** — hero, My Story card, credentials strip, close CTA; nav active underline |
 | 8 | Work with Me | `/work-with-me` | Not started | Not started |
 | 9–11 | Privacy / Terms / Cookies | `/privacy`, etc. | GDPR chat | Screening has `/privacy`; marketing legal TBD — see [roadmap_screening.md](roadmap_screening.md) Phase 8 |
 
@@ -106,21 +106,24 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - [x] Landing hero + announcement bar + transformation vision (desktop door-glow on archway)
 - [x] Landing Daily Reality section
 - [x] Landing Bridge Map CTA spotlight + Reassurance sections
-- [x] Landing Programme intro (timeline + quote callout) — glassy quote card
+- [x] Landing Programme intro (timeline + quote callout) — warm paper quote card
 - [x] Landing Testimonials carousel — scenic background behind cards
 - [x] Landing Founder section
 - [x] Landing Outcome pillars section
 - [x] Landing Missing piece + Phase breakdown sections
-- [x] Landing Outcomes, FAQ, Final CTA, and Still not sure sections (Final CTA has photo background)
+- [x] Landing Outcomes, FAQ, Final CTA, and Still not sure sections (Final CTA hi-res scenic background)
 - [x] Marketing header (announcement + nav), on-brand 404, dev watcher fixes (EMFILE) — mobile menu button pinned right
 - [x] Landing page sections from handoff (18 sections)
 - [x] Bridge Map from [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (design port complete; copy still pending sign-off)
 
+- [x] About page from [apps/marketing/content/about.md](../apps/marketing/content/about.md) — hero, floating My Story card, credentials icons, bridge close CTA
+
 ### Phase 3 — Core funnel pages
 
 - [x] Free class (`/free-class`)
+- [x] About (`/about`)
 - [ ] Clarity Call + Discovery Call embeds
-- [ ] About, Work with Me
+- [ ] Work with Me
 
 ### Phase 4 — Polish + launch
 
@@ -135,8 +138,10 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 1. **Domain:** Link `thebridgehub.com` → `bridge-hub-marketing` Vercel project; `app.thebridgehub.com` → screening
 2. Caroline reviews [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (sign-off + any final tweaks)
-3. Stabilise marketing dev cache issue (`npm run dev:marketing:clean` when chunks go missing)
-4. Build shared marketing components (spotlight card refactor, FAQ extract)
+3. Caroline sign-off on [apps/marketing/content/about.md](../apps/marketing/content/about.md) if any final copy tweaks
+4. Stabilise marketing dev cache issue (`npm run dev:marketing:clean` when chunks go missing)
+5. Build shared marketing components (spotlight card refactor, FAQ extract)
+6. Work with Me page
 
 *Copy in `apps/marketing/content/` is source of truth. No changes without Caroline's approval.*
 
