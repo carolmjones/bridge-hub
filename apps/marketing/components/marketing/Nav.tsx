@@ -10,12 +10,18 @@ const NAV_LINKS = [
   { href: MARKETING_ROUTES.home, label: "Home" },
   { href: MARKETING_ROUTES.about, label: "About" },
   { href: MARKETING_ROUTES.bridgeMap, label: "The Bridge Map" },
-  { href: MARKETING_ROUTES.workWithMe, label: "Work with Me" },
+] as const;
+
+const WORK_WITH_ME_LINKS = [
+  { href: MARKETING_ROUTES.coaching, label: "The Bridge Programme" },
+  { href: MARKETING_ROUTES.keynoteSpeaking, label: "Keynote Speaking" },
+  { href: MARKETING_ROUTES.consulting, label: "Consulting" },
 ] as const;
 
 export function MarketingNav() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const workWithMeActive = pathname.startsWith(MARKETING_ROUTES.workWithMe);
   const hideNavCta =
     pathname === MARKETING_ROUTES.bridgeMap ||
     pathname === MARKETING_ROUTES.freeClass;
@@ -51,6 +57,31 @@ export function MarketingNav() {
               {label}
             </Link>
           ))}
+          <div className="group relative">
+            <Link
+              href={MARKETING_ROUTES.coaching}
+              className={`font-sans text-[13px] text-soft-ink transition-colors hover:text-ink ${
+                workWithMeActive
+                  ? "font-medium text-ink underline decoration-line-stone underline-offset-[6px]"
+                  : ""
+              }`}
+            >
+              Work with Me
+            </Link>
+            <div className="invisible absolute left-1/2 top-full z-50 mt-4 w-[220px] -translate-x-1/2 rounded-2xl border border-line-stone bg-cream p-2 text-left opacity-0 shadow-[0_24px_60px_-36px_rgba(35,40,36,0.42)] transition-all duration-200 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
+              {WORK_WITH_ME_LINKS.map(({ href, label }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className={`block rounded-xl px-3 py-2.5 font-sans text-[13px] leading-snug text-soft-ink transition-colors hover:bg-warm-paper hover:text-ink ${
+                    pathname === href ? "bg-warm-paper font-medium text-ink" : ""
+                  }`}
+                >
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </div>
         </nav>
 
         <div className="ml-auto flex items-center justify-end gap-3 md:ml-0 md:w-full md:justify-self-stretch">
@@ -97,6 +128,21 @@ export function MarketingNav() {
                 {label}
               </Link>
             ))}
+            <div className="border-b border-line-stone py-3">
+              <p className="font-serif text-[28px] text-ink">Work with Me</p>
+              <div className="mt-3 flex flex-col gap-2">
+                {WORK_WITH_ME_LINKS.map(({ href, label }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    className="font-sans text-[15px] text-soft-ink"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            </div>
             {!hideNavCta && (
               <Link
                 href={MARKETING_ROUTES.freeClass}

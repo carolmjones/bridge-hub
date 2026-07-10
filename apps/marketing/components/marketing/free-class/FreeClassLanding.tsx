@@ -28,13 +28,13 @@ export function FreeClassLanding({
           aria-hidden
         >
           <Image
-            src={`${IMG}/hero.jpg`}
+            src="/images/caroline-web3-about.jpg"
             alt=""
             fill
-            className="object-cover object-[58%_center]"
+            unoptimized
+            className="object-cover object-[43%_center]"
             sizes="56vw"
             priority
-            quality={90}
             style={{
               maskImage:
                 "linear-gradient(to right, transparent 0%, rgba(0,0,0,0.35) 14%, black 32%, black 100%)",
@@ -87,13 +87,13 @@ export function FreeClassLanding({
           <div className="relative mx-auto mt-10 max-w-[420px] lg:hidden">
             <div className="relative aspect-[4/5] overflow-hidden">
               <Image
-                src={`${IMG}/hero.jpg`}
+                src="/images/caroline-web3-about.jpg"
                 alt="Caroline Jones"
                 fill
-                className="object-cover object-center"
+                unoptimized
+                className="object-cover object-[35%_center]"
                 sizes="90vw"
                 priority
-                quality={90}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-cream via-cream/25 to-transparent" />
             </div>
@@ -144,12 +144,12 @@ export function FreeClassLanding({
         <div className="mx-auto grid max-w-[960px] grid-cols-1 items-center gap-10 md:grid-cols-[minmax(0,340px)_minmax(0,1fr)] md:gap-14">
           <div className="relative mx-auto aspect-square w-full max-w-[340px] overflow-hidden rounded-[12px] shadow-[0_28px_60px_-40px_rgba(35,40,36,0.35)]">
             <Image
-              src={`${IMG}/about.jpg`}
+              src="/images/caroline-web1-about.jpg"
               alt="Caroline Jones"
               fill
+              unoptimized
               className="object-cover object-center"
               sizes="(max-width: 768px) 80vw, 340px"
-              quality={90}
             />
           </div>
 

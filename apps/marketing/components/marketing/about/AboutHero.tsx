@@ -52,13 +52,13 @@ export function AboutHero() {
           />
           <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] shadow-[0_28px_60px_-36px_rgba(35,40,36,0.4)]">
             <Image
-              src="/images/free-class/about.jpg"
+              src="/images/caroline-web3-about.jpg"
               alt="Caroline Jones"
               fill
+              unoptimized
               className="object-cover object-center"
               sizes="(max-width: 1024px) 90vw, 480px"
               priority
-              quality={90}
             />
           </div>
         </div>

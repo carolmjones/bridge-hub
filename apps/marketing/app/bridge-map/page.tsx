@@ -332,8 +332,20 @@ export default function BridgeMapPage() {
       </section>
 
       {/* WHY WHAT YOU TRIED MAY NOT HAVE HELPED */}
-      <section className="border-t border-line-stone bg-warm-paper px-6 py-[clamp(72px,9vw,104px)]">
-        <div className="mx-auto max-w-[960px]">
+      <section className="relative overflow-hidden border-t border-line-stone bg-warm-paper px-6 py-[clamp(72px,9vw,104px)]">
+        <div className="pointer-events-none absolute inset-0" aria-hidden>
+          <Image
+            src="/images/testimonials-bg.png"
+            alt=""
+            fill
+            className="object-cover object-center opacity-[0.3]"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-warm-paper/88 via-warm-paper/70 to-warm-paper/92" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(250,247,239,0.55),transparent_58%)]" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-[960px]">
           <div className="mx-auto max-w-[680px] text-center">
             <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-line-stone bg-white/55 px-4 py-1.5 font-sans text-[10px] font-medium uppercase tracking-[0.14em] text-[#6B7060]">
               <span

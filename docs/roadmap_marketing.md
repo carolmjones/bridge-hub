@@ -131,6 +131,17 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - [ ] Custom domain (`thebridgehub.com`) → marketing Vercel project
 - [ ] Copy sign-off, a11y, analytics
 - [ ] Cookie consent on marketing layout (optional)
+- [ ] **Healing Revolution subscribe popup** — sitewide email capture modal (Kit); copy below
+
+---
+
+## Sitewide components (planned)
+
+| Component | Copy | Dev |
+|-----------|------|-----|
+| Healing Revolution popup | **Headline:** Join The Healing Revolution · **Subtext:** Subscribe to receive insights and resources to inspire a collective healing movement. | Not started |
+
+Implementation notes: trauma-informed (easy dismiss, no urgency animation); respect cookie/consent if required; reuse Kit pattern from `/free-class` where possible; show once per session or after scroll threshold — TBD with Caroline.
 
 ---
 
@@ -142,6 +153,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 4. Stabilise marketing dev cache issue (`npm run dev:marketing:clean` when chunks go missing)
 5. Build shared marketing components (spotlight card refactor, FAQ extract)
 6. Work with Me page
+7. **Healing Revolution popup** — subscribe modal with locked copy (headline + subtext above); Kit list + dismiss UX TBD
 
 *Copy in `apps/marketing/content/` is source of truth. No changes without Caroline's approval.*
 

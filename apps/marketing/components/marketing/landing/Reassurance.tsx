@@ -10,11 +10,12 @@ export function Reassurance() {
           aria-label="Caroline Jones"
         >
           <Image
-            src="/images/side.png"
+            src="/images/caroline-face.png"
             alt=""
             fill
-            className="object-cover object-top"
-            sizes="64px"
+            unoptimized
+            className="object-cover object-center"
+            sizes="128px"
           />
         </div>
 

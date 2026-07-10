@@ -46,7 +46,7 @@ export function BridgeMapFounderPortrait() {
             src={PORTRAIT_SRC}
             alt="Caroline Jones, founder of The Bridge Map"
             fill
-            className="object-cover object-center"
+            className="object-cover object-center scale-[1.1]"
             sizes="(max-width: 768px) 90vw, 380px"
             quality={95}
             unoptimized

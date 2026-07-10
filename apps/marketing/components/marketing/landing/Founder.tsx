@@ -21,13 +21,14 @@ export function Founder() {
         <div
           className="relative mb-8 h-[340px] w-full overflow-hidden rounded-xl bg-stone"
           role="img"
-          aria-label="The Bridge Hub"
+          aria-label="Caroline Jones"
         >
           <Image
-            src="/images/ts_background-desktop_section-2-mqx21uxi.png"
+            src="/images/caroline-web4-founder.jpg"
             alt=""
             fill
-            className="object-cover object-center"
+            unoptimized
+            className="object-cover object-[center_18%]"
             sizes="(max-width: 680px) 100vw, 680px"
           />
         </div>

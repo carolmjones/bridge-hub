@@ -12,7 +12,7 @@ const REALITY_ITEMS = [
 export function DailyReality() {
   return (
     <section className="border-t border-line-stone bg-warm-paper py-[72px]">
-      <div className="mx-auto max-w-[680px] px-6">
+      <div className="mx-auto max-w-[820px] px-6">
         <p className="mb-3 font-sans text-[10px] font-medium uppercase tracking-[0.14em] text-sage">
           Is this you
         </p>
@@ -20,7 +20,7 @@ export function DailyReality() {
           Is this your daily reality?
         </h2>
 
-        <div className="flex items-start gap-8">
+        <div className="flex items-stretch gap-6 min-[761px]:gap-8">
           <ul className="m-0 flex-1 list-none p-0">
             {REALITY_ITEMS.map((item) => (
               <li
@@ -39,17 +39,32 @@ export function DailyReality() {
           </ul>
 
           <div
-            className="relative hidden h-[240px] w-[160px] shrink-0 overflow-hidden rounded-[10px] bg-stone min-[761px]:block"
+            className="relative hidden w-[200px] shrink-0 self-stretch min-[761px]:block lg:w-[240px] xl:w-[280px]"
             role="img"
             aria-label="Caroline Jones"
           >
-            <Image
-              src="/images/side.png"
-              alt=""
-              fill
-              className="object-cover object-center"
-              sizes="160px"
-            />
+            <div className="absolute inset-0 overflow-hidden rounded-l-[14px]">
+              <Image
+                src="/images/caroline-web-photo2-portrait.jpg"
+                alt=""
+                fill
+                unoptimized
+                className="-scale-x-100 object-cover object-[center_12%]"
+                sizes="(min-width: 1280px) 560px, (min-width: 1024px) 480px, 400px"
+              />
+
+              {/* Left-edge fade into section — 10% width only */}
+              <div
+                className="pointer-events-none absolute inset-y-0 left-0 w-[10%] bg-gradient-to-r from-warm-paper to-transparent"
+                aria-hidden
+              />
+
+              {/* Right-side depth shading */}
+              <div
+                className="pointer-events-none absolute inset-y-0 right-0 w-[18%] bg-gradient-to-l from-black/22 via-black/8 to-transparent"
+                aria-hidden
+              />
+            </div>
           </div>
         </div>
       </div>
