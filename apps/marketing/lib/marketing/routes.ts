@@ -21,7 +21,7 @@ export const MARKETING_ROUTES = {
   about: "/about",
   workWithMe: "/work-with-me",
   coaching: "/work-with-me/coaching",
-  keynoteSpeaking: "/work-with-me/keynote-speaking",
+  keynoteSpeaking: "/work-with-me/speaking",
   consulting: "/work-with-me/consulting",
   discoveryCall: "/discovery-call",
   clarityCall: "/clarity-call",

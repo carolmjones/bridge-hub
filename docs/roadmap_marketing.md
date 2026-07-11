@@ -67,7 +67,10 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 | # | Page | Route | Copy | Dev |
 |---|------|-------|------|-----|
 | 7 | About | `/about` | Locked in [about.md](../apps/marketing/content/about.md) | **Built** — hero, My Story card, credentials strip, close CTA; nav active underline |
-| 8 | Work with Me | `/work-with-me` | Not started | Not started |
+| 8 | Work with Me | `/work-with-me` | Not started | Not started — hub TBD; sub-pages below |
+| 8a | The Bridge Programme | `/work-with-me/coaching` | Locked in [coaching.md](../apps/marketing/content/coaching.md) | **Built** — hero, programme structure stepper, manifesto, CTAs |
+| 8b | Keynote Speaking | `/work-with-me/speaking` | Locked in [speaking.md](../apps/marketing/content/speaking.md) | **Built** — cinematic hero, story, keynote, topics, testimonials, enquire CTAs |
+| 8c | Consulting | `/work-with-me/consulting` | Not started | Not started |
 | 9–11 | Privacy / Terms / Cookies | `/privacy`, etc. | GDPR chat | Screening has `/privacy`; marketing legal TBD — see [roadmap_screening.md](roadmap_screening.md) Phase 8 |
 
 ### Phase 3 — Supporting
@@ -122,8 +125,10 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 - [x] Free class (`/free-class`)
 - [x] About (`/about`)
-- [ ] Clarity Call + Discovery Call embeds
-- [ ] Work with Me
+- [x] The Bridge Programme (`/work-with-me/coaching`)
+- [x] Keynote Speaking (`/work-with-me/speaking`)
+- [ ] Clarity Call + Discovery Call embeds (speaking enquire CTAs point at `/discovery-call` — page not built yet)
+- [ ] Work with Me hub (`/work-with-me`) + Consulting (`/work-with-me/consulting`)
 
 ### Phase 4 — Polish + launch
 
@@ -132,6 +137,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - [ ] Copy sign-off, a11y, analytics
 - [ ] Cookie consent on marketing layout (optional)
 - [ ] **Healing Revolution subscribe popup** — sitewide email capture modal (Kit); copy below
+- [ ] **PepTalk speaker listing** — once site is finished, pitch [PepTalk](https://getapeptalk.com/) to list Caroline as a keynote speaker (Wellness & Culture / Mental Health / Neurodiversity topics); optional channel to market Work with Me → Keynote Speaking
 
 ---
 
@@ -145,6 +151,16 @@ Implementation notes: trauma-informed (easy dismiss, no urgency animation); resp
 
 ---
 
+## Distribution (post-launch)
+
+| Channel | Purpose | When |
+|---------|---------|------|
+| [PepTalk](https://getapeptalk.com/) | List Caroline as a vetted keynote speaker — mental health, neurodiversity, workplace wellbeing, burnout | After marketing site is finished (domain live, Work with Me + keynote copy signed off) |
+
+Notes: PepTalk matches event planners to speakers (15k+ roster, 24h response). Pitch when `/work-with-me/speaking` is live and copy signed off; link back to site or discovery call. No dev work — outreach/listing only.
+
+---
+
 ## Next actions
 
 1. **Domain:** Link `thebridgehub.com` → `bridge-hub-marketing` Vercel project; `app.thebridgehub.com` → screening
@@ -152,8 +168,10 @@ Implementation notes: trauma-informed (easy dismiss, no urgency animation); resp
 3. Caroline sign-off on [apps/marketing/content/about.md](../apps/marketing/content/about.md) if any final copy tweaks
 4. Stabilise marketing dev cache issue (`npm run dev:marketing:clean` when chunks go missing)
 5. Build shared marketing components (spotlight card refactor, FAQ extract)
-6. Work with Me page
-7. **Healing Revolution popup** — subscribe modal with locked copy (headline + subtext above); Kit list + dismiss UX TBD
+6. Work with Me hub + Consulting page
+7. Discovery Call page (speaking enquire CTAs depend on it)
+8. **Healing Revolution popup** — subscribe modal with locked copy (headline + subtext above); Kit list + dismiss UX TBD
+9. **PepTalk** — when site is finished, pitch [getapeptalk.com](https://getapeptalk.com/) to list Caroline for keynote bookings (Wellness & Culture / mental health / neurodiversity)
 
 *Copy in `apps/marketing/content/` is source of truth. No changes without Caroline's approval.*
 
