@@ -48,7 +48,7 @@ Two workstreams share one **git repo** but deploy as **two Next.js apps** (marke
 | From | To | Mechanism |
 |------|-----|-----------|
 | Marketing CTA | Screening start | `SCREENING_START` in `apps/marketing/lib/marketing/routes.ts` → `NEXT_PUBLIC_SCREENING_URL/begin` |
-| Screening results | Marketing | Future: link to `/work-with-me` (not built) |
+| Screening results | Marketing | Nav links to `/work-with-me/coaching` and `/work-with-me/speaking` (no hub page) |
 | Marketing Cal.com pages | Booking webhook | Embed on marketing; webhook stays `app/api/booking/cal-webhook` |
 | Both | Disclaimer | Same legal line on all client-facing screens |
 

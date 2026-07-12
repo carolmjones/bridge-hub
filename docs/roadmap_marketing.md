@@ -33,7 +33,8 @@ Marketing and screening share **one git repo** — **two Vercel projects**. No s
 | `NEXT_PUBLIC_MUX_PLAYBACK_ID` | Public playback ID for `/free-class` Mux player (from video asset after upload) |
 | `KIT_API_KEY` | Kit v4 API key — free class signup (`/api/free-class/subscribe`) |
 | `KIT_FREE_CLASS_FORM_ID` | Kit form ID for free class list (also used by landing "Still not sure?" newsletter signup) |
-| `KIT_STILL_NOT_SURE_TAG_ID` | Kit tag ID for `still-not-sure` — tags newsletter signups from landing "Still not sure?" section (same list as free class, distinct from future Healing Revolution popup tag) |
+| `KIT_STILL_NOT_SURE_TAG_ID` | Kit tag ID for `still-not-sure` — landing "Still not sure?" newsletter (same list as free class) |
+| `KIT_HEALING_REVOLUTION_TAG_ID` | Kit tag ID for `healing-revolution` — sitewide popup newsletter (same list, distinct from still-not-sure) |
 | `KIT_SPEAKING_ENQUIRY_FORM_ID` | Kit form ID for the speaking enquiry list (same `KIT_API_KEY`, separate form) |
 | `RESEND_API_KEY` | Resend API key — **marketing project's own key**, separate from screening's magic-link Resend usage |
 | `RESEND_FROM_EMAIL` | Optional sender override (defaults to `The Bridge Hub <onboarding@resend.dev>`) |
@@ -51,7 +52,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - **Primary CTA:** Watch the free class
 - **Secondary CTA:** Discover my profile — free → `SCREENING_START` (screening deploy `/begin`)
 - **No "Book your Clarity Call"** on landing or Bridge Map (results screen only)
-- **Nav:** Home · About · The Bridge Map · Work with Me (Coaching · Speaking only — Consulting removed from nav)
+- **Nav:** Home · About · The Bridge Map · Work with Me (dropdown → Coaching · Speaking — no `/work-with-me` hub page)
 - **Disclaimer everywhere:** *This is a screening tool, not a clinical diagnosis.*
 - **All copy locked** after Caroline approval
 
@@ -75,7 +76,6 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 | # | Page | Route | Copy | Dev |
 |---|------|-------|------|-----|
 | 7 | About | `/about` | Locked in [about.md](../apps/marketing/content/about.md) | **Built** — hero, My Story card, credentials strip, close CTA; nav active underline |
-| 8 | Work with Me | `/work-with-me` | Not started | Not started — hub TBD; sub-pages below |
 | 8a | The Bridge Programme | `/work-with-me/coaching` | Locked in [coaching.md](../apps/marketing/content/coaching.md) | **Built** — hero, programme structure stepper, manifesto, CTAs |
 | 8b | Keynote Speaking | `/work-with-me/speaking` | Locked in [speaking.md](../apps/marketing/content/speaking.md) | **Built** — cinematic hero, story, keynote, topics, testimonials, enquire CTAs |
 | 8b-i | Speaking enquiry | `/work-with-me/speaking/enquire` | Locked in [speaking-enquiry.md](../apps/marketing/content/speaking-enquiry.md) | **Built** — Kit form (name, phone optional, organisation, event type, date, message); notifies Caroline instantly via Resend, adds subscriber to Kit for nurture |
@@ -114,7 +114,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 ### Phase 2 — Design port + shared components
 
 - [x] Framer Motion utilities (`apps/marketing/lib/marketing/motion.ts`)
-- [ ] Reusable section components (spotlight card refactor; carousel + synapse hero still inline)
+- [x] Reusable spotlight components — `AuroraGlows`, `SpotlightSection`, `SpotlightCard` (landing Bridge Map CTA + Final CTA); carousel and synapse hero left as-is; heroes untouched
 - [x] FAQ data extracted to `lib/marketing/faq.ts` (shared by landing accordion + FAQPage JSON-LD)
 - [x] Landing hero + announcement bar + transformation vision (desktop door-glow on archway)
 - [x] Landing Daily Reality section
@@ -141,7 +141,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - [x] Discovery Call (`/discovery-call`) — parked; Cal.com iframe retained, unlinked from live site
 - [x] Still not sure newsletter (`/api/still-not-sure/subscribe`) — same Kit list as free class, tagged `still-not-sure`
 - [ ] Clarity Call embed (separate from Discovery Call — 45 min, post–Bridge Map)
-- [ ] Work with Me hub (`/work-with-me`) — sub-pages (coaching, speaking) are live; hub page TBD
+- [x] ~~Work with Me hub (`/work-with-me`)~~ — **Removed from scope**; nav dropdown links directly to coaching and speaking sub-pages
 
 #### Entry points — newsletter vs speaking enquiry
 
@@ -154,16 +154,16 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 Kit's own "new subscriber" notification is batched hourly and has no message content, so `/api/speaking/enquire` sends Caroline a direct Resend email with the full enquiry (organisation, event type, message, etc.) in real time, and separately adds the subscriber to Kit for future nurture. Cal.com webhook handling stays on the **screening** deploy only — see [integration-boundaries.md](integration-boundaries.md).
 
-**Kit tagging:** Free class, Still not sure, and (planned) Healing Revolution popup all use the same Kit list (`KIT_FREE_CLASS_FORM_ID`) with different tags so Caroline can see which entry point each subscriber came from.
+**Kit tagging:** Free class, Still not sure, and Healing Revolution popup all use the same Kit list (`KIT_FREE_CLASS_FORM_ID`) with different tags (`still-not-sure`, `healing-revolution`) so Caroline can see which entry point each subscriber came from.
 
 ### Phase 4 — Polish + launch
 
 - [x] Marketing production deploy (`bridge-hub-marketing`) — Mux + Kit env on Vercel
-- [ ] Custom domain (`thebridgehub.com`) → marketing Vercel project
+- [ ] Custom domain (`carolinejones.co`) → marketing Vercel project — see **Domain connection** below
 - [ ] Copy sign-off, a11y, analytics
 - [x] **SEO + AI discoverability** (dev) — see Phase 4b below; Caroline Search Console checklist at launch
 - [ ] Cookie consent on marketing layout (optional)
-- [ ] **Healing Revolution subscribe popup** — sitewide email capture modal (Kit); copy below
+- [x] **Healing Revolution subscribe popup** — sitewide Kit modal; tag `healing-revolution`; see below
 - [ ] **PepTalk speaker listing** — once site is finished, pitch [PepTalk](https://getapeptalk.com/) to list Caroline as a keynote speaker (Wellness & Culture / Mental Health / Neurodiversity topics); optional channel to market Work with Me → Keynote Speaking
 
 #### Phase 4b — SEO + AI discoverability
@@ -172,7 +172,7 @@ Kit's own "new subscriber" notification is batched hourly and has no message con
 
 **Policy:** Full allow — maximise discoverability; allow AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended) for both citation and training.
 
-**Timing:** Build metadata, sitemap, robots, and llms files before domain cutover using `NEXT_PUBLIC_MARKETING_URL`. Set production env to `https://thebridgehub.com` when DNS goes live. Do not submit sitemap to Search Console until canonical domain is live.
+**Timing:** Build metadata, sitemap, robots, and llms files before domain cutover using `NEXT_PUBLIC_MARKETING_URL`. Set production env to `https://carolinejones.co` when DNS goes live. Do not submit sitemap to Search Console until canonical domain is live.
 
 | Task | Priority | Status | Notes |
 |------|----------|--------|-------|
@@ -185,14 +185,14 @@ Kit's own "new subscriber" notification is batched hourly and has no message con
 | `/llms.txt` | P1 | Done | Curated agent index of canonical marketing pages |
 | `/llms-full.txt` | P2 | Done | Concatenated locked markdown from `apps/marketing/content/` |
 | `/ai.txt` | P1 | Done | Full-allow training + citation policy |
-| Search Console + Bing Webmaster | P1 | Caroline | Verify `thebridgehub.com` after DNS |
+| Search Console + Bing Webmaster | P1 | Caroline | Verify `carolinejones.co` after DNS |
 | IndexNow (optional) | P3 | — | Bing/Yandex instant ping on deploy |
 | `/.well-known/security.txt` | P3 | — | `security@` contact — production hygiene |
 
 **Pre-launch audit** (run after domain is live):
 
 ```bash
-HOST="https://thebridgehub.com"
+HOST="https://carolinejones.co"
 for path in /robots.txt /sitemap.xml /llms.txt /llms-full.txt /ai.txt /og-default.png /favicon.ico; do
   curl -s -o /dev/null -w "%{http_code}  $path\n" "$HOST$path"
 done
@@ -203,15 +203,30 @@ Manual checks:
 - [Google Rich Results Test](https://search.google.com/test/rich-results) — no JSON-LD errors
 - Google Search Console — sitemap accepted, no coverage errors
 
+#### Domain connection — `carolinejones.co`
+
+**Marketing** (`bridge-hub-marketing` Vercel project):
+
+1. Vercel → **bridge-hub-marketing** → Settings → **Domains** → Add `carolinejones.co` and `www.carolinejones.co`
+2. At your domain registrar, add the DNS records Vercel shows. Typical setup:
+   - **Apex** `carolinejones.co` → A record `76.76.21.21` (or registrar redirect to `www` if apex ALIAS isn't supported)
+   - **www** → CNAME `cname.vercel-dns.com`
+3. Wait for Vercel **Valid Configuration** (often minutes; up to 48h)
+4. On **both** Vercel projects (marketing + screening), set `NEXT_PUBLIC_MARKETING_URL=https://carolinejones.co`
+5. Redeploy marketing after env change (canonicals, sitemap, OG tags read this variable)
+6. Optional: redirect `www.carolinejones.co` → `carolinejones.co` in Vercel domain settings
+
+**Screening** (when ready): add `app.carolinejones.co` to the screening Vercel project; set `NEXT_PUBLIC_SCREENING_URL` and `NEXT_PUBLIC_APP_URL` to `https://app.carolinejones.co` on both projects. Until then, screening can stay on its existing `*.vercel.app` URL.
+
 ---
 
-## Sitewide components (planned)
+## Sitewide components
 
 | Component | Copy | Dev |
 |-----------|------|-----|
-| Healing Revolution popup | **Headline:** Join The Healing Revolution · **Subtext:** Subscribe to receive insights and resources to inspire a collective healing movement. | Not started |
+| Healing Revolution popup | **Headline:** Join The Healing Revolution · **Subtext:** Subscribe to receive insights and resources to inspire a collective healing movement. | **Built** — shows once per session on the visitor's first landing page (after 20% scroll or 8s); skips `/free-class` and speaking enquiry; Kit tag `healing-revolution` |
 
-Implementation notes: trauma-informed (easy dismiss, no urgency animation); respect cookie/consent if required; reuse Kit pattern from `/free-class` where possible; show once per session or after scroll threshold — TBD with Caroline.
+Implementation: trauma-informed (easy dismiss via ×, backdrop, Escape); no urgency animation; reuses `EmailCaptureForm`; `sessionStorage` prevents repeat in same session (including after navigating to other pages). Dev preview: `?healing-popup` on any URL.
 
 ---
 
@@ -227,16 +242,13 @@ Notes: PepTalk matches event planners to speakers (15k+ roster, 24h response). P
 
 ## Next actions
 
-1. **Domain:** Link `thebridgehub.com` → `bridge-hub-marketing` Vercel project; `app.thebridgehub.com` → screening; set `NEXT_PUBLIC_MARKETING_URL=https://thebridgehub.com`
+1. **Domain:** Connect `carolinejones.co` → `bridge-hub-marketing` (steps in Phase 4b above); set `NEXT_PUBLIC_MARKETING_URL=https://carolinejones.co` on both Vercel projects; redeploy marketing
 2. **Caroline env setup** — speaking enquiry + Still not sure newsletter tag (checklist below); unblock production signup flows
 3. Caroline reviews [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (sign-off + any final tweaks)
 4. Caroline sign-off on [apps/marketing/content/about.md](../apps/marketing/content/about.md) if any final copy tweaks
-5. Build shared marketing components (spotlight card refactor)
-6. Work with Me hub (`/work-with-me`)
-7. Clarity Call page (45 min, post–Bridge Map — separate from Discovery Call)
-8. **Healing Revolution popup** — subscribe modal with locked copy (headline + subtext above); Kit list + distinct tag TBD
-9. **PepTalk** — when site is finished, pitch [getapeptalk.com](https://getapeptalk.com/) to list Caroline for keynote bookings (Wellness & Culture / mental health / neurodiversity)
-10. **SEO launch checklist** — Caroline: Search Console + Bing verification, `sameAs` URLs in `seo.ts`, curl audit + Rich Results Test once domain is live
+5. Clarity Call page (45 min, post–Bridge Map — separate from Discovery Call)
+6. **PepTalk** — when site is finished, pitch [getapeptalk.com](https://getapeptalk.com/) to list Caroline for keynote bookings (Wellness & Culture / mental health / neurodiversity)
+7. **SEO launch checklist** — Caroline: Search Console + Bing verification, `sameAs` URLs in `seo.ts`, curl audit + Rich Results Test once domain is live
 
 **Dev tip:** If marketing pages 500 with `Cannot find module './NNN.js'`, run `npm run dev:marketing:clean` and hard-refresh the browser.
 
@@ -244,18 +256,19 @@ Notes: PepTalk matches event planners to speakers (15k+ roster, 24h response). P
 
 1. Create Kit form **"Speaking enquiry"** + custom fields: `phone_number`, `company`, `event_type`, `event_date`, `message` (slugs must match exactly or Kit silently drops them)
 2. Create Kit tag **`still-not-sure`** — note the tag ID for `KIT_STILL_NOT_SURE_TAG_ID` (landing newsletter signup; same list as free class)
-3. Decide the inbox for `SPEAKING_ENQUIRY_NOTIFY_EMAIL`
-4. Confirm Resend sending domain/from-address for marketing (or a new API key scoped to the marketing Vercel project)
-5. Add env vars to the **marketing** Vercel project: `KIT_SPEAKING_ENQUIRY_FORM_ID`, `KIT_STILL_NOT_SURE_TAG_ID`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL` (optional), `SPEAKING_ENQUIRY_NOTIFY_EMAIL`
+3. Create Kit tag **`healing-revolution`** — note the tag ID for `KIT_HEALING_REVOLUTION_TAG_ID` (sitewide popup; same list as free class)
+4. Decide the inbox for `SPEAKING_ENQUIRY_NOTIFY_EMAIL`
+5. Confirm Resend sending domain/from-address for marketing (or a new API key scoped to the marketing Vercel project)
+6. Add env vars to the **marketing** Vercel project: `KIT_SPEAKING_ENQUIRY_FORM_ID`, `KIT_STILL_NOT_SURE_TAG_ID`, `KIT_HEALING_REVOLUTION_TAG_ID`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL` (optional), `SPEAKING_ENQUIRY_NOTIFY_EMAIL`
 
 **Optional (parked page):** `NEXT_PUBLIC_CAL_DISCOVERY_EMBED_URL` only needed if `/discovery-call` is re-linked later.
 
 ### Caroline setup checklist (SEO + AI discoverability)
 
-1. Google Search Console — verify `thebridgehub.com` after DNS cutover; submit `/sitemap.xml`
+1. Google Search Console — verify `carolinejones.co` after DNS cutover; submit `/sitemap.xml`
 2. Bing Webmaster Tools — verify domain; submit sitemap
 3. Confirm social/profile URLs for Person schema `sameAs` in `apps/marketing/lib/marketing/seo.ts` (LinkedIn, Instagram; PepTalk when live)
-4. Set `NEXT_PUBLIC_MARKETING_URL=https://thebridgehub.com` on marketing Vercel project at domain cutover
+4. Set `NEXT_PUBLIC_MARKETING_URL=https://carolinejones.co` on **both** Vercel projects at domain cutover
 5. Run pre-launch curl audit (Phase 4b above) and Google Rich Results Test before announcing site
 
 *Copy in `apps/marketing/content/` is source of truth. No changes without Caroline's approval.*

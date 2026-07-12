@@ -24,6 +24,14 @@ export function isStillNotSureKitConfigured(): boolean {
   );
 }
 
+export function isHealingRevolutionKitConfigured(): boolean {
+  return Boolean(
+    getKitApiKey() &&
+      process.env.KIT_FREE_CLASS_FORM_ID?.trim() &&
+      process.env.KIT_HEALING_REVOLUTION_TAG_ID?.trim(),
+  );
+}
+
 async function kitPost(path: string, body: Record<string, unknown>) {
   const apiKey = getKitApiKey();
   if (!apiKey) {
@@ -94,6 +102,25 @@ export async function subscribeToStillNotSureNewsletter({
   const tagId = process.env.KIT_STILL_NOT_SURE_TAG_ID?.trim();
   if (!tagId) {
     throw new Error("Kit still-not-sure tag ID is not configured");
+  }
+
+  await subscribeToFreeClassForm({ email, firstName, referrer });
+  await tagSubscriberByEmail(tagId, email);
+}
+
+/** Same Kit list as free class; tagged `healing-revolution` for sitewide popup signups. */
+export async function subscribeToHealingRevolutionNewsletter({
+  email,
+  firstName,
+  referrer,
+}: {
+  email: string;
+  firstName: string;
+  referrer?: string;
+}) {
+  const tagId = process.env.KIT_HEALING_REVOLUTION_TAG_ID?.trim();
+  if (!tagId) {
+    throw new Error("Kit healing-revolution tag ID is not configured");
   }
 
   await subscribeToFreeClassForm({ email, firstName, referrer });

@@ -8,8 +8,8 @@ Marketing and screening share **`carolmjones/bridge-hub`** but deploy as **separ
 
 | Deploy | Root directory | Local dev | Production URL (example) |
 |--------|--------------|-----------|--------------------------|
-| **Marketing** | `apps/marketing` | `npm run dev:marketing` → `:3000` | `thebridgehub.com` |
-| **Screening** | repo root | `npm run dev:screening` → `:3001` | `app.thebridgehub.com` |
+| **Marketing** | `apps/marketing` | `npm run dev:marketing` → `:3000` | `carolinejones.co` |
+| **Screening** | repo root | `npm run dev:screening` → `:3001` | `app.carolinejones.co` |
 
 Shared: GitHub repo. Screening keeps Supabase, Resend, OpenRouter, Cal.com webhooks.
 

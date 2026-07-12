@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SpotlightSection } from "@/components/marketing/shared/Spotlight";
 import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 
 const STEPS = [
@@ -42,40 +43,8 @@ const STEPS = [
 
 export function BridgeMapCta() {
   return (
-    <section className="relative overflow-hidden bg-deep-card py-[104px]">
-      <div
-        className="pointer-events-none absolute -left-[6%] -top-[12%] h-[560px] w-[560px] animate-bm-aurora-a rounded-full motion-reduce:animate-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(142,154,124,0.55), rgba(142,154,124,0) 68%)",
-          filter: "blur(36px)",
-        }}
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -bottom-[18%] -right-[8%] h-[620px] w-[620px] animate-bm-aurora-b rounded-full motion-reduce:animate-none"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(218,206,191,0.4), rgba(218,206,191,0) 68%)",
-          filter: "blur(40px)",
-        }}
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          backgroundImage:
-            "radial-gradient(rgba(250,247,239,0.05) 1px, transparent 1px)",
-          backgroundSize: "26px 26px",
-          maskImage:
-            "radial-gradient(circle at 50% 42%, #000 0%, transparent 72%)",
-          WebkitMaskImage:
-            "radial-gradient(circle at 50% 42%, #000 0%, transparent 72%)",
-        }}
-        aria-hidden
-      />
-
-      <div className="relative mx-auto max-w-[640px] px-6 text-center">
+    <SpotlightSection>
+      <div className="mx-auto max-w-[640px] px-6 text-center">
         <span className="mb-[22px] inline-flex items-center gap-2 rounded-full border border-glow-sage/30 bg-glow-sage/10 px-4 py-[7px] font-sans text-[10px] font-medium uppercase tracking-[0.14em] text-[#C7CBB0]">
           <span
             className="h-1.5 w-1.5 rounded-full bg-glow-sage shadow-[0_0_10px_rgba(190,194,169,0.9)]"
@@ -134,6 +103,6 @@ export function BridgeMapCta() {
           </p>
         </div>
       </div>
-    </section>
+    </SpotlightSection>
   );
 }

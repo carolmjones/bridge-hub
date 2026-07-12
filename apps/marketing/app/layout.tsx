@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { MarketingFooter } from "@/components/marketing/Footer";
+import { HealingRevolutionPopup } from "@/components/marketing/HealingRevolutionPopup";
 import { JsonLd } from "@/components/marketing/JsonLd";
 import { MarketingHeader } from "@/components/marketing/MarketingHeader";
 import { rootMetadata, siteJsonLd } from "@/lib/marketing/seo";
@@ -42,6 +43,7 @@ export default function RootLayout({
           <MarketingHeader />
           <main className="flex-1">{children}</main>
           <MarketingFooter />
+          <HealingRevolutionPopup />
         </div>
       </body>
     </html>

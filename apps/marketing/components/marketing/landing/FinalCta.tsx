@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { SpotlightCard } from "@/components/marketing/shared/Spotlight";
 import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 import { buttonHover } from "@/lib/marketing/motion";
 
@@ -25,87 +26,48 @@ export function FinalCta() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,rgba(250,247,239,0.22),transparent_60%)]" />
       </div>
 
-      <div
-        className="relative mx-auto max-w-[660px] overflow-hidden rounded-[30px] border border-glow-sage/20 px-[clamp(26px,5vw,60px)] py-[clamp(48px,7vw,76px)] shadow-[0_60px_120px_-46px_rgba(20,28,24,0.75),inset_0_1px_0_rgba(250,247,239,0.07)]"
-        style={{
-          background: "linear-gradient(162deg, #22302A, #141C18)",
-        }}
-      >
-        <div
-          className="pointer-events-none absolute -left-[10%] -top-[16%] h-[440px] w-[440px] animate-bm-aurora-a rounded-full motion-reduce:animate-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(142,154,124,0.5), rgba(142,154,124,0) 68%)",
-            filter: "blur(34px)",
-          }}
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute -bottom-[22%] -right-[12%] h-[480px] w-[480px] animate-bm-aurora-b rounded-full motion-reduce:animate-none"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(218,206,191,0.34), rgba(218,206,191,0) 68%)",
-            filter: "blur(40px)",
-          }}
-          aria-hidden
-        />
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(rgba(250,247,239,0.045) 1px, transparent 1px)",
-            backgroundSize: "24px 24px",
-            maskImage:
-              "radial-gradient(circle at 50% 36%, #000, transparent 72%)",
-            WebkitMaskImage:
-              "radial-gradient(circle at 50% 36%, #000, transparent 72%)",
-          }}
-          aria-hidden
-        />
+      <SpotlightCard>
+        <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-glow-sage/30 bg-glow-sage/10 px-4 py-[7px] font-sans text-[11px] font-medium uppercase tracking-[0.13em] text-[#C7CBB0]">
+          <span
+            className="h-1.5 w-1.5 rounded-full bg-glow-sage shadow-[0_0_10px_rgba(190,194,169,0.9)]"
+            aria-hidden
+          />
+          The Bridge Programme
+        </span>
 
-        <div className="relative">
-          <span className="mb-6 inline-flex items-center gap-2 rounded-full border border-glow-sage/30 bg-glow-sage/10 px-4 py-[7px] font-sans text-[11px] font-medium uppercase tracking-[0.13em] text-[#C7CBB0]">
-            <span
-              className="h-1.5 w-1.5 rounded-full bg-glow-sage shadow-[0_0_10px_rgba(190,194,169,0.9)]"
-              aria-hidden
-            />
-            The Bridge Programme
+        <h2 className="mx-auto mb-2.5 max-w-[520px] font-serif text-[clamp(34px,9vw,46px)] font-normal leading-[1.12] text-cream">
+          Ready to understand what has been holding you back?
+        </h2>
+        <p className="mb-7 font-serif text-[21px] italic text-[#C7CBB0]">
+          (And finally start moving past it?)
+        </p>
+
+        <div className="mb-[38px] inline-flex items-center gap-2.5 rounded-full border border-cream/10 bg-cream/[0.06] px-[18px] py-2">
+          <span className="font-sans text-[13px] text-cream/[0.85]">
+            8 weeks. Personalised. 1:1 with Caroline.
           </span>
-
-          <h2 className="mx-auto mb-2.5 max-w-[520px] font-serif text-[clamp(34px,9vw,46px)] font-normal leading-[1.12] text-cream">
-            Ready to understand what has been holding you back?
-          </h2>
-          <p className="mb-7 font-serif text-[21px] italic text-[#C7CBB0]">
-            (And finally start moving past it?)
-          </p>
-
-          <div className="mb-[38px] inline-flex items-center gap-2.5 rounded-full border border-cream/10 bg-cream/[0.06] px-[18px] py-2">
-            <span className="font-sans text-[13px] text-cream/[0.85]">
-              8 weeks. Personalised. 1:1 with Caroline.
-            </span>
-          </div>
-
-          <div className="flex flex-col items-center gap-[18px]">
-            <motion.div whileHover={reduceMotion ? undefined : buttonHover}>
-              <Link
-                href={MARKETING_ROUTES.freeClass}
-                className="inline-flex h-14 items-center justify-center gap-2.5 rounded-[14px] bg-gradient-to-br from-[#E7EAD7] to-glow-sage px-[34px] font-sans text-[15px] font-semibold text-dark-room shadow-[0_18px_40px_-14px_rgba(190,194,169,0.7)] transition-shadow hover:shadow-[0_26px_52px_-12px_rgba(190,194,169,0.9)]"
-              >
-                Watch the free class
-                <span aria-hidden className="text-[17px] leading-none">
-                  →
-                </span>
-              </Link>
-            </motion.div>
-            <Link
-              href={MARKETING_ROUTES.bridgeMap}
-              className="font-sans text-[13px] text-cream/60 underline underline-offset-[3px] hover:text-cream"
-            >
-              Or discover your nervous system profile first →
-            </Link>
-          </div>
         </div>
-      </div>
+
+        <div className="flex flex-col items-center gap-[18px]">
+          <motion.div whileHover={reduceMotion ? undefined : buttonHover}>
+            <Link
+              href={MARKETING_ROUTES.freeClass}
+              className="inline-flex h-14 items-center justify-center gap-2.5 rounded-[14px] bg-gradient-to-br from-[#E7EAD7] to-glow-sage px-[34px] font-sans text-[15px] font-semibold text-dark-room shadow-[0_18px_40px_-14px_rgba(190,194,169,0.7)] transition-shadow hover:shadow-[0_26px_52px_-12px_rgba(190,194,169,0.9)]"
+            >
+              Watch the free class
+              <span aria-hidden className="text-[17px] leading-none">
+                →
+              </span>
+            </Link>
+          </motion.div>
+          <Link
+            href={MARKETING_ROUTES.bridgeMap}
+            className="font-sans text-[13px] text-cream/60 underline underline-offset-[3px] hover:text-cream"
+          >
+            Or discover your nervous system profile first →
+          </Link>
+        </div>
+      </SpotlightCard>
     </section>
   );
 }
