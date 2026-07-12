@@ -16,6 +16,14 @@ export function isKitSpeakingFormConfigured(): boolean {
   );
 }
 
+export function isStillNotSureKitConfigured(): boolean {
+  return Boolean(
+    getKitApiKey() &&
+      process.env.KIT_FREE_CLASS_FORM_ID?.trim() &&
+      process.env.KIT_STILL_NOT_SURE_TAG_ID?.trim(),
+  );
+}
+
 async function kitPost(path: string, body: Record<string, unknown>) {
   const apiKey = getKitApiKey();
   if (!apiKey) {
@@ -39,6 +47,12 @@ async function kitPost(path: string, body: Record<string, unknown>) {
   }
 
   return response.json().catch(() => ({}));
+}
+
+async function tagSubscriberByEmail(tagId: string, email: string) {
+  await kitPost(`/tags/${tagId}/subscribers`, {
+    email_address: email,
+  });
 }
 
 export async function subscribeToFreeClassForm({
@@ -65,6 +79,25 @@ export async function subscribeToFreeClassForm({
     email_address: email,
     ...(referrer ? { referrer } : {}),
   });
+}
+
+/** Same Kit list as free class; tagged `still-not-sure` for entry-point tracking. */
+export async function subscribeToStillNotSureNewsletter({
+  email,
+  firstName,
+  referrer,
+}: {
+  email: string;
+  firstName: string;
+  referrer?: string;
+}) {
+  const tagId = process.env.KIT_STILL_NOT_SURE_TAG_ID?.trim();
+  if (!tagId) {
+    throw new Error("Kit still-not-sure tag ID is not configured");
+  }
+
+  await subscribeToFreeClassForm({ email, firstName, referrer });
+  await tagSubscriberByEmail(tagId, email);
 }
 
 export type SpeakingEnquiryInput = {

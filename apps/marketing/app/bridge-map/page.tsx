@@ -1,9 +1,18 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 
 import { MarketingPrimaryCta } from "@/components/marketing/Nav";
 import { BridgeMapFounder } from "@/components/marketing/bridge-map/BridgeMapFounder";
 import { BridgeMapHero } from "@/components/marketing/bridge-map/BridgeMapHero";
 import { Disclaimer } from "@/components/ui/Disclaimer";
+import { buildPageMetadata } from "@/lib/marketing/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "The Bridge Map — Free Nervous System Screening",
+  description:
+    "A free 15-minute nervous system screening using five validated clinical instruments. Discover your profile and what your body has been protecting.",
+  path: "/bridge-map",
+});
 
 const CREDIBILITY = [
   "Built on validated clinical instruments used by psychologists worldwide",

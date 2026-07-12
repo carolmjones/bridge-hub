@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { buildPageMetadata } from "@/lib/marketing/seo";
+
+export const metadata: Metadata = buildPageMetadata({
+  title: "Urgent support",
+  description:
+    "Crisis and mental health support resources for Ireland, the UK, and internationally. This platform is not a crisis service.",
+  path: "/urgent-support",
+  noIndex: true,
+});
 
 const RESOURCES = [
   {

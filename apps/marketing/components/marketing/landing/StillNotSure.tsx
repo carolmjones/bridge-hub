@@ -1,25 +1,59 @@
-import Link from "next/link";
-import { MARKETING_ROUTES } from "@/lib/marketing/routes";
+"use client";
+
+import { useState } from "react";
+import { EmailCaptureForm } from "@/components/marketing/free-class/EmailCaptureForm";
 
 export function StillNotSure() {
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (data: { email: string; firstName: string }) => {
+    const response = await fetch("/api/still-not-sure/subscribe", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    const payload = (await response.json().catch(() => ({}))) as {
+      error?: string;
+    };
+
+    if (!response.ok) {
+      throw new Error(
+        payload.error || "Something went wrong. Please try again.",
+      );
+    }
+
+    setSubmitted(true);
+  };
+
   return (
     <section className="border-t border-line-stone bg-cream py-[72px] text-center">
-      <div className="mx-auto max-w-[380px] px-6">
+      <div className="mx-auto max-w-[480px] px-6">
         <h2 className="mb-4 font-serif text-[30px] font-normal text-ink">
           Still not sure?
         </h2>
         <p className="mb-7 font-sans text-sm leading-[1.72] text-soft-ink">
-          I get it. I have been on the same side as you, wondering if anything
-          will actually be different this time. Want to speak to Caroline before
-          you start? Book a free 15 minute Discovery Call — no commitment, no
-          pressure.
+          I get it. I&apos;ve been on the same side as you, wondering if
+          anything would actually be different this time. Join the newsletter
+          for simple, practical ways to work with your nervous system, real
+          stories, and honest updates on what&apos;s actually helping women get
+          unstuck.
         </p>
-        <Link
-          href={MARKETING_ROUTES.discoveryCall}
-          className="inline-flex h-[54px] items-center justify-center rounded-[14px] border border-line-stone bg-cream px-7 font-sans text-[15px] font-medium text-[#3D403A] transition-colors hover:bg-[#F0EADD]"
-        >
-          Book a free Discovery Call
-        </Link>
+
+        {submitted ? (
+          <p className="font-sans text-sm leading-[1.72] text-ink">
+            You&apos;re in. Check your inbox — Caroline&apos;s glad you&apos;re
+            here.
+          </p>
+        ) : (
+          <div className="mx-auto w-full max-w-[480px] text-left">
+            <EmailCaptureForm
+              id="still-not-sure-form"
+              buttonLabel="Join the newsletter"
+              onSubmit={handleSubmit}
+            />
+          </div>
+        )}
       </div>
     </section>
   );

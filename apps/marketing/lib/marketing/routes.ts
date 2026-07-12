@@ -23,7 +23,6 @@ export const MARKETING_ROUTES = {
   coaching: "/work-with-me/coaching",
   keynoteSpeaking: "/work-with-me/speaking",
   speakingEnquiry: "/work-with-me/speaking/enquire",
-  consulting: "/work-with-me/consulting",
   discoveryCall: "/discovery-call",
   clarityCall: "/clarity-call",
   privacy: screeningUrl("/privacy"),
