@@ -31,6 +31,11 @@ Marketing and screening share **one git repo** — **two Vercel projects**. No s
 | `NEXT_PUBLIC_MUX_PLAYBACK_ID` | Public playback ID for `/free-class` Mux player (from video asset after upload) |
 | `KIT_API_KEY` | Kit v4 API key — free class signup (`/api/free-class/subscribe`) |
 | `KIT_FREE_CLASS_FORM_ID` | Kit form ID for free class list |
+| `KIT_SPEAKING_ENQUIRY_FORM_ID` | Kit form ID for the speaking enquiry list (same `KIT_API_KEY`, separate form) |
+| `RESEND_API_KEY` | Resend API key — **marketing project's own key**, separate from screening's magic-link Resend usage |
+| `RESEND_FROM_EMAIL` | Optional sender override (defaults to `The Bridge Hub <onboarding@resend.dev>`) |
+| `SPEAKING_ENQUIRY_NOTIFY_EMAIL` | Inbox that receives instant speaking enquiry notifications |
+| `NEXT_PUBLIC_CAL_DISCOVERY_EMBED_URL` | Cal.com embed for the 15 min Discovery Call (`/discovery-call`) — distinct from screening's Clarity Call embed |
 
 Supabase and other screening API keys live on the **screening** Vercel project only — see [roadmap_screening.md](roadmap_screening.md) Phase 0.
 
@@ -70,15 +75,16 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 | 8 | Work with Me | `/work-with-me` | Not started | Not started — hub TBD; sub-pages below |
 | 8a | The Bridge Programme | `/work-with-me/coaching` | Locked in [coaching.md](../apps/marketing/content/coaching.md) | **Built** — hero, programme structure stepper, manifesto, CTAs |
 | 8b | Keynote Speaking | `/work-with-me/speaking` | Locked in [speaking.md](../apps/marketing/content/speaking.md) | **Built** — cinematic hero, story, keynote, topics, testimonials, enquire CTAs |
+| 8b-i | Speaking enquiry | `/work-with-me/speaking/enquire` | Locked in [speaking-enquiry.md](../apps/marketing/content/speaking-enquiry.md) | **Built** — Kit form (name, phone optional, organisation, event type, date, message); notifies Caroline instantly via Resend, adds subscriber to Kit for nurture |
 | 8c | Consulting | `/work-with-me/consulting` | Not started | Not started |
 | 9–11 | Privacy / Terms / Cookies | `/privacy`, etc. | GDPR chat | Screening has `/privacy`; marketing legal TBD — see [roadmap_screening.md](roadmap_screening.md) Phase 8 |
 
 ### Phase 3 — Supporting
 
-| # | Page | Route |
-|---|------|-------|
-| 12 | Discovery Call | `/discovery-call` |
-| 13 | 404 | `/404` | — | On-brand `not-found.tsx` done |
+| # | Page | Route | Dev |
+|---|------|-------|-----|
+| 12 | Discovery Call | `/discovery-call` | **Built** — Cal.com iframe only (no phone/session capture, unlike screening `/book`); client funnel entry point from landing "Still not sure?" |
+| 13 | 404 | `/404` | On-brand `not-found.tsx` done |
 
 ---
 
@@ -127,8 +133,21 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - [x] About (`/about`)
 - [x] The Bridge Programme (`/work-with-me/coaching`)
 - [x] Keynote Speaking (`/work-with-me/speaking`)
-- [ ] Clarity Call + Discovery Call embeds (speaking enquire CTAs point at `/discovery-call` — page not built yet)
+- [x] Speaking enquiry (`/work-with-me/speaking/enquire`) — Kit form + Resend notification; see "Booking split" below
+- [x] Discovery Call (`/discovery-call`) — Cal.com iframe, client funnel only
+- [ ] Clarity Call embed (separate from Discovery Call — 45 min, post–Bridge Map)
 - [ ] Work with Me hub (`/work-with-me`) + Consulting (`/work-with-me/consulting`)
+
+#### Booking split — two different tools for two audiences
+
+Cal.com optimises for *scheduling a time*; organiser enquiries are async (event details, then Caroline follows up), so they use different tools:
+
+| Flow | Audience | Tool | Entry point |
+|------|----------|------|--------------|
+| Discovery Call | Individual clients | Cal.com (15 min embed) | Landing "Still not sure?" → `/discovery-call` |
+| Speaking enquiry | Event organisers | Kit form + instant Resend email to Caroline | Speaking page CTAs → `/work-with-me/speaking/enquire` |
+
+Kit's own "new subscriber" notification is batched hourly and has no message content, so `/api/speaking/enquire` sends Caroline a direct Resend email with the full enquiry (organisation, event type, message, etc.) in real time, and separately adds the subscriber to Kit for future nurture. Cal.com webhook handling stays on the **screening** deploy only — see [integration-boundaries.md](integration-boundaries.md).
 
 ### Phase 4 — Polish + launch
 
@@ -169,9 +188,17 @@ Notes: PepTalk matches event planners to speakers (15k+ roster, 24h response). P
 4. Stabilise marketing dev cache issue (`npm run dev:marketing:clean` when chunks go missing)
 5. Build shared marketing components (spotlight card refactor, FAQ extract)
 6. Work with Me hub + Consulting page
-7. Discovery Call page (speaking enquire CTAs depend on it)
+7. Clarity Call page (45 min, post–Bridge Map — separate from Discovery Call)
 8. **Healing Revolution popup** — subscribe modal with locked copy (headline + subtext above); Kit list + dismiss UX TBD
 9. **PepTalk** — when site is finished, pitch [getapeptalk.com](https://getapeptalk.com/) to list Caroline for keynote bookings (Wellness & Culture / mental health / neurodiversity)
+
+### Caroline setup checklist (speaking enquiry + Discovery Call)
+
+1. Create Kit form **"Speaking enquiry"** + custom fields: `phone_number`, `company`, `event_type`, `event_date`, `message` (slugs must match exactly or Kit silently drops them)
+2. Decide the inbox for `SPEAKING_ENQUIRY_NOTIFY_EMAIL`
+3. Confirm Resend sending domain/from-address for marketing (or a new API key scoped to the marketing Vercel project)
+4. Create a Cal.com **Discovery Call** event (15 min) — separate from the Clarity Call event
+5. Add env vars to the **marketing** Vercel project: `KIT_SPEAKING_ENQUIRY_FORM_ID`, `RESEND_API_KEY`, `RESEND_FROM_EMAIL` (optional), `SPEAKING_ENQUIRY_NOTIFY_EMAIL`, `NEXT_PUBLIC_CAL_DISCOVERY_EMBED_URL`
 
 *Copy in `apps/marketing/content/` is source of truth. No changes without Caroline's approval.*
 

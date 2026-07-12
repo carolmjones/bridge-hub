@@ -73,7 +73,7 @@ function Eyebrow({ children, dark = false }: { children: string; dark?: boolean 
 function EnquireButton({ className = "" }: { className?: string }) {
   return (
     <Link
-      href={MARKETING_ROUTES.discoveryCall}
+      href={MARKETING_ROUTES.speakingEnquiry}
       className={`inline-flex h-14 min-w-[220px] items-center justify-center rounded-[14px] bg-btn-primary px-8 font-sans text-body-lg font-medium text-btn-text transition-all hover:-translate-y-0.5 hover:bg-btn-primary-hover ${className}`}
     >
       Enquire about booking
