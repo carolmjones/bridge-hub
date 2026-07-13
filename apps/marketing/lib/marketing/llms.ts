@@ -12,17 +12,19 @@ import {
 const LLMS_PAGE_SUMMARIES: Record<string, string> = {
   "/": "Landing — free class, Bridge Map CTA, 8-week programme overview",
   "/bridge-map":
-    "Free 15-minute nervous system screening using five validated clinical instruments",
+    "The Bridge Map — free nervous-system screening by Caroline Jones",
   "/free-class":
-    "Life Beyond Survival Mode — free class on why strategies fail and what must change first",
+    "Life Beyond Survival Mode — free video class on survival mode, nervous system patterns, and what needs to change first",
   "/about":
-    "Caroline Jones — registered nurse, therapist, founder; credentials and personal story",
+    "Caroline Jones — registered nurse, MSc Psychology, training in psychotherapy and counselling, founder; credentials and personal story",
   "/work-with-me/coaching":
     "The Bridge Programme — eight weeks, one to one, built around your nervous system profile",
   "/work-with-me/speaking":
     "Keynote speaking on stress, burnout, trauma, and nervous system regulation (Ireland)",
   "/work-with-me/speaking/enquire":
     "Enquire about booking Caroline for keynotes, talks, and workshops",
+  "/privacy": "Privacy policy for carolinejones.co (marketing site)",
+  "/terms": "Terms of use for carolinejones.co (marketing site)",
 };
 
 export function buildLlmsTxt(): string {
@@ -45,6 +47,10 @@ export function buildLlmsTxt(): string {
         "/work-with-me/speaking",
         "/work-with-me/speaking/enquire",
       ],
+    },
+    {
+      heading: "Legal",
+      paths: ["/privacy", "/terms"],
     },
   ];
 

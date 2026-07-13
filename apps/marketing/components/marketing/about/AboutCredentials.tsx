@@ -60,6 +60,16 @@ export function AboutCredentials() {
             </div>
           ))}
         </div>
+
+        <p className="mx-auto mt-10 max-w-[720px] text-center font-sans text-[15px] leading-[1.75] text-soft-ink">
+          Caroline is a dual-registered nurse with NMBI (children&apos;s and
+          adults) and holds a master&apos;s in psychology from the University of
+          South Wales, specialising in play therapy, with a thesis grounded in
+          attachment theory. She has published peer-reviewed research through
+          UNIFESP (Universidade Federal de São Paulo), is a member of IACP, and
+          is currently training in psychotherapy and counselling at PCI College
+          Ireland.
+        </p>
       </div>
     </section>
   );

@@ -3,9 +3,9 @@ import { SpeakingEnquiryPage } from "@/components/marketing/work-with-me/Speakin
 import { buildPageMetadata } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Enquire About Booking",
+  title: "Book Caroline Jones — Speaking Enquiry",
   description:
-    "Tell Caroline Jones about your event to enquire about keynotes, talks, and workshops.",
+    "Enquire about booking Caroline Jones for a keynote, talk, or workshop in Ireland. Share your event details and receive a personal reply within 24 hours.",
   path: "/work-with-me/speaking/enquire",
 });
 

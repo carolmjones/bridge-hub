@@ -19,9 +19,9 @@ import { LANDING_FAQS } from "@/lib/marketing/faq";
 import { buildPageMetadata, faqPageJsonLd } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Life Beyond Survival Mode",
+  title: "Life Beyond Survival Mode | Caroline Jones",
   description:
-    "Learn the 8-week framework that helps capable women understand why they keep getting stuck, what their body has been protecting, and how to begin creating change their nervous system can hold.",
+    "The Bridge Hub, founded by nurse and MSc Psychology graduate Caroline Jones, helps women in survival mode understand their nervous system — starting with a free screening and free class.",
   path: "/",
 });
 

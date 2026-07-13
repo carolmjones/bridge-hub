@@ -4,7 +4,7 @@ import { MarketingPrimaryCta } from "@/components/marketing/Nav";
 import { BridgeMapFounderPortrait } from "@/components/marketing/bridge-map/BridgeMapFounderPortrait";
 
 const BODY_PARAGRAPHS = [
-  "I am Caroline Jones — a nurse and therapist with a master\u2019s degree in psychology. I have spent five years working with women who feel exactly the way you do right now.",
+  "I am Caroline Jones, a nurse with a master's degree in psychology and currently training in psychotherapy and counselling. I have spent my career working with women who feel exactly the way you do right now, first through nursing and now through this work.",
   "I have also been on the other side. I know what it is to understand everything intellectually and still not be able to shift it. I know what it feels like when something is clearly happening in your body and you cannot find the words for it.",
   "I built The Bridge Map because I wanted women to have a structured, honest starting point — before a first session, before a first conversation, before they have to explain themselves from scratch to someone who does not yet know what they are carrying.",
 ] as const;
@@ -13,7 +13,7 @@ const EMPHASIS_PARAGRAPH =
   "The questions in The Bridge Map are designed to do what is hardest to do alone. Take what feels vague and overwhelming and give it structure. By the time you finish, what has been difficult to put into words will have a name.";
 
 const CREDENTIALS =
-  "Registered nurse · Therapist · MSc Psychology · 16+ years working with families and children · 5 years supporting women in stress, trauma, and nervous system regulation";
+  "Registered nurse (NMBI) · MSc Psychology · IACP Member · Training in psychotherapy and counselling · 16+ years working with families and children · Supporting women in stress, trauma, and nervous system regulation";
 
 export function BridgeMapFounder() {
   return (

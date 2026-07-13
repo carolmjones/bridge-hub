@@ -4,19 +4,20 @@ import type { Metadata } from "next";
 import { MarketingPrimaryCta } from "@/components/marketing/Nav";
 import { BridgeMapFounder } from "@/components/marketing/bridge-map/BridgeMapFounder";
 import { BridgeMapHero } from "@/components/marketing/bridge-map/BridgeMapHero";
+import { JsonLd } from "@/components/marketing/JsonLd";
 import { Disclaimer } from "@/components/ui/Disclaimer";
-import { buildPageMetadata } from "@/lib/marketing/seo";
+import { buildPageMetadata, faqPageJsonLd } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "The Bridge Map — Free Nervous System Screening",
+  title: "The Bridge Map — Free Nervous System Screening by Caroline Jones",
   description:
-    "A free 15-minute nervous system screening using five validated clinical instruments. Discover your profile and what your body has been protecting.",
+    "A free 15-minute nervous system screening built on five validated clinical instruments, designed by nurse and MSc Psychology graduate Caroline Jones. See your profile immediately — psychoeducational, not a diagnosis.",
   path: "/bridge-map",
 });
 
 const CREDIBILITY = [
   "Built on validated clinical instruments used by psychologists worldwide",
-  "Designed by a qualified nurse and psychological support practitioner",
+  "Designed by a dual-registered nurse with a master's in psychology",
   "Results shown immediately on screen",
   "Psychoeducational only — not a diagnosis or clinical assessment",
 ] as const;
@@ -34,7 +35,7 @@ const THIS_IS_FOR_YOU = [
 const DIFFERENT = [
   {
     title: "It uses validated clinical instruments.",
-    body: "The Bridge Map draws on five psychological tools used by researchers and clinicians worldwide. Your responses are scored using published methodology. This is not a personality quiz or a wellness checklist.",
+    body: "The Bridge Map draws on five psychological tools used by researchers and clinicians worldwide. Your responses are scored using published methodology. This is not a personality quiz or a wellness checklist. Together, the five instruments cover perceived stress, emotional wellbeing, trauma-related responses, disconnection, and nervous system overload — scored using each instrument's published methodology.",
   },
   {
     title: "It puts words to what you already know.",
@@ -103,6 +104,11 @@ const FAQS = [
 export default function BridgeMapPage() {
   return (
     <>
+      <JsonLd
+        data={faqPageJsonLd(
+          FAQS.map((item) => ({ question: item.q, answer: item.a })),
+        )}
+      />
       <BridgeMapHero />
 
       {/* CREDIBILITY STRIP */}
@@ -218,27 +224,30 @@ export default function BridgeMapPage() {
 
         <div className="relative mx-auto max-w-[760px]">
           <p className="mb-8 font-sans text-[11px] font-medium uppercase tracking-[0.18em] text-cream/55">
-            You have been here before
+            A pattern you already know
           </p>
           <h2 className="mx-auto max-w-[640px] font-serif text-[clamp(34px,7vw,52px)] leading-[1.1] text-cream">
-            It starts at 8am. Your jaw already tight.
+            Your jaw is tight before you&apos;ve even opened your eyes.
           </h2>
           <div
             className="mx-auto mt-8 h-px w-12 bg-cream/25"
             aria-hidden
           />
           <div className="mx-auto mt-8 max-w-[620px] space-y-6 font-sans text-[clamp(15px,2vw,17px)] leading-[1.75] text-cream/75">
-            <p>By midnight you are lying awake trying to work out why.</p>
             <p>
-              The more you chase the why, the less anything changes. All that
-              analysis may have been pulling you away from what works.
+              By midnight you&apos;re still trying to work out why. But the more
+              you chase the why, the less anything actually shifts.
             </p>
             <p>
-              Discovering your nervous system profile is where you stop chasing
-              the why and start learning to catch the stress in your body
-              earlier. So that when your jaw is tight at 8am, you have something
-              to reach for. Not just another midnight of trying to figure it
-              out.
+              Your nervous system profile isn&apos;t more analysis. It&apos;s
+              understanding the pattern itself: what triggers it, what it&apos;s
+              protecting you from, why it keeps showing up. Once you understand
+              the pattern, you can start building ways to manage it, and even
+              keep it from happening in the first place.
+            </p>
+            <p>
+              So the next tight jaw isn&apos;t just something to survive.
+              It&apos;s something you know what to do with.
             </p>
           </div>
         </div>

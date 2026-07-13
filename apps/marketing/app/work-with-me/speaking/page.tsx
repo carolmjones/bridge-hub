@@ -4,9 +4,9 @@ import { SpeakingPage } from "@/components/marketing/work-with-me/SpeakingPage";
 import { buildPageMetadata, serviceJsonLd } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Keynote Speaking",
+  title: "Keynote Speaker — Burnout, Stress & the Nervous System",
   description:
-    "Book Caroline Jones for keynotes on stress, burnout, trauma, and nervous system regulation — healthcare keynote specialist in Ireland.",
+    "Book Caroline Jones — registered nurse, MSc Psychology — for keynotes on burnout, stress, trauma, and nervous system regulation. Talks for healthcare teams and organisations across Ireland.",
   path: "/work-with-me/speaking",
 });
 
@@ -19,6 +19,7 @@ export default function SpeakingRoute() {
           description:
             "Keynotes, talks, and workshops on stress, burnout, trauma, and nervous system regulation.",
           path: "/work-with-me/speaking",
+          areaServed: "Ireland",
         })}
       />
       <SpeakingPage />

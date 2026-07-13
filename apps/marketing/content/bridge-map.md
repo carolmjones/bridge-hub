@@ -24,7 +24,7 @@ Free — takes 15 minutes
 Which nervous system profile are you?
 
 **[SUBHEADING]**  
-Most women spend years trying to figure out why they feel the way they do. The Bridge Map gives you a structured picture of what is actually happening — across five areas of your life — so you stop guessing and start understanding.
+Most women spend years trying to understand why they feel the way they do. The Bridge Map gives you a structured picture of what is happening across five areas of your life, helping you stop guessing and start understanding.
 
 **[BUTTON]**  
 Discover my profile — free
@@ -41,7 +41,7 @@ Built on five validated clinical instruments. Results on screen immediately. No 
 *Four short trust signals in a row. Small text. Horizontal on desktop, 2x2 grid on mobile.*
 
 - ✓ Built on validated clinical instruments used by psychologists worldwide
-- ✓ Designed by a qualified nurse and psychological support practitioner
+- ✓ Designed by a registered nurse with a master's in psychology, training in psychotherapy and counselling
 - ✓ Results shown immediately on screen
 - ✓ Psychoeducational only — not a diagnosis or clinical assessment
 
@@ -78,17 +78,17 @@ Discover my profile — free
 ## [EMOTIONAL ANCHOR — THE JAW/MIDNIGHT SECTION]
 
 **[EYEBROW]**  
-You have been here before
+A pattern you already know
 
 **[HEADING]**  
-It starts at 8am. Your jaw already tight.
+Your jaw is tight before you've even opened your eyes.
 
 **[BODY]**  
-By midnight you are lying awake trying to work out why.
+By midnight you're still trying to work out why. But the more you chase the why, the less anything actually shifts.
 
-The more you chase the why, the less anything changes. All that analysis may have been pulling you away from what works.
+Your nervous system profile isn't more analysis. It's understanding the pattern itself: what triggers it, what it's protecting you from, why it keeps showing up. Once you understand the pattern, you can start building ways to manage it, and even keep it from happening in the first place.
 
-Discovering your nervous system profile is where you stop chasing the why and start learning to catch the stress in your body earlier. So that when your jaw is tight at 8am, you have something to reach for. Not just another midnight of trying to figure it out.
+So the next tight jaw isn't just something to survive. It's something you know what to do with.
 
 ---
 
@@ -172,7 +172,7 @@ About Caroline
 Built by someone who has been on both sides of this work.
 
 **[BODY]**  
-I am Caroline Jones — a nurse and therapist with a master's degree in psychology. I have spent five years working with women who feel exactly the way you do right now.
+I am Caroline Jones, a nurse with a master's degree in psychology and currently training in psychotherapy and counselling. I have spent my career working with women who feel exactly the way you do right now, first through nursing and now through this work.
 
 I have also been on the other side. I know what it is to understand everything intellectually and still not be able to shift it. I know what it feels like when something is clearly happening in your body and you cannot find the words for it.
 
@@ -181,7 +181,7 @@ I built The Bridge Map because I wanted women to have a structured, honest start
 The questions in The Bridge Map are designed to do what is hardest to do alone. Take what feels vague and overwhelming and give it structure. By the time you finish, what has been difficult to put into words will have a name.
 
 **[CREDENTIALS LINE]**  
-Registered nurse · Therapist · MSc Psychology · 16+ years working with families and children · 5 years supporting women in stress, trauma, and nervous system regulation
+Registered nurse (NMBI) · MSc Psychology · IACP Member · Training in psychotherapy and counselling · 16+ years working with families and children · Supporting women in stress, trauma, and nervous system regulation
 
 **[BUTTON]**  
 Discover my profile — free

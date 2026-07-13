@@ -3,7 +3,7 @@ import { FreeClassPage } from "@/components/marketing/free-class/FreeClassPage";
 import { buildPageMetadata } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "Life Beyond Survival Mode — Free Class",
+  title: "Free Class: Life Beyond Survival Mode — with Caroline Jones",
   description:
     "A free class on why everything you have tried keeps failing, and what has to change first.",
   path: "/free-class",

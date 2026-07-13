@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 export const SITE_NAME = "The Bridge Hub";
 
 export const SITE_DESCRIPTION =
-  "Trauma-informed nervous system screening and the 8-week Bridge Programme for women ready to move beyond survival mode. Founded by Caroline Jones, registered nurse and therapist, Ireland.";
+  "Trauma-informed nervous system screening and the 8-week Bridge Programme for women ready to move beyond survival mode. Founded by Caroline Jones, registered nurse and MSc Psychology graduate, Ireland.";
 
 /** Caroline's social/profile URLs for Person schema sameAs — update when confirmed. */
 export const CAROLINE_SAME_AS: string[] = [
@@ -143,11 +143,11 @@ export function siteJsonLd(): Record<string, unknown> {
         "@type": "Person",
         "@id": personUrl,
         name: "Caroline Jones",
-        jobTitle: "Registered Nurse, Therapist, and Founder",
+        jobTitle: "Registered Nurse and Founder of The Bridge Hub",
         url: absoluteUrl("/about"),
         image: absoluteUrl("/images/caroline-web4-founder.jpg"),
         description:
-          "Dual registered nurse, psychological support practitioner, and founder of The Bridge Hub. Specialises in nervous system regulation, burnout, and trauma-informed psychoeducation.",
+          "Dual registered nurse (NMBI, Children's and Adults), MSc Psychology (University of South Wales), currently training in psychotherapy and counselling at PCI College Ireland, and founder of The Bridge Hub. Specialises in nervous system regulation, burnout, and trauma-informed psychoeducation.",
         worksFor: { "@id": orgId },
         knowsAbout: [
           "Nervous system regulation",
@@ -193,10 +193,12 @@ export function serviceJsonLd({
   name,
   description,
   path,
+  areaServed,
 }: {
   name: string;
   description: string;
   path: string;
+  areaServed?: string;
 }): Record<string, unknown> {
   return {
     "@context": "https://schema.org",
@@ -205,10 +207,14 @@ export function serviceJsonLd({
     description,
     url: absoluteUrl(path),
     provider: { "@id": personId() },
-    areaServed: {
-      "@type": "Country",
-      name: "Ireland",
-    },
+    ...(areaServed
+      ? {
+          areaServed:
+            areaServed === "Worldwide"
+              ? { "@type": "Text", name: "Worldwide" }
+              : { "@type": "Country", name: areaServed },
+        }
+      : {}),
   };
 }
 
@@ -218,11 +224,11 @@ export function aboutPersonJsonLd(): Record<string, unknown> {
     "@type": "Person",
     "@id": personId(),
     name: "Caroline Jones",
-    jobTitle: "Registered Nurse, Therapist, and Founder of The Bridge Hub",
+    jobTitle: "Registered Nurse and Founder of The Bridge Hub",
     url: absoluteUrl("/about"),
     image: absoluteUrl("/images/caroline-web4-founder.jpg"),
     description:
-      "Caroline Jones — nurse, therapist, and founder of The Bridge Hub. Dual registered nurse with NMBI, master's in psychology specialising in play therapy, currently in psychotherapy training at PCI College Ireland, member of IACP.",
+      "Caroline Jones — registered nurse (NMBI), MSc Psychology, currently training in psychotherapy and counselling at PCI College Ireland, IACP member, and founder of The Bridge Hub. Master's in psychology specialising in play therapy, with peer-reviewed research published through UNIFESP.",
     worksFor: { "@id": organizationId() },
     knowsAbout: [
       "Nervous system regulation",
@@ -254,4 +260,6 @@ export const INDEXABLE_ROUTES = [
   { path: "/work-with-me/coaching", title: "The Bridge Programme" },
   { path: "/work-with-me/speaking", title: "Keynote Speaking" },
   { path: "/work-with-me/speaking/enquire", title: "Speaking Enquiry" },
+  { path: "/privacy", title: "Privacy Policy" },
+  { path: "/terms", title: "Terms of Use" },
 ] as const;

@@ -38,6 +38,15 @@ export function ProgrammeIntro() {
           The Bridge Programme
         </h2>
 
+        <p className="mb-6 max-w-[560px] font-sans text-body-lg leading-[1.72] text-soft-ink">
+          The Bridge Hub is a nervous-system programme developed by Caroline
+          Jones, a registered nurse with a master&apos;s degree in Psychology
+          and ongoing training in psychotherapy and counselling. It includes The
+          Bridge Map, a free nervous-system screening informed by five validated
+          clinical instruments, and an eight-week, one-to-one programme for women
+          who feel stuck in survival mode.
+        </p>
+
         <p className="mb-9 max-w-[520px] font-sans text-body-lg text-soft-ink">
           An 8 week framework for women who are ready to understand why stress,
           past experiences, and old patterns have been limiting what they can

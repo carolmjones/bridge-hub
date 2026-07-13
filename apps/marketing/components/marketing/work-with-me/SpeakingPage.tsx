@@ -7,9 +7,10 @@ import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 import { easeOut, fadeUp, staggerContainer } from "@/lib/marketing/motion";
 
 const HERO_BODY = [
-  "Caroline Jones is a registered nurse, master's in psychology with a certificate in software engineering and psychotherapy trainee, bringing a rare mix of clinical depth, technical skills and lived experience to every talk she gives. As the founder of The Bridge Hub, she has built her career on turning what she has lived through into something practical other people can actually use.",
-  "Her story, holding others through their worst days as a nurse, then living through her own, connects with people on a deep level. Organisations looking for a genuinely honest take on stress, burnout, and trauma are drawn to her message because it doesn't oversimplify what healing actually takes.",
-  "Caroline's talks don't just inform, they change how a room understands stress in the body. She helps healthcare teams and organisations see trauma, burnout, and nervous system regulation in a new light, breaking down the usual stigma and giving people something to actually do differently.",
+  "Caroline Jones is a registered nurse with an MSc in Psychology, currently training in psychotherapy and counselling. She also holds a first class honours qualification in software engineering, bringing an unusual combination of clinical insight, psychological understanding and technical fluency to her work.",
+  "As the founder of The Bridge Hub, Caroline turns complex ideas about stress, trauma, burnout and the nervous system into practical tools people can understand and use.",
+  "Her perspective has been shaped by both professional and personal experience. After spending years supporting patients and families through some of the hardest moments of their lives, Caroline found herself facing profound challenges of her own. This allows her to speak about stress and healing with honesty, depth and humanity, without simplifying what recovery truly requires.",
+  "Caroline's talks do more than share information. They change how people understand stress in the body. She helps healthcare teams and organisations recognise the patterns beneath burnout and trauma, challenge the stigma surrounding them and identify practical changes that can create safer, healthier ways of working.",
 ] as const;
 
 const STORY_PARAGRAPHS = [
@@ -22,7 +23,7 @@ const STORY_PARAGRAPHS = [
 const KEYNOTE_BODY = [
   "Caroline Jones has spent years inside the systems meant to help people heal, and seen firsthand how often they fail.",
   "This keynote was built around one question: if healing actually worked the way we're told it does, why do so many capable people stay stuck?",
-  "Caroline redefines healing as something that has to be built, not waited for. Drawing on nursing, a psychology master's, an honours degree in software engineering, and now psychotherapy training, she challenges the idea that understanding your story is enough, and reveals what most burnout and wellbeing programmes leave out entirely. She shows audiences what's missing when people know exactly what's wrong and still can't change it, and introduces her own approach to closing that gap. This keynote dares your team to stop managing symptoms and start understanding the pattern underneath them.",
+  "Caroline redefines healing as something that has to be built, not waited for. Drawing on nursing, a psychology master's, an honours degree in software engineering, and training in psychotherapy and counselling, she challenges the idea that understanding your story is enough, and reveals what most burnout and wellbeing programmes leave out entirely. She shows audiences what's missing when people know exactly what's wrong and still can't change it, and introduces her own approach to closing that gap. This keynote dares your team to stop managing symptoms and start understanding the pattern underneath them.",
 ] as const;
 
 const KEYNOTE_OUTCOMES = [
@@ -118,10 +119,12 @@ export function SpeakingPage() {
               Keynote Speaking
             </span>
 
-            <h1 className="max-w-[580px] font-serif text-[clamp(38px,6.5vw,60px)] font-normal leading-[1.04] tracking-[-0.02em] text-[#FAF7EF]">
-              An Inspiring, Honest Take on{" "}
-              <span className="italic text-[#C8D4B8]">Healing.</span>
+            <h1 className="mb-2 max-w-[580px] font-serif text-[clamp(38px,6.5vw,60px)] font-normal leading-[1.04] tracking-[-0.02em] text-[#FAF7EF]">
+              Keynote Speaker on Burnout, Stress &amp; the Nervous System
             </h1>
+            <p className="max-w-[580px] font-serif text-[clamp(22px,3.5vw,32px)] font-normal italic leading-[1.2] text-[#C8D4B8]">
+              An inspiring, honest take on healing.
+            </p>
 
             <div className="liquid-glass mt-5 max-w-[580px] rounded-[18px] px-5 py-4 md:px-6 md:py-5">
               <p className="font-serif text-[clamp(18px,2.8vw,26px)] font-normal leading-[1.32] text-[#E8EADF]">
@@ -151,22 +154,6 @@ export function SpeakingPage() {
               {paragraph}
             </p>
           ))}
-        </div>
-      </section>
-
-      <section className="border-t border-line-stone bg-warm-paper px-6 py-[clamp(72px,9vw,96px)]">
-        <div className="mx-auto max-w-[820px]">
-          <Eyebrow>More About Caroline Jones</Eyebrow>
-          <div className="space-y-5 font-sans text-body-lg leading-[1.78] text-soft-ink">
-            {STORY_PARAGRAPHS.map((paragraph, index) => (
-              <p
-                key={paragraph.slice(0, 40)}
-                className={index === STORY_PARAGRAPHS.length - 1 ? "font-medium text-ink" : undefined}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -310,6 +297,22 @@ export function SpeakingPage() {
               </motion.blockquote>
             ))}
           </motion.div>
+        </div>
+      </section>
+
+      <section className="border-t border-line-stone bg-warm-paper px-6 py-[clamp(72px,9vw,96px)]">
+        <div className="mx-auto max-w-[820px]">
+          <Eyebrow>More About Caroline Jones</Eyebrow>
+          <div className="space-y-5 font-sans text-body-lg leading-[1.78] text-soft-ink">
+            {STORY_PARAGRAPHS.map((paragraph, index) => (
+              <p
+                key={paragraph.slice(0, 40)}
+                className={index === STORY_PARAGRAPHS.length - 1 ? "font-medium text-ink" : undefined}
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
         </div>
       </section>
 

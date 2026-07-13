@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const BODY_PARAGRAPHS = [
-  "I have walked this path — first as a nurse, then as a therapist.",
+  "I have walked this path — first as a nurse, now through years of my own healing work and training in psychotherapy and counselling.",
   "Embracing change and evolving is not just what I teach — it is something I have lived. I have been on my own healing path for five years. I have felt the frustration, the setbacks, and the moments of wondering if anything would actually shift. I know firsthand what becomes possible when stored patterns in the body start to change.",
   "What I kept seeing with clients was the same thing: intelligent, capable women who had tried everything and still could not move forward. Not because they were not trying. Because the work was not reaching the right level.",
 ] as const;

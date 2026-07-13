@@ -7,9 +7,9 @@ import { AboutMyStory } from "@/components/marketing/about/AboutMyStory";
 import { aboutPersonJsonLd, buildPageMetadata } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
-  title: "About Caroline Jones",
+  title: "About Caroline Jones — Nurse, MSc Psychology & Founder",
   description:
-    "Caroline Jones — nurse, therapist, and founder of The Bridge Hub. A personal story about patterns, safety, and building capacity from the inside out.",
+    "Caroline Jones — registered nurse, MSc Psychology, currently training in psychotherapy and counselling, and founder of The Bridge Hub. Her story, her credentials, and why she works with women in survival mode.",
   path: "/about",
 });
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useCallback, useRef, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -95,17 +95,42 @@ function StageContentPanel({
       animate={contentVariants.animate}
       exit={contentVariants.exit}
       transition={{ duration: reduceMotion ? 0 : 0.28, ease: contentEase }}
-      className="rounded-[24px] border border-[rgba(31,38,34,0.14)] bg-[#FFFDF8] px-6 py-7 shadow-[0_18px_44px_-36px_rgba(31,38,34,0.18)] sm:px-8 sm:py-8"
+      className="liquid-glass-light rounded-[24px] px-6 py-7 shadow-[0_18px_44px_-36px_rgba(31,38,34,0.18)] sm:px-8 sm:py-8"
     >
-      <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
+      <div className="flex flex-col gap-5">
         <div className="min-w-0 flex-1 space-y-4">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-[#B58A47]">
-              Phase {stage.id}
-            </span>
-            <span className="font-sans text-[11px] text-[#68665F]">
-              {stage.id} of {PROGRAMME_STAGES.length}
-            </span>
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="font-sans text-[10px] font-medium uppercase tracking-[0.16em] text-[#B58A47]">
+                Phase {stage.id}
+              </span>
+              <span className="font-sans text-[11px] text-[#68665F]">
+                {stage.id} of {PROGRAMME_STAGES.length}
+              </span>
+            </div>
+
+            {showNav ? (
+              <div className="flex shrink-0 items-center gap-2">
+                <button
+                  type="button"
+                  onClick={onPrevious}
+                  disabled={stage.id === 1}
+                  aria-label="Previous phase"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(31,38,34,0.14)] bg-[#F7F2E8] text-[#1F2622] transition-colors hover:bg-[#FFFDF8] disabled:cursor-not-allowed disabled:opacity-35 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B58A47]/60"
+                >
+                  <ChevronLeft className="h-4 w-4" aria-hidden />
+                </button>
+                <button
+                  type="button"
+                  onClick={onNext}
+                  disabled={stage.id === PROGRAMME_STAGES.length}
+                  aria-label="Next phase"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(31,38,34,0.14)] bg-[#F7F2E8] text-[#1F2622] transition-colors hover:bg-[#FFFDF8] disabled:cursor-not-allowed disabled:opacity-35 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B58A47]/60"
+                >
+                  <ChevronRight className="h-4 w-4" aria-hidden />
+                </button>
+              </div>
+            ) : null}
           </div>
           <h3 className="font-serif text-[clamp(22px,4vw,30px)] font-normal leading-[1.14] text-[#1F2622]">
             {stage.fullTitle}
@@ -114,29 +139,6 @@ function StageContentPanel({
             {stage.description}
           </p>
         </div>
-
-        {showNav ? (
-          <div className="flex shrink-0 items-center gap-2 self-start">
-            <button
-              type="button"
-              onClick={onPrevious}
-              disabled={stage.id === 1}
-              aria-label="Previous phase"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(31,38,34,0.14)] bg-[#F7F2E8] text-[#1F2622] transition-colors hover:bg-[#FFFDF8] disabled:cursor-not-allowed disabled:opacity-35 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B58A47]/60"
-            >
-              <ChevronLeft className="h-4 w-4" aria-hidden />
-            </button>
-            <button
-              type="button"
-              onClick={onNext}
-              disabled={stage.id === PROGRAMME_STAGES.length}
-              aria-label="Next phase"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(31,38,34,0.14)] bg-[#F7F2E8] text-[#1F2622] transition-colors hover:bg-[#FFFDF8] disabled:cursor-not-allowed disabled:opacity-35 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B58A47]/60"
-            >
-              <ChevronRight className="h-4 w-4" aria-hidden />
-            </button>
-          </div>
-        ) : null}
       </div>
     </motion.div>
   );
@@ -145,7 +147,6 @@ function StageContentPanel({
 export function ProgrammeStructure() {
   const finePointer = useFinePointer();
   const reduceMotion = useReducedMotion();
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
 
   const [activeStage, setActiveStage] = useState(1);
@@ -201,16 +202,6 @@ export function ProgrammeStructure() {
     );
   };
 
-  useEffect(() => {
-    const tab = tabRefs.current[activeStage - 1];
-    if (!tab) return;
-    tab.scrollIntoView({
-      behavior: reduceMotion ? "auto" : "smooth",
-      block: "nearest",
-      inline: "center",
-    });
-  }, [activeStage, reduceMotion]);
-
   const handleSectionKeyDown = (event: KeyboardEvent<HTMLElement>) => {
     if (event.key === "ArrowLeft") {
       event.preventDefault();
@@ -230,9 +221,21 @@ export function ProgrammeStructure() {
       ref={sectionRef}
       aria-labelledby="programme-structure-heading"
       onKeyDown={handleSectionKeyDown}
-      className="border-t border-line-stone bg-[#F7F2E8] px-6 py-[clamp(72px,9vw,96px)]"
+      className="relative overflow-hidden border-t border-line-stone bg-[#F7F2E8] px-6 py-[clamp(72px,9vw,96px)]"
     >
-      <div className="mx-auto max-w-[1040px]">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
+        <Image
+          src="/images/bridge.png"
+          alt=""
+          fill
+          unoptimized
+          sizes="100vw"
+          className="object-contain object-[center_48%] opacity-[0.4] sm:opacity-[0.5]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F7F2E8]/90 via-[#F7F2E8]/40 to-[#F7F2E8]/76" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-[1040px]">
         <Eyebrow>THE STRUCTURE</Eyebrow>
         <h2
           id="programme-structure-heading"
@@ -245,21 +248,8 @@ export function ProgrammeStructure() {
         </p>
 
         <div className="relative mt-10 lg:mt-12">
-          {/* Bridge artwork — clean centrepiece, no overlays */}
-          <div className="overflow-hidden rounded-[28px] border border-[rgba(31,38,34,0.1)] bg-[#FFFDF8] px-4 py-6 shadow-[0_24px_60px_-44px_rgba(31,38,34,0.22)] sm:px-8 sm:py-8">
-            <Image
-              src="/images/bridge-programme-structure2.png"
-              alt="Four-stage Bridge Programme structure from understanding to integration"
-              width={1672}
-              height={941}
-              unoptimized
-              sizes="(max-width: 1024px) 100vw, 1040px"
-              className="mx-auto h-auto w-full max-w-[920px] object-contain"
-            />
-          </div>
-
-          {/* Desktop horizontal stepper — below the bridge */}
-          <div className="relative mt-10 hidden lg:block">
+          {/* Desktop horizontal stepper */}
+          <div className="relative hidden lg:block">
             <div
               className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-8 z-[1] h-px bg-[rgba(196,165,116,0.4)]"
               aria-hidden
@@ -288,37 +278,33 @@ export function ProgrammeStructure() {
             </div>
           </div>
 
-          {/* Mobile tab selector */}
-          <div className="mt-8 lg:hidden">
+          {/* Mobile stepper */}
+          <div className="relative lg:hidden">
             <div
-              className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-              role="tablist"
-              aria-label="Programme phases"
+              className="pointer-events-none absolute left-[12.5%] right-[12.5%] top-7 z-[1] h-px bg-[rgba(196,165,116,0.4)]"
+              aria-hidden
             >
-              {PROGRAMME_STAGES.map((stage, index) => {
-                const selected = activeStage === stage.id;
-                return (
-                  <button
-                    key={stage.id}
-                    ref={(node) => {
-                      tabRefs.current[index] = node;
-                    }}
-                    type="button"
-                    role="tab"
-                    aria-selected={selected}
-                    aria-controls={mobilePanelId}
-                    onClick={() => selectStage(stage.id)}
-                    className={`shrink-0 rounded-full border px-4 py-2.5 font-sans text-[12px] font-bold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B58A47]/60 ${
-                      selected
-                        ? "border-[#B58A47] bg-[#243128] text-[#FFFDF8]"
-                        : "border-[#D9C3A0] bg-[#FFFDF8] text-[#68665F]"
-                    }`}
-                  >
-                    <span className="mr-1.5 font-medium">{stage.id}</span>
-                    {stage.tabLabel}
-                  </button>
-                );
-              })}
+              <motion.div
+                className="h-full origin-left bg-[#B58A47]"
+                animate={{ scaleX: progressScale }}
+                transition={{ duration: reduceMotion ? 0 : 0.35, ease: contentEase }}
+                style={{ width: "100%" }}
+              />
+            </div>
+
+            <div className="relative z-[2] grid grid-cols-4 gap-1 sm:gap-2">
+              {PROGRAMME_STAGES.map((stage) => (
+                <StructureStage
+                  key={stage.id}
+                  stage={stage}
+                  isActive={activeStage === stage.id}
+                  isFinePointer={finePointer}
+                  panelId={mobilePanelId}
+                  onSelect={selectStage}
+                  onHover={hoverStage}
+                  onLeave={leaveStage}
+                />
+              ))}
             </div>
           </div>
 
@@ -329,12 +315,15 @@ export function ProgrammeStructure() {
                 key={`mobile-${currentStage.id}`}
                 stage={currentStage}
                 panelId={mobilePanelId}
+                showNav
+                onPrevious={goToPrevious}
+                onNext={goToNext}
               />
             </AnimatePresence>
           </div>
 
           {/* Desktop shared panel */}
-          <div className="mt-8 hidden lg:block">
+          <div className="mt-[52px] hidden lg:block">
             <AnimatePresence mode="wait" initial={false}>
               <StageContentPanel
                 key={`desktop-${currentStage.id}`}

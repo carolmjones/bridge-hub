@@ -2,9 +2,9 @@ import Image from "next/image";
 
 const HERO_PARAGRAPHS = [
   "You are not a diagnosis. Not a label. Not a disorder.",
-  "You're carrying a pattern you learned before you had any say in it. A default your body picked when it didn't know another way.",
-  "That's why this starts with understanding your pattern. Finding the root. Mapping your default, not managing your symptoms.",
-  "I know this as a nurse. I know it as a patient. I know it as a mother. I know this as a therapist.",
+  "You are carrying a pattern you learned before you had any say in it. A default your body chose when it did not know another way.",
+  "That is why this starts with understanding your pattern. Finding the root. Mapping your default, rather than simply managing your symptoms.",
+  "I know this as a nurse. I know it as a patient. I know it as a mother. And I know it through the one-to-one work I now do with women who feel stuck in survival mode.",
 ] as const;
 
 export function AboutHero() {
@@ -31,8 +31,11 @@ export function AboutHero() {
           </span>
 
           <h1 className="max-w-[520px] font-serif text-[clamp(36px,7vw,52px)] font-normal leading-[1.08] text-ink">
-            We&apos;re rethinking what it means to heal.
+            Caroline Jones
           </h1>
+          <p className="mt-3 max-w-[520px] font-serif text-[clamp(22px,4vw,28px)] font-normal italic leading-[1.2] text-soft-ink">
+            Rethinking what it means to heal.
+          </p>
 
           <div className="mb-7 mt-5 h-px w-14 bg-line-stone" aria-hidden />
 

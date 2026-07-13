@@ -9,10 +9,12 @@ Everything for the marketing workstream lives in **`apps/marketing/`**.
 | # | Doc | Why |
 |---|-----|-----|
 | 1 | [roadmap_marketing.md](../roadmap_marketing.md) | Pages, build phases, what's next |
-| 2 | [design-system.md](design-system.md) | Colors, typography, motion, sections |
-| 3 | [../integration-boundaries.md](../integration-boundaries.md) | What marketing may not touch |
-| 4 | [brand.md](brand.md) | Voice and positioning |
-| 5 | `apps/marketing/content/` | Locked copy — [copy-briefs.md](../../apps/marketing/content/copy-briefs.md) |
+| 2 | [seo-ai-discoverability.md](seo-ai-discoverability.md) | SEO + AI research, definitions, Caroline launch checklist |
+| 3 | [bridge-hub-implementation-roadmap.md](bridge-hub-implementation-roadmap.md) | Audit task list — credentials, copy, conversion (Phase 4c) |
+| 4 | [design-system.md](design-system.md) | Colors, typography, motion, sections |
+| 5 | [../integration-boundaries.md](../integration-boundaries.md) | What marketing may not touch |
+| 6 | [brand.md](brand.md) | Voice and positioning |
+| 7 | `apps/marketing/content/` | Locked copy — [copy-briefs.md](../../apps/marketing/content/copy-briefs.md) |
 
 Run `git status` + `git log -10` after reading. Screening: [roadmap_screening.md](../roadmap_screening.md).
 

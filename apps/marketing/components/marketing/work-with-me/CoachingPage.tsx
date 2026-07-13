@@ -1,5 +1,6 @@
 "use client";
 
+import { Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
@@ -192,8 +193,8 @@ export function CoachingPage() {
           <Eyebrow>WHY THIS WORKS</Eyebrow>
           <div className="space-y-5 font-sans text-body-lg leading-[1.78] text-soft-ink">
             <p className="font-serif text-[clamp(28px,5vw,40px)] font-normal leading-[1.12] text-ink">
-              Most support starts with a plan and hopes your body cooperates. We
-              start with your body.
+              Most support hands you a plan and hopes your body cooperates. We
+              start by understanding your pattern first.
             </p>
             <p>
               Before week one, you complete The Bridge Map, so we&apos;re never
@@ -315,6 +316,10 @@ export function CoachingPage() {
               This isn&apos;t about becoming a different person. It&apos;s about your own
               system finally working with you. By the end, you can:
             </h2>
+            <p className="mx-auto mt-5 max-w-[600px] font-sans text-[15px] leading-[1.72] text-cream/75">
+              Every nervous system is different, and I won&apos;t promise a timeline.
+              But this is the kind of change women in this work describe:
+            </p>
           </motion.div>
 
           <motion.div
@@ -362,64 +367,156 @@ export function CoachingPage() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-line-stone px-6 py-[clamp(72px,9vw,96px)]">
-        <div className="pointer-events-none absolute inset-0" aria-hidden>
-          <Image
-            src="/images/background_section3_coaching-page.png"
-            alt=""
-            fill
-            unoptimized
-            sizes="100vw"
-            className="object-cover object-bottom"
-          />
-        </div>
+      <section className="relative overflow-hidden border-t border-line-stone bg-cream px-6 py-[clamp(80px,10vw,112px)]">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(35,40,36,0.04)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:linear-gradient(180deg,#000,transparent_92%)]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(190,194,169,0.16),transparent_68%)] blur-[48px]"
+          aria-hidden
+        />
 
-        <div className="relative z-10 mx-auto grid max-w-[980px] grid-cols-1 gap-8 lg:grid-cols-2">
-          <div className="rounded-[24px] border border-line-stone bg-white p-7">
-            <Eyebrow>IS THIS RIGHT FOR YOU</Eyebrow>
-            <div className="space-y-5 font-sans text-body-lg leading-[1.78] text-soft-ink">
-              <p>This work goes deep, so it isn&apos;t for everyone right now, and that&apos;s okay.</p>
-              <p>
-                It&apos;s for you if you&apos;re carrying more than you let on, you&apos;re
-                curious about what your body has been doing, and you&apos;re ready to
-                stop looking for the next quick fix and do the real thing.
-              </p>
-              <p>
-                It&apos;s not the right time if you&apos;re in acute crisis and need urgent
-                support first, or you want someone to hand you a plan you can
-                follow without looking at what&apos;s underneath. That&apos;s not this. And
-                if you&apos;re in crisis,{" "}
-                <Link
-                  href={MARKETING_ROUTES.urgentSupport}
-                  className="font-medium text-ink underline underline-offset-[3px]"
-                >
-                  there&apos;s help here
-                </Link>{" "}
-                that matters more than any programme.
-              </p>
+        <motion.div
+          className="relative z-10 mx-auto max-w-[960px]"
+          initial={reduceMotion ? false : "hidden"}
+          whileInView={reduceMotion ? undefined : "visible"}
+          viewport={{ once: true, margin: "-60px" }}
+          variants={fadeUp}
+        >
+          <p className="mx-auto mb-12 max-w-[680px] text-center font-serif text-[clamp(28px,5vw,40px)] font-normal leading-[1.14] text-ink md:mb-14">
+            This work goes deep, so it isn&apos;t for everyone right now, and
+            that&apos;s okay.
+          </p>
+
+          <div className="overflow-hidden rounded-[32px] border border-line-stone/70 bg-white shadow-[0_36px_90px_-52px_rgba(35,40,36,0.22)]">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              <div className="border-b border-line-stone/60 px-8 py-10 md:px-10 md:py-12 lg:border-b-0 lg:border-r">
+                <Eyebrow>Is this right for you</Eyebrow>
+
+                <div className="mt-8 space-y-8">
+                  <div className="flex items-start gap-4">
+                    <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#E7EAD7] to-[#9EAA84] shadow-[0_10px_24px_-14px_rgba(142,154,124,0.65)]">
+                      <Check
+                        className="h-[18px] w-[18px] stroke-[2.5px] text-deep-card"
+                        aria-hidden
+                      />
+                    </span>
+                    <p className="font-sans text-[15px] leading-[1.78] text-soft-ink">
+                      It&apos;s for you if you&apos;re carrying more than you let on,
+                      you&apos;re curious about what your body has been doing, and
+                      you&apos;re ready to stop looking for the next quick fix and do
+                      the real thing.
+                    </p>
+                  </div>
+
+                  <div className="flex items-start gap-4 border-t border-line-stone/50 pt-8">
+                    <span className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line-stone bg-warm-paper">
+                      <span
+                        className="h-[2px] w-3.5 rounded-full bg-sage"
+                        aria-hidden
+                      />
+                    </span>
+                    <p className="font-sans text-[15px] leading-[1.78] text-soft-ink">
+                      It&apos;s not the right time if you&apos;re in acute crisis and
+                      need urgent support first, or you want someone to hand you a
+                      plan you can follow without looking at what&apos;s underneath.
+                      That&apos;s not this. And if you&apos;re in crisis,{" "}
+                      <Link
+                        href={MARKETING_ROUTES.urgentSupport}
+                        className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-[#6B7060]"
+                      >
+                        there&apos;s help here
+                      </Link>{" "}
+                      that matters more than any programme.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="relative overflow-hidden bg-deep-card px-8 py-10 text-cream md:px-10 md:py-12">
+                <div
+                  className="pointer-events-none absolute -right-16 -top-16 h-[280px] w-[280px] rounded-full bg-[radial-gradient(circle,rgba(142,154,124,0.28),transparent_68%)] blur-[2px]"
+                  aria-hidden
+                />
+                <div
+                  className="pointer-events-none absolute -bottom-20 -left-12 h-[300px] w-[300px] rounded-full bg-[radial-gradient(circle,rgba(218,206,191,0.12),transparent_70%)]"
+                  aria-hidden
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(250,247,239,0.05)_1px,transparent_1px)] [background-size:22px_22px] [mask-image:radial-gradient(circle_at_50%_35%,#000,transparent_78%)]"
+                  aria-hidden
+                />
+
+                <div className="relative">
+                  <Eyebrow dark>Limited places</Eyebrow>
+                  <p className="mt-2 font-serif text-[clamp(28px,4.5vw,36px)] font-normal leading-[1.14] text-cream">
+                    I work with a small number of women at a time.
+                  </p>
+                  <p className="mt-5 font-sans text-[15px] leading-[1.78] text-cream/75">
+                    One to one, done properly, means places are limited. When
+                    they&apos;re full, they&apos;re full, and the next round is a
+                    waitlist. If you know this is the work you need, start now.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="rounded-[24px] border border-line-stone bg-warm-paper p-7">
-            <Eyebrow>LIMITED PLACES</Eyebrow>
-            <p className="font-serif text-[clamp(28px,5vw,38px)] font-normal leading-[1.12] text-ink">
-              I work with a small number of women at a time.
-            </p>
-            <p className="mt-5 font-sans text-body-lg leading-[1.78] text-soft-ink">
-              One to one, done properly, means places are limited. When they&apos;re
-              full, they&apos;re full, and the next round is a waitlist. If you know
-              this is the work you need, start now.
-            </p>
-          </div>
-        </div>
+        </motion.div>
       </section>
 
-      <section className="px-6 py-[clamp(72px,9vw,104px)]">
-        <div className="relative mx-auto max-w-[900px] overflow-hidden rounded-[28px] border border-line-stone px-6 py-[clamp(48px,7vw,72px)] text-center shadow-[0_32px_70px_-40px_rgba(35,40,36,0.3)]">
+      <section className="relative overflow-hidden bg-cream px-6 pb-[clamp(80px,10vw,112px)] pt-[clamp(20px,4vw,36px)]">
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(rgba(35,40,36,0.04)_1px,transparent_1px)] [background-size:28px_28px]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute left-1/2 top-0 h-[360px] w-[720px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(190,194,169,0.14),transparent_68%)] blur-[48px]"
+          aria-hidden
+        />
+
+        <div className="relative mx-auto max-w-[900px] overflow-hidden rounded-[28px] border border-line-stone/55 px-6 py-[clamp(48px,7vw,72px)] text-center shadow-[0_28px_70px_-50px_rgba(35,40,36,0.2)]">
+          <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+            <div className="absolute inset-0 md:hidden">
+              <Image
+                src="/images/coaching-hero-mobile.png"
+                alt=""
+                fill
+                unoptimized
+                quality={90}
+                sizes="(max-width: 900px) 100vw, 900px"
+                className="object-cover object-bottom brightness-[1.08] saturate-[0.9]"
+              />
+            </div>
+            <div className="absolute inset-0 hidden md:block">
+              <Image
+                src="/images/coaching-hero-desktop.png"
+                alt=""
+                fill
+                unoptimized
+                quality={90}
+                sizes="(max-width: 900px) 100vw, 900px"
+                className="object-cover object-bottom brightness-[1.08] saturate-[0.9]"
+              />
+            </div>
+          </div>
           <div
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(250,247,239,0.94),rgba(246,240,230,0.78)_48%,rgba(218,206,191,0.55))]"
+            className="pointer-events-none absolute inset-0 z-[1]"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(250,247,239,0.94) 0%, rgba(250,247,239,0.86) 42%, rgba(250,247,239,0.62) 100%)",
+            }}
             aria-hidden
           />
-          <div className="relative">
+          <div
+            className="pointer-events-none absolute inset-0 z-[1]"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 22%, rgba(250,247,239,0.88) 0%, transparent 58%)",
+            }}
+            aria-hidden
+          />
+          <div className="relative z-[2]">
             <Eyebrow>THE FIRST STEP</Eyebrow>
             <h2 className="mx-auto max-w-[620px] font-serif text-[clamp(30px,6vw,42px)] font-normal leading-[1.12] text-ink">
               The programme opens after your Bridge Map and a Clarity Call, so by
@@ -434,16 +531,23 @@ export function CoachingPage() {
                 Discover my profile — free
               </Link>
             </div>
-            <p className="mt-4 font-sans text-[13px] text-sage">
+            <p className="mt-4 font-sans text-[13px] text-soft-ink">
               Not ready yet?{" "}
               <Link
                 href={MARKETING_ROUTES.freeClass}
-                className="underline underline-offset-[3px] hover:text-[#6B7060]"
+                className="font-medium text-ink underline underline-offset-[3px] hover:text-soft-ink"
               >
                 Watch the free class
               </Link>{" "}
               first.
             </p>
+            <div className="liquid-glass-light mx-auto mt-6 max-w-[540px] rounded-[18px] px-5 py-4 sm:px-6 sm:py-5">
+              <p className="relative font-sans text-[12px] leading-[1.6] text-soft-ink">
+                The Bridge Programme is trauma-informed coaching and psychoeducation.
+                It is not therapy, treatment, or a substitute for individual clinical
+                care. If therapy is what you need, I&apos;ll tell you that honestly.
+              </p>
+            </div>
           </div>
         </div>
       </section>

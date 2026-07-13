@@ -58,10 +58,10 @@ export function BridgeMapHero() {
             Which nervous system profile are you?
           </h1>
           <p className="mt-6 max-w-[560px] font-sans text-body-lg leading-[1.72] text-cream/80">
-            Most women spend years trying to figure out why they feel the way
+            Most women spend years trying to understand why they feel the way
             they do. The Bridge Map gives you a structured picture of what is
-            actually happening — across five areas of your life — so you stop
-            guessing and start understanding.
+            happening across five areas of your life, helping you stop guessing
+            and start understanding.
           </p>
           <div className="mt-10 flex flex-col items-start gap-4">
             <MarketingPrimaryCta>Discover my profile — free</MarketingPrimaryCta>

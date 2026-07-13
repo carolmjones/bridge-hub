@@ -48,33 +48,31 @@ export function FreeClassLanding({
         <div className="relative mx-auto max-w-[1120px] px-6 py-[clamp(56px,8vw,88px)] lg:min-h-[clamp(560px,72vh,700px)] lg:py-[clamp(64px,8vw,96px)]">
           <div ref={heroFormRef} className="max-w-[520px] lg:pt-4">
             <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-line-stone bg-white/55 px-4 py-1.5 font-sans text-[10px] font-medium uppercase tracking-[0.14em] text-[#6B7060]">
-              Free class
+              Free video class
             </span>
-
-            <div className="mb-6 space-y-1.5 font-sans text-body-lg leading-[1.65] text-soft-ink">
-              <p>
-                You&apos;ve tried the apps. Saved the posts. Maybe even bought
-                the books.
-              </p>
-              <p>Some of it helped, for a moment. None of it stuck.</p>
-              <p>
-                And somewhere along the way, you started wondering if the problem
-                was you.
-              </p>
-              <p>
-                It wasn&apos;t. Most advice was never built as a system. It
-                wasn&apos;t grounded in how your body actually responds under
-                chronic stress. It wasn&apos;t offered by someone trained in what
-                your nervous system needs to feel safe enough to change.
-              </p>
-            </div>
 
             <h1 className="mb-4 max-w-[520px] font-serif text-[clamp(42px,6vw,60px)] font-normal leading-[1.02] text-ink">
               Life Beyond Survival Mode
             </h1>
-            <p className="mb-8 max-w-[480px] font-sans text-body-lg leading-[1.72] text-soft-ink">
-              A free class on why everything you have tried keeps failing, and
-              what has to change first.
+            <p className="mb-6 max-w-[520px] font-sans text-body-lg leading-[1.72] text-soft-ink">
+              Why capable women keep getting pulled back into survival mode, what
+              the nervous system may be protecting, and what needs to change first.
+            </p>
+
+            <div className="mb-6 space-y-1.5 font-sans text-body-lg leading-[1.65] text-soft-ink">
+              <p>
+                You have tried the apps, saved the posts and maybe even bought the
+                books.
+              </p>
+              <p>
+                Some of it helped for a moment, but none of it lasted. And somewhere
+                along the way, you started wondering if the problem was you.
+              </p>
+              <p>It was not.</p>
+            </div>
+
+            <p className="mb-4 font-sans text-body-lg leading-[1.72] text-soft-ink">
+              Enter your name and email below to watch the class.
             </p>
 
             <EmailCaptureForm
@@ -82,6 +80,10 @@ export function FreeClassLanding({
               buttonLabel="Watch now"
               onSubmit={onUnlock}
             />
+            <p className="mt-4 font-sans text-[12px] text-sage">
+              Taught by Caroline Jones, a registered nurse with an MSc in Psychology
+              and ongoing training in psychotherapy and counselling.
+            </p>
           </div>
 
           <div className="relative mx-auto mt-10 max-w-[420px] lg:hidden">

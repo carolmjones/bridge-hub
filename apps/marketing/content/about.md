@@ -6,17 +6,19 @@
 
 **Eyebrow:** ABOUT
 
-**Headline:** We're rethinking what it means to heal.
+**Headline:** Caroline Jones
+
+**Subhead:** Rethinking what it means to heal.
 
 **Body:**
 
 You are not a diagnosis. Not a label. Not a disorder.
 
-You're carrying a pattern you learned before you had any say in it. A default your body picked when it didn't know another way.
+You are carrying a pattern you learned before you had any say in it. A default your body chose when it did not know another way.
 
-That's why this starts with understanding your pattern. Finding the root. Mapping your default, not managing your symptoms.
+That is why this starts with understanding your pattern. Finding the root. Mapping your default, rather than simply managing your symptoms.
 
-I know this as a nurse. I know it as a patient. I know it as a mother. I know this as a therapist.
+I know this as a nurse. I know it as a patient. I know it as a mother. And I know it through the one-to-one work I now do with women who feel stuck in survival mode.
 
 **Signature:** Caroline Jones
 
@@ -26,15 +28,21 @@ I know this as a nurse. I know it as a patient. I know it as a mother. I know th
 
 **Body:**
 
-I grew up in São Paulo, Brazil. I became a nurse because I wanted to be useful in the hardest rooms, and for years that's where I worked. Paediatrics. Intensive care. Families in the worst week of their lives.
+I grew up in São Paulo, Brazil, and became a nurse because I wanted to help people.
 
-I saw what the charts didn't show. Mothers holding it together in the corridor and falling apart in the car park. Bodies stuck in alert long after the danger had passed.
+For years, I worked in paediatrics and intensive care, supporting children and families through some of the hardest days of their lives. I learned to notice what could not be captured in a chart. The mother holding everything together beside the hospital bed, then crying alone in the car park. The family who had made it safely home, but whose bodies were still living as though the danger had never ended.
 
-In Wales I did my master's in psychology, specialising in play therapy, with a thesis grounded in attachment theory. That's where something clicked. Safety isn't a thought we convince ourselves into. It's something the body decides first.
+Later, while living in Wales, I did my master's in psychology, specialising in play therapy, with a thesis grounded in attachment theory. It helped me understand something that nursing had already shown me again and again. Feeling safe is not simply a thought. It is something the body needs to experience.
 
-Then life tested the theory on me. In Ireland I lost three pregnancies. I know what it is to be the patient in the room, not the nurse. And I know what it is to run into A&E with your own child in your arms.
+Then I came to understand this from the other side.
 
-Understanding my story wasn't what healed me. Working with my pattern was. Finding the root, learning my default, giving my body what it needed before asking it to change. That's what took me past nursing and into this work, and it's why I'm still training, still learning, right now, in psychotherapy.
+After moving to Ireland, I experienced three pregnancy losses. I learned what it felt like to be the patient in the room rather than the nurse. I also know the fear of arriving at A&E with your own child in your arms and needing someone else to take over.
+
+For a long time, I believed that understanding what had happened to me would be enough. It helped, but it did not change the way my body reacted. The real shift began when I learned to recognise the patterns underneath those reactions. I began to understand what my body had learned to do, why it kept returning to the same responses, and what it needed in order to feel safe enough to change.
+
+That experience shaped the work I now do with women who feel stuck in survival mode. It is also why I continue to study, train and deepen my practice through psychotherapy and counselling.
+
+This work is professional, but it is also deeply personal. I do not stand outside it and explain it from a distance. I know what it is to live inside these patterns, and I know what can begin to change when we finally understand them.
 
 **Signature:** — Caroline
 

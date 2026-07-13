@@ -23,9 +23,9 @@ export const MARKETING_ROUTES = {
   coaching: "/work-with-me/coaching",
   keynoteSpeaking: "/work-with-me/speaking",
   speakingEnquiry: "/work-with-me/speaking/enquire",
-  discoveryCall: "/discovery-call",
   clarityCall: "/clarity-call",
-  privacy: screeningUrl("/privacy"),
+  privacy: "/privacy",
+  screeningPrivacy: screeningUrl("/privacy"),
   terms: "/terms",
   support: "/urgent-support",
 } as const;
