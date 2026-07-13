@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/marketing/JsonLd";
 import { FreeClassPage } from "@/components/marketing/free-class/FreeClassPage";
-import { buildPageMetadata } from "@/lib/marketing/seo";
+import { breadcrumbJsonLd, buildPageMetadata } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Free Class: Life Beyond Survival Mode — with Caroline Jones",
@@ -10,5 +11,15 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function FreeClassRoute() {
-  return <FreeClassPage />;
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Free Class", path: "/free-class" },
+        ])}
+      />
+      <FreeClassPage />
+    </>
+  );
 }

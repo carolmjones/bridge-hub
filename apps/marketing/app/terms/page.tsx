@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/marketing/seo";
+import { JsonLd } from "@/components/marketing/JsonLd";
+import { breadcrumbJsonLd, buildPageMetadata } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Terms of Use",
@@ -10,7 +11,14 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function TermsPage() {
   return (
-    <article className="mx-auto max-w-[680px] px-6 py-[clamp(56px,8vw,96px)]">
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Terms of Use", path: "/terms" },
+        ])}
+      />
+      <article className="mx-auto max-w-[680px] px-6 py-[clamp(56px,8vw,96px)]">
       <h1 className="mb-6 font-serif text-[clamp(32px,6vw,40px)] font-normal leading-[1.1] text-ink">
         Terms of Use
       </h1>
@@ -27,5 +35,6 @@ export default function TermsPage() {
         Legal review pending before launch.
       </p>
     </article>
+    </>
   );
 }

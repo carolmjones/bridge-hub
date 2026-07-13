@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { trackCtaClick } from "@/lib/marketing/analytics";
 import { useState, type ReactNode } from "react";
 import { MARKETING_ROUTES, SCREENING_START } from "@/lib/marketing/routes";
 
@@ -168,6 +169,7 @@ export function MarketingPrimaryCta({
   return (
     <Link
       href={SCREENING_START}
+      onClick={() => trackCtaClick("/begin")}
       className={`inline-flex h-14 items-center justify-center rounded-[14px] bg-btn-primary px-8 font-sans text-body-lg font-medium text-btn-text transition-all hover:-translate-y-0.5 hover:bg-btn-primary-hover ${className}`}
     >
       {children}

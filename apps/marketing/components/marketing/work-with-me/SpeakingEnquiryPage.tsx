@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { SpeakingEnquiryForm } from "./SpeakingEnquiryForm";
+import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 
 export function SpeakingEnquiryPage() {
   return (
@@ -15,6 +17,15 @@ export function SpeakingEnquiryPage() {
           <p className="mt-4 font-sans text-body-lg leading-[1.72] text-soft-ink">
             Tell me a little about what you&apos;re planning, and I&apos;ll come back to
             you within 24 hours to talk it through.
+          </p>
+          <p className="mt-4 font-sans text-[14px] leading-[1.65] text-soft-ink">
+            Not ready to enquire?{" "}
+            <Link
+              href={MARKETING_ROUTES.keynoteSpeaking}
+              className="font-medium text-ink underline underline-offset-[3px] hover:text-soft-ink"
+            >
+              Read about my talks and topics first →
+            </Link>
           </p>
         </div>
 

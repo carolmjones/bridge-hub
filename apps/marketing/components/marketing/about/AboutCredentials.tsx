@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+
+import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 
 const CREDENTIALS = [
   {
@@ -69,6 +72,14 @@ export function AboutCredentials() {
           UNIFESP (Universidade Federal de São Paulo), is a member of IACP, and
           is currently training in psychotherapy and counselling at PCI College
           Ireland.
+        </p>
+        <p className="mx-auto mt-4 max-w-[720px] text-center font-sans text-[15px] leading-[1.75] text-soft-ink">
+          <Link
+            href={MARKETING_ROUTES.keynoteSpeaking}
+            className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
+          >
+            I also speak at events across Ireland →
+          </Link>
         </p>
       </div>
     </section>

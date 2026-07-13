@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/marketing/JsonLd";
 import { SpeakingPage } from "@/components/marketing/work-with-me/SpeakingPage";
-import { buildPageMetadata, serviceJsonLd } from "@/lib/marketing/seo";
+import { buildPageMetadata, breadcrumbJsonLd, serviceJsonLd } from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Keynote Speaker — Burnout, Stress & the Nervous System",
@@ -21,6 +21,12 @@ export default function SpeakingRoute() {
           path: "/work-with-me/speaking",
           areaServed: "Ireland",
         })}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Keynote Speaking", path: "/work-with-me/speaking" },
+        ])}
       />
       <SpeakingPage />
     </>

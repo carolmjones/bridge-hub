@@ -7,8 +7,8 @@ export const SITE_DESCRIPTION =
 
 /** Caroline's social/profile URLs for Person schema sameAs — update when confirmed. */
 export const CAROLINE_SAME_AS: string[] = [
-  // "https://www.linkedin.com/in/...",
-  // "https://www.instagram.com/...",
+  "https://www.instagram.com/itscarolinejones",
+  // LinkedIn — add when confirmed
 ];
 
 export function marketingSiteUrl(): string {
@@ -122,6 +122,7 @@ export function siteJsonLd(): Record<string, unknown> {
         "@type": "WebSite",
         "@id": webId,
         name: SITE_NAME,
+        alternateName: "Caroline Jones",
         url: siteUrl,
         description: SITE_DESCRIPTION,
         publisher: { "@id": orgId },
@@ -250,6 +251,34 @@ export function aboutPersonJsonLd(): Record<string, unknown> {
     ...(CAROLINE_SAME_AS.length > 0 ? { sameAs: CAROLINE_SAME_AS } : {}),
   };
 }
+
+export function breadcrumbJsonLd(
+  items: ReadonlyArray<{ name: string; path: string }>,
+): Record<string, unknown> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  };
+}
+
+/** Per-route sitemap lastModified — update when page content changes. */
+export const SITEMAP_LAST_MODIFIED: Record<string, string> = {
+  "/": "2026-07-13",
+  "/bridge-map": "2026-07-13",
+  "/free-class": "2026-07-13",
+  "/about": "2026-07-13",
+  "/work-with-me/coaching": "2026-07-13",
+  "/work-with-me/speaking": "2026-07-13",
+  "/work-with-me/speaking/enquire": "2026-07-13",
+  "/privacy": "2026-07-13",
+  "/terms": "2026-07-13",
+};
 
 /** Routes included in sitemap and llms.txt index */
 export const INDEXABLE_ROUTES = [

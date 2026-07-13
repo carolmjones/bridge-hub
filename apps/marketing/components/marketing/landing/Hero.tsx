@@ -15,8 +15,8 @@ import {
 
 const HIGHLIGHTS = [
   { value: "8", label: "WEEKS" },
-  { value: "5", label: "AREAS" },
-  { value: "15", label: "MINUTES" },
+  { value: "1:1", label: "SESSIONS" },
+  { value: "100%", label: "YOURS" },
 ] as const;
 
 /** Arch / door-light centre on full-bleed desktop hero (image is centred) */
@@ -241,7 +241,7 @@ export function Hero() {
               <div className="mb-5">
                 <div className="mb-2 flex items-center justify-between font-sans text-[12px] text-cream/65">
                   <span>Built around you</span>
-                  <span className="font-medium text-cream">100%</span>
+                  <span className="font-medium text-cream">5 areas</span>
                 </div>
                 <div className="h-1.5 overflow-hidden rounded-full bg-cream/10">
                   <motion.div

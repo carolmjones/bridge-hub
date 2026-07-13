@@ -1,4 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
+
+import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 
 const STORY_PARAGRAPHS = [
   "I grew up in São Paulo, Brazil, and became a nurse because I wanted to help people.",
@@ -62,8 +65,20 @@ export function AboutMyStory() {
               </span>
 
               <div className="space-y-4 font-sans text-[15px] leading-[1.78] text-soft-ink">
-                {STORY_PARAGRAPHS.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+                {STORY_PARAGRAPHS.map((paragraph, index) => (
+                  <div key={paragraph}>
+                    <p>{paragraph}</p>
+                    {index === 6 ? (
+                      <p className="mt-4">
+                        <Link
+                          href={MARKETING_ROUTES.bridgeMap}
+                          className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
+                        >
+                          That&apos;s how The Bridge Map was born →
+                        </Link>
+                      </p>
+                    ) : null}
+                  </div>
                 ))}
               </div>
 

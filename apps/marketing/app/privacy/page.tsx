@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { buildPageMetadata } from "@/lib/marketing/seo";
+import { JsonLd } from "@/components/marketing/JsonLd";
+import { breadcrumbJsonLd, buildPageMetadata } from "@/lib/marketing/seo";
 import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 
 export const metadata: Metadata = buildPageMetadata({
@@ -12,7 +13,14 @@ export const metadata: Metadata = buildPageMetadata({
 
 export default function PrivacyPage() {
   return (
-    <article className="mx-auto max-w-[680px] px-6 py-[clamp(56px,8vw,96px)]">
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Privacy Policy", path: "/privacy" },
+        ])}
+      />
+      <article className="mx-auto max-w-[680px] px-6 py-[clamp(56px,8vw,96px)]">
       <h1 className="mb-6 font-serif text-[clamp(32px,6vw,40px)] font-normal leading-[1.1] text-ink">
         Privacy Policy
       </h1>
@@ -36,5 +44,6 @@ export default function PrivacyPage() {
         Legal review pending before launch.
       </p>
     </article>
+    </>
   );
 }

@@ -14,6 +14,38 @@ export function MarketingFooter() {
               Caroline Jones
             </p>
           </div>
+          <nav
+            aria-label="Site links"
+            className="flex flex-col gap-2 font-sans text-[12px] text-cream/40"
+          >
+            <Link
+              href={MARKETING_ROUTES.bridgeMap}
+              className="hover:text-cream/70"
+            >
+              The Bridge Map
+            </Link>
+            <Link
+              href={MARKETING_ROUTES.freeClass}
+              className="hover:text-cream/70"
+            >
+              Free Class
+            </Link>
+            <Link href={MARKETING_ROUTES.about} className="hover:text-cream/70">
+              About Caroline
+            </Link>
+            <Link
+              href={MARKETING_ROUTES.coaching}
+              className="hover:text-cream/70"
+            >
+              Coaching
+            </Link>
+            <Link
+              href={MARKETING_ROUTES.keynoteSpeaking}
+              className="hover:text-cream/70"
+            >
+              Speaking
+            </Link>
+          </nav>
           <div className="flex flex-col items-end gap-2 text-right">
             <Link
               href={MARKETING_ROUTES.privacy}

@@ -4,7 +4,11 @@ import { AboutCloseCta } from "@/components/marketing/about/AboutCloseCta";
 import { AboutCredentials } from "@/components/marketing/about/AboutCredentials";
 import { AboutHero } from "@/components/marketing/about/AboutHero";
 import { AboutMyStory } from "@/components/marketing/about/AboutMyStory";
-import { aboutPersonJsonLd, buildPageMetadata } from "@/lib/marketing/seo";
+import {
+  aboutPersonJsonLd,
+  breadcrumbJsonLd,
+  buildPageMetadata,
+} from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "About Caroline Jones — Nurse, MSc Psychology & Founder",
@@ -17,6 +21,12 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd data={aboutPersonJsonLd()} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "About Caroline Jones", path: "/about" },
+        ])}
+      />
       <AboutHero />
       <AboutMyStory />
       <AboutCredentials />

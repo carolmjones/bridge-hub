@@ -300,6 +300,46 @@ export function SpeakingPage() {
         </div>
       </section>
 
+      <section className="border-t border-line-stone bg-cream px-6 py-[clamp(64px,8vw,88px)]">
+        <div className="mx-auto max-w-[820px]">
+          <Eyebrow>Logistics</Eyebrow>
+          <h2 className="mt-2 font-serif text-[clamp(28px,5vw,36px)] font-normal leading-[1.14] text-ink">
+            Formats, audiences, and booking
+          </h2>
+          <dl className="mt-8 space-y-5 font-sans text-[15px] leading-[1.72] text-soft-ink">
+            <div>
+              <dt className="font-medium text-ink">Formats</dt>
+              <dd>Keynote (30–60 min) · Workshop (half-day) · Panel or Q&amp;A</dd>
+            </div>
+            <div>
+              <dt className="font-medium text-ink">Audiences</dt>
+              <dd>
+                Healthcare teams · Corporate wellbeing · Education · Conferences
+              </dd>
+            </div>
+            <div>
+              <dt className="font-medium text-ink">Location</dt>
+              <dd>Ireland (in-person); remote by arrangement</dd>
+            </div>
+            <div>
+              <dt className="font-medium text-ink">Lead time</dt>
+              <dd>4–6 weeks preferred</dd>
+            </div>
+            <div>
+              <dt className="font-medium text-ink">Enquiries</dt>
+              <dd>
+                <Link
+                  href={MARKETING_ROUTES.speakingEnquiry}
+                  className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
+                >
+                  Enquire about booking →
+                </Link>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
       <section className="border-t border-line-stone bg-warm-paper px-6 py-[clamp(72px,9vw,96px)]">
         <div className="mx-auto max-w-[820px]">
           <Eyebrow>More About Caroline Jones</Eyebrow>
@@ -309,10 +349,38 @@ export function SpeakingPage() {
                 key={paragraph.slice(0, 40)}
                 className={index === STORY_PARAGRAPHS.length - 1 ? "font-medium text-ink" : undefined}
               >
-                {paragraph}
+                {index === 2 ? (
+                  <>
+                    So she asked a different question: how do I take everything
+                    I&apos;ve learned and do something with it? A nurse studying
+                    software engineering in Galway was not the expected next step,
+                    but Caroline finished with honours, and used it to do something
+                    no one else could have: design and build a{" "}
+                    <Link
+                      href={MARKETING_ROUTES.bridgeMap}
+                      className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
+                    >
+                      clinical screening tool
+                    </Link>{" "}
+                    from the ground up. The structure, the logic, the clinical
+                    thinking behind every question, all hers, drawing on validated
+                    instruments psychologists already use, to map nervous system
+                    patterns the way she wished someone could have mapped hers.
+                  </>
+                ) : (
+                  paragraph
+                )}
               </p>
             ))}
           </div>
+          <p className="mt-6 font-sans text-[15px]">
+            <Link
+              href={MARKETING_ROUTES.about}
+              className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
+            >
+              Read the full story →
+            </Link>
+          </p>
         </div>
       </section>
 

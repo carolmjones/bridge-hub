@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/marketing/JsonLd";
 import { CoachingPage } from "@/components/marketing/work-with-me/CoachingPage";
-import { buildPageMetadata, serviceJsonLd } from "@/lib/marketing/seo";
+import { buildPageMetadata, breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd } from "@/lib/marketing/seo";
+import { COACHING_FAQS } from "@/lib/marketing/faq";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "The Bridge Programme — 8-Week 1:1 Nervous System Coaching",
@@ -21,6 +22,14 @@ export default function CoachingRoute() {
           path: "/work-with-me/coaching",
           areaServed: "Worldwide",
         })}
+      />
+      <JsonLd data={faqPageJsonLd(COACHING_FAQS)} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "Work With Me", path: "/work-with-me" },
+          { name: "The Bridge Programme", path: "/work-with-me/coaching" },
+        ])}
       />
       <CoachingPage />
     </>

@@ -31,3 +31,31 @@ export const LANDING_FAQS = [
       "Yes. Your data is stored securely, seen only by you and Caroline, and held in compliance with GDPR. You can request deletion at any time.",
   },
 ] as const;
+
+export const COACHING_FAQS = [
+  {
+    question: "Is this therapy?",
+    answer:
+      "No. The Bridge Programme is trauma-informed coaching and psychoeducation. If therapy is what you need, I'll tell you honestly on the Clarity Call.",
+  },
+  {
+    question: "Do I need to take The Bridge Map first?",
+    answer:
+      "Yes — your Bridge Map results are the foundation. The programme is built around your specific nervous system profile, not a generic template.",
+  },
+  {
+    question: "What if I'm outside Ireland?",
+    answer:
+      "Coaching is available worldwide — sessions happen online. Speaking and consultancy are Ireland only.",
+  },
+  {
+    question: "How many places are available?",
+    answer:
+      "I work with a small number of women at a time so every programme gets my full attention. If there's a wait, I'll let you know and you won't be pressured.",
+  },
+  {
+    question: "What's the investment?",
+    answer:
+      "We discuss this on the Clarity Call, alongside whether the programme is the right fit. There's no obligation.",
+  },
+] as const;

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { trackGenerateLead } from "@/lib/marketing/analytics";
 import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 
 const EVENT_TYPES = ["Keynote", "Workshop", "Other"] as const;
@@ -77,6 +78,7 @@ export function SpeakingEnquiryForm() {
       }
 
       setSubmitted(true);
+      trackGenerateLead("speaking_enquiry");
     } catch (submitError) {
       setError(
         submitError instanceof Error

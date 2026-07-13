@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 import { MarketingPrimaryCta } from "@/components/marketing/Nav";
@@ -6,7 +7,12 @@ import { BridgeMapFounder } from "@/components/marketing/bridge-map/BridgeMapFou
 import { BridgeMapHero } from "@/components/marketing/bridge-map/BridgeMapHero";
 import { JsonLd } from "@/components/marketing/JsonLd";
 import { Disclaimer } from "@/components/ui/Disclaimer";
-import { buildPageMetadata, faqPageJsonLd } from "@/lib/marketing/seo";
+import { MARKETING_ROUTES } from "@/lib/marketing/routes";
+import {
+  breadcrumbJsonLd,
+  buildPageMetadata,
+  faqPageJsonLd,
+} from "@/lib/marketing/seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "The Bridge Map — Free Nervous System Screening by Caroline Jones",
@@ -108,6 +114,12 @@ export default function BridgeMapPage() {
         data={faqPageJsonLd(
           FAQS.map((item) => ({ question: item.q, answer: item.a })),
         )}
+      />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Home", path: "/" },
+          { name: "The Bridge Map", path: "/bridge-map" },
+        ])}
       />
       <BridgeMapHero />
 
@@ -487,6 +499,19 @@ export default function BridgeMapPage() {
                   </p>
                   <p className="font-sans text-sm leading-[1.7] text-cream/70">
                     {step.body}
+                    {index === 3 ? (
+                      <>
+                        {" "}
+                        If the Clarity Call shows one-to-one work is the right
+                        fit,{" "}
+                        <Link
+                          href={MARKETING_ROUTES.coaching}
+                          className="font-medium text-cream underline underline-offset-[3px] transition-colors hover:text-white"
+                        >
+                          here&apos;s what The Bridge Programme looks like →
+                        </Link>
+                      </>
+                    ) : null}
                   </p>
                 </div>
               </div>

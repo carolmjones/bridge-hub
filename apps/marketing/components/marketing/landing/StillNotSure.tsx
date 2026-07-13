@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { trackGenerateLead } from "@/lib/marketing/analytics";
 import { EmailCaptureForm } from "@/components/marketing/free-class/EmailCaptureForm";
 
 export function StillNotSure() {
@@ -24,6 +25,7 @@ export function StillNotSure() {
     }
 
     setSubmitted(true);
+    trackGenerateLead("still_not_sure");
   };
 
   return (

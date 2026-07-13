@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { MARKETING_ROUTES, SCREENING_START } from "@/lib/marketing/routes";
+import { COACHING_FAQS } from "@/lib/marketing/faq";
 import { FloatingPetals } from "@/components/marketing/FloatingPetals";
 import { ProgrammeStructure } from "@/components/marketing/programme/ProgrammeStructure";
 import { easeOut, fadeUp, staggerContainer } from "@/lib/marketing/motion";
@@ -270,7 +271,7 @@ export function CoachingPage() {
             </h2>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-5">
-            {INCLUDED.map(({ title, body }) => (
+            {INCLUDED.map(({ title, body }, index) => (
               <article
                 key={title}
                 className="rounded-[20px] border border-line-stone/70 bg-white/85 p-5 shadow-[0_18px_44px_-36px_rgba(35,40,36,0.22)]"
@@ -280,6 +281,17 @@ export function CoachingPage() {
                 </h3>
                 <p className="mt-3 font-sans text-[13px] leading-[1.65] text-soft-ink">
                   {body}
+                  {index === 0 ? (
+                    <>
+                      {" "}
+                      <Link
+                        href={MARKETING_ROUTES.bridgeMap}
+                        className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
+                      >
+                        Your results from The Bridge Map →
+                      </Link>
+                    </>
+                  ) : null}
                 </p>
               </article>
             ))}
@@ -463,6 +475,38 @@ export function CoachingPage() {
             </div>
           </div>
         </motion.div>
+      </section>
+
+      <section className="border-t border-line-stone bg-warm-paper px-6 py-[clamp(72px,9vw,96px)]">
+        <div className="mx-auto max-w-[760px]">
+          <Eyebrow>Common questions</Eyebrow>
+          <h2 className="mt-2 font-serif text-[clamp(30px,5vw,38px)] font-normal leading-[1.12] text-ink">
+            Before you begin
+          </h2>
+          <div className="mt-8 space-y-3">
+            {COACHING_FAQS.map((item) => (
+              <details
+                key={item.question}
+                className="group rounded-[18px] border border-line-stone bg-cream px-6 py-5 shadow-[0_18px_40px_-34px_rgba(35,40,36,0.35)]"
+              >
+                <summary className="cursor-pointer list-none font-sans text-sm font-semibold text-ink">
+                  <span className="flex items-start justify-between gap-6">
+                    <span>{item.question}</span>
+                    <span
+                      className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-line-stone bg-white text-soft-ink transition-transform group-open:rotate-45"
+                      aria-hidden
+                    >
+                      +
+                    </span>
+                  </span>
+                </summary>
+                <p className="mt-4 font-sans text-sm leading-[1.72] text-soft-ink">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="relative overflow-hidden bg-cream px-6 pb-[clamp(80px,10vw,112px)] pt-[clamp(20px,4vw,36px)]">

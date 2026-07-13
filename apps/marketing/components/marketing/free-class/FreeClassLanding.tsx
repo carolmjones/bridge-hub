@@ -1,10 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { EmailCaptureForm } from "./EmailCaptureForm";
 import { IMG, LANDING_TAKEAWAYS } from "./constants";
 import { TakeawaysSection } from "./TakeawaysSection";
+import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 
 export function FreeClassLanding({
   onUnlock,
@@ -80,9 +82,25 @@ export function FreeClassLanding({
               buttonLabel="Watch now"
               onSubmit={onUnlock}
             />
+            <p className="mt-4 font-sans text-[13px] text-soft-ink">
+              Prefer to start with the screening?{" "}
+              <Link
+                href={MARKETING_ROUTES.bridgeMap}
+                className="font-medium text-ink underline underline-offset-[3px] hover:text-soft-ink"
+              >
+                Take The Bridge Map →
+              </Link>
+            </p>
             <p className="mt-4 font-sans text-[12px] text-sage">
-              Taught by Caroline Jones, a registered nurse with an MSc in Psychology
-              and ongoing training in psychotherapy and counselling.
+              Taught by{" "}
+              <Link
+                href={MARKETING_ROUTES.about}
+                className="font-medium underline underline-offset-[3px] hover:text-soft-ink"
+              >
+                Caroline Jones
+              </Link>
+              , a registered nurse with an MSc in Psychology and ongoing training
+              in psychotherapy and counselling.
             </p>
           </div>
 

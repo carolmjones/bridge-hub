@@ -1,7 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { MarketingPrimaryCta } from "@/components/marketing/Nav";
 import { BridgeMapFounderPortrait } from "@/components/marketing/bridge-map/BridgeMapFounderPortrait";
+import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 
 const BODY_PARAGRAPHS = [
   "I am Caroline Jones, a nurse with a master's degree in psychology and currently training in psychotherapy and counselling. I have spent my career working with women who feel exactly the way you do right now, first through nursing and now through this work.",
@@ -58,6 +60,15 @@ export function BridgeMapFounder() {
 
           <p className="mt-6 border-t border-line-stone pt-5 font-sans text-[12px] leading-[1.65] text-sage">
             {CREDENTIALS}
+          </p>
+
+          <p className="mt-4 font-sans text-[14px]">
+            <Link
+              href={MARKETING_ROUTES.about}
+              className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
+            >
+              Read my full story →
+            </Link>
           </p>
 
           <div className="mt-7">

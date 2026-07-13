@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { trackGenerateLead } from "@/lib/marketing/analytics";
 import {
   FREE_CLASS_RESET_EVENT,
   FREE_CLASS_UNLOCK_EVENT,
@@ -60,6 +61,7 @@ export function FreeClassPage() {
     }
 
     localStorage.setItem(FREE_CLASS_UNLOCK_KEY, "1");
+    trackGenerateLead("free_class");
     setUnlocked(true);
     window.dispatchEvent(new Event(FREE_CLASS_UNLOCK_EVENT));
     window.scrollTo({ top: 0, behavior: "smooth" });
