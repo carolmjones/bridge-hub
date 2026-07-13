@@ -110,3 +110,5 @@ Same structure as 3.4, topic from speaking page topics list.
 ## Approval
 
 Reply with per-page: **approved**, **edit**, or **defer**. Full draft copy required before any page is built.
+
+**Status (July 2026):** Deferred — Caroline to review when ready for the content wave. No Phase 3 pages exist in code yet.

@@ -227,14 +227,14 @@ Manual checks:
 
 **How to work:** Top to bottom within each phase. ⚠️ = Caroline decision before code ships. 🔧 = implement after the gate is cleared. **One Phase 1 section per session** — review diff, validate, check the box.
 
-**Current step:** → **Phase 1.3** — add LinkedIn/Instagram to `CAROLINE_SAME_AS` once Caroline confirms URLs (0.5).
+**Current step:** → **Launch** — connect `carolinejones.co`, Search Console, curl audit ([seo-launch-checklist.md](marketing/seo-launch-checklist.md)). Phase 3 content proposals await Caroline review ([phase3-content-proposals.md](marketing/phase3-content-proposals.md)).
 
 | Phase | Focus | Gate | Status |
 |-------|-------|------|--------|
-| 0 | Caroline decisions (credentials, testimonials, social URLs, AI policy) | Caroline | **Complete** (0.5 pending URLs) |
-| 1 | P0 pre-launch (1.1–1.16: credentials, metadata, H1s, JSON-LD, privacy/terms) | After Phase 0 | **Nearly complete** — 1.3 blocked on 0.5 |
-| 2 | P1 post-launch (breadcrumbs, footer links, cross-links, FAQs, analytics) | After Phase 1 | Not started |
-| 3 | P1 content wave (`/insights/*`, `/bridge-map/how-it-works`, `/clarity-call`) | After Phase 2 | Not started |
+| 0 | Caroline decisions (credentials, testimonials, social URLs, AI policy) | Caroline | **Complete** (LinkedIn `sameAs` deferred) |
+| 1 | P0 pre-launch (1.1–1.16: credentials, metadata, H1s, JSON-LD, privacy/terms) | After Phase 0 | **Complete** — 1.3 partial (Instagram in `sameAs`; LinkedIn when confirmed) |
+| 2 | P1 post-launch (breadcrumbs, footer links, cross-links, FAQs, analytics) | After Phase 1 | **Complete** (commit `659f3e2`) |
+| 3 | P1 content wave (`/insights/*`, `/bridge-map/how-it-works`, `/clarity-call`) | Caroline copy approval | **Proposals ready** — [phase3-content-proposals.md](marketing/phase3-content-proposals.md); no pages built yet |
 | 4 | P2 second wave (more insights, per-page OG, observatory) | Ongoing | Not started |
 
 **Domain timing:** Phase 1 can run on `*.vercel.app` now. Search Console, sitemap submit, and final curl audit still wait for `carolinejones.co` (Phase 4b Domain connection).
@@ -249,14 +249,14 @@ Manual checks:
 | 0.2 | Software engineering credential | **Honours degree** in software engineering |
 | 0.3 | "Five years" claim in Bridge Map founder | **Career-span wording** — *"I have spent my career — first in nursing, now in this work — with women who feel exactly the way you do."* |
 | 0.4 | Testimonial provenance | **Real clients with consent**; no extra governance line |
-| 0.5 | Social URLs → `CAROLINE_SAME_AS` | **Pending** — Caroline to confirm LinkedIn + Instagram URLs |
+| 0.5 | Social URLs → `CAROLINE_SAME_AS` | **Partial** — Instagram live; LinkedIn deferred until confirmed |
 | 0.6 | AI training policy | **Full allow** — keep current `robots.ts` |
 
 ##### Phase 1 — P0 pre-launch (after Phase 0)
 
 - [x] 1.1 Credential consistency pass (components + content markdown + JSON-LD)
 - [x] 1.2 Coaching `serviceJsonLd` `areaServed` (Worldwide vs Ireland)
-- [ ] 1.3 Fill `CAROLINE_SAME_AS` — blocked on 0.5
+- [x] 1.3 Fill `CAROLINE_SAME_AS` — Instagram done; LinkedIn deferred
 - [x] 1.4 De-duplicate Home vs Free Class H1/titles
 - [x] 1.5 New titles and meta descriptions (priority pages)
 - [x] 1.6 Speaking page H1
@@ -299,12 +299,12 @@ Notes: PepTalk matches event planners to speakers (15k+ roster, 24h response). P
 
 ## Next actions
 
-1. **Phase 4c — 0.5** — Caroline confirms LinkedIn + Instagram URLs → implement 1.3 `CAROLINE_SAME_AS`
-2. **Phase 4c Phase 2** — post-launch P1 (breadcrumbs, footer links, analytics) after domain or when ready
-3. **Caroline env setup** — speaking enquiry + newsletter tags (checklist below); parallel with Phase 4c
-4. Caroline **sign-off** on updated copy ([bridge-map.md](../apps/marketing/content/bridge-map.md), [about.md](../apps/marketing/content/about.md), coaching/speaking/free-class pages)
-5. **Domain** — connect `carolinejones.co` (Phase 4b Domain connection); after Phase 1.3 or when ready
-6. **SEO launch checklist** — Search Console, Bing, curl audit, Rich Results Test once domain is live
+1. **Domain** — connect `carolinejones.co` on marketing Vercel; set `NEXT_PUBLIC_MARKETING_URL` on both projects; redeploy — [seo-launch-checklist.md](marketing/seo-launch-checklist.md) §1
+2. **SEO launch** — Search Console, Bing, curl audit, Rich Results Test once domain is live — checklist §2–4
+3. **Phase 3 content** — review outlines in [phase3-content-proposals.md](marketing/phase3-content-proposals.md); approve copy before any `/insights/*` or `/clarity-call` pages are built
+4. **Caroline env setup** — speaking enquiry + newsletter Kit tags (checklist below)
+5. Caroline **sign-off** on remaining copy ([bridge-map.md](../apps/marketing/content/bridge-map.md), [about.md](../apps/marketing/content/about.md), coaching/speaking/free-class)
+6. **LinkedIn `sameAs`** — optional: confirm URL → add to `seo.ts` (Instagram already live)
 7. **PepTalk** — when site is finished, pitch [getapeptalk.com](https://getapeptalk.com/)
 
 *Clarity Call page — tracked in Phase 4c task 3.6, not listed separately here.*
