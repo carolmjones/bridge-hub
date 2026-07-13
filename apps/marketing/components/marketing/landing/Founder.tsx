@@ -1,9 +1,10 @@
 import Image from "next/image";
 
 const BODY_PARAGRAPHS = [
-  "I have walked this path — first as a nurse, now through years of my own healing work and training in psychotherapy and counselling.",
-  "Embracing change and evolving is not just what I teach — it is something I have lived. I have been on my own healing path for five years. I have felt the frustration, the setbacks, and the moments of wondering if anything would actually shift. I know firsthand what becomes possible when stored patterns in the body start to change.",
-  "What I kept seeing with clients was the same thing: intelligent, capable women who had tried everything and still could not move forward. Not because they were not trying. Because the work was not reaching the right level.",
+  "I have walked this path first as a nurse and later through years of personal healing, study and ongoing training in psychotherapy and counselling.",
+  "Change is not simply something I speak about. It is something I have had to live. For the past five years, I have been doing my own healing work. I have experienced the frustration, the setbacks and the moments of wondering whether anything would truly shift. I also know what can become possible when the patterns held in the body begin to change.",
+  "I kept seeing the same struggle in the women I worked with. They were intelligent, capable and committed. They had tried everything, yet they still felt unable to move forward. It was not because they were not trying hard enough. The work simply was not reaching the level where the pattern was being held.",
+  "What changed my understanding was learning that the nervous system is not fixed. The brain and body can develop new patterns throughout life. This capacity for change, known as neuroplasticity, is the foundation of the work I do.",
 ] as const;
 
 export function Founder() {
@@ -33,21 +34,18 @@ export function Founder() {
           />
         </div>
 
-        {BODY_PARAGRAPHS.map((paragraph) => (
+        {BODY_PARAGRAPHS.map((paragraph, index) => (
           <p
-            key={paragraph}
-            className="mb-4 font-sans text-body-lg leading-[1.75] text-soft-ink last:mb-0"
+            key={paragraph.slice(0, 48)}
+            className={`mb-4 font-sans text-body-lg leading-[1.75] last:mb-0 ${
+              index === BODY_PARAGRAPHS.length - 1
+                ? "font-medium text-ink"
+                : "text-soft-ink"
+            }`}
           >
             {paragraph}
           </p>
         ))}
-
-        <p className="mt-4 font-sans text-body-lg font-medium leading-[1.75] text-ink">
-          What I discovered changed everything: the nervous system is not fixed.
-          Neuroscience shows us that the brain and body can form new patterns at
-          any age. That capacity for change — neuroplasticity — is the
-          foundation of everything I do.
-        </p>
       </div>
     </section>
   );
