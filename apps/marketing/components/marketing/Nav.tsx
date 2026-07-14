@@ -16,6 +16,7 @@ const NAV_LINKS = [
 const WORK_WITH_ME_LINKS = [
   { href: MARKETING_ROUTES.coaching, label: "The Bridge Programme" },
   { href: MARKETING_ROUTES.keynoteSpeaking, label: "Keynote Speaking" },
+  { href: MARKETING_ROUTES.speakingEnquiry, label: "General enquiry" },
 ] as const;
 
 export function MarketingNav() {

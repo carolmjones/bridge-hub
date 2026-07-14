@@ -1,6 +1,6 @@
 # Marketing roadmap — website pages
 
-*Last updated: 13 July 2026. Lives in `bridge-hub` repo — see [infra-decision.md](../infra-decision.md).*
+*Last updated: 14 July 2026. Lives in `bridge-hub` repo — see [infra-decision.md](../infra-decision.md).*
 
 **Start at [marketing/README.md](marketing/README.md).** Visual spec: [marketing/design-system.md](marketing/design-system.md). Screening roadmap: [roadmap_screening.md](roadmap_screening.md).
 
@@ -52,7 +52,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - **Primary CTA:** Watch the free class
 - **Secondary CTA:** Discover my profile — free → `SCREENING_START` (screening deploy `/begin`)
 - **No "Book your Clarity Call"** on landing or Bridge Map (results screen only)
-- **Nav:** Home · About · The Bridge Map · Work with Me (dropdown → Coaching · Speaking — no `/work-with-me` hub page)
+- **Nav:** Home · About · The Bridge Map · Work with Me (dropdown → Coaching · Speaking · General enquiry — no `/work-with-me` hub page)
 - **Disclaimer everywhere:** *This is a screening tool, not a clinical diagnosis.*
 - **All copy locked** after Caroline approval
 
@@ -79,7 +79,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 | 8a | The Bridge Programme | `/work-with-me/coaching` | Locked in [coaching.md](../apps/marketing/content/coaching.md) | **Built** — hero, bridge-backed programme structure (liquid-glass panel + mobile stepper), split qualifier card, manifesto, flower-backed First Step CTA |
 | 8b | Keynote Speaking | `/work-with-me/speaking` | Locked in [speaking.md](../apps/marketing/content/speaking.md) | **Built** — cinematic hero, story, keynote, topics, testimonials, enquire CTAs |
 | 8b-i | Speaking enquiry | `/work-with-me/speaking/enquire` | Locked in [speaking-enquiry.md](../apps/marketing/content/speaking-enquiry.md) | **Built** — Kit form (name, phone optional, organisation, event type, date, message); notifies Caroline instantly via Resend, adds subscriber to Kit for nurture |
-| 9–11 | Privacy / Terms / Cookies | `/privacy`, `/terms` | GDPR chat | Marketing `/privacy` + `/terms` stubs live (legal review pending); screening `/privacy` for assessment data |
+| 9–11 | Privacy / Terms / Cookies | `/privacy`, `/terms` | Caroline-approved privacy copy (10/05/2026) | **Built** — full 12-section `/privacy` (Montero Labs DBA Caroline Jones); `/terms` stub; cookie banner + preferences modal; footer Cookie Settings opens modal; GA4 gated on analytics consent; screening `/privacy` for assessment data |
 
 ### Phase 3 — Supporting
 
@@ -163,7 +163,7 @@ Kit's own "new subscriber" notification is batched hourly and has no message con
 - [ ] Copy sign-off, a11y, analytics
 - [x] **SEO + AI discoverability** (dev) — see Phase 4b below; Caroline Search Console checklist at launch
 - [ ] **SEO & conversion audit (Phase 4c)** — Phase 1 P0 complete except 1.3 (social URLs); Caroline copy review + coaching UI polish landed — see below
-- [ ] Cookie consent on marketing layout (optional)
+- [x] Cookie consent on marketing layout — bottom banner + customise modal (CookieYes-style); footer legal line restructured (© + inline Privacy · Terms · Cookie Settings; disclaimer on next line); site links in two columns
 - [x] **Healing Revolution subscribe popup** — sitewide Kit modal; tag `healing-revolution`; see below
 - [ ] **PepTalk speaker listing** — once site is finished, pitch [PepTalk](https://getapeptalk.com/) to list Caroline as a keynote speaker (Wellness & Culture / Mental Health / Neurodiversity topics); optional channel to market Work with Me → Keynote Speaking
 
@@ -269,7 +269,7 @@ Manual checks:
 - [x] 1.13 Testimonial attribution — skipped per 0.4 (no governance line)
 - [x] 1.14 Free Class teacher attribution
 - [x] 1.15 Speaking page section reorder
-- [x] 1.16 `/privacy` and `/terms` stub pages
+- [x] 1.16 `/privacy` and `/terms` stub pages — `/privacy` now full Caroline-approved policy (July 2026)
 
 Phase 1 validation commands — see [implementation roadmap](marketing/bridge-hub-implementation-roadmap.md#phase-1-validation-checklist).
 
@@ -281,6 +281,8 @@ Phase 1 validation commands — see [implementation roadmap](marketing/bridge-hu
 
 | Component | Copy | Dev |
 |-----------|------|-----|
+| Cookie consent | Caroline-approved category copy in modal; banner adapted to privacy policy | **Built** — first-visit banner (Customise · Reject All · Accept All); preferences modal with Necessary / Functional / Analytics / Performance toggles; `localStorage`; GA4 loads only when Analytics accepted; footer **Cookie Settings** reopens modal |
+| Footer | © line + inline legal links; disclaimer on second line; site links in two columns | **Built** — Bridge Map · Free Class · About \| Coaching · Speaking · In Crisis? |
 | Healing Revolution popup | **Headline:** Join The Healing Revolution · **Subtext:** Subscribe to receive insights and resources to inspire a collective healing movement. | **Built** — shows once per session on the visitor's first landing page (after 20% scroll or 8s); skips `/free-class` and speaking enquiry; Kit tag `healing-revolution` |
 
 Implementation: trauma-informed (easy dismiss via ×, backdrop, Escape); no urgency animation; reuses `EmailCaptureForm`; `sessionStorage` prevents repeat in same session (including after navigating to other pages). Dev preview: `?healing-popup` on any URL.
