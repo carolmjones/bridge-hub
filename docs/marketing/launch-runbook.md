@@ -19,13 +19,13 @@ done
 
 On `/about`, page source should include **Why I Do This Work**.
 
-If routes 404 or copy is old: Vercel → **bridge-hub-marketing** → Deployments → Redeploy latest `main` (skip build cache). See [vercel-setup.md](../vercel-setup.md).
-
-Or run locally:
+If routes 404 or copy is old: Vercel → **bridge-hub-marketing** → Deployments → Redeploy latest `main` (skip build cache). Or from **repo root** (not `apps/marketing`):
 
 ```bash
-SMOKE_MARKETING_URL=https://bridge-hub-marketing.vercel.app node scripts/smoke-marketing.mjs
+npm run deploy:marketing
 ```
+
+**Note:** Vercel project Root Directory is `apps/marketing`. Run CLI deploys from repo root only — deploying from inside `apps/marketing` doubles the path and fails.
 
 ---
 
