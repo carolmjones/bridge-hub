@@ -75,7 +75,7 @@ After setting URLs on both projects, redeploy so CTAs, sitemap canonicals, and `
 1. Confirm GitHub `main` has latest commits (`git push origin main`)
 2. Vercel → **bridge-hub-marketing** → Deployments → check latest build **succeeded** (not Failed/Canceled)
 3. If failed: open logs; confirm Root Directory = `apps/marketing`, Install = `npm install --prefix=../..`, Build = `npm run build`
-4. **Manual CLI deploy** (from repo root, uses linked `apps/marketing/.vercel` project):
+4. **Manual CLI deploy** (from **repo root** — project Root Directory is already `apps/marketing`; do not `cd` into it or the path doubles):
 
 ```bash
 npm run deploy:marketing
