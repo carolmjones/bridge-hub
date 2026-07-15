@@ -301,13 +301,16 @@ Notes: PepTalk matches event planners to speakers (15k+ roster, 24h response). P
 
 ## Next actions
 
-1. **Domain** — connect `carolinejones.co` on marketing Vercel; set `NEXT_PUBLIC_MARKETING_URL` on both projects; redeploy — [seo-launch-checklist.md](marketing/seo-launch-checklist.md) §1
-2. **SEO launch** — Search Console, Bing, curl audit, Rich Results Test once domain is live — checklist §2–4
-3. **Phase 3 content** — review outlines in [phase3-content-proposals.md](marketing/phase3-content-proposals.md); approve copy before any `/insights/*` or `/clarity-call` pages are built
-4. **Caroline env setup** — speaking enquiry + newsletter Kit tags (checklist below)
-5. Caroline **sign-off** on remaining copy ([bridge-map.md](../apps/marketing/content/bridge-map.md), coaching/free-class; About + Speaking largely locked in `content/*.md`)
-6. **LinkedIn `sameAs`** — optional: confirm URL → add to `seo.ts` (Instagram already live)
-7. **PepTalk** — when site is finished, pitch [getapeptalk.com](https://getapeptalk.com/)
+**Go-live:** [launch-runbook.md](marketing/launch-runbook.md) — Vercel deploy fix, Kit env, copy sign-off, domain, SEO verify, PepTalk.
+
+1. **Push + Vercel redeploy** — commit `3df6420` fixes monorepo install; push `main`, then Redeploy **bridge-hub-marketing** (skip build cache). Verify with `SMOKE_MARKETING_URL=https://bridge-hub-marketing.vercel.app npm run smoke:marketing`
+2. **Domain** — connect `carolinejones.co` on marketing Vercel; set `NEXT_PUBLIC_MARKETING_URL` on both projects; redeploy — [seo-launch-checklist.md](marketing/seo-launch-checklist.md) §1
+3. **SEO launch** — Search Console, Bing, curl audit, Rich Results Test once domain is live — checklist §2–4
+4. **Phase 3 content** — review outlines in [phase3-content-proposals.md](marketing/phase3-content-proposals.md); approve copy before any `/insights/*` or `/clarity-call` pages are built
+5. **Caroline env setup** — speaking enquiry + newsletter Kit tags (checklist below)
+6. Caroline **sign-off** on remaining copy ([bridge-map.md](../apps/marketing/content/bridge-map.md), coaching/free-class; About + Speaking largely locked in `content/*.md`)
+7. **LinkedIn `sameAs`** — optional: confirm URL → add to `seo.ts` (Instagram already live)
+8. **PepTalk** — when site is finished, pitch [getapeptalk.com](https://getapeptalk.com/)
 
 *Clarity Call page — tracked in Phase 4c task 3.6, not listed separately here.*
 

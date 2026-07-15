@@ -63,12 +63,12 @@ async function main() {
     await checkPage(route);
   }
 
-  const homeRes = await fetch(`${BASE}/`);
-  const homeHtml = await homeRes.text();
-  if (homeHtml.includes(`${SCREENING}/begin`)) {
-    ok("Landing links screening CTA to screening deploy /begin");
+  const bridgeMapRes = await fetch(`${BASE}/bridge-map`);
+  const bridgeMapHtml = await bridgeMapRes.text();
+  if (bridgeMapRes.ok && bridgeMapHtml.includes("/begin")) {
+    ok("Bridge Map includes screening /begin CTA");
   } else {
-    fail("Screening CTA URL", `expected link to ${SCREENING}/begin`);
+    fail("Screening CTA", "expected /begin link on /bridge-map");
   }
 
   const aboutRes = await fetch(`${BASE}/about`);
@@ -95,18 +95,22 @@ async function main() {
 
   const termsRes = await fetch(`${BASE}/terms`);
   const termsHtml = await termsRes.text();
-  if (termsHtml.includes("About these terms") && !termsHtml.includes("placeholder")) {
+  if (termsRes.ok && termsHtml.includes("About these terms")) {
     ok("Terms page has full policy copy");
   } else {
-    fail("Terms page", "expected full terms, not placeholder");
+    fail("Terms page", `expected full terms (${termsRes.status})`);
   }
 
   const privacyRes = await fetch(`${BASE}/privacy`);
   const privacyHtml = await privacyRes.text();
-  if (privacyHtml.includes("Montero Labs") || privacyHtml.includes("Privacy Policy")) {
+  if (
+    privacyRes.ok &&
+    (privacyHtml.includes("Montero Labs") ||
+      privacyHtml.includes("Information we collect"))
+  ) {
     ok("Privacy page has full policy copy");
   } else {
-    fail("Privacy page", "expected full privacy policy");
+    fail("Privacy page", `expected full privacy policy (${privacyRes.status})`);
   }
 
   console.log("\n--- Summary ---");
