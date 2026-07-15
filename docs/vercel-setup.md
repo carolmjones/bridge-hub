@@ -30,7 +30,7 @@ Until `app.carolinejones.co` is connected, use your screening `*.vercel.app` URL
 |---------|-------|
 | Root Directory | `apps/marketing` |
 | Framework | Next.js |
-| Install Command | `cd ../.. && npm install` |
+| Install Command | `npm install --prefix=../..` |
 | Build Command | `npm run build` |
 
 **Production URL:** `https://bridge-hub-marketing.vercel.app` (until custom domain is live)
@@ -69,6 +69,19 @@ KIT_HEALING_REVOLUTION_TAG_ID=...
 ## 5. Redeploy both
 
 After setting URLs on both projects, redeploy so CTAs, sitemap canonicals, and `/` redirect resolve correctly.
+
+### Marketing deploy stuck on old version?
+
+1. Confirm GitHub `main` has latest commits (`git push origin main`)
+2. Vercel → **bridge-hub-marketing** → Deployments → check latest build **succeeded** (not Failed/Canceled)
+3. If failed: open logs; confirm Root Directory = `apps/marketing`, Install = `npm install --prefix=../..`, Build = `npm run build`
+4. **Manual CLI deploy** (from repo root, uses linked `apps/marketing/.vercel` project):
+
+```bash
+npm run deploy:marketing
+```
+
+5. Verify: `SMOKE_MARKETING_URL=https://bridge-hub-marketing.vercel.app npm run smoke:marketing` (expect 19/19)
 
 ## Local parity
 

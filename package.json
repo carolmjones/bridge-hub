@@ -13,6 +13,7 @@
     "build": "npm run build:screening",
     "build:screening": "next build",
     "build:marketing": "npm run build -w @bridge-hub/marketing",
+    "deploy:marketing": "npm run build:marketing && vercel deploy --prod --cwd apps/marketing",
     "start": "npm run start:screening",
     "start:screening": "DOTENV_CONFIG_PATH=.env.bridgehub node -r dotenv/config node_modules/.bin/next start -p 3001",
     "start:marketing": "npm run start -w @bridge-hub/marketing",
