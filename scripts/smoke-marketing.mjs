@@ -3,7 +3,7 @@
  * Marketing app smoke test — local dev or production preview.
  *
  * Local:  npm run dev:marketing  then  node scripts/smoke-marketing.mjs
- * Prod:   SMOKE_MARKETING_URL=https://bridge-hub-marketing.vercel.app node scripts/smoke-marketing.mjs
+ * Prod:   SMOKE_MARKETING_URL=https://www.carolinejones.co node scripts/smoke-marketing.mjs
  */
 import dotenv from "dotenv";
 import path from "path";

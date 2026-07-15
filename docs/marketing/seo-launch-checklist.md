@@ -11,10 +11,12 @@
 3. Wait for **Valid Configuration**
 4. On **both** Vercel projects (marketing + screening), set:
    ```
-   NEXT_PUBLIC_MARKETING_URL=https://carolinejones.co
+   NEXT_PUBLIC_MARKETING_URL=https://www.carolinejones.co
    ```
 5. **Redeploy marketing** (canonicals, sitemap, OG tags read this env var)
 6. Optional: redirect `www.carolinejones.co` → `carolinejones.co` in Vercel
+
+**Current production:** `www.carolinejones.co` is primary; apex redirects to www.
 
 See also [vercel-setup.md](../vercel-setup.md).
 
@@ -37,7 +39,7 @@ Run against preview URL before domain cutover, then again on production:
 HOST="https://bridge-hub-marketing.vercel.app"
 
 # Production (after domain)
-# HOST="https://carolinejones.co"
+# HOST="https://www.carolinejones.co"
 
 for path in /robots.txt /sitemap.xml /llms.txt /llms-full.txt /ai.txt /og-default.png /favicon.ico /privacy /terms /about /work-with-me/speaking; do
   curl -s -o /dev/null -w "%{http_code}  $path\n" "$HOST$path"

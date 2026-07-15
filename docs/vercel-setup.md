@@ -13,7 +13,7 @@
 **Environment variables** (Production + Preview):
 
 ```
-NEXT_PUBLIC_MARKETING_URL=https://carolinejones.co
+NEXT_PUBLIC_MARKETING_URL=https://www.carolinejones.co
 NEXT_PUBLIC_SCREENING_URL=https://app.carolinejones.co
 NEXT_PUBLIC_APP_URL=https://app.carolinejones.co
 NEXT_PUBLIC_SUPABASE_URL=...
@@ -33,12 +33,12 @@ Until `app.carolinejones.co` is connected, use your screening `*.vercel.app` URL
 | Install Command | `npm install --prefix=../..` |
 | Build Command | `npm run build` |
 
-**Production URL:** `https://bridge-hub-marketing.vercel.app` (until custom domain is live)
+**Production URL:** `https://www.carolinejones.co` (apex redirects to www)
 
 **Environment variables**:
 
 ```
-NEXT_PUBLIC_MARKETING_URL=https://carolinejones.co
+NEXT_PUBLIC_MARKETING_URL=https://www.carolinejones.co
 NEXT_PUBLIC_SCREENING_URL=https://app.carolinejones.co
 NEXT_PUBLIC_MUX_PLAYBACK_ID=...
 MUX_TOKEN_ID=...
@@ -57,7 +57,7 @@ KIT_HEALING_REVOLUTION_TAG_ID=...
    - **Apex** `@` / `carolinejones.co` → A `76.76.21.21`
    - **www** → CNAME `cname.vercel-dns.com`
 4. Wait for **Valid Configuration** in Vercel
-5. Set `NEXT_PUBLIC_MARKETING_URL=https://carolinejones.co` on **both** projects; redeploy marketing
+5. Set `NEXT_PUBLIC_MARKETING_URL=https://www.carolinejones.co` on **both** projects; redeploy marketing
 6. Optional: redirect `www` → apex in Vercel
 
 ## 4. Custom domain — `app.carolinejones.co` (screening, when ready)
@@ -81,7 +81,7 @@ After setting URLs on both projects, redeploy so CTAs, sitemap canonicals, and `
 npm run deploy:marketing
 ```
 
-5. Verify: `SMOKE_MARKETING_URL=https://bridge-hub-marketing.vercel.app npm run smoke:marketing` (expect 19/19)
+5. Verify: `SMOKE_MARKETING_URL=https://www.carolinejones.co npm run smoke:marketing` (expect 19/19)
 
 ## Local parity
 

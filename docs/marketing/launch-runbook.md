@@ -11,7 +11,7 @@ After every push to `main`, check **bridge-hub-marketing** (not the screening pr
 **Quick verify** (expect all `200`):
 
 ```bash
-HOST="https://bridge-hub-marketing.vercel.app"
+HOST="https://www.carolinejones.co"
 for path in /about /privacy /terms /work-with-me/speaking /work-with-me/coaching; do
   curl -s -o /dev/null -w "%{http_code}  $path\n" "$HOST$path"
 done
@@ -83,7 +83,7 @@ Follow [seo-launch-checklist.md](seo-launch-checklist.md) §1.
 
 1. Vercel → **bridge-hub-marketing** → Domains → `carolinejones.co` + `www.carolinejones.co`
 2. Registrar DNS per Vercel instructions
-3. Both Vercel projects: `NEXT_PUBLIC_MARKETING_URL=https://carolinejones.co`
+3. Both Vercel projects: `NEXT_PUBLIC_MARKETING_URL=https://www.carolinejones.co`
 4. Redeploy marketing
 
 Screening subdomain `app.carolinejones.co` can wait.
@@ -108,7 +108,7 @@ When domain is live and speaking copy signed off:
 
 1. Go to [getapeptalk.com](https://getapeptalk.com/) → list as speaker
 2. Topics: Wellness & Culture, Mental Health, Neurodiversity, workplace burnout
-3. Link: `https://carolinejones.co/work-with-me/speaking` or enquiry form
+3. Link: `https://www.carolinejones.co/work-with-me/speaking` or enquiry form
 4. Optional: add PepTalk URL to `CAROLINE_SAME_AS` in `seo.ts` when live
 
 **Pitch angle (short):** Registered nurse, MSc Psychology, psychotherapy trainee. Keynotes on burnout, nervous system regulation, and trauma-informed practice for healthcare, corporate, and education audiences in Ireland. Founder of The Bridge Hub — built a psychoeducational screening tool from lived experience + software engineering.
@@ -121,5 +121,5 @@ When domain is live and speaking copy signed off:
 npm run dev:marketing          # local :3000
 npm run dev:marketing:clean    # if stale .next cache
 npm run build:marketing        # verify build before push
-SMOKE_MARKETING_URL=https://bridge-hub-marketing.vercel.app node scripts/smoke-marketing.mjs
+SMOKE_MARKETING_URL=https://www.carolinejones.co node scripts/smoke-marketing.mjs
 ```
