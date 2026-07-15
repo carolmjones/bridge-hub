@@ -7,10 +7,9 @@ import { MARKETING_ROUTES } from "@/lib/marketing/routes";
 import { easeOut, fadeUp, staggerContainer } from "@/lib/marketing/motion";
 
 const HERO_BODY = [
-  "Caroline Jones is a registered nurse with an MSc in Psychology, currently training in psychotherapy and counselling. She also holds a first class honours qualification in software engineering, bringing an unusual combination of clinical insight, psychological understanding and technical fluency to her work.",
-  "As the founder of The Bridge Hub, Caroline turns complex ideas about stress, trauma, burnout and the nervous system into practical tools people can understand and use.",
-  "Her perspective has been shaped by both professional and personal experience. After spending years supporting patients and families through some of the hardest moments of their lives, Caroline found herself facing profound challenges of her own. This allows her to speak about stress and healing with honesty, depth and humanity, without simplifying what recovery truly requires.",
-  "Caroline's talks do more than share information. They change how people understand stress in the body. She helps healthcare teams and organisations recognise the patterns beneath burnout and trauma, challenge the stigma surrounding them and identify practical changes that can create safer, healthier ways of working.",
+  "Caroline Jones is a registered nurse, master's in psychology with a certificate in software engineering and psychotherapy trainee, bringing a rare mix of clinical depth, technical skills and lived experience to every talk she gives. As the founder of The Bridge Hub, she has built her career on turning what she has lived through into something practical other people can actually use.",
+  "Her story, holding others through their worst days as a nurse, then living through her own, connects with people on a deep level. Organisations looking for a genuinely honest take on stress, burnout, and trauma are drawn to her message because it doesn't oversimplify what healing actually takes.",
+  "Caroline's talks don't just inform, they change how a room understands stress in the body. She helps healthcare teams and organisations see trauma, burnout, and nervous system regulation in a new light, breaking down the usual stigma and giving people something to actually do differently.",
 ] as const;
 
 const STORY_PARAGRAPHS = [
@@ -20,25 +19,74 @@ const STORY_PARAGRAPHS = [
   "With psychotherapy training now building directly on her psychology background, she's able to offer real, qualified help herself, not just point people toward it. It's the same instinct behind every talk she gives: healing isn't one moment of insight. It's built, deliberately, piece by piece, the same way she built everything else in her life. That's the honest take on healing she brings to a stage.",
 ] as const;
 
-const KEYNOTE_BODY = [
-  "Caroline Jones has spent years inside the systems meant to help people heal, and seen firsthand how often they fail.",
-  "This keynote was built around one question: if healing actually worked the way we're told it does, why do so many capable people stay stuck?",
-  "Caroline redefines healing as something that has to be built, not waited for. Drawing on nursing, a psychology master's, an honours degree in software engineering, and training in psychotherapy and counselling, she challenges the idea that understanding your story is enough, and reveals what most burnout and wellbeing programmes leave out entirely. She shows audiences what's missing when people know exactly what's wrong and still can't change it, and introduces her own approach to closing that gap. This keynote dares your team to stop managing symptoms and start understanding the pattern underneath them.",
-] as const;
-
-const KEYNOTE_OUTCOMES = [
-  "Leave with a real understanding of the nervous system and trauma patterns, and how experiences from years ago still shape how we react today",
-  "Recognise the specific pattern behind burnout, disconnection, and feeling stuck, so it stops feeling random or personal",
-  "Learn practical ways to reconnect with themselves that they can start using right away",
+const FORMATS = [
+  {
+    duration: "45, 90 minutes",
+    title: "Keynote Presentations",
+    description:
+      "High-impact, story-driven talks for conferences, corporate wellbeing events, and organisational retreats. Clinical depth and lived experience, delivered in a way your audience hasn't heard before.",
+  },
+  {
+    duration: "60, 90 minutes",
+    title: "Healthcare Team Presentations",
+    description:
+      "Evidence-based sessions for physicians, nurses, healthcare teams, and clinical staff on trauma informed practices, burnout, nervous system regulation, and the hidden cost of caregiving work.",
+  },
+  {
+    duration: "Half-day / Full-day",
+    title: "Workshops & Interactive Sessions",
+    description:
+      "Deeper dives with space for reflection and practical application. Suited to teams and cohorts who want lasting change, not just a talk.",
+  },
+  {
+    duration: "Varies",
+    title: "Podcasts, Panels & Community Talks",
+    description:
+      "Available as a guest, panellist, or speaker for community and education events on burnout, trauma, and nervous system health.",
+  },
 ] as const;
 
 const TOPICS = [
-  "What healing actually requires, and why insight alone isn't enough",
-  "The nervous system and burnout: why capable people stay stuck",
-  "Trauma and the body: how past experience shapes reactions years later",
-  "The Creative Power of Falling Apart",
-  "Motherhood and the Nervous System: Why Your Calm (or Lack of It) Isn't Just Yours",
-  "Rebuilding a career, and a life, from the ground up",
+  {
+    title: "What healing actually requires, and why insight alone isn't enough",
+    audiences: "Corporate wellbeing, healthcare teams, community talks",
+  },
+  {
+    title: "The nervous system and burnout: why capable people stay stuck",
+    audiences: "Corporate leadership, healthcare organisations",
+  },
+  {
+    title: "Trauma and the body: how past experience shapes reactions years later",
+    audiences: "Healthcare teams, education settings",
+  },
+  {
+    title: "The Creative Power of Falling Apart",
+    audiences: "Community events, wellbeing retreats",
+  },
+  {
+    title: "Motherhood and the Nervous System: Why Your Calm (or Lack of It) Isn't Just Yours",
+    audiences: "Parenting and family events, community and education settings",
+  },
+  {
+    title: "Rebuilding a career, and a life, from the ground up",
+    audiences: "Career development, education, corporate",
+  },
+  {
+    title: "Trauma-informed practice: what it actually takes to change how care is delivered",
+    audiences: "Healthcare professionals, clinical teams, hospital leadership",
+  },
+  {
+    title: "The psychological cost of caregiving: what healthcare work asks of the nervous system",
+    audiences: "Healthcare professionals, hospital leadership, clinical teams",
+  },
+  {
+    title: "When your best people are running on survival fuel: spotting burnout before it costs you your best people",
+    audiences: "Corporate HR, leadership retreats, organisational wellbeing",
+  },
+  {
+    title: "Building the tool I wish had existed: what it takes to turn lived experience into something people can actually use",
+    audiences: "Corporate innovation talks, women's leadership events, community talks",
+  },
 ] as const;
 
 const TESTIMONIALS = [
@@ -47,9 +95,6 @@ const TESTIMONIALS = [
   "Forget everything you know about long-winded speeches. Prepare to connect, feel, engage, learn, and grow. Caroline tells her story in a way that connects to your own. Her experiences are like a mirror to help you see yourself inside.",
   "I've sat through a lot of wellbeing talks that felt like a box being ticked. This wasn't that. I found an immense value in seeing this one.",
 ] as const;
-
-const KEYNOTE_TITLE =
-  "I Rebuilt My Career From Nursing to Software Engineering to Therapy to Answer One Question: What Does Healing Actually Take?";
 
 function Eyebrow({ children, dark = false }: { children: string; dark?: boolean }) {
   return (
@@ -146,13 +191,8 @@ export function SpeakingPage() {
 
       <section className="border-t border-line-stone bg-cream px-6 py-[clamp(56px,7vw,80px)]">
         <div className="mx-auto max-w-[820px] space-y-5 font-sans text-body-lg leading-[1.78] text-soft-ink">
-          {HERO_BODY.map((paragraph, index) => (
-            <p
-              key={paragraph.slice(0, 40)}
-              className={index === HERO_BODY.length - 1 ? "font-medium text-ink" : undefined}
-            >
-              {paragraph}
-            </p>
+          {HERO_BODY.map((paragraph) => (
+            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
           ))}
         </div>
       </section>
@@ -169,37 +209,28 @@ export function SpeakingPage() {
         <div className="pointer-events-none absolute inset-0 bg-deep-card/35" aria-hidden />
 
         <div className="relative mx-auto max-w-[860px]">
-          <div className="overflow-hidden rounded-[30px] border border-cream/10 bg-deep-card/70 px-7 py-9 shadow-[0_50px_120px_-60px_rgba(0,0,0,0.75)] backdrop-blur-sm md:px-10 md:py-11">
-            <Eyebrow dark>Keynote</Eyebrow>
-            <h2 className="font-serif text-[clamp(26px,4.5vw,36px)] font-normal leading-[1.14] text-cream">
-              {KEYNOTE_TITLE}
-            </h2>
-            <div className="mt-6 space-y-5 font-sans text-body-lg leading-[1.82] text-[#D4D8C4]">
-              {KEYNOTE_BODY.map((paragraph) => (
-                <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-              ))}
-            </div>
+          <Eyebrow dark>How I Work With Your Organisation</Eyebrow>
+          <h2 className="max-w-[640px] font-serif text-[clamp(30px,5vw,40px)] font-normal leading-[1.12] text-cream">
+            Formats &amp; Audiences
+          </h2>
 
-            <div className="mt-8 rounded-[20px] border border-cream/10 bg-cream/5 p-6">
-              <p className="mb-4 font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-[#D4D8C4]">
-                Attendees will
-              </p>
-              <ul className="m-0 flex list-none flex-col gap-4 p-0">
-                {KEYNOTE_OUTCOMES.map((outcome) => (
-                  <li key={outcome.slice(0, 40)} className="flex items-start gap-3">
-                    <span
-                      className="mt-1.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-glow-sage/40 bg-glow-sage/15"
-                      aria-hidden
-                    >
-                      <span className="h-1.5 w-1.5 rounded-full bg-glow-sage" />
-                    </span>
-                    <span className="font-sans text-[15px] leading-[1.68] text-[#E8EADF]">
-                      {outcome}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="mt-10 grid grid-cols-1 gap-4 md:grid-cols-2">
+            {FORMATS.map(({ duration, title, description }) => (
+              <div
+                key={title}
+                className="overflow-hidden rounded-[22px] border border-cream/10 bg-deep-card/70 p-6 shadow-[0_32px_80px_-48px_rgba(0,0,0,0.75)] backdrop-blur-sm"
+              >
+                <p className="font-sans text-[11px] font-medium uppercase tracking-[0.14em] text-glow-sage">
+                  {duration}
+                </p>
+                <h3 className="mt-3 font-serif text-[clamp(22px,3vw,26px)] font-normal leading-[1.18] text-cream">
+                  {title}
+                </h3>
+                <p className="mt-3 font-sans text-[15px] leading-[1.68] text-[#D4D8C4]">
+                  {description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -212,23 +243,25 @@ export function SpeakingPage() {
             viewport={{ once: true, margin: "-60px" }}
             variants={fadeUp}
           >
-            <Eyebrow>Themes We Can Explore</Eyebrow>
-            <h2 className="mb-10 max-w-[640px] font-serif text-[clamp(30px,5vw,40px)] font-normal leading-[1.12] text-ink">
-              Topics Caroline can shape around your audience and event.
+            <Eyebrow>Signature Topics</Eyebrow>
+            <h2 className="max-w-[640px] font-serif text-[clamp(30px,5vw,40px)] font-normal leading-[1.12] text-ink">
+              What I Speak About
             </h2>
+            <p className="mb-10 mt-5 max-w-[640px] font-serif text-[clamp(18px,2.5vw,22px)] font-normal italic leading-[1.45] text-soft-ink">
+              Every talk is shaped around your audience and what matters to them.
+              These are the themes I come back to most, the ones that leave a room
+              quiet, then stay with people long after they&apos;ve gone home.
+            </p>
           </motion.div>
 
-          <motion.ul
-            className="m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2"
-            initial={reduceMotion ? false : "hidden"}
-            whileInView={reduceMotion ? undefined : "visible"}
-            viewport={{ once: true, margin: "-40px" }}
-            variants={staggerContainer}
-          >
-            {TOPICS.map((topic, index) => (
+          <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-2">
+            {TOPICS.map(({ title, audiences }, index) => (
               <motion.li
-                key={topic}
-                variants={fadeUp}
+                key={`topic-${index}`}
+                initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+                whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.8, ease: easeOut, delay: index * 0.06 }}
                 whileHover={
                   reduceMotion
                     ? undefined
@@ -243,11 +276,18 @@ export function SpeakingPage() {
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#E7EAD7] to-[#9EAA84] font-serif text-[14px] text-deep-card">
                     {index + 1}
                   </span>
-                  <p className="font-sans text-[15px] leading-[1.62] text-soft-ink">{topic}</p>
+                  <div>
+                    <p className="font-sans text-[15px] leading-[1.62] text-soft-ink">
+                      {title}
+                    </p>
+                    <p className="mt-2 font-sans text-[13px] leading-[1.55] text-sage">
+                      {audiences}
+                    </p>
+                  </div>
                 </div>
               </motion.li>
             ))}
-          </motion.ul>
+          </ul>
         </div>
       </section>
 
@@ -300,46 +340,6 @@ export function SpeakingPage() {
         </div>
       </section>
 
-      <section className="border-t border-line-stone bg-cream px-6 py-[clamp(64px,8vw,88px)]">
-        <div className="mx-auto max-w-[820px]">
-          <Eyebrow>Logistics</Eyebrow>
-          <h2 className="mt-2 font-serif text-[clamp(28px,5vw,36px)] font-normal leading-[1.14] text-ink">
-            Formats, audiences, and booking
-          </h2>
-          <dl className="mt-8 space-y-5 font-sans text-[15px] leading-[1.72] text-soft-ink">
-            <div>
-              <dt className="font-medium text-ink">Formats</dt>
-              <dd>Keynote (30–60 min) · Workshop (half-day) · Panel or Q&amp;A</dd>
-            </div>
-            <div>
-              <dt className="font-medium text-ink">Audiences</dt>
-              <dd>
-                Healthcare teams · Corporate wellbeing · Education · Conferences
-              </dd>
-            </div>
-            <div>
-              <dt className="font-medium text-ink">Location</dt>
-              <dd>Ireland (in-person); remote by arrangement</dd>
-            </div>
-            <div>
-              <dt className="font-medium text-ink">Lead time</dt>
-              <dd>4–6 weeks preferred</dd>
-            </div>
-            <div>
-              <dt className="font-medium text-ink">Enquiries</dt>
-              <dd>
-                <Link
-                  href={MARKETING_ROUTES.speakingEnquiry}
-                  className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
-                >
-                  Enquire about booking →
-                </Link>
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </section>
-
       <section className="border-t border-line-stone bg-warm-paper px-6 py-[clamp(72px,9vw,96px)]">
         <div className="mx-auto max-w-[820px]">
           <Eyebrow>More About Caroline Jones</Eyebrow>
@@ -384,34 +384,27 @@ export function SpeakingPage() {
         </div>
       </section>
 
-      <section className="border-t border-line-stone bg-cream px-6 py-[clamp(72px,9vw,96px)]">
-        <div className="mx-auto max-w-[760px] text-center">
-          <Eyebrow>For Organisers</Eyebrow>
-          <p className="font-sans text-body-lg leading-[1.78] text-soft-ink">
-            Caroline Jones is a registered nurse, psychology master&apos;s, and
-            psychotherapy trainee, delivering keynotes, talks, and workshops across
-            corporate, healthcare, and education sectors in Ireland. She works with
-            organisations to build a genuine understanding of stress, burnout, and
-            nervous system regulation, from a single keynote to a full workshop day.
-            Every session is shaped around the audience it&apos;s for.
-          </p>
-          <div className="mt-8">
-            <EnquireButton />
-          </div>
-        </div>
-      </section>
-
       <section className="px-6 pb-[clamp(72px,9vw,104px)]">
         <div className="relative mx-auto max-w-[900px] overflow-hidden rounded-[28px] border border-line-stone px-6 py-[clamp(48px,7vw,72px)] text-center shadow-[0_32px_70px_-40px_rgba(35,40,36,0.3)]">
           <div
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(250,247,239,0.94),rgba(246,240,230,0.78)_48%,rgba(218,206,191,0.55))]"
             aria-hidden
           />
-          <div className="relative">
-            <h2 className="mx-auto max-w-[560px] font-serif text-[clamp(28px,5vw,38px)] font-normal leading-[1.14] text-ink">
-              Not sure this is the right fit for your event? Get in touch and
-              we&apos;ll talk it through.
-            </h2>
+          <div className="relative mx-auto max-w-[720px]">
+            <div className="flex justify-center">
+              <Eyebrow>For Organisers</Eyebrow>
+            </div>
+            <p className="font-sans text-body-lg leading-[1.78] text-soft-ink">
+              Caroline Jones is a registered nurse, psychology master&apos;s, and
+              psychotherapy trainee, delivering keynotes, talks, and workshops across
+              corporate, healthcare, and education sectors in Ireland. She works with
+              organisations to build a genuine understanding of stress, burnout,
+              trauma informed practices, and nervous system regulation, from a single keynote to a full workshop day.
+              Every session is shaped around the audience it&apos;s for.
+            </p>
+            <p className="mt-5 font-sans text-[13px] italic leading-[1.6] text-sage">
+              Speaking fees vary by event type, audience size, and format.
+            </p>
             <div className="mt-8 flex justify-center">
               <EnquireButton />
             </div>

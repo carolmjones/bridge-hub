@@ -29,6 +29,7 @@ export function AnnouncementBar() {
   }, []);
 
   if (pathname === MARKETING_ROUTES.urgentSupport) return null;
+  if (pathname === MARKETING_ROUTES.keynoteSpeaking) return null;
   if (pathname === MARKETING_ROUTES.freeClass && freeClassUnlocked) return null;
 
   return (

@@ -7,10 +7,9 @@ const STORY_PARAGRAPHS = [
   "I grew up in São Paulo, Brazil, and became a nurse because I wanted to help people.",
   "For years, I worked in paediatrics and intensive care, supporting children and families through some of the hardest days of their lives. I learned to notice what could not be captured in a chart. The mother holding everything together beside the hospital bed, then crying alone in the car park. The family who had made it safely home, but whose bodies were still living as though the danger had never ended.",
   "Later, while living in Wales, I did my master's in psychology, specialising in play therapy, with a thesis grounded in attachment theory. It helped me understand something that nursing had already shown me again and again. Feeling safe is not simply a thought. It is something the body needs to experience.",
-  "Then I came to understand this from the other side.",
-  "After moving to Ireland, I experienced three pregnancy losses. I learned what it felt like to be the patient in the room rather than the nurse. I also know the fear of arriving at A&E with your own child in your arms and needing someone else to take over.",
+  "Then I came to understand this from the other side. Life brought obstacles of my own, and I learned what it was to be the patient in the room rather than the nurse, to need someone else to take over on the days I could not.",
   "For a long time, I believed that understanding what had happened to me would be enough. It helped, but it did not change the way my body reacted. The real shift began when I learned to recognise the patterns underneath those reactions. I began to understand what my body had learned to do, why it kept returning to the same responses, and what it needed in order to feel safe enough to change.",
-  "That experience shaped the work I now do with women who feel stuck in survival mode. It is also why I continue to study, train and deepen my practice through psychotherapy and counselling.",
+  "I wanted to give other women a way to see those patterns too. So I did something unusual for a nurse: I went back and earned an honours degree in software engineering, and used it to build the tool I had needed myself. Naming what is happening inside us, and giving it a shape we can actually look at, is one of the most established ways the body begins to quiet and change. The Bridge Map exists to make that possible, to take what has been invisible and overwhelming and turn it into something you can finally understand and work with.",
   "This work is professional, but it is also deeply personal. I do not stand outside it and explain it from a distance. I know what it is to live inside these patterns, and I know what can begin to change when we finally understand them.",
 ] as const;
 
@@ -68,7 +67,7 @@ export function AboutMyStory() {
                 {STORY_PARAGRAPHS.map((paragraph, index) => (
                   <div key={paragraph}>
                     <p>{paragraph}</p>
-                    {index === 6 ? (
+                    {index === 5 ? (
                       <p className="mt-4">
                         <Link
                           href={MARKETING_ROUTES.bridgeMap}

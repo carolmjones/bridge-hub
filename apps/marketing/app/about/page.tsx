@@ -3,6 +3,7 @@ import { JsonLd } from "@/components/marketing/JsonLd";
 import { AboutCloseCta } from "@/components/marketing/about/AboutCloseCta";
 import { AboutCredentials } from "@/components/marketing/about/AboutCredentials";
 import { AboutHero } from "@/components/marketing/about/AboutHero";
+import { AboutKeynote } from "@/components/marketing/about/AboutKeynote";
 import { AboutMyStory } from "@/components/marketing/about/AboutMyStory";
 import {
   aboutPersonJsonLd,
@@ -29,6 +30,7 @@ export default function AboutPage() {
       />
       <AboutHero />
       <AboutMyStory />
+      <AboutKeynote />
       <AboutCredentials />
       <AboutCloseCta />
     </>

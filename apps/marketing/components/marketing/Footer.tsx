@@ -43,13 +43,13 @@ export function MarketingFooter() {
           >
             {FOOTER_LINK_COLUMNS.map((column, columnIndex) => (
               <div key={columnIndex} className="flex flex-col gap-2">
-                {column.map(({ href, label, className }) => (
+                {column.map((link) => (
                   <Link
-                    key={href}
-                    href={href}
-                    className={className ?? footerLinkClass}
+                    key={link.href}
+                    href={link.href}
+                    className={"className" in link ? link.className : footerLinkClass}
                   >
-                    {label}
+                    {link.label}
                   </Link>
                 ))}
               </div>

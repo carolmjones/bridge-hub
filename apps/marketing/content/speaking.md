@@ -26,32 +26,50 @@ So she asked a different question: how do I take everything I've learned and do 
 
 With psychotherapy training now building directly on her psychology background, she's able to offer real, qualified help herself, not just point people toward it. It's the same instinct behind every talk she gives: healing isn't one moment of insight. It's built, deliberately, piece by piece, the same way she built everything else in her life. That's the honest take on healing she brings to a stage.
 
+## FORMATS & AUDIENCES
+
+**Eyebrow:** How I Work With Your Organisation
+
+**Heading:** Formats & Audiences
+
+### Keynote Presentations — 45, 90 minutes
+
+High-impact, story-driven talks for conferences, corporate wellbeing events, and organisational retreats. Clinical depth and lived experience, delivered in a way your audience hasn't heard before.
+
+### Healthcare Team Presentations — 60, 90 minutes
+
+Evidence-based sessions for physicians, nurses, healthcare teams, and clinical staff on trauma informed practices, burnout, nervous system regulation, and the hidden cost of caregiving work.
+
+### Workshops & Interactive Sessions — Half-day / Full-day
+
+Deeper dives with space for reflection and practical application. Suited to teams and cohorts who want lasting change, not just a talk.
+
+### Podcasts, Panels & Community Talks — Varies
+
+Available as a guest, panellist, or speaker for community and education events on burnout, trauma, and nervous system health.
+
 ## KEYNOTE
 
-**Title:** I Rebuilt My Career From Nursing to Software Engineering to Therapy to Answer One Question: What Does Healing Actually Take?
-
-Caroline Jones has spent years inside the systems meant to help people heal, and seen firsthand how often they fail.
-
-This keynote was built around one question: if healing actually worked the way we're told it does, why do so many capable people stay stuck?
-
-Caroline redefines healing as something that has to be built, not waited for. Drawing on nursing, a psychology master's, an honours degree in software engineering, and now psychotherapy training, she challenges the idea that understanding your story is enough, and reveals what most burnout and wellbeing programmes leave out entirely. She shows audiences what's missing when people know exactly what's wrong and still can't change it, and introduces her own approach to closing that gap. This keynote dares your team to stop managing symptoms and start understanding the pattern underneath them.
-
-**Attendees will:**
-
-- Leave with a real understanding of the nervous system and trauma patterns, and how experiences from years ago still shape how we react today
-- Recognise the specific pattern behind burnout, disconnection, and feeling stuck, so it stops feeling random or personal
-- Learn practical ways to reconnect with themselves that they can start using right away
+*Moved to `/about` — see [about.md](about.md) My Why section.*
 
 ## TOPICS
 
-**Eyebrow:** THEMES WE CAN EXPLORE
+**Eyebrow:** Signature Topics
 
-- What healing actually requires, and why insight alone isn't enough
-- The nervous system and burnout: why capable people stay stuck
-- Trauma and the body: how past experience shapes reactions years later
-- The Creative Power of Falling Apart
-- Motherhood and the Nervous System: Why Your Calm (or Lack of It) Isn't Just Yours
-- Rebuilding a career, and a life, from the ground up
+**Heading:** What I Speak About
+
+*Every talk is shaped around your audience and what matters to them. These are the themes I come back to most, the ones that leave a room quiet, then stay with people long after they've gone home.*
+
+- What healing actually requires, and why insight alone isn't enough — Corporate wellbeing, healthcare teams, community talks
+- The nervous system and burnout: why capable people stay stuck — Corporate leadership, healthcare organisations
+- Trauma and the body: how past experience shapes reactions years later — Healthcare teams, education settings
+- The Creative Power of Falling Apart — Community events, wellbeing retreats
+- Motherhood and the Nervous System: Why Your Calm (or Lack of It) Isn't Just Yours — Parenting and family events, community and education settings
+- Rebuilding a career, and a life, from the ground up — Career development, education, corporate
+- Trauma-informed practice: what it actually takes to change how care is delivered — Healthcare professionals, clinical teams, hospital leadership
+- The psychological cost of caregiving: what healthcare work asks of the nervous system — Healthcare professionals, hospital leadership, clinical teams
+- When your best people are running on survival fuel: spotting burnout before it costs you your best people — Corporate HR, leadership retreats, organisational wellbeing
+- Building the tool I wish had existed: what it takes to turn lived experience into something people can actually use — Corporate innovation talks, women's leadership events, community talks
 
 ## TESTIMONIALS
 
@@ -62,12 +80,10 @@ Caroline redefines healing as something that has to be built, not waited for. Dr
 
 ## FOR ORGANISERS
 
-Caroline Jones is a registered nurse, psychology master's, and psychotherapy trainee, delivering keynotes, talks, and workshops across corporate, healthcare, and education sectors in Ireland. She works with organisations to build a genuine understanding of stress, burnout, and nervous system regulation, from a single keynote to a full workshop day. Every session is shaped around the audience it's for.
+**Eyebrow:** For Organisers
 
-**CTA:** Enquire about booking
+Caroline Jones is a registered nurse, psychology master's, and psychotherapy trainee, delivering keynotes, talks, and workshops across corporate, healthcare, and education sectors in Ireland. She works with organisations to build a genuine understanding of stress, burnout, trauma informed practices, and nervous system regulation, from a single keynote to a full workshop day. Every session is shaped around the audience it's for.
 
-## CLOSE
-
-Not sure this is the right fit for your event? Get in touch and we'll talk it through.
+Speaking fees vary by event type, audience size, and format.
 
 **CTA:** Enquire about booking

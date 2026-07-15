@@ -1,6 +1,6 @@
 # Marketing roadmap — website pages
 
-*Last updated: 14 July 2026. Lives in `bridge-hub` repo — see [infra-decision.md](../infra-decision.md).*
+*Last updated: 15 July 2026. Lives in `bridge-hub` repo — see [infra-decision.md](../infra-decision.md).*
 
 **Start at [marketing/README.md](marketing/README.md).** Visual spec: [marketing/design-system.md](marketing/design-system.md). Screening roadmap: [roadmap_screening.md](roadmap_screening.md).
 
@@ -75,11 +75,11 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 | # | Page | Route | Copy | Dev |
 |---|------|-------|------|-----|
-| 7 | About | `/about` | Locked in [about.md](../apps/marketing/content/about.md) | **Built** — hero, My Story card, credentials strip, close CTA; nav active underline |
+| 7 | About | `/about` | Locked in [about.md](../apps/marketing/content/about.md) | **Built** — hero, My Story card, **My Why** section, credentials strip + cream prose card (DOI link), close CTA |
 | 8a | The Bridge Programme | `/work-with-me/coaching` | Locked in [coaching.md](../apps/marketing/content/coaching.md) | **Built** — hero, bridge-backed programme structure (liquid-glass panel + mobile stepper), split qualifier card, manifesto, flower-backed First Step CTA |
-| 8b | Keynote Speaking | `/work-with-me/speaking` | Locked in [speaking.md](../apps/marketing/content/speaking.md) | **Built** — cinematic hero, story, keynote, topics, testimonials, enquire CTAs |
+| 8b | Keynote Speaking | `/work-with-me/speaking` | Locked in [speaking.md](../apps/marketing/content/speaking.md) | **Built** — cinematic hero, story, **Formats & Audiences**, **Signature Topics** (10 cards), testimonials, **For Organisers** close card; announcement bar hidden on this route |
 | 8b-i | Speaking enquiry | `/work-with-me/speaking/enquire` | Locked in [speaking-enquiry.md](../apps/marketing/content/speaking-enquiry.md) | **Built** — Kit form (name, phone optional, organisation, event type, date, message); notifies Caroline instantly via Resend, adds subscriber to Kit for nurture |
-| 9–11 | Privacy / Terms / Cookies | `/privacy`, `/terms` | Caroline-approved privacy copy (10/05/2026) | **Built** — full 12-section `/privacy` (Montero Labs DBA Caroline Jones); `/terms` stub; cookie banner + preferences modal; footer Cookie Settings opens modal; GA4 gated on analytics consent; screening `/privacy` for assessment data |
+| 9–11 | Privacy / Terms / Cookies | `/privacy`, `/terms` | Caroline-approved privacy (10/05/2026) + terms (10/06/2026) | **Built** — full 12-section `/privacy` and `/terms` (Montero Labs DBA Caroline Jones); cookie banner + preferences modal; footer Cookie Settings opens modal; GA4 gated on analytics consent; screening `/privacy` for assessment data |
 
 ### Phase 3 — Supporting
 
@@ -129,7 +129,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - [x] Landing page sections from handoff (18 sections)
 - [x] Bridge Map from [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (design port complete; copy still pending sign-off)
 
-- [x] About page from [apps/marketing/content/about.md](../apps/marketing/content/about.md) — hero, floating My Story card, credentials icons, bridge close CTA
+- [x] About page from [apps/marketing/content/about.md](../apps/marketing/content/about.md) — hero, floating My Story card, My Why section, credentials icons + cream prose card, bridge close CTA
 
 ### Phase 3 — Core funnel pages
 
@@ -269,11 +269,11 @@ Manual checks:
 - [x] 1.13 Testimonial attribution — skipped per 0.4 (no governance line)
 - [x] 1.14 Free Class teacher attribution
 - [x] 1.15 Speaking page section reorder
-- [x] 1.16 `/privacy` and `/terms` stub pages — `/privacy` now full Caroline-approved policy (July 2026)
+- [x] 1.16 `/privacy` and `/terms` — full Caroline-approved policies (privacy 10/05/2026; terms 10/06/2026)
 
 Phase 1 validation commands — see [implementation roadmap](marketing/bridge-hub-implementation-roadmap.md#phase-1-validation-checklist).
 
-**Caroline copy review (July 2026):** About hero + My Story, Bridge Map founder/hero/emotional anchor, Speaking opening, Free class hero, landing direct-answer paragraph — implemented in components + `content/*.md`. Coaching page UI polish: bridge background on programme structure, `liquid-glass-light` utility, split qualifier, First Step card (hero flower + cream overlay).
+**Caroline copy review (July 2026):** About hero + My Story + **My Why**, Bridge Map founder/hero/emotional anchor, Speaking opening + **Formats & Audiences / Signature Topics / For Organisers**, Free class hero, landing direct-answer paragraph — implemented in components + `content/*.md`. Coaching page UI polish: bridge background on programme structure, `liquid-glass-light` utility, split qualifier, First Step card (hero flower + cream overlay).
 
 ---
 
@@ -305,7 +305,7 @@ Notes: PepTalk matches event planners to speakers (15k+ roster, 24h response). P
 2. **SEO launch** — Search Console, Bing, curl audit, Rich Results Test once domain is live — checklist §2–4
 3. **Phase 3 content** — review outlines in [phase3-content-proposals.md](marketing/phase3-content-proposals.md); approve copy before any `/insights/*` or `/clarity-call` pages are built
 4. **Caroline env setup** — speaking enquiry + newsletter Kit tags (checklist below)
-5. Caroline **sign-off** on remaining copy ([bridge-map.md](../apps/marketing/content/bridge-map.md), [about.md](../apps/marketing/content/about.md), coaching/speaking/free-class)
+5. Caroline **sign-off** on remaining copy ([bridge-map.md](../apps/marketing/content/bridge-map.md), coaching/free-class; About + Speaking largely locked in `content/*.md`)
 6. **LinkedIn `sameAs`** — optional: confirm URL → add to `seo.ts` (Instagram already live)
 7. **PepTalk** — when site is finished, pitch [getapeptalk.com](https://getapeptalk.com/)
 

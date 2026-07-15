@@ -64,23 +64,33 @@ export function AboutCredentials() {
           ))}
         </div>
 
-        <p className="mx-auto mt-10 max-w-[720px] text-center font-sans text-[15px] leading-[1.75] text-soft-ink">
-          Caroline is a dual-registered nurse with NMBI (children&apos;s and
-          adults) and holds a master&apos;s in psychology from the University of
-          South Wales, specialising in play therapy, with a thesis grounded in
-          attachment theory. She has published peer-reviewed research through
-          UNIFESP (Universidade Federal de São Paulo), is a member of IACP, and
-          is currently training in psychotherapy and counselling at PCI College
-          Ireland.
-        </p>
-        <p className="mx-auto mt-4 max-w-[720px] text-center font-sans text-[15px] leading-[1.75] text-soft-ink">
-          <Link
-            href={MARKETING_ROUTES.keynoteSpeaking}
-            className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
-          >
-            I also speak at events across Ireland →
-          </Link>
-        </p>
+        <div className="mx-auto mt-12 max-w-[720px] rounded-[22px] border border-line-stone/70 bg-cream/50 px-6 py-8 text-center sm:px-8">
+          <p className="font-sans text-[15px] leading-[1.75] text-soft-ink">
+            Caroline is a dual-registered nurse with NMBI (children&apos;s and
+            adults) and holds a master&apos;s in psychology from the University of
+            South Wales, specialising in play therapy, with a thesis grounded in
+            attachment theory. She has{" "}
+            <a
+              href="https://doi.org/10.1590/S1414-81452011000200018"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
+            >
+              published peer-reviewed research
+            </a>{" "}
+            through UNIFESP (Universidade Federal de São Paulo), is a member of
+            IACP, and is currently training in psychotherapy and counselling at PCI
+            College Ireland.
+          </p>
+          <p className="mt-4 font-sans text-[15px] leading-[1.75] text-soft-ink">
+            <Link
+              href={MARKETING_ROUTES.keynoteSpeaking}
+              className="font-medium text-ink underline underline-offset-[3px] transition-colors hover:text-soft-ink"
+            >
+              I also speak at events across Ireland →
+            </Link>
+          </p>
+        </div>
       </div>
     </section>
   );
