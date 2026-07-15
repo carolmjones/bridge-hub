@@ -13,6 +13,21 @@
 
 ---
 
+## Approval status
+
+Reply per page: **approved**, **edit**, or **defer**.
+
+| Page | Route | Status |
+|------|-------|--------|
+| How The Bridge Map Works | `/bridge-map/how-it-works` | Pending Caroline review |
+| Survival Mode essay | `/insights/survival-mode` | Pending Caroline review |
+| Nervous System Regulation essay | `/insights/nervous-system-regulation` | Pending Caroline review |
+| Burnout keynote landing | `/work-with-me/speaking/burnout-keynote` | Pending Caroline review |
+| Motherhood keynote landing | `/work-with-me/speaking/motherhood-nervous-system` | Pending Caroline review |
+| Clarity Call | `/clarity-call` | Pending Caroline review |
+
+---
+
 ## 3.1 `/bridge-map/how-it-works`
 
 **Title:** How The Bridge Map Works — Methodology & Instruments  
@@ -111,4 +126,4 @@ Same structure as 3.4, topic from speaking page topics list.
 
 Reply with per-page: **approved**, **edit**, or **defer**. Full draft copy required before any page is built.
 
-**Status (July 2026):** Deferred — Caroline to review when ready for the content wave. No Phase 3 pages exist in code yet.
+**Status (July 2026):** Pending Caroline review — see approval table above. No Phase 3 pages exist in code yet.

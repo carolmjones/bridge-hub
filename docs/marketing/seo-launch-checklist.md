@@ -30,14 +30,23 @@ See also [vercel-setup.md](../vercel-setup.md).
 
 ## 3. Pre-launch curl audit
 
+Run against preview URL before domain cutover, then again on production:
+
 ```bash
-HOST="https://carolinejones.co"
-for path in /robots.txt /sitemap.xml /llms.txt /llms-full.txt /ai.txt /og-default.png /favicon.ico /privacy /terms; do
+# Preview (before domain)
+HOST="https://bridge-hub-marketing.vercel.app"
+
+# Production (after domain)
+# HOST="https://carolinejones.co"
+
+for path in /robots.txt /sitemap.xml /llms.txt /llms-full.txt /ai.txt /og-default.png /favicon.ico /privacy /terms /about /work-with-me/speaking; do
   curl -s -o /dev/null -w "%{http_code}  $path\n" "$HOST$path"
 done
 ```
 
 Expect `200` for every path.
+
+Or: `SMOKE_MARKETING_URL=$HOST node scripts/smoke-marketing.mjs`
 
 ---
 
@@ -55,5 +64,4 @@ Expect `200` for every path.
 | Item | Notes |
 |------|-------|
 | LinkedIn URL | Add to `CAROLINE_SAME_AS` when confirmed |
-| Legal review | `/privacy` and `/terms` are stubs |
 | Phase 3 content pages | See [phase3-content-proposals.md](phase3-content-proposals.md) — approve copy before build |

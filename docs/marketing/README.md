@@ -9,14 +9,15 @@ Everything for the marketing workstream lives in **`apps/marketing/`**.
 | # | Doc | Why |
 |---|-----|-----|
 | 1 | [roadmap_marketing.md](../roadmap_marketing.md) | Pages, build phases, what's next |
-| 2 | [seo-ai-discoverability.md](seo-ai-discoverability.md) | SEO + AI research, definitions, Caroline launch checklist |
-| 3 | [seo-launch-checklist.md](seo-launch-checklist.md) | Domain cutover + Search Console steps (Caroline) |
-| 4 | [phase3-content-proposals.md](phase3-content-proposals.md) | Proposed `/insights/*` and `/clarity-call` pages — approve before build |
-| 5 | [bridge-hub-implementation-roadmap.md](bridge-hub-implementation-roadmap.md) | Audit task list — credentials, copy, conversion (Phase 4c) |
-| 6 | [design-system.md](design-system.md) | Colors, typography, motion, sections |
-| 7 | [../integration-boundaries.md](../integration-boundaries.md) | What marketing may not touch |
-| 8 | [brand.md](brand.md) | Voice and positioning |
-| 9 | `apps/marketing/content/` | Locked copy — [copy-briefs.md](../../apps/marketing/content/copy-briefs.md) |
+| 2 | [launch-runbook.md](launch-runbook.md) | **Go-live checklist** — Vercel deploy, Kit env, copy sign-off, domain, PepTalk |
+| 3 | [seo-ai-discoverability.md](seo-ai-discoverability.md) | SEO + AI research, definitions, Caroline launch checklist |
+| 4 | [seo-launch-checklist.md](seo-launch-checklist.md) | Domain cutover + Search Console steps (Caroline) |
+| 5 | [phase3-content-proposals.md](phase3-content-proposals.md) | Proposed `/insights/*` and `/clarity-call` pages — approve before build |
+| 6 | [bridge-hub-implementation-roadmap.md](bridge-hub-implementation-roadmap.md) | Audit task list — credentials, copy, conversion (Phase 4c) |
+| 7 | [design-system.md](design-system.md) | Colors, typography, motion, sections |
+| 8 | [../integration-boundaries.md](../integration-boundaries.md) | What marketing may not touch |
+| 9 | [brand.md](brand.md) | Voice and positioning |
+| 10 | `apps/marketing/content/` | Locked copy — [copy-briefs.md](../../apps/marketing/content/copy-briefs.md) |
 
 Run `git status` + `git log -10` after reading. Screening: [roadmap_screening.md](../roadmap_screening.md).
 

@@ -30,8 +30,8 @@ Until `app.carolinejones.co` is connected, use your screening `*.vercel.app` URL
 |---------|-------|
 | Root Directory | `apps/marketing` |
 | Framework | Next.js |
+| Install Command | `cd ../.. && npm install` |
 | Build Command | `npm run build` |
-| Install Command | `npm install` |
 
 **Production URL:** `https://bridge-hub-marketing.vercel.app` (until custom domain is live)
 
