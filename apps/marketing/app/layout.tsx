@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CookieConsent } from "@/components/marketing/CookieConsent";
 import { MarketingFooter } from "@/components/marketing/Footer";
 import { Ga4WithConsent } from "@/components/marketing/Ga4WithConsent";
@@ -49,6 +50,7 @@ export default function RootLayout({
           <HealingRevolutionPopup />
           <CookieConsent />
         </div>
+        <SpeedInsights />
       </body>
     </html>
   );
