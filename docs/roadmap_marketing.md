@@ -1,6 +1,6 @@
 # Marketing roadmap — website pages
 
-*Last updated: 15 July 2026. Lives in `bridge-hub` repo — see [infra-decision.md](../infra-decision.md).*
+*Last updated: 18 July 2026. Lives in `bridge-hub` repo — see [infra-decision.md](../infra-decision.md).*
 
 **Start at [marketing/README.md](marketing/README.md).** Visual spec: [marketing/design-system.md](marketing/design-system.md). Screening roadmap: [roadmap_screening.md](roadmap_screening.md).
 
@@ -16,7 +16,9 @@ Instagram / Podcast / Email  →  Marketing pages (this workstream)  →  /begin
 
 13 marketing pages (landing, Bridge Map, About, booking embeds, etc.) plus `/urgent-support`. Results UI and GDPR legal pages are owned by the [screening workstream](roadmap_screening.md).
 
-**SEO + AI discoverability:** Phase 4b dev complete (metadata, sitemap, robots, `llms.txt`, JSON-LD). **Phase 4c audit** in progress — credential/copy/conversion fixes; Caroline Phase 0 decisions first.
+**Production:** `https://www.carolinejones.co` (apex → www). **Copy:** signed off (July 2026).
+
+**SEO + AI discoverability:** Phase 4b + Phase 4c Phases 0–2 complete in code. Remaining: Search Console / Bing submit, optional LinkedIn `sameAs`, Phase 3 content wave (awaiting approval), PepTalk outreach.
 
 ---
 
@@ -26,8 +28,9 @@ Marketing and screening share **one git repo** — **two Vercel projects**. No s
 
 | Variable | Purpose |
 |----------|---------|
-| `NEXT_PUBLIC_MARKETING_URL` | This deploy's URL (`http://localhost:3000` locally) |
+| `NEXT_PUBLIC_MARKETING_URL` | This deploy's URL — production `https://www.carolinejones.co`; local `http://localhost:3000` |
 | `NEXT_PUBLIC_SCREENING_URL` | Screening app URL (`http://localhost:3001` locally) — used for CTAs |
+| `NEXT_PUBLIC_GA4_MEASUREMENT_ID` | Optional GA4 — consent-gated via cookie banner |
 | `MUX_TOKEN_ID` | Mux API access token ID (Settings → Access Tokens) — marketing deploy |
 | `MUX_TOKEN_SECRET` | Mux API access token secret — server-side only; not used by player yet |
 | `NEXT_PUBLIC_MUX_PLAYBACK_ID` | Public playback ID for `/free-class` Mux player (from video asset after upload) |
@@ -64,9 +67,9 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 
 | # | Page | Route | Copy | Dev |
 |---|------|-------|------|-----|
-| 1 | Landing | `/` | Nearly done | Design port complete — polish + copy sign-off (hero door-glow + section backgrounds in place) |
-| 2 | Bridge Map | `/bridge-map` | Draft for review | Design port complete — hero + synapse canvas + founder, “This is for you”, dark “What happens next”, final CTA background |
-| 3 | Free class | `/free-class` | Draft from mockup | **Live** on [bridge-hub-marketing.vercel.app](https://bridge-hub-marketing.vercel.app) — landing + unlocked watch, Mux player, Kit signup; dev reset via `?reset=1` |
+| 1 | Landing | `/` | **Signed off** | **Live** on [www.carolinejones.co](https://www.carolinejones.co) — hero door-glow + section backgrounds |
+| 2 | Bridge Map | `/bridge-map` | **Signed off** | **Live** — hero + synapse canvas + founder, “This is for you”, dark “What happens next”, final CTA |
+| 3 | Free class | `/free-class` | **Signed off** | **Live** — landing + unlocked watch, Mux player, Kit signup; dev reset via `?reset=1` |
 | 4 | Results | `/results` | Built | [Screening workstream](roadmap_screening.md) |
 | 5 | Clarity Call | `/clarity-call` | Not started | Not started |
 | 6 | Booking confirmed | `/booking-confirmed` | Not started | Not started |
@@ -79,7 +82,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 | 8a | The Bridge Programme | `/work-with-me/coaching` | Locked in [coaching.md](../apps/marketing/content/coaching.md) | **Built** — hero, bridge-backed programme structure (liquid-glass panel + mobile stepper), split qualifier card, manifesto, flower-backed First Step CTA |
 | 8b | Keynote Speaking | `/work-with-me/speaking` | Locked in [speaking.md](../apps/marketing/content/speaking.md) | **Built** — cinematic hero, story, **Formats & Audiences**, **Signature Topics** (10 cards), testimonials, **For Organisers** close card; announcement bar hidden on this route |
 | 8b-i | Speaking enquiry | `/work-with-me/speaking/enquire` | Locked in [speaking-enquiry.md](../apps/marketing/content/speaking-enquiry.md) | **Built** — Kit form (name, phone optional, organisation, event type, date, message); notifies Caroline instantly via Resend, adds subscriber to Kit for nurture |
-| 9–11 | Privacy / Terms / Cookies | `/privacy`, `/terms` | Caroline-approved privacy (10/05/2026) + terms (10/06/2026) | **Built** — full 12-section `/privacy` and `/terms` (Montero Labs DBA Caroline Jones); cookie banner + preferences modal; footer Cookie Settings opens modal; GA4 gated on analytics consent; screening `/privacy` for assessment data |
+| 9–11 | Privacy / Terms / Cookies | `/privacy`, `/terms` | Caroline-approved privacy (10/05/2026) + terms (10/06/2026) | **Built** — full policies; cookie banner + preferences modal; GA4 + Vercel Analytics gated on analytics consent; screening `/privacy` for assessment data |
 
 ### Phase 3 — Supporting
 
@@ -127,7 +130,7 @@ See [vercel-setup.md](../vercel-setup.md) for step-by-step Vercel configuration.
 - [x] Landing Outcomes, FAQ, Final CTA, and Still not sure sections (Still not sure = Kit newsletter signup with `still-not-sure` tag; Final CTA hi-res scenic background)
 - [x] Marketing header (announcement + nav), on-brand 404, dev watcher fixes (EMFILE) — mobile menu button pinned right
 - [x] Landing page sections from handoff (18 sections)
-- [x] Bridge Map from [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (design port complete; copy still pending sign-off)
+- [x] Bridge Map from [apps/marketing/content/bridge-map.md](../apps/marketing/content/bridge-map.md) (design port complete; copy signed off)
 
 - [x] About page from [apps/marketing/content/about.md](../apps/marketing/content/about.md) — hero, floating My Story card, My Why section, credentials icons + cream prose card, bridge close CTA
 
@@ -159,44 +162,48 @@ Kit's own "new subscriber" notification is batched hourly and has no message con
 ### Phase 4 — Polish + launch
 
 - [x] Marketing production deploy (`bridge-hub-marketing`) — Mux + Kit env on Vercel
-- [ ] Custom domain (`carolinejones.co`) → marketing Vercel project — see **Domain connection** below
-- [ ] Copy sign-off, a11y, analytics
-- [x] **SEO + AI discoverability** (dev) — see Phase 4b below; Caroline Search Console checklist at launch
-- [ ] **SEO & conversion audit (Phase 4c)** — Phase 1 P0 complete except 1.3 (social URLs); Caroline copy review + coaching UI polish landed — see below
-- [x] Cookie consent on marketing layout — bottom banner + customise modal (CookieYes-style); footer legal line restructured (© + inline Privacy · Terms · Cookie Settings; disclaimer on next line); site links in two columns
-- [x] **Healing Revolution subscribe popup** — sitewide Kit modal; tag `healing-revolution`; see below
-- [ ] **PepTalk speaker listing** — once site is finished, pitch [PepTalk](https://getapeptalk.com/) to list Caroline as a keynote speaker (Wellness & Culture / Mental Health / Neurodiversity topics); optional channel to market Work with Me → Keynote Speaking
+- [x] Custom domain — **live** at `https://www.carolinejones.co` (apex → www); `NEXT_PUBLIC_MARKETING_URL` set on marketing + screening
+- [x] Copy sign-off — all marketing page copy approved (July 2026)
+- [x] Analytics — cookie consent; GA4 (`Ga4WithConsent`) + Vercel Analytics (`VercelAnalyticsWithConsent`); enable Web Analytics in Vercel dashboard; optional `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
+- [x] Favicon — bridge logo in `app/icon.png`, `app/apple-icon.png`, `app/favicon.ico`
+- [x] **SEO + AI discoverability** (dev) — see Phase 4b; Caroline Search Console / Bing still open
+- [x] **SEO & conversion audit (Phase 4c)** — Phases 0–2 complete; Phase 3 content proposals await approval — see below
+- [x] Cookie consent on marketing layout — bottom banner + customise modal; footer legal line; site links in two columns
+- [x] **Healing Revolution subscribe popup** — sitewide Kit modal; tag `healing-revolution`
+- [ ] **PepTalk speaker listing** — pitch [PepTalk](https://getapeptalk.com/) (Wellness & Culture / Mental Health / Neurodiversity); link Work with Me → Keynote Speaking
 
 #### Phase 4b — SEO + AI discoverability
 
-**Dev status:** Complete (July 2026). Caroline actions (Search Console, Bing, `sameAs` URLs, domain env) remain for launch.
+**Dev status:** Complete (July 2026). Domain cutover done. Caroline: Search Console, Bing, optional LinkedIn `sameAs`.
 
 **Policy:** Full allow — maximise discoverability; allow AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended) for both citation and training.
 
-**Timing:** Build metadata, sitemap, robots, and llms files before domain cutover using `NEXT_PUBLIC_MARKETING_URL`. Set production env to `https://carolinejones.co` when DNS goes live. Do not submit sitemap to Search Console until canonical domain is live.
+**Canonical:** `NEXT_PUBLIC_MARKETING_URL=https://www.carolinejones.co` on both Vercel projects.
 
 | Task | Priority | Status | Notes |
 |------|----------|--------|-------|
 | `metadataBase` + sitewide OG/Twitter defaults | P0 | Done | `apps/marketing/lib/marketing/seo.ts` + `app/layout.tsx` |
 | Per-page `metadata` for all routes | P0 | Done | `/`, `/bridge-map`; `noindex` on `/urgent-support` |
 | `app/sitemap.ts` + `app/robots.ts` | P0 | Done | Marketing routes only; `/api/` disallowed |
-| Default OG image (`/og-default.png`, 1200×630) + favicon | P0 | Done | `public/og-default.png`, `app/icon.png`, `app/apple-icon.png` |
+| Default OG image (`/og-default.png`, 1200×630) + favicon | P0 | Done | `public/og-default.png`; `app/icon.png`, `app/apple-icon.png`, `app/favicon.ico` |
 | JSON-LD `@graph` (sitewide) | P1 | Done | `WebSite` + `ProfessionalService` + `Person` in layout |
 | Per-page JSON-LD | P1 | Done | `FAQPage` on landing; `Service` on coaching/speaking; `Person` on About |
 | `/llms.txt` | P1 | Done | Curated agent index of canonical marketing pages |
 | `/llms-full.txt` | P2 | Done | Concatenated locked markdown from `apps/marketing/content/` |
 | `/ai.txt` | P1 | Done | Full-allow training + citation policy |
-| Search Console + Bing Webmaster | P1 | Caroline | Verify `carolinejones.co` after DNS |
+| Domain + `NEXT_PUBLIC_MARKETING_URL` | P0 | Done | `www.carolinejones.co` primary |
+| Search Console + Bing Webmaster | P1 | Caroline | Verify www; submit `https://www.carolinejones.co/sitemap.xml` |
 | IndexNow (optional) | P3 | — | Bing/Yandex instant ping on deploy |
 | `/.well-known/security.txt` | P3 | — | `security@` contact — production hygiene |
 
-**Pre-launch audit** (run after domain is live):
+**Production audit:**
 
 ```bash
-HOST="https://carolinejones.co"
+HOST="https://www.carolinejones.co"
 for path in /robots.txt /sitemap.xml /llms.txt /llms-full.txt /ai.txt /og-default.png /favicon.ico; do
   curl -s -o /dev/null -w "%{http_code}  $path\n" "$HOST$path"
 done
+# or: SMOKE_MARKETING_URL=$HOST npm run smoke:marketing
 ```
 
 Manual checks:
@@ -206,16 +213,7 @@ Manual checks:
 
 #### Domain connection — `carolinejones.co`
 
-**Marketing** (`bridge-hub-marketing` Vercel project):
-
-1. Vercel → **bridge-hub-marketing** → Settings → **Domains** → Add `carolinejones.co` and `www.carolinejones.co`
-2. At your domain registrar, add the DNS records Vercel shows. Typical setup:
-   - **Apex** `carolinejones.co` → A record `76.76.21.21` (or registrar redirect to `www` if apex ALIAS isn't supported)
-   - **www** → CNAME `cname.vercel-dns.com`
-3. Wait for Vercel **Valid Configuration** (often minutes; up to 48h)
-4. On **both** Vercel projects (marketing + screening), set `NEXT_PUBLIC_MARKETING_URL=https://carolinejones.co`
-5. Redeploy marketing after env change (canonicals, sitemap, OG tags read this variable)
-6. Optional: redirect `www.carolinejones.co` → `carolinejones.co` in Vercel domain settings
+**Status:** Done. Primary production URL is **`https://www.carolinejones.co`**; apex redirects to www.
 
 **Screening** (when ready): add `app.carolinejones.co` to the screening Vercel project; set `NEXT_PUBLIC_SCREENING_URL` and `NEXT_PUBLIC_APP_URL` to `https://app.carolinejones.co` on both projects. Until then, screening can stay on its existing `*.vercel.app` URL.
 
@@ -227,17 +225,17 @@ Manual checks:
 
 **How to work:** Top to bottom within each phase. ⚠️ = Caroline decision before code ships. 🔧 = implement after the gate is cleared. **One Phase 1 section per session** — review diff, validate, check the box.
 
-**Current step:** → **Launch** — connect `carolinejones.co`, Search Console, curl audit ([seo-launch-checklist.md](marketing/seo-launch-checklist.md)). Phase 3 content proposals await Caroline review ([phase3-content-proposals.md](marketing/phase3-content-proposals.md)).
+**Current step:** → **Post-launch** — Search Console / Bing ([seo-launch-checklist.md](marketing/seo-launch-checklist.md) §2–4), Phase 3 content approval ([phase3-content-proposals.md](marketing/phase3-content-proposals.md)), PepTalk.
 
 | Phase | Focus | Gate | Status |
 |-------|-------|------|--------|
 | 0 | Caroline decisions (credentials, testimonials, social URLs, AI policy) | Caroline | **Complete** (LinkedIn `sameAs` deferred) |
 | 1 | P0 pre-launch (1.1–1.16: credentials, metadata, H1s, JSON-LD, privacy/terms) | After Phase 0 | **Complete** — 1.3 partial (Instagram in `sameAs`; LinkedIn when confirmed) |
-| 2 | P1 post-launch (breadcrumbs, footer links, cross-links, FAQs, analytics) | After Phase 1 | **Complete** (commit `659f3e2`) |
+| 2 | P1 post-launch (breadcrumbs, footer links, cross-links, FAQs, analytics) | After Phase 1 | **Complete** (commit `659f3e2`); Vercel Analytics added July 2026 |
 | 3 | P1 content wave (`/insights/*`, `/bridge-map/how-it-works`, `/clarity-call`) | Caroline copy approval | **Proposals ready** — [phase3-content-proposals.md](marketing/phase3-content-proposals.md); no pages built yet |
 | 4 | P2 second wave (more insights, per-page OG, observatory) | Ongoing | Not started |
 
-**Domain timing:** Phase 1 can run on `*.vercel.app` now. Search Console, sitemap submit, and final curl audit still wait for `carolinejones.co` (Phase 4b Domain connection).
+**Domain:** Live. Search Console / Bing sitemap submit still open.
 
 **Clarity Call:** Tracked in Phase 4c task **3.6** — not duplicated in Next actions once Phase 4c is underway.
 
@@ -281,7 +279,7 @@ Phase 1 validation commands — see [implementation roadmap](marketing/bridge-hu
 
 | Component | Copy | Dev |
 |-----------|------|-----|
-| Cookie consent | Caroline-approved category copy in modal; banner adapted to privacy policy | **Built** — first-visit banner (Customise · Reject All · Accept All); preferences modal with Necessary / Functional / Analytics / Performance toggles; `localStorage`; GA4 loads only when Analytics accepted; footer **Cookie Settings** reopens modal |
+| Cookie consent | Caroline-approved category copy in modal; banner adapted to privacy policy | **Built** — first-visit banner (Customise · Reject All · Accept All); preferences modal; `localStorage`; GA4 + Vercel Analytics load only when Analytics accepted; footer **Cookie Settings** reopens modal |
 | Footer | © line + inline legal links; disclaimer on second line; site links in two columns | **Built** — Bridge Map · Free Class · About \| Coaching · Speaking · In Crisis? |
 | Healing Revolution popup | **Headline:** Join The Healing Revolution · **Subtext:** Subscribe to receive insights and resources to inspire a collective healing movement. | **Built** — shows once per session on the visitor's first landing page (after 20% scroll or 8s); skips `/free-class` and speaking enquiry; Kit tag `healing-revolution` |
 
@@ -293,24 +291,23 @@ Implementation: trauma-informed (easy dismiss via ×, backdrop, Escape); no urge
 
 | Channel | Purpose | When |
 |---------|---------|------|
-| [PepTalk](https://getapeptalk.com/) | List Caroline as a vetted keynote speaker — mental health, neurodiversity, workplace wellbeing, burnout | After marketing site is finished (domain live, Work with Me + keynote copy signed off) |
+| [PepTalk](https://getapeptalk.com/) | List Caroline as a vetted keynote speaker — mental health, neurodiversity, workplace wellbeing, burnout | Ready — domain live; speaking copy signed off |
 
-Notes: PepTalk matches event planners to speakers (15k+ roster, 24h response). Pitch when `/work-with-me/speaking` is live and copy signed off; link back to site or speaking enquiry. No dev work — outreach/listing only.
+Notes: PepTalk matches event planners to speakers (15k+ roster, 24h response). Pitch now; link `https://www.carolinejones.co/work-with-me/speaking` or enquiry form. No dev work — outreach/listing only.
 
 ---
 
 ## Next actions
 
-**Go-live:** [launch-runbook.md](marketing/launch-runbook.md) — Vercel deploy fix, Kit env, copy sign-off, domain, SEO verify, PepTalk.
+**Post-launch:** [launch-runbook.md](marketing/launch-runbook.md) · [seo-launch-checklist.md](marketing/seo-launch-checklist.md).
 
-1. **Push + Vercel redeploy** — commit `3df6420` fixes monorepo install; push `main`, then Redeploy **bridge-hub-marketing** (skip build cache). Verify with `SMOKE_MARKETING_URL=https://bridge-hub-marketing.vercel.app npm run smoke:marketing`
-2. **Domain** — connect `carolinejones.co` on marketing Vercel; set `NEXT_PUBLIC_MARKETING_URL` on both projects; redeploy — [seo-launch-checklist.md](marketing/seo-launch-checklist.md) §1
-3. **SEO launch** — Search Console, Bing, curl audit, Rich Results Test once domain is live — checklist §2–4
-4. **Phase 3 content** — review outlines in [phase3-content-proposals.md](marketing/phase3-content-proposals.md); approve copy before any `/insights/*` or `/clarity-call` pages are built
-5. **Caroline env setup** — speaking enquiry + newsletter Kit tags (checklist below)
-6. Caroline **sign-off** on remaining copy ([bridge-map.md](../apps/marketing/content/bridge-map.md), coaching/free-class; About + Speaking largely locked in `content/*.md`)
-7. **LinkedIn `sameAs`** — optional: confirm URL → add to `seo.ts` (Instagram already live)
-8. **PepTalk** — when site is finished, pitch [getapeptalk.com](https://getapeptalk.com/)
+1. **Redeploy marketing** after this commit (favicon + Vercel Analytics) — from repo root: `npm run deploy:marketing` or Vercel Redeploy **bridge-hub-marketing**. Smoke: `SMOKE_MARKETING_URL=https://www.carolinejones.co npm run smoke:marketing`
+2. **SEO verify** — Search Console + Bing: verify www, submit sitemap, Rich Results Test, OG share check — checklist §2–4
+3. **Phase 3 content** — review outlines in [phase3-content-proposals.md](marketing/phase3-content-proposals.md); approve / edit / defer before any `/insights/*` or `/clarity-call` pages are built
+4. **Kit / Resend smoke** — confirm free class, Still not sure, speaking enquiry, Healing Revolution land in Kit; speaking enquiry emails arrive
+5. **LinkedIn `sameAs`** — optional: confirm URL → add to `seo.ts` (Instagram already live)
+6. **PepTalk** — pitch [getapeptalk.com](https://getapeptalk.com/)
+7. **Vercel Web Analytics** — enable on **bridge-hub-marketing** project dashboard (package already wired)
 
 *Clarity Call page — tracked in Phase 4c task 3.6, not listed separately here.*
 
@@ -329,11 +326,11 @@ Notes: PepTalk matches event planners to speakers (15k+ roster, 24h response). P
 
 ### Caroline setup checklist (SEO + AI discoverability)
 
-1. Google Search Console — verify `carolinejones.co` after DNS cutover; submit `/sitemap.xml`
-2. Bing Webmaster Tools — verify domain; submit sitemap
-3. Confirm social/profile URLs for Person schema `sameAs` in `apps/marketing/lib/marketing/seo.ts` (LinkedIn, Instagram; PepTalk when live)
-4. Set `NEXT_PUBLIC_MARKETING_URL=https://carolinejones.co` on **both** Vercel projects at domain cutover
-5. Run pre-launch curl audit (Phase 4b above) and Google Rich Results Test before announcing site
+1. Google Search Console — verify `www.carolinejones.co` (or domain property); submit `https://www.carolinejones.co/sitemap.xml`
+2. Bing Webmaster Tools — verify domain; submit same sitemap
+3. Confirm social/profile URLs for Person schema `sameAs` in `apps/marketing/lib/marketing/seo.ts` (LinkedIn when ready; Instagram live; PepTalk when listed)
+4. ~~Set `NEXT_PUBLIC_MARKETING_URL`~~ — **Done** (`https://www.carolinejones.co` on both projects)
+5. Run production curl / smoke audit (Phase 4b above) and Google Rich Results Test
 
 *Copy in `apps/marketing/content/` is source of truth. No changes without Caroline's approval.*
 

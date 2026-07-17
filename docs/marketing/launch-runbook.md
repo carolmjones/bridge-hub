@@ -66,14 +66,12 @@ Optional: `NEXT_PUBLIC_GA4_MEASUREMENT_ID` for analytics (consent-gated).
 
 | Page | Route | Status | Source |
 |------|-------|--------|--------|
-| Landing | `/` | Nearly done — final read | Components + `content/` |
-| Bridge Map | `/bridge-map` | **Draft — priority review** | [bridge-map.md](../../apps/marketing/content/bridge-map.md) |
-| Free class | `/free-class` | Draft — review hero + unlock | [free-class.md](../../apps/marketing/content/free-class.md) |
-| Coaching | `/work-with-me/coaching` | Locked | [coaching.md](../../apps/marketing/content/coaching.md) |
-| About | `/about` | Locked | [about.md](../../apps/marketing/content/about.md) |
-| Speaking | `/work-with-me/speaking` | Locked | [speaking.md](../../apps/marketing/content/speaking.md) |
-
-Reply per page: **approved**, **edit** (with notes), or **defer**.
+| Landing | `/` | **Signed off** | Components + `content/` |
+| Bridge Map | `/bridge-map` | **Signed off** | [bridge-map.md](../../apps/marketing/content/bridge-map.md) |
+| Free class | `/free-class` | **Signed off** | [free-class.md](../../apps/marketing/content/free-class.md) |
+| Coaching | `/work-with-me/coaching` | **Signed off** | [coaching.md](../../apps/marketing/content/coaching.md) |
+| About | `/about` | **Signed off** | [about.md](../../apps/marketing/content/about.md) |
+| Speaking | `/work-with-me/speaking` | **Signed off** | [speaking.md](../../apps/marketing/content/speaking.md) |
 
 ---
 

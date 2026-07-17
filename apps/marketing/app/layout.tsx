@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import { CookieConsent } from "@/components/marketing/CookieConsent";
 import { MarketingFooter } from "@/components/marketing/Footer";
 import { Ga4WithConsent } from "@/components/marketing/Ga4WithConsent";
+import { VercelAnalyticsWithConsent } from "@/components/marketing/VercelAnalyticsWithConsent";
 import { HealingRevolutionPopup } from "@/components/marketing/HealingRevolutionPopup";
 import { JsonLd } from "@/components/marketing/JsonLd";
 import { MarketingHeader } from "@/components/marketing/MarketingHeader";
@@ -41,6 +42,7 @@ export default function RootLayout({
     <html lang="en" className={`${cormorant.variable} ${inter.variable}`}>
       <body>
         <Ga4WithConsent />
+        <VercelAnalyticsWithConsent />
         <JsonLd data={siteJsonLd()} />
         <div className="flex min-h-dvh flex-col bg-warm-paper font-sans text-soft-ink">
           <MarketingHeader />
